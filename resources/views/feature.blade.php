@@ -32,7 +32,7 @@
                             <h4 class="mb-3">Real-Time Van Tracking</h4> <br />
                             <p>Stay updated on the exact location of school vans through our live tracking system, ensuring
                                 timely pickups and drop-offs with complete peace of mind.</p>
-                            <a class="fw-medium" href="">Read More<i class="fa fa-arrow-right ms-2"></i></a>
+                            <!-- <a class="fw-medium" href="">Read More<i class="fa fa-arrow-right ms-2"></i></a> -->
                         </div>
                     </div>
                 </div>
@@ -46,7 +46,7 @@
                             <h4 class="mb-3">RFID-Based Attendance Management</h4>
                             <p>Seamlessly record student attendance as they board and leave the van using RFID technology,
                                 providing accurate, hassle-free records.</p>
-                            <a class="fw-medium" href="">Read More<i class="fa fa-arrow-right ms-2"></i></a>
+                            <!-- <a class="fw-medium" href="">Read More<i class="fa fa-arrow-right ms-2"></i></a> -->
                         </div>
                     </div>
                 </div>
@@ -60,7 +60,7 @@
                             <h4 class="mb-3">Payment Management</h4> <br />
                             <p>Simplify fee collection with a secure payment system that tracks due dates, generates
                                 invoices, and keeps all transactions organized.</p> <br />
-                            <a class="fw-medium" href="">Read More<i class="fa fa-arrow-right ms-2"></i></a>
+                            <!-- <a class="fw-medium" href="">Read More<i class="fa fa-arrow-right ms-2"></i></a> -->
                         </div>
                     </div>
                 </div>
@@ -74,7 +74,7 @@
                             <h4 class="mb-3">Route Optimization</h4>
                             <p>Efficiently plan and manage school van routes to minimize delays and save time, benefiting
                                 both drivers and parents.</p>
-                            <a class="fw-medium" href="">Read More<i class="fa fa-arrow-right ms-2"></i></a>
+                            <!-- <a class="fw-medium" href="">Read More<i class="fa fa-arrow-right ms-2"></i></a> -->
                         </div>
                     </div>
                 </div>
@@ -88,7 +88,7 @@
                             <h4 class="mb-3">Parent-Driver Communication</h4>
                             <p>Facilitate direct communication between parents and drivers for real-time updates, urgent
                                 notifications, or special requests.</p>
-                            <a class="fw-medium" href="">Read More<i class="fa fa-arrow-right ms-2"></i></a>
+                            <!-- <a class="fw-medium" href="">Read More<i class="fa fa-arrow-right ms-2"></i></a> -->
                         </div>
                     </div>
                 </div>
@@ -102,7 +102,7 @@
                             <h4 class="mb-3">Comprehensive Reporting</h4>
                             <p>Generate detailed reports for attendance, payment history, making it
                                 easy for van operators to monitor operations.</p>
-                            <a class="fw-medium" href="">Read More<i class="fa fa-arrow-right ms-2"></i></a>
+                            <!-- <a class="fw-medium" href="">Read More<i class="fa fa-arrow-right ms-2"></i></a> -->
                         </div>
                     </div>
                 </div>

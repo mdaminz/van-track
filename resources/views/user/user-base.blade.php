@@ -91,7 +91,7 @@
                             data-bs-toggle="tooltip" data-bs-placement="left" title="Toggle Navigation"><span
                                 class="navbar-toggle-icon"><span class="toggle-line"></span></span></button>
 
-                    </div><a class="navbar-brand" href="index.html">
+                    </div><a class="navbar-brand" href="/home">
                         <div class="d-flex align-items-center py-3"><span class="font-sans-serif">VanTrack</span>
                         </div>
                     </a>
@@ -110,40 +110,7 @@
                             <li class="nav-item">
                                 <!-- label-->
                                 <div class="row navbar-vertical-label-wrapper mt-3 mb-2">
-                                    <div class="col-auto navbar-vertical-label">Tab
-                                    </div>
-                                    <div class="col ps-0">
-                                        <hr class="mb-0 navbar-vertical-divider" />
-                                    </div>
-                                </div>
-                                <!-- parent pages--><a class="nav-link" href="view_forum" role="button">
-                                    <div class="d-flex align-items-center"><span class="nav-link-icon"><span
-                                                class="fab fa-rocketchat"></span></span><span
-                                            class="nav-link-text ps-1">Chat</span>
-                                    </div>
-                                </a>
-                                <!-- parent pages--><a class="nav-link" href="view_van" role="button">
-                                    <div class="d-flex align-items-center"><span class="nav-link-icon"><span
-                                                class="fas fa-caravan"></span></span><span
-                                            class="nav-link-text ps-1">Track
-                                            Van</span>
-                                    </div>
-                                </a>
-
-
-
-                                <!-- parent pages--><a class="nav-link" href="create_report" role="button">
-                                    <div class="d-flex align-items-center"><span class="nav-link-icon"><span
-                                                class="far fa-file-alt"></span></span><span
-                                            class="nav-link-text ps-1">Report</span>
-                                    </div>
-                                </a>
-
-                            </li>
-                            <li class="nav-item">
-                                <!-- label-->
-                                <div class="row navbar-vertical-label-wrapper mt-3 mb-2">
-                                    <div class="col-auto navbar-vertical-label">Manage
+                                    <div class="col-auto navbar-vertical-label">Manage Children
                                     </div>
                                     <div class="col ps-0">
                                         <hr class="mb-0 navbar-vertical-divider" />
@@ -165,7 +132,8 @@
                                     </div>
                                 </a>
 
-                                <!-- parent pages--><a class="nav-link dropdown-indicator" href="#events"
+                                
+                                {{-- <!-- parent pages--><a class="nav-link dropdown-indicator" href="#events"
                                     role="button" data-bs-toggle="collapse" aria-expanded="false"
                                     aria-controls="events">
                                     <div class="d-flex align-items-center"><span class="nav-link-icon"><span
@@ -174,22 +142,88 @@
                                     </div>
                                 </a>
                                 <ul class="nav collapse false" id="events">
-                                    <li class="nav-item"><a class="nav-link" href="view_student">
-                                            <div class="d-flex align-items-center"><span
-                                                    class="nav-link-text ps-1">Pay Fees</span>
+                                    <li class="nav-item"><a class="nav-link" href="/">
+                                            <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Pay
+                                                    Fees</span>
                                             </div>
                                         </a>
                                         <!-- more inner pages-->
                                     </li>
-                                    <li class="nav-item"><a class="nav-link" href="create_student">
-                                            <div class="d-flex align-items-center"><span
-                                                    class="nav-link-text ps-1">Fee History</span>
+                                    <li class="nav-item"><a class="nav-link" href="/user_view_bill">
+                                            <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Fee
+                                                    History</span>
                                             </div>
                                         </a>
                                         <!-- more inner pages-->
                                     </li>
-                                </ul>
+                                </ul> --}}
                             </li>
+                            <li class="nav-item">
+                                <!-- label-->
+                                <div class="row navbar-vertical-label-wrapper mt-3 mb-2">
+                                    <div class="col-auto navbar-vertical-label">Communication
+                                    </div>
+                                    <div class="col ps-0">
+                                        <hr class="mb-0 navbar-vertical-divider" />
+                                    </div>
+                                </div>
+                                <!-- parent pages--><a class="nav-link" href="view_forum_post" role="button">
+                                    <div class="d-flex align-items-center"><span class="nav-link-icon"><span
+                                                class="fab fa-rocketchat"></span></span><span
+                                            class="nav-link-text ps-1">Forum</span>
+                                    </div>
+                                </a>
+                                <!-- parent pages--><a class="nav-link" href="view_van" role="button">
+                                    <div class="d-flex align-items-center"><span class="nav-link-icon"><span
+                                                class="fas fa-caravan"></span></span><span
+                                            class="nav-link-text ps-1">Track
+                                            Van</span>
+                                    </div>
+                                </a>
+
+
+
+                            </li>
+                            <li class="nav-item">
+                                <!-- label-->
+                                <div class="row navbar-vertical-label-wrapper mt-3 mb-2">
+                                    <div class="col-auto navbar-vertical-label">Payment
+                                    </div>
+                                    <div class="col ps-0">
+                                        <hr class="mb-0 navbar-vertical-divider" />
+                                    </div>
+                                </div>
+                                <!-- parent pages--><a class="nav-link" href="user_view_bill" role="button">
+                                    <div class="d-flex align-items-center"><span class="nav-link-icon"><span
+                                        class="far fa-money-bill-alt"></span></span><span
+                                    class="nav-link-text ps-1">Billing</span>
+                            </div>
+                        </a>
+
+
+                            </li>
+                            <li class="nav-item">
+                                <!-- label-->
+                                <div class="row navbar-vertical-label-wrapper mt-3 mb-2">
+                                    <div class="col-auto navbar-vertical-label">Report
+                                    </div>
+                                    <div class="col ps-0">
+                                        <hr class="mb-0 navbar-vertical-divider" />
+                                    </div>
+                                </div>
+                               
+
+
+
+                                <!-- parent pages--><a class="nav-link" href="user_view_report" role="button">
+                                    <div class="d-flex align-items-center"><span class="nav-link-icon"><span
+                                                class="far fa-file-alt"></span></span><span
+                                            class="nav-link-text ps-1">Report</span>
+                                    </div>
+                                </a>
+
+                            </li>
+
                         </ul>
                     </div>
                 </div>
@@ -204,16 +238,15 @@
                                 class="toggle-line"></span></span></button>
                     <a class="navbar-brand me-1 me-sm-3" href="index.html">
                         <div class="d-flex align-items-center"><img class="me-2"
-                                src="assets/img/icons/spot-illustrations/falcon.png" alt=""
-                                width="40" /><span class="font-sans-serif">VanTrack</span>
+                                src="assets/img/icons/spot-illustrations/falcon.png" alt="" width="40" /><span
+                                class="font-sans-serif">VanTrack</span>
                         </div>
                     </a>
                     <ul class="navbar-nav navbar-nav-icons ms-auto flex-row align-items-center">
                         <li class="nav-item">
                             <div class="theme-control-toggle fa-icon-wait px-2">
-                                <input class="form-check-input ms-0 theme-control-toggle-input"
-                                    id="themeControlToggle" type="checkbox" data-theme-control="theme"
-                                    value="dark" />
+                                <input class="form-check-input ms-0 theme-control-toggle-input" id="themeControlToggle"
+                                    type="checkbox" data-theme-control="theme" value="dark" />
                                 <label class="mb-0 theme-control-toggle-label theme-control-toggle-light"
                                     for="themeControlToggle" data-bs-toggle="tooltip" data-bs-placement="left"
                                     title="Switch to light theme"><span class="fas fa-sun fs-0"></span></label>
@@ -224,10 +257,9 @@
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link notification-indicator notification-indicator-primary px-0 fa-icon-wait"
-                                id="navbarDropdownNotification" href="#" role="button"
-                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span
-                                    class="fas fa-bell" data-fa-transform="shrink-6"
-                                    style="font-size: 33px;"></span></a>
+                                id="navbarDropdownNotification" href="#" role="button" data-bs-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false"><span class="fas fa-bell"
+                                    data-fa-transform="shrink-6" style="font-size: 33px;"></span></a>
                             <div class="dropdown-menu dropdown-menu-end dropdown-menu-card dropdown-menu-notification"
                                 aria-labelledby="navbarDropdownNotification">
                                 <div class="card card-notification shadow-none">
@@ -256,8 +288,8 @@
                                                     <div class="notification-body">
                                                         <p class="mb-1"><strong>Emma Watson</strong> replied to your
                                                             comment : "Hello world 😍"</p>
-                                                        <span class="notification-time"><span class="me-2"
-                                                                role="img" aria-label="Emoji">💬</span>Just
+                                                        <span class="notification-time"><span class="me-2" role="img"
+                                                                aria-label="Emoji">💬</span>Just
                                                             now</span>
 
                                                     </div>
@@ -290,16 +322,15 @@
                                                     <div class="notification-avatar">
                                                         <div class="avatar avatar-2xl me-3">
                                                             <img class="rounded-circle"
-                                                                src="assets/img/icons/weather-sm.jpg"
-                                                                alt="" />
+                                                                src="assets/img/icons/weather-sm.jpg" alt="" />
 
                                                         </div>
                                                     </div>
                                                     <div class="notification-body">
                                                         <p class="mb-1">The forecast today shows a low of 20&#8451;
                                                             in California. See today's weather.</p>
-                                                        <span class="notification-time"><span class="me-2"
-                                                                role="img" aria-label="Emoji">🌤️</span>1d</span>
+                                                        <span class="notification-time"><span class="me-2" role="img"
+                                                                aria-label="Emoji">🌤️</span>1d</span>
 
                                                     </div>
                                                 </a>
@@ -318,16 +349,15 @@
                                                     <div class="notification-body">
                                                         <p class="mb-1"><strong>University of Oxford</strong>
                                                             created an event : "Causal Inference Hilary 2019"</p>
-                                                        <span class="notification-time"><span class="me-2"
-                                                                role="img" aria-label="Emoji">✌️</span>1w</span>
+                                                        <span class="notification-time"><span class="me-2" role="img"
+                                                                aria-label="Emoji">✌️</span>1w</span>
 
                                                     </div>
                                                 </a>
 
                                             </div>
                                             <div class="list-group-item">
-                                                <a class="border-bottom-0 notification notification-flush"
-                                                    href="#!">
+                                                <a class="border-bottom-0 notification notification-flush" href="#!">
                                                     <div class="notification-avatar">
                                                         <div class="avatar avatar-xl me-3">
                                                             <img class="rounded-circle" src="assets/img/team/10.jpg"
@@ -339,8 +369,8 @@
                                                         <p class="mb-1"><strong>James Cameron</strong> invited to
                                                             join the group: United Nations International Children's Fund
                                                         </p>
-                                                        <span class="notification-time"><span class="me-2"
-                                                                role="img" aria-label="Emoji">🙋‍</span>2d</span>
+                                                        <span class="notification-time"><span class="me-2" role="img"
+                                                                aria-label="Emoji">🙋‍</span>2d</span>
 
                                                     </div>
                                                 </a>
@@ -354,11 +384,10 @@
                             </div>
 
                         </li>
-                        <li class="nav-item dropdown"><a class="nav-link pe-0" id="navbarDropdownUser"
-                                href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true"
-                                aria-expanded="false">
+                        <li class="nav-item dropdown"><a class="nav-link pe-0" id="navbarDropdownUser" href="#"
+                                role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <div class="avatar avatar-xl">
-                                    <img class="rounded-circle" src="assets/img/team/3-thumb.png" alt="" />
+                                    <img class="rounded-circle" src="{{Auth::user()->profile_photo_path}}" alt="" />
 
                                 </div>
                             </a>
@@ -368,12 +397,12 @@
                                             class="fas fa-crown me-1"></span><span>Go Pro</span></a>
 
                                     <div class="dropdown-divider"></div> --}}
-                                    <a class="dropdown-item" href="{{ route('profile.show') }}">Profile &amp;
+                                    <a class="dropdown-item" href="update_profile/{{ Auth::user()->id }}">Profile &amp;
                                         account</a>
 
                                     <div class="dropdown-divider"></div>
 
-                                    <a class="dropdown-item" href="pages/user/settings.html">Settings</a>
+
 
                                     <form method="POST" action="{{ route('logout') }}">
                                         @csrf
@@ -435,8 +464,8 @@
                                 <label class="btn d-inline-block btn-navbar-style fs--1" for="themeSwitcherLight">
                                     <span class="hover-overlay mb-2 rounded d-block"><img
                                             class="img-fluid img-prototype mb-0"
-                                            src="assets/img/generic/falcon-mode-default.jpg"
-                                            alt="" /></span><span class="label-text">Light</span></label>
+                                            src="assets/img/generic/falcon-mode-default.jpg" alt="" /></span><span
+                                        class="label-text">Light</span></label>
                             </div>
                             <div class="col-6">
                                 <input class="btn-check" id="themeSwitcherDark" name="theme-color" type="radio"
@@ -444,8 +473,8 @@
                                 <label class="btn d-inline-block btn-navbar-style fs--1" for="themeSwitcherDark">
                                     <span class="hover-overlay mb-2 rounded d-block"><img
                                             class="img-fluid img-prototype mb-0"
-                                            src="assets/img/generic/falcon-mode-dark.jpg"
-                                            alt="" /></span><span class="label-text"> Dark</span></label>
+                                            src="assets/img/generic/falcon-mode-dark.jpg" alt="" /></span><span
+                                        class="label-text"> Dark</span></label>
                             </div>
                         </div>
                     </div>
@@ -483,16 +512,15 @@
                     <div class="btn-group d-block w-100 btn-group-navbar-style">
                         <div class="row gx-2">
                             <div class="col-6">
-                                <input class="btn-check" id="navbar-style-transparent" type="radio"
-                                    name="navbarStyle" value="transparent" data-theme-control="navbarStyle" />
-                                <label class="btn d-block w-100 btn-navbar-style fs--1"
-                                    for="navbar-style-transparent"> <img class="img-fluid img-prototype"
-                                        src="assets/img/generic/default.png" alt="" /><span
-                                        class="label-text"> Transparent</span></label>
+                                <input class="btn-check" id="navbar-style-transparent" type="radio" name="navbarStyle"
+                                    value="transparent" data-theme-control="navbarStyle" />
+                                <label class="btn d-block w-100 btn-navbar-style fs--1" for="navbar-style-transparent">
+                                    <img class="img-fluid img-prototype" src="assets/img/generic/default.png"
+                                        alt="" /><span class="label-text"> Transparent</span></label>
                             </div>
                             <div class="col-6">
-                                <input class="btn-check" id="navbar-style-inverted" type="radio"
-                                    name="navbarStyle" value="inverted" data-theme-control="navbarStyle" />
+                                <input class="btn-check" id="navbar-style-inverted" type="radio" name="navbarStyle"
+                                    value="inverted" data-theme-control="navbarStyle" />
                                 <label class="btn d-block w-100 btn-navbar-style fs--1" for="navbar-style-inverted">
                                     <img class="img-fluid img-prototype" src="assets/img/generic/inverted.png"
                                         alt="" /><span class="label-text"> Inverted</span></label>

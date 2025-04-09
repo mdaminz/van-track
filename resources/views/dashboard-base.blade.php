@@ -128,18 +128,18 @@
                         <a class="btn btn-outline-light btn-social" href="/"><i class="fab fa-twitter"></i></a>
                         <a class="btn btn-outline-light btn-social" href="/"><i
                                 class="fab fa-facebook-f"></i></a>
-                        <a class="btn btn-outline-light btn-social" href="/"><i class="fab fa-youtube"></i></a>
+                        <a class="btn btn-outline-light btn-social" href="/"><i class="fab fa-linkedin-in"></i></a>
                         <a class="btn btn-outline-light btn-social" href="/"><i
-                                class="fab fa-linkedin-in"></i></a>
+                                class="fab fa-instagram"></i></a>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6">
                     <h4 class="text-light mb-4">Services</h4>
-                    <a class="btn btn-link" href="">General Carpentry</a>
-                    <a class="btn btn-link" href="">Furniture Remodeling</a>
-                    <a class="btn btn-link" href="">Wooden Floor</a>
-                    <a class="btn btn-link" href="">Wooden Furniture</a>
-                    <a class="btn btn-link" href="">Custom Carpentry</a>
+                    <a class="btn btn-link" href="">Real-Time Van Tracking</a>
+                    <a class="btn btn-link" href="">RFID-Based Attendance Tracking</a>
+                    <a class="btn btn-link" href="">Payment Management</a>
+                    <a class="btn btn-link" href="">Route Optimization</a>
+                    <a class="btn btn-link" href="">Parent-Driver Communication</a>
                 </div>
                 <div class="col-lg-3 col-md-6">
                     <h4 class="text-light mb-4">Quick Links</h4>
@@ -150,13 +150,11 @@
                     <a class="btn btn-link" href="term">Terms & Condition</a>
                 </div>
                 <div class="col-lg-3 col-md-6">
-                    <h4 class="text-light mb-4">Newsletter</h4>
-                    <p>Dolor amet sit justo amet elitr clita ipsum elitr est.</p>
+                    <h4 class="text-light mb-4">Payment Method</h4>
+                    <p>Pay easily via DuitNow QR—just scan and pay using your banking or e-wallet app.</p>
                     <div class="position-relative mx-auto" style="max-width: 400px;">
-                        <input class="form-control border-0 w-100 py-3 ps-4 pe-5" type="text"
-                            placeholder="Your email">
-                        <button type="button"
-                            class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">SignUp</button>
+                        <img style="border-radius: 3px;" width="60px" src="homepage/img/qr-logo.png" alt="">
+                        <!-- <img style="margin-left: 10px;" width="60px" src="homepage/img/mastercard.png" alt=""> -->
                     </div>
                 </div>
             </div>
@@ -165,11 +163,11 @@
             <div class="copyright">
                 <div class="row">
                     <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                        &copy; <a class="border-bottom" href="/">VanTrack</a>, All Right Reserved.
+                        &copy; VanTrack, All Right Reserved.
                     </div>
                     <div class="col-md-6 text-center text-md-end">
                         <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
-                        Designed By <a class="border-bottom" href="/">Muhammad Amin Bin Abd Rani</a>
+                        Designed By Muhammad Amin Bin Abd Rani
                     </div>
                 </div>
             </div>

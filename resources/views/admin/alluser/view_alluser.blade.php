@@ -78,9 +78,9 @@
                                                 class="fas fa-ellipsis-h fs--1"></span></button>
                                         <div class="dropdown-menu dropdown-menu-end border py-0"
                                             aria-labelledby="order-dropdown-0">
-                                            <div class="bg-white py-2"><a class="dropdown-item" href="">Edit</a>
+                                            <div class="bg-white py-2"><a class="dropdown-item" href="{{ url('update_alluser', $alluser_data->id) }}">Edit</a>
                                                 <div class="dropdown-divider"></div>
-                                                <a class="dropdown-item text-danger" href="">Delete</a>
+                                                <a class="dropdown-item text-danger" href="{{ url('delete_alluser', $alluser_data->id) }}">Delete</a>
                                             </div>
                                         </div>
                                     </div>

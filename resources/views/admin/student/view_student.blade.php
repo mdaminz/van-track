@@ -1,4 +1,12 @@
-@extends('admin.admin-base')
+@php
+    $layout = match (Auth::user()->usertype) {
+        'admin' => 'admin.admin-base',
+        'driver' => 'driver.driver-base',
+        default => 'user.user-base',
+    };
+@endphp
+
+@extends($layout)
 
 
 @section('body-content')
@@ -11,7 +19,7 @@
             <div class="row">
                 <div class="col-lg-8">
                     <h3>Student Management</h3>
-                    <p class="mb-0">Below is the list of all students currently registered by thier parent in the system.
+                    <p class="mb-0">Below is the list of all students currently registered by their parent in the system.
                     </p>
                 </div>
             </div>
@@ -40,9 +48,9 @@
                         <tr>
                             <th class="sort" style="min-width: 3rem;" data-sort="no">No</th>
                             <th class="sort" style="min-width: 10rem;" data-sort="name">Full Name</th>
-                            <th class="sort" style="min-width: 5rem;" data-sort="name">Parent Name</th>
+                            <th class="sort" style="min-width: 5rem;" data-sort="parent">Parent Name</th>
                             <th class="sort" style="min-width: 5rem;" data-sort="rfid">RFID Tag</th>
-                            <th class="sort" style="min-width: 5rem;" data-sort="contact">Emergency Contact</th>
+
                             <th class="sort" style="min-width: 5rem;" data-sort="address">Address</th>
                             <th class="sort" style="min-width: 5rem;" data-sort="status">Status</th>
                             <th class="no-sort"></th>
@@ -57,11 +65,11 @@
 
                                 <td class="no align-middle">{{ $number++ }}</td>
                                 <td class="name align-middle">{{ $students->full_name }}</td>
-                                <td class="name align-middle">{{ $students->user->name }}</td>
-                                <td class="rifd align-middle">{{ $students->rfid_tag }}</td>
-                                <td class="contact align-middle">{{ $students->emergency_contact }}
+                                <td class="parent align-middle">{{ $students->user->name }}</td>
+                                <td class="rfid align-middle">{{ $students->rfid_tag }}</td>
+
                                 </td>
-                                <td class="address align-middle">{{ $students->address }}
+                                <td class="address align-middle">{{ $students->address}}
                                 </td>
                                 @if ($students->status == 'Active')
                                     <td class="align-middle"><span
@@ -76,19 +84,26 @@
                                 </td>
                                 <td class="align-middle text-end">
                                     <div class="dropdown font-sans-serif position-static">
-                                        <button class="btn btn-link text-600 btn-sm dropdown-toggle btn-reveal"
-                                            type="button" id="order-dropdown-0" data-bs-toggle="dropdown"
-                                            data-boundary="viewport" aria-haspopup="true" aria-expanded="false"><span
+                                        <button class="btn btn-link text-600 btn-sm dropdown-toggle btn-reveal" type="button"
+                                            id="order-dropdown-0" data-bs-toggle="dropdown" data-boundary="viewport"
+                                            aria-haspopup="true" aria-expanded="false"><span
                                                 class="fas fa-ellipsis-h fs--1"></span></button>
                                         <div class="dropdown-menu dropdown-menu-end border py-0"
                                             aria-labelledby="order-dropdown-0">
-                                            <div class="bg-white py-2"><a class="dropdown-item"
-                                                    href="{{ url('admin_update_student', $students->id) }}">Edit</a>
-                                                <div class="dropdown-divider"></div>
-                                                <a class="dropdown-item text-danger"
-                                                    href="{{ url('delete_student', $students->id) }}">Delete</a>
+                                            <div class="bg-white py-2">
+                                                <a class="dropdown-item"
+                                                    href="{{ url('detail_student', $students->id) }}">View</a>
+
+                                                @if(Auth::user()->usertype == 'admin')
+                                                    <a class="dropdown-item"
+                                                        href="{{ url('admin_update_student', $students->id) }}">Edit</a>
+                                                    <div class="dropdown-divider"></div>
+                                                    <a class="dropdown-item text-danger"
+                                                        href="{{ url('delete_student', $students->id) }}">Delete</a>
+                                                @endif
                                             </div>
                                         </div>
+
                                     </div>
                                 </td>
                             </tr>

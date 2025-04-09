@@ -1,4 +1,12 @@
-@extends('admin.admin-base')
+@php
+    $layout = match (Auth::user()->usertype) {
+        'admin' => 'admin.admin-base',
+        'driver' => 'driver.driver-base',
+        default => 'user.user-base',
+    };
+@endphp
+
+@extends($layout)
 
 
 @section('body-content')
@@ -37,12 +45,12 @@
                 <table class="table table-sm table-striped fs--1 mb-0 overflow-hidden">
                     <thead class="bg-200 text-900">
                         <tr>
-                            <th class="sort" style="min-width: 3rem;" data-sort="no">No</th>
-                            <th class="sort" style="min-width: 10rem;" data-sort="name">Full Name</th>
-                            <th class="sort" style="min-width: 10rem;" data-sort="email">Type</th>
-                            <th class="sort" style="min-width: 20rem;" data-sort="contact">Description</th>
-                            <th class="sort" style="min-width: 10rem;" data-sort="address">Status</th>
-                            <th class="sort" style="min-width: 5rem;" data-sort="status">Resolved At</th>
+                            <th class="sort align-middle" style="min-width: 3rem;" data-sort="no">No</th>
+                            <th class="sort align-middle" style="min-width: 15rem;" data-sort="name">Full Name</th>
+                            <th class="sort align-middle" style="min-width: 5rem;" data-sort="email">Type</th>
+                            <th class="sort align-middle" style="min-width: 15rem;" data-sort="contact">Subject</th>
+                            <th class="sort align-middle" style="min-width: 10rem;" data-sort="address">Resolved At</th>
+                            <th class="sort align-middle" style="min-width: 10rem;" data-sort="status">Status</th>
                             <th class="no-sort"></th>
                         </tr>
                     </thead>
@@ -53,40 +61,44 @@
                         @foreach ($report_data as $report_data)
                             <tr class="btn-reveal-trigger">
 
-                                <td class="no">{{ $number++ }}</td>
-                                <td class="name">{{ $report_data->user->name }}</td>
-                                <td class="email">{{ $report_data->type }}</td>
-                                <td class="contact">{{ $report_data->description }}</td>
-
+                                <td class="no align-middle" style="min-width: 3rem;">{{ $number++ }}</td>
+                                <td class="name align-middle" style="min-width: 10rem;">{{ $report_data->user->name }}</td>
+                                <td class="email align-middle" style="min-width: 5rem;">{{ $report_data->type }}</td>
+                                <td class="contact align-middle" style="min-width: 10rem;">{{ $report_data->subject }}</td>
+                                <td class="address align-middle" style="min-width: 10rem;">{{ $report_data->resolved_at }}</td>
                                 </td>
-                                @if ($report_data->status == 'Active')
+                                @if ($report_data->status == 'Resolved')
                                     <td class="align-middle"><span
-                                            class="badge badge rounded-pill d-block py-2 badge-soft-success">Active<span
+                                            class="badge badge rounded-pill d-block py-2 badge-soft-success">Resolved<span
                                                 class="fas fa-check" data-fa-transform="shrink-2"></span></span>
                                     </td>
                                 @else
                                     <td class="align-middle"><span
-                                            class="badge badge rounded-pill d-block p-2 badge-soft-secondary">Inactive<span
+                                            class="badge badge rounded-pill d-block p-2 badge-soft-secondary">Pending<span
                                                 class="ms-1 fas fa-ban" data-fa-transform="shrink-2"></span></span>
                                     </td>
                                 @endif
-                                <td class="contact align-middle" style="min-width: 10rem;">{{ $report_data->resolved_at }}</td>
 
                                 <td class="align-middle text-end">
                                     <div class="dropdown font-sans-serif position-static">
-                                        <button class="btn btn-link text-600 btn-sm dropdown-toggle btn-reveal"
-                                            type="button" id="order-dropdown-0" data-bs-toggle="dropdown"
-                                            data-boundary="viewport" aria-haspopup="true" aria-expanded="false"><span
+                                        <button class="btn btn-link text-600 btn-sm dropdown-toggle btn-reveal" type="button"
+                                            id="order-dropdown-0" data-bs-toggle="dropdown" data-boundary="viewport"
+                                            aria-haspopup="true" aria-expanded="false"><span
                                                 class="fas fa-ellipsis-h fs--1"></span></button>
                                         <div class="dropdown-menu dropdown-menu-end border py-0"
                                             aria-labelledby="order-dropdown-0">
-                                            <div class="bg-white py-2"><a class="dropdown-item" href="">Edit</a>
+                                            <div class="bg-white py-2"><a class="dropdown-item"
+                                                    href="{{ url('detail_report', $report_data->id) }}">View</a><a
+                                                    class="dropdown-item"
+                                                    href="{{ url('update_report', $report_data->id) }}">Resolve</a>
                                                 <div class="dropdown-divider"></div>
-                                                <a class="dropdown-item text-danger" href="{{ url('delete_report', $report_data->id) }}">Delete</a>
+                                                <a class="dropdown-item text-danger"
+                                                    href="{{ url('delete_report', $report_data->id) }}">Delete</a>
                                             </div>
                                         </div>
                                     </div>
                                 </td>
+
                             </tr>
                         @endforeach
                     </tbody>

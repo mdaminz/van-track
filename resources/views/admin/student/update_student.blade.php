@@ -16,10 +16,10 @@
         </div>
     </div>
     {{-- <div class="card cover-image mb-3"><img class="card-img-top" src="../../assets/img/generic/13.jpg" alt="" />
-<input class="d-none" id="upload-cover-image" type="file" />
-<label class="cover-image-file-input" for="upload-cover-image"><span class="fas fa-camera me-2"></span><span>Change
-    cover photo</span></label>
-</div> --}}
+        <input class="d-none" id="upload-cover-image" type="file" />
+        <label class="cover-image-file-input" for="upload-cover-image"><span class="fas fa-camera me-2"></span><span>Change
+                cover photo</span></label>
+    </div> --}}
     <div class="row g-0">
         <div class="col-lg-12">
             <div class="card mb-3">
@@ -27,8 +27,8 @@
                     <h5 class="mb-0">Student Information</h5>
                 </div>
                 <div class="card-body bg-light">
-                    <form action="{{ url('admin_edit_student', $students->id) }}" method="POST" class="row g-3 needs-validation"
-                        novalidate="" enctype="multipart/form-data">
+                    <form action="{{ url('admin_edit_student', $students->id) }}" method="POST"
+                        class="row g-3 needs-validation" novalidate="" enctype="multipart/form-data">
                         @csrf
                         <div class="col-md-12">
                             <label class="form-label" for="validationCustom01">Full Name</label>
@@ -46,7 +46,8 @@
                             <label class="form-label" for="validationCustom03">Relationship</label>
                             <select name="relationship" class="form-select" id="validationCustom03" required="">
                                 <option selected="value={{ $students->relationship }}" selected>
-                                    {{ $students->relationship }}</option>
+                                    {{ $students->relationship }}
+                                </option>
                                 <option value="Father">Father</option>
                                 <option value="Mother">Mother</option>
                                 <option value="Grandfather">Grandfather</option>
@@ -57,10 +58,16 @@
                             <div class="invalid-feedback">Please select your relationship.</div>
                         </div>
                         <div class="col-md-6">
-                            <label class="form-label" for="validationCustom05">Address</label>
-                            <input value="{{ $students->address }}" name="address" class="form-control"
-                                id="validationCustom05" type="text" required="" />
-                            <div class="invalid-feedback">Enter an address.</div>
+                            <label class="form-label" for="validationCustom04">School</label>
+                            <select name="school_id" class="form-select" id="validationCustom04" required="">
+                                <option value="{{$students->school->id}}" selected>
+                                    {{$students->school->name}}
+                                </option>
+                                @foreach ($rate->unique('school_id') as $rate)
+                                    <option value="{{$rate->school->id}}">{{$rate->school->name}}</option>
+                                @endforeach
+                            </select>
+                            <div class="invalid-feedback">Please select a school.</div>
                         </div>
                         <div class="col-md-6">
                             <label class="form-label" for="validationCustom04">Emergency Contact</label>
@@ -68,11 +75,36 @@
                                 id="validationCustom04" type="text" required="" />
                             <div class="invalid-feedback">Enter an emergency contact.</div>
                         </div>
+                        <div class="col-md-12">
+                            <label class="form-label" for="validationCustom05">Address</label>
+                            <input value="{{ $students->address }}" name="address" class="form-control"
+                                id="validationCustom05" type="text" required="" />
+                            <div class="invalid-feedback">Enter an address.</div>
+                        </div>
+
                         {{-- <div class="col-md-6">
                             <label class="form-label" for="validationCustom06">Profile Photo</label>
                             <input name="profile_photo" class="form-control" type="file" id="validationCustom06" />
                             <img style="height: 200px;" src="student/{{ $students->profile_photo }}" alt="">
                         </div> --}}
+                        <div class="col-md-6">
+                            <label class="form-label" for="validationCustom07">Postcode</label>
+                            <input value="{{ $students->postcode }}" name="postcode" class="form-control"
+                                id="validationCustom07" type="text" required="" />
+                            <div class="invalid-feedback">Enter a postcode.</div>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label" for="validationCustom08">District</label>
+                            <select name="district" class="form-select" id="validationCustom08" required="">
+                                <option disabled="" value="{{ $students->district }}">
+                                    {{ $students->district }}
+                                </option>
+                                @foreach ($rates->unique('district') as $rates)
+                                    <option value="{{$rates->district}}">{{$rates->district}}</option>
+                                @endforeach
+                            </select>
+                            <div class="invalid-feedback">Please select your relationship.</div>
+                        </div>
                         <div class="col-md-6">
                             <label class="form-label">RFID Tag</label>
                             <input value="{{ $students->rfid_tag }}" name="rfid_tag" class="form-control" type="text" />
@@ -81,14 +113,15 @@
                             <label class="form-label">Status</label>
                             <select name="status" class="form-select" id="validationCustom07" required="">
                                 <option selected="value={{ $students->status }}" selected>
-                                    {{ $students->status }}</option>
+                                    {{ $students->status }}
+                                </option>
                                 <option value="Active">Active</option>
                                 <option value="Nonactive">Nonactive</option>
                             </select>
                             <div class="invalid-feedback">Please select your relationship.</div>
                         </div>
 
-                        <input value="{{ $students->user_id }}" name="user_id" class="form-control" type="text" hidden/>
+                        <input value="{{ $students->user_id }}" name="user_id" class="form-control" type="text" hidden />
 
                         <div class="col-12 mt-4">
                             <button class="btn btn-primary" type="submit">Update Student</button>

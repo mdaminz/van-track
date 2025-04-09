@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Bill;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
@@ -12,6 +13,8 @@ use App\Models\School;
 use App\Models\User;
 use App\Models\Report;
 use App\Models\Attendance;
+use App\Models\Rate;
+
 
 class HomeController extends Controller
 {
@@ -26,7 +29,9 @@ class HomeController extends Controller
         $userCount = User::count(); // Count the total number of users
         $studentCount = Student::count();
 
-        return view('about', compact('userCount', 'studentCount'));
+        $team_members = User::whereIn('id', [1, 2, 3])->get();
+
+        return view('about', compact('userCount', 'studentCount', 'team_members'));
     }
 
     public function feature()
@@ -44,13 +49,16 @@ class HomeController extends Controller
     public function index()
     {
         $userCount = User::count(); // Count the total number of users
+
         $studentCount = Student::count();
 
         $schools = School::all();
 
         $feedbacks = Feedback::with('user')->get(); // Eager load students
 
-        return view('welcome', compact('feedbacks', 'schools', 'userCount', 'studentCount'));
+        $team_members = User::whereIn('id', [1, 2, 3])->get();
+
+        return view('welcome', compact('feedbacks', 'schools', 'userCount', 'studentCount', 'team_members'));
     }
 
 
@@ -80,7 +88,11 @@ class HomeController extends Controller
 
     public function create_student()
     {
-        return view('user.student.create_student');
+        $rates = Rate::all();
+        $rate = Rate::all();
+
+
+        return view('user.student.create_student', compact('rates', 'rate'));
     }
 
     public function add_student(Request $request)
@@ -95,11 +107,17 @@ class HomeController extends Controller
         $student_data->relationship = $request->relationship;
         $student_data->emergency_contact = $request->emergency_contact;
         $student_data->address = $request->address;
+        $student_data->school_id = $request->school_id;
+        $student_data->postcode = $request->postcode;
+        $student_data->district = $request->district;
 
         $student_data->user_id = Auth::id();
 
+        $student_data->rfid_tag = 'No Rfid Tag';
+        $student_data->status = $request->Inactive;
 
         $student_data->profile_photo = $request->profile_photo;
+        
         $image = $request->profile_photo;
 
         if ($image) {
@@ -119,7 +137,11 @@ class HomeController extends Controller
     {
         $student_data = Student::find($id);
 
-        return view('user.student.update_student', compact('student_data'));
+        $rate = rate::all();
+
+        $rates = Rate::all();
+
+        return view('user.student.update_student', compact('student_data', 'rate','rates'));
     }
 
     public function edit_student(Request $request, $id)
@@ -133,6 +155,9 @@ class HomeController extends Controller
         $student_data->relationship = $request->relationship;
         $student_data->emergency_contact = $request->emergency_contact;
         $student_data->address = $request->address;
+        $student_data->postcode = $request->postcode;
+        $student_data->district = $request->district;
+        $student_data->school_id = $request->school_id;
         $student_data->user_id = Auth::id();
 
         if ($request->hasFile('profile_photo')) {
@@ -148,9 +173,7 @@ class HomeController extends Controller
             $student_data->profile_photo = $imagename;
         }
 
-        $student_data->rfid_tag = 'No Rfid Tag';
-        $student_data->status = 'Active';
-
+        
 
         $student_data->save();
 
@@ -247,18 +270,88 @@ class HomeController extends Controller
 
         $report_data->save();
 
-        return redirect('view_report');
+        return redirect('user_view_report');
     }
 
     public function parent_view_attendance()
     {
-        $user_id = Auth::id(); // Get the authenticated user's ID
+        $user_id = Auth::id(); // Get the authenticated parent's ID
 
-        // Retrieve students' attendance associated with the authenticated user, ordered by created_at descending
-        $attendances = Attendance::where('student_id', $user_id)
+        // Retrieve students associated with the authenticated parent
+        $students = Student::where('user_id', $user_id)->pluck('rfid_tag'); 
+
+        // Retrieve attendance for those students, ordered by latest first
+        $attendances = Attendance::whereIn('rfid_tag', $students)
             ->orderBy('created_at', 'desc')
             ->get();
 
         return view('user.attendance.view_attendance', compact('attendances'));
     }
+
+    public function user_view_report(Request $request)
+    {
+        $user_id = Auth::id(); // Get the authenticated user's ID
+
+        // Retrieve students' reports associated with the authenticated user, ordered by latest
+        $report_data = Report::where('user_id', $user_id)
+                            ->orderBy('created_at', 'desc')
+                            ->get();
+
+        return view('user.report.user_view_report', compact('report_data'));
+    }
+
+    public function user_view_bill()
+    {
+        $userId = auth()->id();
+
+        // Get unpaid bills (sorted by latest)
+        $unpaidBills = Bill::where('user_id', $userId)
+                            ->where('status', 'Unpaid')
+                            ->orderBy('created_at', 'desc')
+                            ->get();
+
+        // Get unpaid bills (sorted by latest)
+        $pendingBills = Bill::where('user_id', $userId)
+                            ->where('status', 'Pending')
+                            ->orderBy('created_at', 'desc')
+                            ->get();
+
+        // Get paid bills (sorted by latest)
+        $paidBills = Bill::where('user_id', $userId)
+                        ->where('status', 'Paid')
+                        ->orderBy('created_at', 'desc')
+                        ->get();
+
+        return view('user.bill.user_view_bill', compact('unpaidBills', 'paidBills', 'pendingBills'));
+    }   
+
+    public function pay_bill($id)
+    {
+        $bill = Bill::find($id);
+
+        return view('user.bill.pay_bill', compact('bill'));
+    }
+
+    public function uploadReceipt(Request $request)
+    {
+        $request->validate([
+            'bill_id' => 'required|exists:bills,id',
+            'receipt' => 'required|file|mimes:jpg,jpeg,png,pdf|max:2048',
+        ]);
+
+        $bill = Bill::findOrFail($request->bill_id);
+
+        // Store file
+        $path = $request->file('receipt')->store('receipts', 'public');
+
+        // Update bill
+        $bill->receipt = $path;
+        $bill->user_id = Auth::id();
+        $bill->status = 'Pending'; // optional
+        $bill->save();
+
+        return redirect()->back()->with('success', 'Receipt uploaded successfully!');
+    }
+
+
 }

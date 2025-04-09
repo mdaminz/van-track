@@ -16,10 +16,10 @@
         </div>
     </div>
     {{-- <div class="card cover-image mb-3"><img class="card-img-top" src="../../assets/img/generic/13.jpg" alt="" />
-  <input class="d-none" id="upload-cover-image" type="file" />
-  <label class="cover-image-file-input" for="upload-cover-image"><span class="fas fa-camera me-2"></span><span>Change
-          cover photo</span></label>
-</div> --}}
+        <input class="d-none" id="upload-cover-image" type="file" />
+        <label class="cover-image-file-input" for="upload-cover-image"><span class="fas fa-camera me-2"></span><span>Change
+                cover photo</span></label>
+    </div> --}}
     <div class="row g-0">
         <div class="col-lg-12">
             <div class="card mb-3">
@@ -27,8 +27,8 @@
                     <h5 class="mb-0">School Details</h5>
                 </div>
                 <div class="card-body bg-light">
-                    <form action="{{ url('edit_school', $school_data->id) }}" method="POST"
-                        class="row g-3 needs-validation" novalidate="" enctype="multipart/form-data">
+                    <form action="{{ url('edit_school', $school_data->id) }}" method="POST" class="row g-3 needs-validation"
+                        novalidate="" enctype="multipart/form-data">
                         @csrf
                         <div class="col-md-12">
                             <label class="form-label" for="validationCustom01">School Name</label>
@@ -38,8 +38,8 @@
                         </div>
                         <div class="col-md-6">
                             <label class="form-label" for="validationCustom02">First Address</label>
-                            <input name="first_address" class="form-control" id="validationCustom02" type="text"
-                                required="" value="{{ $school_data->first_address }}" />
+                            <input name="first_address" class="form-control" id="validationCustom02" type="text" required=""
+                                value="{{ $school_data->first_address }}" />
                             <div class="invalid-feedback">Enter First Address.</div>
                         </div>
                         <div class="col-md-6">
@@ -51,7 +51,7 @@
                         <div class="col-md-6">
                             <label class="form-label" for="validationCustom04">School Type</label>
                             <select name="type" class="form-select" id="validationCustom04" required="">
-                                <option selected="" disabled="" value="{{ $school_data->type }}">
+                                <option selected="{{ $school_data->type }}" disabled="" value="{{ $school_data->type }}">
                                     @if ($school_data->type == 'first')
                                         Primary School
                                     @else

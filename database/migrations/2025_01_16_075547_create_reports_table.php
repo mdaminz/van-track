@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('image')->nullable();
             $table->string('status')->nullable();
             $table->string('resolved_at')->nullable();
+            $table->text('remarks')->nullable();
             $table->string('user_id')->nullable();
             $table->timestamps();
         });

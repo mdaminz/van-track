@@ -6,6 +6,7 @@ use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
+
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -14,6 +15,9 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call(UserSeeder::class);
-        $this->call(StudentSeeder::class);
+        $this->call(SchoolSeeder::class);
+        $this->call(FeedbackSeeder::class);
+        $this->call(ReportSeeder::class);
+        $this->call(ForumSeeder::class);
     }
 }

@@ -10,8 +10,8 @@
         <div class="card-body position-relative">
             <div class="row">
                 <div class="col-lg-8">
-                    <h3>User Management</h3>
-                    <p class="mb-0">Below is the list of all users currently registered in the system.</p>
+                    <h3>Parent Management</h3>
+                    <p class="mb-0">Below is the list of all parents currently registered in the system.</p>
                 </div>
             </div>
         </div>
@@ -72,15 +72,17 @@
                                 @endif
                                 <td class="align-middle text-end">
                                     <div class="dropdown font-sans-serif position-static">
-                                        <button class="btn btn-link text-600 btn-sm dropdown-toggle btn-reveal"
-                                            type="button" id="order-dropdown-0" data-bs-toggle="dropdown"
-                                            data-boundary="viewport" aria-haspopup="true" aria-expanded="false"><span
+                                        <button class="btn btn-link text-600 btn-sm dropdown-toggle btn-reveal" type="button"
+                                            id="order-dropdown-0" data-bs-toggle="dropdown" data-boundary="viewport"
+                                            aria-haspopup="true" aria-expanded="false"><span
                                                 class="fas fa-ellipsis-h fs--1"></span></button>
                                         <div class="dropdown-menu dropdown-menu-end border py-0"
                                             aria-labelledby="order-dropdown-0">
-                                            <div class="bg-white py-2"><a class="dropdown-item" href="">Edit</a>
+                                            <div class="bg-white py-2"><a class="dropdown-item"
+                                                    href="{{ url('update_parent', $parent_data->id) }}">Edit</a>
                                                 <div class="dropdown-divider"></div>
-                                                <a class="dropdown-item text-danger" href="">Delete</a>
+                                                <a class="dropdown-item text-danger"
+                                                    href="{{ url('delete_parent', $parent_data->id) }}">Delete</a>
                                             </div>
                                         </div>
                                     </div>

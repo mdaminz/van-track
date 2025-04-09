@@ -41,6 +41,7 @@ route::get('/admin_view_attendance', [AdminController::class, 'admin_view_attend
 
 //Feedback
 route::get('/admin_view_feedback', [AdminController::class, 'admin_view_feedback']);
+route::get('/delete_feedback/{id}', [AdminController::class, 'delete_feedback']);
 
 //Student
 route::get('/admin_view_student', [AdminController::class, 'admin_view_student']);
@@ -50,15 +51,25 @@ route::get('/admin_update_student/{id}', [AdminController::class, 'admin_update_
 route::post('/admin_edit_student/{id}', [AdminController::class, 'admin_edit_student']);
 route::get('/admin_delete_student/{id}', [AdminController::class, 'admin_delete_student']);
 
+route::get('/detail_student/{id}', [AdminController::class,'detail_student']);
+
 //manage parent
 route::get('/view_parent', [AdminController::class, 'view_parent']);
+route::get('/update_parent/{id}', [AdminController::class, 'update_parent']);
+route::post('/edit_parent/{id}', [AdminController::class, 'edit_parent']);
+route::get('/delete_parent/{id}', [AdminController::class, 'delete_parent']);
 
 //manage driver
 route::get('/view_vandriver', [AdminController::class, 'view_vandriver']);
 route::get('/update_vandriver/{id}', [AdminController::class, 'update_vandriver']);
+route::post('/edit_vandriver/{id}', [AdminController::class, 'edit_vandriver']);
+route::get('/delete_vandriver/{id}', [AdminController::class, 'delete_vandriver']);
 
 //manage all user
 route::get('/view_alluser', [AdminController::class, 'view_alluser']);
+route::get('/update_alluser/{id}', [AdminController::class, 'update_alluser']);
+route::post('/edit_alluser/{id}', [AdminController::class, 'edit_alluser']);
+route::get('/delete_alluser/{id}', [AdminController::class, 'delete_alluser']);
 
 //USER-dashboard
 
@@ -79,6 +90,7 @@ route::get('/delete_feedback/{id}', [HomeController::class, 'delete_feedback']);
 //parent view attendance
 route::get('/parent_view_attendance', [HomeController::class, 'parent_view_attendance']);
 
+
 //report and complaint
 
 
@@ -91,13 +103,23 @@ route::get('/view_van_location', [AdminController::class, 'view_van_location']);
 //Report
 
 route::get('/view_report', [AdminController::class, 'view_report']);
+
+route::get('/detail_report/{id}', [AdminController::class, 'detail_report']);
+
+route::get('/update_report/{id}', [AdminController::class, 'update_report']);
+route::post('/edit_report/{id}', [AdminController::class, 'edit_report']);
+
 route::get('/create_report', [HomeController::class, 'create_report']);
 route::post('/add_report', [HomeController::class, 'add_report']);
 route::get('/delete_report/{id}', [AdminController::class, 'delete_report']);
 
+//report and complaint (User and Driver)
+route::get('/user_view_report', [HomeController::class, 'user_view_report']);
+
 
 //forum
-route::get('/view_forum', [AdminController::class, 'view_forum']);
+route::get('/view_forum_post', [AdminController::class, 'view_forum']);
+Route::post('/store_post', [AdminController::class, 'store'])->name('store_post');
 
 
 //van
@@ -110,3 +132,44 @@ route::post('/add_schedule', [AdminController::class, 'add_schedule']);
 route::get('/update_schedule/{id}', [AdminController::class, 'update_schedule']);
 route::post('/edit_schedule/{id}', [AdminController::class, 'edit_schedule']);
 route::get('/delete_schedule/{id}', [AdminController::class, 'delete_schedule']);
+
+//profile
+route::get('/update_profile/{id}', [AdminController::class, 'update_profile']);
+route::post('/edit_profile/{id}', [AdminController::class, 'edit_profile']);
+route::post('/update_profile_photo/{id}', [AdminController::class, 'update_profile_photo']);
+route::put('/edit_password/{id}', [AdminController::class, 'updatePassword']);
+
+//Rates
+route::get('/view_rate', [AdminController::class, 'view_rate']);
+route::get('/create_rate', [AdminController::class, 'create_rate']);
+route::post('/add_rate', [AdminController::class, 'add_rate']);
+
+route::get('/update_rate/{id}', [AdminController::class, 'update_rate']);
+route::post('/edit_rate/{id}', [AdminController::class, 'edit_rate']);
+route::get('/delete_rate/{id}', [AdminController::class, 'delete_rate']);
+
+
+//bills (Admin)
+route::get('/paid_bill', [AdminController::class, 'paid_bill']);
+route::get('/pending_bill', [AdminController::class, 'pending_bill']);
+route::get('/unpaid_bill', [AdminController::class, 'unpaid_bill']);
+
+route::get('/verify_bill/{id}', [AdminController::class, 'verify_bill']);
+route::post('/edit_status/{id}', [AdminController::class, 'edit_status']);
+
+route::get('/bill_receipt/{id}', [AdminController::class, 'bill_receipt']);
+
+
+//bills (User)  
+route::get('/user_view_bill', [HomeController::class, 'user_view_bill']);
+route::get('/pay_bill/{id}', [HomeController::class, 'pay_bill']);
+
+Route::post('/upload-receipt', [HomeController::class, 'uploadReceipt'])->name('bill.uploadReceipt');
+
+
+//GPS
+
+// routes/api.php
+Route::middleware(['auth'])->post('/update-coor', [AdminController::class, 'updateCoor'])->name('update.coor');
+
+Route::get('/view_van_location/{id}', [AdminController::class, 'viewLocation']);

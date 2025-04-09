@@ -59,7 +59,7 @@
                                 <td class="contact align-middle" style="min-width: 10rem;">{{ $vandriver_data->phone }}</td>
                                 <td class="address align-middle" style="min-width: 10rem;">{{ $vandriver_data->address }}</td>
                                 </td>
-                                @if ($vandriver_data->status == 'active')
+                                @if ($vandriver_data->status == 'Active')
                                     <td class="align-middle"><span
                                             class="badge badge rounded-pill d-block py-2 badge-soft-success">Active<span
                                                 class="fas fa-check" data-fa-transform="shrink-2"></span></span>
@@ -80,7 +80,7 @@
                                             aria-labelledby="order-dropdown-0">
                                             <div class="bg-white py-2"><a class="dropdown-item" href="{{ url('update_vandriver', $vandriver_data->id) }}">Edit</a>
                                                 <div class="dropdown-divider"></div>
-                                                <a class="dropdown-item text-danger" href="">Delete</a>
+                                                <a class="dropdown-item text-danger" href="{{ url('delete_vandriver', $vandriver_data->id) }}">Delete</a>
                                             </div>
                                         </div>
                                     </div>

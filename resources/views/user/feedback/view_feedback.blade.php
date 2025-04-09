@@ -47,9 +47,9 @@
                         data-bulk-select='{"body":"table-orders-body","actions":"orders-bulk-actions","replacedElement":"orders-actions"}' />
                 </div>
             </th> --}}
-                            <th class="sort pe-1 align-middle white-space-nowrap" data-sort="order">No</th>
-                            <th class="sort pe-1 align-middle white-space-nowrap" data-sort="order">Rating</th>
-                            <th class="sort pe-1 align-middle white-space-nowrap pe-7" data-sort="date">Message</th>
+                            <th class="sort pe-1 align-middle" data-sort="order">No</th>
+                            <th class="sort pe-1 align-middle" data-sort="order">Rating</th>
+                            <th class="sort pe-1 align-middle" data-sort="date" style="min-width: 12.5rem;">Message</th>
                             <th class="no-sort"></th>
                         </tr>
                     </thead>
@@ -65,9 +65,9 @@
                         data-bulk-select-row="data-bulk-select-row" />
                 </div>
             </td> --}}
-                                <td class="order py-2 align-middle white-space-nowrap">{{ $number++ }}</td>
+                                <td class="order py-2 align-middle">{{ $number++ }}</td>
                                 <!-- Increment the counter -->
-                                <td class="order py-2 align-middle white-space-nowrap">{{ $feedbacks->rating }}
+                                <td class="order py-2 align-middle">{{ $feedbacks->rating }} Star
                                 </td>
                                 <td class="date py-2 align-middle">{{ $feedbacks->message }}</td>
 

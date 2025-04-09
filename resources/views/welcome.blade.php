@@ -16,9 +16,9 @@
                                     Parents and Drivers</h1>
                                 <p class="fs-5 fw-medium text-white mb-4 pb-2">Stay connected, informed, and stress-free
                                     with our real-time tracking and communication system.</p>
-                                <a href="" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Read
-                                    More</a>
-                                <a href="" class="btn btn-light py-md-3 px-md-5 animated slideInRight">Free Quote</a>
+                                <!-- <a href="" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Read
+                                                More</a>
+                                            <a href="" class="btn btn-light py-md-3 px-md-5 animated slideInRight">Free Quote</a> -->
                             </div>
                         </div>
                     </div>
@@ -36,9 +36,9 @@
                                     at Your Fingertips</h1>
                                 <p class="fs-5 fw-medium text-white mb-4 pb-2">Track routes, manage attendance, and simplify
                                     payments with VanTrack's advanced tools system.</p>
-                                <a href="" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Read
-                                    More</a>
-                                <a href="" class="btn btn-light py-md-3 px-md-5 animated slideInRight">Free Quote</a>
+                                <!-- <a href="" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Read
+                                                More</a>
+                                            <a href="" class="btn btn-light py-md-3 px-md-5 animated slideInRight">Free Quote</a> -->
                             </div>
                         </div>
                     </div>
@@ -56,9 +56,9 @@
                                     with RFID Technology</h1>
                                 <p class="fs-5 fw-medium text-white mb-4 pb-2">Experience reliable attendance logging,
                                     optimized scheduling, and seamless coordination every day.</p>
-                                <a href="" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Read
-                                    More</a>
-                                <a href="" class="btn btn-light py-md-3 px-md-5 animated slideInRight">Free Quote</a>
+                                <!-- <a href="" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Read
+                                                More</a>
+                                            <a href="" class="btn btn-light py-md-3 px-md-5 animated slideInRight">Free Quote</a> -->
                             </div>
                         </div>
                     </div>
@@ -173,7 +173,7 @@
                                 </div>
                             </div>
                         </div>
-                        <a href="" class="btn btn-primary py-3 px-5">Explore More</a>
+                        <!-- <a href="" class="btn btn-primary py-3 px-5">Explore More</a> -->
                     </div>
                 </div>
             </div>
@@ -199,7 +199,7 @@
                             <h4 class="mb-3">Real-Time Van Tracking</h4> <br />
                             <p>Stay updated on the exact location of school vans through our live tracking system, ensuring
                                 timely pickups and drop-offs with complete peace of mind.</p>
-                            <a class="fw-medium" href="">Read More<i class="fa fa-arrow-right ms-2"></i></a>
+                            <!-- <a class="fw-medium" href="">Read More<i class="fa fa-arrow-right ms-2"></i></a> -->
                         </div>
                     </div>
                 </div>
@@ -213,7 +213,7 @@
                             <h4 class="mb-3">RFID-Based Attendance Management</h4>
                             <p>Seamlessly record student attendance as they board and leave the van using RFID technology,
                                 providing accurate, hassle-free records.</p>
-                            <a class="fw-medium" href="">Read More<i class="fa fa-arrow-right ms-2"></i></a>
+                            <!-- <a class="fw-medium" href="">Read More<i class="fa fa-arrow-right ms-2"></i></a> -->
                         </div>
                     </div>
                 </div>
@@ -227,7 +227,7 @@
                             <h4 class="mb-3">Payment Management</h4> <br />
                             <p>Simplify fee collection with a secure payment system that tracks due dates, generates
                                 invoices, and keeps all transactions organized.</p> <br />
-                            <a class="fw-medium" href="">Read More<i class="fa fa-arrow-right ms-2"></i></a>
+                            <!-- <a class="fw-medium" href="">Read More<i class="fa fa-arrow-right ms-2"></i></a> -->
                         </div>
                     </div>
                 </div>
@@ -241,7 +241,7 @@
                             <h4 class="mb-3">Route Optimization</h4>
                             <p>Efficiently plan and manage school van routes to minimize delays and save time, benefiting
                                 both drivers and parents.</p>
-                            <a class="fw-medium" href="">Read More<i class="fa fa-arrow-right ms-2"></i></a>
+                            <!-- <a class="fw-medium" href="">Read More<i class="fa fa-arrow-right ms-2"></i></a> -->
                         </div>
                     </div>
                 </div>
@@ -255,7 +255,7 @@
                             <h4 class="mb-3">Parent-Driver Communication</h4>
                             <p>Facilitate direct communication between parents and drivers for real-time updates, urgent
                                 notifications, or special requests.</p>
-                            <a class="fw-medium" href="">Read More<i class="fa fa-arrow-right ms-2"></i></a>
+                            <!-- <a class="fw-medium" href="">Read More<i class="fa fa-arrow-right ms-2"></i></a> -->
                         </div>
                     </div>
                 </div>
@@ -269,7 +269,7 @@
                             <h4 class="mb-3">Comprehensive Reporting</h4>
                             <p>Generate detailed reports for attendance, payment history, making it
                                 easy for van operators to monitor operations.</p>
-                            <a class="fw-medium" href="">Read More<i class="fa fa-arrow-right ms-2"></i></a>
+                            <!-- <a class="fw-medium" href="">Read More<i class="fa fa-arrow-right ms-2"></i></a> -->
                         </div>
                     </div>
                 </div>
@@ -375,13 +375,11 @@
                     <div class="col-lg-4 col-md-6 portfolio-item {{ $schools->type }} wow fadeInUp" data-wow-delay="0.4s">
                         <div class="rounded overflow-hidden">
                             <div class="position-relative overflow-hidden">
-                                <img style="height: 300px;" class="img-fluid w-100" src="school/{{ $schools->image }}"
-                                    alt="">
+                                <img style="height: 300px;" class="img-fluid w-100" src="school/{{ $schools->image }}" alt="">
                                 <div class="portfolio-overlay">
                                     <a class="btn btn-square btn-outline-light mx-1" href="school/{{ $schools->image }}"
                                         data-lightbox="portfolio"><i class="fa fa-eye"></i></a>
-                                    <a class="btn btn-square btn-outline-light mx-1" href=""><i
-                                            class="fa fa-link"></i></a>
+                                    <a class="btn btn-square btn-outline-light mx-1" href=""><i class="fa fa-link"></i></a>
                                 </div>
                             </div>
                             <div class="border border-5 border-light border-top-0 p-4">
@@ -466,71 +464,27 @@
             <div class="section-title text-center">
                 <h1 class="display-5 mb-5">Team Members</h1>
             </div>
-            <div class="row g-4">
-                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                    <div class="team-item">
-                        <div class="overflow-hidden position-relative">
-                            <img class="img-fluid" src="homepage/img/no-profile-photo.jpg" alt="">
-                            <div class="team-social">
-                                <a class="btn btn-square" href=""><i class="fab fa-facebook-f"></i></a>
-                                <a class="btn btn-square" href=""><i class="fab fa-twitter"></i></a>
-                                <a class="btn btn-square" href=""><i class="fab fa-instagram"></i></a>
+            <div class="row g-4 justify-content-center">
+                @foreach ($team_members as $team_members)
+                    <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                        <div class="team-item">
+                            <div class="overflow-hidden position-relative">
+                                <img style="height: 390px;" class="img-fluid" src="{{$team_members->profile_photo_path}}"
+                                    alt="">
+                                {{-- <div class="team-social">
+                                    <a class="btn btn-square" href=""><i class="fab fa-facebook-f"></i></a>
+                                    <a class="btn btn-square" href=""><i class="fab fa-twitter"></i></a>
+                                    <a class="btn btn-square" href=""><i class="fab fa-instagram"></i></a>
+                                </div> --}}
+                            </div>
+                            <div class="text-center border border-5 border-light border-top-0 p-4">
+                                <h5 class="mb-0">{{$team_members->name}}</h5>
+                                <small>{{$team_members->phone}}</small>
+                                <small>({{ ucfirst($team_members->usertype) }})</small>
                             </div>
                         </div>
-                        <div class="text-center border border-5 border-light border-top-0 p-4">
-                            <h5 class="mb-0">Full Name</h5>
-                            <small>Designation</small>
-                        </div>
                     </div>
-                </div>
-                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-                    <div class="team-item">
-                        <div class="overflow-hidden position-relative">
-                            <img class="img-fluid" src="homepage/img/no-profile-photo.jpg" alt="">
-                            <div class="team-social">
-                                <a class="btn btn-square" href=""><i class="fab fa-facebook-f"></i></a>
-                                <a class="btn btn-square" href=""><i class="fab fa-twitter"></i></a>
-                                <a class="btn btn-square" href=""><i class="fab fa-instagram"></i></a>
-                            </div>
-                        </div>
-                        <div class="text-center border border-5 border-light border-top-0 p-4">
-                            <h5 class="mb-0">Full Name</h5>
-                            <small>Designation</small>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
-                    <div class="team-item">
-                        <div class="overflow-hidden position-relative">
-                            <img class="img-fluid" src="homepage/img/no-profile-photo.jpg" alt="">
-                            <div class="team-social">
-                                <a class="btn btn-square" href=""><i class="fab fa-facebook-f"></i></a>
-                                <a class="btn btn-square" href=""><i class="fab fa-twitter"></i></a>
-                                <a class="btn btn-square" href=""><i class="fab fa-instagram"></i></a>
-                            </div>
-                        </div>
-                        <div class="text-center border border-5 border-light border-top-0 p-4">
-                            <h5 class="mb-0">Full Name</h5>
-                            <small>Designation</small>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.7s">
-                    <div class="team-item">
-                        <div class="overflow-hidden position-relative">
-                            <img class="img-fluid" src="homepage/img/no-profile-photo.jpg" alt="">
-                            <div class="team-social">
-                                <a class="btn btn-square" href=""><i class="fab fa-facebook-f"></i></a>
-                                <a class="btn btn-square" href=""><i class="fab fa-twitter"></i></a>
-                                <a class="btn btn-square" href=""><i class="fab fa-instagram"></i></a>
-                            </div>
-                        </div>
-                        <div class="text-center border border-5 border-light border-top-0 p-4">
-                            <h5 class="mb-0">Full Name</h5>
-                            <small>Designation</small>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </div>
@@ -547,7 +501,7 @@
             <div class="owl-carousel testimonial-carousel">
                 @foreach ($feedbacks as $feedback)
                     <div class="testimonial-item text-center">
-                        <img class="img-fluid bg-light p-2 mx-auto mb-3" src="storage/{{ $feedback->user->profile_photo_path }}"
+                        <img class="img-fluid bg-light p-2 mx-auto mb-3" src="/{{ $feedback->user->profile_photo_path }}"
                             style="width: 90px; height: 90px;">
                         <div class="testimonial-text text-center p-4">
                             <p>{{ $feedback->message }}

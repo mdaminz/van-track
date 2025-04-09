@@ -43,11 +43,11 @@
                     <thead class="bg-200 text-900">
                         <tr>
                             {{-- <th>
-                        <div class="form-check fs-0 mb-0 d-flex align-items-center">
-                            <input class="form-check-input" id="checkbox-bulk-customers-select" type="checkbox"
-                                data-bulk-select='{"body":"table-orders-body","actions":"orders-bulk-actions","replacedElement":"orders-actions"}' />
-                        </div>
-                    </th> --}}
+                                <div class="form-check fs-0 mb-0 d-flex align-items-center">
+                                    <input class="form-check-input" id="checkbox-bulk-customers-select" type="checkbox"
+                                        data-bulk-select='{"body":"table-orders-body","actions":"orders-bulk-actions","replacedElement":"orders-actions"}' />
+                                </div>
+                            </th> --}}
                             <th class="sort pe-1 align-middle white-space-nowrap" data-sort="order">No</th>
                             <th class="sort pe-1 align-middle white-space-nowrap" data-sort="order">Full Name</th>
                             <th class="sort pe-1 align-middle white-space-nowrap pe-7" data-sort="date">RFID Tag</th>
@@ -63,7 +63,8 @@
                                 style="min-width: 12.5rem;">Address</th>
                             <th class="sort pe-1 align-middle white-space-nowrap" data-sort="address"
                                 style="min-width: 12.5rem;">Status</th>
-                            {{-- <th class="sort pe-1 align-middle white-space-nowrap text-center" data-sort="status">Profile
+                            {{-- <th class="sort pe-1 align-middle white-space-nowrap text-center" data-sort="status">
+                                Profile
                                 Photo</th> --}}
                             <th class="no-sort"></th>
                         </tr>
@@ -106,13 +107,15 @@
                                 </td> --}}
                                 <td class="py-2 align-middle white-space-nowrap text-end">
                                     <div class="dropdown font-sans-serif position-static">
-                                        <button class="btn btn-link text-600 btn-sm dropdown-toggle btn-reveal"
-                                            type="button" id="order-dropdown-0" data-bs-toggle="dropdown"
-                                            data-boundary="viewport" aria-haspopup="true" aria-expanded="false"><span
+                                        <button class="btn btn-link text-600 btn-sm dropdown-toggle btn-reveal" type="button"
+                                            id="order-dropdown-0" data-bs-toggle="dropdown" data-boundary="viewport"
+                                            aria-haspopup="true" aria-expanded="false"><span
                                                 class="fas fa-ellipsis-h fs--1"></span></button>
                                         <div class="dropdown-menu dropdown-menu-end border py-0"
                                             aria-labelledby="order-dropdown-0">
                                             <div class="bg-white py-2"><a class="dropdown-item"
+                                                    href="{{ url('detail_student', $students->id) }}">View</a><a
+                                                    class="dropdown-item"
                                                     href="{{ url('update_student', $students->id) }}">Edit</a>
                                                 <div class="dropdown-divider"></div>
                                                 <a class="dropdown-item text-danger"

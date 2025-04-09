@@ -16,7 +16,9 @@ return new class extends Migration
             $table->string('full_name')->nullable();
             $table->string('date_of_birth')->nullable();
             $table->string('address')->nullable();
-            $table->string('school')->nullable();
+            $table->string('postcode')->nullable();
+            $table->string('district')->nullable();
+            $table->string('school_id')->nullable();
             $table->string('profile_photo')->nullable();
             $table->string('rfid_tag')->nullable();
             $table->string('emergency_contact')->nullable();

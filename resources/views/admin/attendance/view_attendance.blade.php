@@ -1,4 +1,12 @@
-@extends('admin.admin-base')
+@php
+    $layout = match (Auth::user()->usertype) {
+        'admin' => 'admin.admin-base',
+        'driver' => 'driver.driver-base',
+        default => 'user.user-base',
+    };
+@endphp
+
+@extends($layout)
 
 @section('body-content')
     <div class="card mb-3">
@@ -23,21 +31,23 @@
                     <h5 class="fs-0 mb-0 text-nowrap py-2 py-xl-0">Student Attendance</h5>
                 </div>
                 <div class="col-8 col-sm-auto ms-auto text-end ps-0">
-                    
+
                     <div id="orders-actions">
                         {{-- <button class="btn btn-falcon-default btn-sm mx-2" type="button"><span class="fas fa-filter"
                                 data-fa-transform="shrink-3 down-2"></span><span
                                 class="d-none d-sm-inline-block ms-1">Filter</span></button> --}}
-                        <button class="btn btn-falcon-default btn-sm" type="button"><span class="fas fa-external-link-alt"
-                                data-fa-transform="shrink-3 down-2"></span><span
-                                class="d-none d-sm-inline-block ms-1">Export</span></button>
+                        <button class="btn btn-falcon-default btn-sm" type="button" onclick="exportAttendanceTable()">
+                            <span class="fas fa-external-link-alt" data-fa-transform="shrink-3 down-2"></span>
+                            <span class="d-none d-sm-inline-block ms-1">Export</span>
+                        </button>
+
                     </div>
                 </div>
             </div>
         </div>
         <div class="card-body p-0">
             <div class="table-responsive scrollbar">
-                <table class="table table-sm table-striped fs--1 mb-0 overflow-hidden">
+                <table id="attendance-table" class="table table-sm table-striped fs--1 mb-0 overflow-hidden">
                     <thead class="bg-200 text-900">
                         <tr>
                             {{-- <th>
@@ -50,10 +60,12 @@
                             <th class="sort" style="min-width: 5rem;" data-sort="address">Date Time</th>
                             <th class="sort" style="min-width: 5rem;" data-sort="order">RFID Tag</th>
                             <th class="sort" style="min-width: 10rem;" data-sort="date">Student Name</th>
+                            <th class="sort" style="min-width: 10rem;" data-sort="date">School</th>
                             <th class="sort" style="min-width: 10rem;" data-sort="address">Address</th>
                             <th class="sort" data-sort="date">Status</th>
-                           
-                            {{-- <th class="sort pe-1 align-middle white-space-nowrap text-center" data-sort="status">Photo</th> --}}
+
+                            {{-- <th class="sort pe-1 align-middle white-space-nowrap text-center" data-sort="status">Photo
+                            </th> --}}
                             {{-- <th class="no-sort"></th> --}}
                         </tr>
                     </thead>
@@ -64,11 +76,11 @@
                         @foreach ($attendances as $attendances)
                             <tr class="btn-reveal-trigger">
                                 {{-- <td class="align-middle" style="width: 28px;">
-                                <div class="form-check fs-0 mb-0 d-flex align-items-center">
-                                    <input class="form-check-input" type="checkbox" id="checkbox-0"
-                                        data-bulk-select-row="data-bulk-select-row" />
-                                </div>
-                            </td> --}}
+                                    <div class="form-check fs-0 mb-0 d-flex align-items-center">
+                                        <input class="form-check-input" type="checkbox" id="checkbox-0"
+                                            data-bulk-select-row="data-bulk-select-row" />
+                                    </div>
+                                </td> --}}
                                 <td class="order py-2">{{ $number++ }}</td>
                                 <!-- Increment the counter -->
                                 <td class="address py-2">
@@ -77,21 +89,21 @@
                                 <td class="order py-2">{{ $attendances->rfid_tag }}
                                 </td>
                                 <td class="date py-2">{{ $attendances->student->full_name }}</td>
+                                <td class="school py-2">{{ $attendances->student->school->name }}</td>
                                 <td class="address py-2">
                                     {{ $attendances->student->address }}
                                 </td>
                                 <td class="order py-2">{{ $attendances->status }}
                                 </td>
-                               
+
                                 {{-- <td class="status py-2 align-middle text-center fs-0 white-space-nowrap">
-                                    <img style="width: 120px;" src="student/{{ $attendances->student->profile_photo }}"
-                                        alt="">
+                                    <img style="width: 120px;" src="student/{{ $attendances->student->profile_photo }}" alt="">
                                 </td> --}}
                                 {{-- <td class="py-2 align-middle white-space-nowrap text-end">
                                     <div class="dropdown font-sans-serif position-static">
-                                        <button class="btn btn-link text-600 btn-sm dropdown-toggle btn-reveal"
-                                            type="button" id="order-dropdown-0" data-bs-toggle="dropdown"
-                                            data-boundary="viewport" aria-haspopup="true" aria-expanded="false"><span
+                                        <button class="btn btn-link text-600 btn-sm dropdown-toggle btn-reveal" type="button"
+                                            id="order-dropdown-0" data-bs-toggle="dropdown" data-boundary="viewport"
+                                            aria-haspopup="true" aria-expanded="false"><span
                                                 class="fas fa-ellipsis-h fs--1"></span></button>
                                         <div class="dropdown-menu dropdown-menu-end border py-0"
                                             aria-labelledby="order-dropdown-0">
@@ -119,10 +131,15 @@
         </div>
     </div>
 
-    {{-- <script>
-        // Refresh the page every 5 seconds (5000 milliseconds)
-        setInterval(function() {
-            location.reload(); // Reloads the entire page
-        }, 10000);
-    </script> --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+
+    <script>
+        function exportAttendanceTable() {
+            const table = document.getElementById('attendance-table');
+            const wb = XLSX.utils.table_to_book(table, { sheet: "Attendance Records" });
+            XLSX.writeFile(wb, "attendance_records.xlsx");
+        }
+    </script>
+
+
 @endsection

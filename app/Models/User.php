@@ -93,4 +93,19 @@ class User extends Authenticatable
     {
         return $this->hasMany(Report::class, 'user_id');
     }
+
+    public function forum()
+    {
+        return $this->hasMany(Forum::class, 'user_id');
+    }
+
+    public function bills()
+    {
+        return $this->hasMany(Bill::class, 'user_id');
+    }
+
+    public function van()
+{
+    return $this->hasOne(Van::class);
+}
 }

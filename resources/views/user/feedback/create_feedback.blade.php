@@ -7,9 +7,6 @@
                 <div class="col-md">
                     <h5 class="mb-2 mb-md-0">Create Feedback</h5>
                 </div>
-                <div class="col-auto">
-                    <button class="btn btn-falcon-default btn-sm me-2" role="button">Add</button>
-                </div>
             </div>
         </div>
     </div>
@@ -31,11 +28,11 @@
                         <div class="col-md-12">
                           <label class="form-label" for="validationCustom01">Rating</label>
                           <select class="form-control" name="rating" id="">
-                            <option value="5">5</option>
-                            <option value="4">4</option>
-                            <option value="3">3</option>
-                            <option value="2">2</option>
-                            <option value="1">1</option>
+                            <option value="5">5 Star</option>
+                            <option value="4">4 Star</option>
+                            <option value="3">3 Star</option>
+                            <option value="2">2 Star</option>
+                            <option value="1">1 Star</option>
                           </select>
 
                         </div>

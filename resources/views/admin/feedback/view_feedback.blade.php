@@ -32,8 +32,8 @@
                         </a> --}}
 
                         {{-- <button class="btn btn-falcon-default btn-sm mx-2" type="button"><span class="fas fa-filter"
-                        data-fa-transform="shrink-3 down-2"></span><span
-                        class="d-none d-sm-inline-block ms-1">Filter</span></button> --}}
+                                data-fa-transform="shrink-3 down-2"></span><span
+                                class="d-none d-sm-inline-block ms-1">Filter</span></button> --}}
                         <button class="btn btn-falcon-default btn-sm" type="button"><span class="fas fa-external-link-alt"
                                 data-fa-transform="shrink-3 down-2"></span><span
                                 class="d-none d-sm-inline-block ms-1">Export</span></button>
@@ -47,16 +47,17 @@
                     <thead class="bg-200 text-900">
                         <tr>
                             {{-- <th>
-                        <div class="form-check fs-0 mb-0 d-flex align-items-center">
-                            <input class="form-check-input" id="checkbox-bulk-customers-select" type="checkbox"
-                                data-bulk-select='{"body":"table-orders-body","actions":"orders-bulk-actions","replacedElement":"orders-actions"}' />
-                        </div>
-                    </th> --}}
+                                <div class="form-check fs-0 mb-0 d-flex align-items-center">
+                                    <input class="form-check-input" id="checkbox-bulk-customers-select" type="checkbox"
+                                        data-bulk-select='{"body":"table-orders-body","actions":"orders-bulk-actions","replacedElement":"orders-actions"}' />
+                                </div>
+                            </th> --}}
                             <th class="sort pe-1 align-middle" data-sort="order">No</th>
                             <th class="sort pe-1 align-middle" data-sort="order">Rating</th>
                             <th class="sort pe-1 align-middle" data-sort="order">Email</th>
                             <th class="sort pe-1 align-middle" data-sort="address" style="min-width: 12.5rem;">Message</th>
-                            {{-- <th class="sort pe-1 align-middle white-space-nowrap text-center" data-sort="status">Profile
+                            {{-- <th class="sort pe-1 align-middle white-space-nowrap text-center" data-sort="status">
+                                Profile
                                 Photo</th> --}}
                             <th class="no-sort"></th>
                         </tr>
@@ -70,7 +71,7 @@
 
                                 <td class="order py-2 align-middle">{{ $number++ }}</td>
                                 <!-- Increment the counter -->
-                                <td class="order py-2 align-middle">{{ $feedback_data->rating }}
+                                <td class="order py-2 align-middle">{{ $feedback_data->rating }} Star
                                 </td>
                                 <td class="order py-2 align-middle">{{ $feedback_data->user->email }}
                                 </td>
@@ -81,17 +82,15 @@
                                 </td> --}}
                                 <td class="py-2 align-middle white-space-nowrap text-end">
                                     <div class="dropdown font-sans-serif position-static">
-                                        <button class="btn btn-link text-600 btn-sm dropdown-toggle btn-reveal"
-                                            type="button" id="order-dropdown-0" data-bs-toggle="dropdown"
-                                            data-boundary="viewport" aria-haspopup="true" aria-expanded="false"><span
+                                        <button class="btn btn-link text-600 btn-sm dropdown-toggle btn-reveal" type="button"
+                                            id="order-dropdown-0" data-bs-toggle="dropdown" data-boundary="viewport"
+                                            aria-haspopup="true" aria-expanded="false"><span
                                                 class="fas fa-ellipsis-h fs--1"></span></button>
                                         <div class="dropdown-menu dropdown-menu-end border py-0"
                                             aria-labelledby="order-dropdown-0">
-                                            <div class="bg-white py-2"><a class="dropdown-item"
-                                                    href="{{ url('admin_update_student', $feedback_data->id) }}">Edit</a>
-                                                <div class="dropdown-divider"></div>
+                                            <div class="bg-white py-2">
                                                 <a class="dropdown-item text-danger"
-                                                    href="{{ url('delete_student', $feedback_data->id) }}">Delete</a>
+                                                    href="{{ url('delete_feedback', $feedback_data->id) }}">Delete</a>
                                             </div>
                                         </div>
                                     </div>

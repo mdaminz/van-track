@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('forums', function (Blueprint $table) {
             $table->id();
-            $table->string('forum_name')->nullable();
             $table->text('post_content')->nullable();
             $table->string('date')->nullable();
             $table->string('time')->nullable();
             $table->string('user_id')->nullable();
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }
