@@ -19,5 +19,6 @@ class DatabaseSeeder extends Seeder
         $this->call(FeedbackSeeder::class);
         $this->call(ReportSeeder::class);
         $this->call(ForumSeeder::class);
+        $this->call(VanSeeder::class);
     }
 }
