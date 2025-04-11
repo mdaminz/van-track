@@ -62,7 +62,7 @@
                             <th class="sort pe-1 align-middle white-space-nowrap" data-sort="address"
                                 style="min-width: 12.5rem;">Address</th>
                             <th class="sort pe-1 align-middle white-space-nowrap" data-sort="address"
-                                style="min-width: 12.5rem;">Status</th>
+                                style="min-width: 5rem;">Status</th>
                             {{-- <th class="sort pe-1 align-middle white-space-nowrap text-center" data-sort="status">
                                 Profile
                                 Photo</th> --}}
@@ -78,7 +78,7 @@
 
                                 <td class="order py-2 align-middle white-space-nowrap">{{ $number++ }}</td>
                                 <!-- Increment the counter -->
-                                <td class="order py-2 align-middle white-space-nowrap">{{ $students->full_name }}
+                                <td class="order py-2 align-middle white-space-nowrap">
                                 </td>
                                 <td class="date py-2 align-middle">{{ $students->rfid_tag }}</td>
                                 @if (Auth::user()->usertype == 'admin')

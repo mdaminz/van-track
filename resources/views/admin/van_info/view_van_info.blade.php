@@ -22,6 +22,11 @@
             <div class="row flex-between-center">
                 <div class="col-4 col-sm-auto d-flex align-items-center pe-0">
                     <h5 class="fs-0 mb-0 text-nowrap py-2 py-xl-0">Report</h5>
+
+                    <a style="margin-left: 10px;" href="create_van" class="btn btn-falcon-default btn-sm">
+                        <span class="fas fa-plus" data-fa-transform="shrink-3 down-2"></span>
+                        <span class="d-none d-sm-inline-block ms-1">New</span>
+                    </a>
                 </div>
                 <div class="col-8 col-sm-auto ms-auto text-end ps-0">
                     <form class="position-relative" data-bs-toggle="search" data-bs-display="static">
@@ -40,8 +45,8 @@
                             <th class="sort align-middle" style="min-width: 3rem;" data-sort="no">No</th>
                             <th class="sort align-middle" style="min-width: 10rem;" data-sort="name">License Plate</th>
                             <th class="sort align-middle" style="min-width: 10rem;" data-sort="email">Capacity</th>
-                            <th class="sort align-middle" style="min-width: 10rem;" data-sort="contact">Image</th>
-                            <th class="sort align-middle" style="min-width: 5rem;" data-sort="status">Driver</th>
+                            <th class="sort align-middle" style="min-width: 10rem;" data-sort="contact">Driver</th>
+                            <th class="sort align-middle" style="min-width: 5rem;" data-sort="status">Image</th>
                             <th class="no-sort"></th>
                         </tr>
                     </thead>
@@ -54,16 +59,16 @@
 
                                 <td class="no align-middle" style="min-width: 3rem;">{{ $number++ }}</td>
                                 <td class="name align-middle" style="min-width: 10rem;">{{ $van_data->license_plate }}</td>
-                                <td class="email align-middle" style="min-width: 10rem;">{{ $van_data->capacity }}</td>
-                                <td class="contact align-middle" style="min-width: 10rem;">{{ $van_data->image }}</td>
-
-                                <td class="contact align-middle" style="min-width: 10rem;"></td>
+                                <td class="email align-middle" style="min-width: 10rem;">{{ $van_data->capacity }} Students</td>
+                                <td class="email align-middle" style="min-width: 10rem;">{{ $van_data->user->name }}</td>
+                                <td class="contact align-middle" style="min-width: 10rem;"><img style="width: 120px;"
+                                        src="van/{{ $van_data->image }}" alt=""></td>
 
                                 <td class="align-middle text-end">
                                     <div class="dropdown font-sans-serif position-static">
-                                        <button class="btn btn-link text-600 btn-sm dropdown-toggle btn-reveal"
-                                            type="button" id="order-dropdown-0" data-bs-toggle="dropdown"
-                                            data-boundary="viewport" aria-haspopup="true" aria-expanded="false"><span
+                                        <button class="btn btn-link text-600 btn-sm dropdown-toggle btn-reveal" type="button"
+                                            id="order-dropdown-0" data-bs-toggle="dropdown" data-boundary="viewport"
+                                            aria-haspopup="true" aria-expanded="false"><span
                                                 class="fas fa-ellipsis-h fs--1"></span></button>
                                         <div class="dropdown-menu dropdown-menu-end border py-0"
                                             aria-labelledby="order-dropdown-0">

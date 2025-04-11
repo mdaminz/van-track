@@ -356,6 +356,24 @@
                             <li class="nav-item">
                                 <!-- label-->
                                 <div class="row navbar-vertical-label-wrapper mt-3 mb-2">
+                                    <div class="col-auto navbar-vertical-label">Manage Van
+                                    </div>
+                                    <div class="col ps-0">
+                                        <hr class="mb-0 navbar-vertical-divider" />
+                                    </div>
+                                </div>
+                                
+                                <!-- parent pages--><a class="nav-link" href="/view_van_info" role="button">
+                                    <div class="d-flex align-items-center"><span class="nav-link-icon"><span
+                                                class="fas fa-caravan"></span></span><span
+                                            class="nav-link-text ps-1">Van</span>
+                                    </div>
+                                </a>
+  
+                            </li>
+                            <li class="nav-item">
+                                <!-- label-->
+                                <div class="row navbar-vertical-label-wrapper mt-3 mb-2">
                                     <div class="col-auto navbar-vertical-label">Manage Experiences
                                     </div>
                                     <div class="col ps-0">

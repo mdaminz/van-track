@@ -41,9 +41,11 @@ class HomeController extends Controller
 
     public function service()
     {
+        $schools = School::all();
+
         $feedbacks = Feedback::with('user')->get(); // Eager load students
 
-        return view('service', compact('feedbacks'));
+        return view('service', compact('feedbacks', 'schools'));
     }
 
     public function index()

@@ -23,7 +23,7 @@
                     <h5 class="fs-0 mb-0 text-nowrap py-2 py-xl-0">Children Attendance</h5>
                 </div>
                 <div class="col-8 col-sm-auto ms-auto text-end ps-0">
-                    
+
                     <div id="orders-actions">
                         {{-- <button class="btn btn-falcon-default btn-sm mx-2" type="button"><span class="fas fa-filter"
                                 data-fa-transform="shrink-3 down-2"></span><span
@@ -52,8 +52,9 @@
                             <th class="sort" style="min-width: 10rem;" data-sort="date">Student Name</th>
                             <th class="sort" style="min-width: 10rem;" data-sort="address">Address</th>
                             <th class="sort" data-sort="date">Status</th>
-                           
-                            {{-- <th class="sort pe-1 align-middle white-space-nowrap text-center" data-sort="status">Photo</th> --}}
+
+                            {{-- <th class="sort pe-1 align-middle white-space-nowrap text-center" data-sort="status">Photo
+                            </th> --}}
                             {{-- <th class="no-sort"></th> --}}
                         </tr>
                     </thead>
@@ -64,11 +65,11 @@
                         @foreach ($attendances as $attendances)
                             <tr class="btn-reveal-trigger">
                                 {{-- <td class="align-middle" style="width: 28px;">
-                                <div class="form-check fs-0 mb-0 d-flex align-items-center">
-                                    <input class="form-check-input" type="checkbox" id="checkbox-0"
-                                        data-bulk-select-row="data-bulk-select-row" />
-                                </div>
-                            </td> --}}
+                                    <div class="form-check fs-0 mb-0 d-flex align-items-center">
+                                        <input class="form-check-input" type="checkbox" id="checkbox-0"
+                                            data-bulk-select-row="data-bulk-select-row" />
+                                    </div>
+                                </td> --}}
                                 <td class="order py-2">{{ $number++ }}</td>
                                 <!-- Increment the counter -->
                                 <td class="address py-2">
@@ -76,22 +77,23 @@
                                 </td>
                                 <td class="order py-2">{{ $attendances->rfid_tag }}
                                 </td>
-                                <td class="date py-2">{{ $attendances->student->full_name }}</td>
+                                <td class="date py-2"><a
+                                        href="detail_student/{{$attendances->student->id}}">{{ $attendances->student->full_name }}</a>
+                                </td>
                                 <td class="address py-2">
                                     {{ $attendances->student->address }}
                                 </td>
                                 <td class="order py-2">{{ $attendances->status }}
                                 </td>
-                               
+
                                 {{-- <td class="status py-2 align-middle text-center fs-0 white-space-nowrap">
-                                    <img style="width: 120px;" src="student/{{ $attendances->student->profile_photo }}"
-                                        alt="">
+                                    <img style="width: 120px;" src="student/{{ $attendances->student->profile_photo }}" alt="">
                                 </td> --}}
                                 {{-- <td class="py-2 align-middle white-space-nowrap text-end">
                                     <div class="dropdown font-sans-serif position-static">
-                                        <button class="btn btn-link text-600 btn-sm dropdown-toggle btn-reveal"
-                                            type="button" id="order-dropdown-0" data-bs-toggle="dropdown"
-                                            data-boundary="viewport" aria-haspopup="true" aria-expanded="false"><span
+                                        <button class="btn btn-link text-600 btn-sm dropdown-toggle btn-reveal" type="button"
+                                            id="order-dropdown-0" data-bs-toggle="dropdown" data-boundary="viewport"
+                                            aria-haspopup="true" aria-expanded="false"><span
                                                 class="fas fa-ellipsis-h fs--1"></span></button>
                                         <div class="dropdown-menu dropdown-menu-end border py-0"
                                             aria-labelledby="order-dropdown-0">
@@ -119,9 +121,10 @@
         </div>
     </div>
 
-    {{-- <script>
+    {{--
+    <script>
         // Refresh the page every 5 seconds (5000 milliseconds)
-        setInterval(function() {
+        setInterval(function () {
             location.reload(); // Reloads the entire page
         }, 10000);
     </script> --}}

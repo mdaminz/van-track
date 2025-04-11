@@ -26,7 +26,7 @@ Saya telah mencari di sekitar rumah, di dalam bilik anak saya, serta dalam keret
 Dengan itu, saya ingin memohon agar pihak pentadbiran VanTrack mengeluarkan kad gantian secepat mungkin supaya kehadiran anak saya dapat terus dipantau dalam sistem. Saya juga berharap agar ada kaedah tambahan yang boleh digunakan sementara waktu, seperti pengesahan manual oleh pemandu van, bagi memastikan anak saya tetap direkodkan dalam sistem tanpa sebarang masalah.  
 
 Saya amat menghargai bantuan dan kerjasama daripada pihak pengurusan dalam menyelesaikan isu ini dengan segera. Terima kasih. ',
-                'image' => '',
+                'image' => 'null',
                 'status' => 'Unresolved',
                 'resolved_at' => null,
                 'remarks' => '',
@@ -44,7 +44,7 @@ Saya memahami bahawa kadangkala mungkin ada masalah trafik atau keadaan tidak di
 Saya berharap pihak pengurusan dapat menyiasat punca kelewatan ini dan mengambil tindakan sewajarnya. Jika ada sebarang perubahan jadual atau masalah yang menyebabkan kelewatan, saya berharap ibu bapa dapat dimaklumkan lebih awal supaya kami boleh membuat perancangan alternatif.  
 
 Terima kasih atas perhatian dan tindakan segera daripada pihak VanTrack.',
-                'image' => '',
+                'image' => 'null',
                 'status' => 'Unresolved',
                 'resolved_at' => null,
                 'remarks' => '',

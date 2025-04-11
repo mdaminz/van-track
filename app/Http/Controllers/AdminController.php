@@ -20,6 +20,8 @@ use App\Models\Schedule;
 use App\Models\Forum;
 use App\Models\Bill;
 
+
+
 use Session;
 
 
@@ -50,8 +52,18 @@ class AdminController extends Controller
                               ->where('user_id', Auth::id())
                               ->count();
 
+                $user_id = Auth::id(); // Get the authenticated parent's ID
 
-                return view('user.index', compact('user', 'total_users', 'total_students', 'overdue', 'unresolved_reports'));    
+                // Retrieve students associated with the authenticated parent
+                $students = Student::where('user_id', $user_id)->pluck('rfid_tag'); 
+                              
+                // Retrieve today's attendance for those students
+                $attendances = Attendance::whereIn('rfid_tag', $students)
+                    ->whereDate('created_at', Carbon::today()) // Filter for today only
+                    ->orderBy('created_at', 'desc')
+                    ->get();
+                              
+                return view('user.index', compact('user', 'total_users', 'total_students', 'overdue', 'unresolved_reports', 'attendances'));    
 
             } else if ($usertype == 'admin') {
 

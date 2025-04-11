@@ -189,8 +189,8 @@
                     <h6>Overdue Payment</h6>
                     <div class="display-4 fs-4 mb-2 fw-normal font-sans-serif"
                         data-countup='{"endValue":43594,"prefix":"$"}'>RM {{$overdue}}</div><a
-                        class="fw-semi-bold fs--1 text-nowrap" href="user_view_bill">See all<span class="fas fa-angle-right ms-1"
-                            data-fa-transform="down-1"></span></a>
+                        class="fw-semi-bold fs--1 text-nowrap" href="user_view_bill">See all<span
+                            class="fas fa-angle-right ms-1" data-fa-transform="down-1"></span></a>
                 </div>
             </div>
         </div>
@@ -236,7 +236,46 @@
             </div>
         </div>
         <div class="col-xxl-4">
-            <div class="card h-100">
+            <div class="card mb-3">
+                <div class="card-header bg-light d-flex justify-content-between">
+                    <h5 class="mb-0">Attendance today</h5>
+                </div>
+                <div class="card-body fs--1 p-0">
+
+                    @php
+                        $maxToShow = 4;
+                    @endphp
+
+                    @foreach ($attendances->take($maxToShow) as $attendance)
+                        <a class="border-bottom-0 notification rounded-0 border-x-0 border border-300" href="#!">
+                            <div class="notification-avatar">
+                                <div class="avatar avatar-xl me-3">
+                                    <div class="avatar-emoji rounded-circle"><span role="img" aria-label="Emoji">📅️</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="notification-body">
+                                <p class="mb-1">
+                                    <strong>{{ $attendance->student->full_name }}</strong> with
+                                    <strong>{{ $attendance->student->rfid_tag }}</strong> tag card at
+                                </p>
+                                <span class="notification-time">
+                                    {{ \Carbon\Carbon::parse($attendance->created_at)->format('d M Y, h:i A') }}
+                                </span>
+                            </div>
+                        </a>
+                    @endforeach
+
+                    {{-- Show "See all" if more than 4 --}}
+                    @if ($attendances->count() > $maxToShow)
+                        <div class="text-center mt-2 mb-1">
+                            <a href="{{ url('parent_view_attendance') }}" class="btn btn-sm btn-link">See all attendance</a>
+                        </div>
+                    @endif
+
+                </div>
+            </div>
+            {{-- <div class="card h-100">
                 <div class="card-header">
                     <h6 class="mb-0">To Do List</h6>
                 </div>
@@ -423,7 +462,7 @@
                 </div>
                 <div class="card-footer bg-light p-0"><a class="btn btn-sm btn-link d-block py-2" href="#!"><span
                             class="fas fa-plus me-1 fs--2"></span>Add New Task</a></div>
-            </div>
+            </div> --}}
         </div>
     </div>
 

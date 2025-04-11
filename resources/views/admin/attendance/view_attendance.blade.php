@@ -88,7 +88,9 @@
                                 </td>
                                 <td class="order py-2">{{ $attendances->rfid_tag }}
                                 </td>
-                                <td class="date py-2">{{ $attendances->student->full_name }}</td>
+                                <td class="date py-2"><a
+                                        href="detail_student/{{$attendances->student->id}}">{{ $attendances->student->full_name }}</a>
+                                </td>
                                 <td class="school py-2">{{ $attendances->student->school->name }}</td>
                                 <td class="address py-2">
                                     {{ $attendances->student->address }}

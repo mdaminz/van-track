@@ -376,11 +376,11 @@
                         <div class="rounded overflow-hidden">
                             <div class="position-relative overflow-hidden">
                                 <img style="height: 300px;" class="img-fluid w-100" src="school/{{ $schools->image }}" alt="">
-                                <div class="portfolio-overlay">
+                                {{-- <div class="portfolio-overlay">
                                     <a class="btn btn-square btn-outline-light mx-1" href="school/{{ $schools->image }}"
                                         data-lightbox="portfolio"><i class="fa fa-eye"></i></a>
                                     <a class="btn btn-square btn-outline-light mx-1" href=""><i class="fa fa-link"></i></a>
-                                </div>
+                                </div> --}}
                             </div>
                             <div class="border border-5 border-light border-top-0 p-4">
                                 <p class="text-primary fw-medium mb-2">
@@ -469,7 +469,7 @@
                     <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                         <div class="team-item">
                             <div class="overflow-hidden position-relative">
-                                <img style="height: 390px;" class="img-fluid" src="{{$team_members->profile_photo_path}}"
+                                <img style="height: 450px;" class="img-fluid" src="{{$team_members->profile_photo_path}}"
                                     alt="">
                                 {{-- <div class="team-social">
                                     <a class="btn btn-square" href=""><i class="fab fa-facebook-f"></i></a>

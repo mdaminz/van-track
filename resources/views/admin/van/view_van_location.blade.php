@@ -1,9 +1,9 @@
 @php
-  $layout = match (Auth::user()->usertype) {
-    'admin' => 'admin.admin-base',
-    'driver' => 'driver.driver-base',
-    default => 'user.user-base',
-  };
+    $layout = match (Auth::user()->usertype) {
+        'admin' => 'admin.admin-base',
+        'driver' => 'driver.driver-base',
+        default => 'user.user-base',
+    };
 @endphp
 
 @extends($layout)
@@ -12,6 +12,17 @@
 <base href="/public">
 
 @section('body-content')
+
+    <style>
+        .custom-marker {
+            background-size: cover;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            border: 2px solid white;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+        }
+    </style>
 
     <div class="card mb-3">
         <div class="bg-holder d-none d-lg-block bg-card"
@@ -27,7 +38,7 @@
             </div>
         </div>
     </div>
-    
+
     <div class="card mb-3">
         <div class="card-header">
             <div class="row flex-between-end">
@@ -37,7 +48,7 @@
             </div>
         </div>
         <div class="card-body bg-light">
-            <div id="map" style="height: 500px; width: 100%; border-radius:5px";></div>
+            <div id="map" style="height: 500px; width: 100%; border-radius:5px" ;></div>
         </div>
     </div>
 
@@ -50,41 +61,60 @@
                 zoom: 15,
             });
 
-            // Custom marker: Using a div for the circular marker
-            const markerDiv = document.createElement('div');
-            markerDiv.classList.add('custom-marker');
-            markerDiv.style.backgroundImage = `url('{{ asset($van->user->profile_photo_path) }}')`;
-            markerDiv.style.backgroundSize = 'cover';
-            markerDiv.style.borderRadius = '50%';
-            markerDiv.style.width = '50px';
-            markerDiv.style.height = '50px';
-            markerDiv.style.border = '2px solid white'; // Optional, adds a border to the circular marker
+            // Custom OverlayView class
+            class CustomMarker extends google.maps.OverlayView {
+                constructor(position, imageUrl, map) {
+                    super();
+                    this.position = position;
+                    this.imageUrl = imageUrl;
+                    this.map = map;
+                    this.div = null;
+                    this.setMap(map); // Adds to map
+                }
 
-            // Create the custom overlay for the map
-            const marker = new google.maps.OverlayView();
+                onAdd() {
+                    this.div = document.createElement("div");
+                    this.div.className = "custom-marker";
+                    this.div.style.backgroundImage = `url('${this.imageUrl}')`;
 
-            marker.onAdd = function () {
-                const layer = document.createElement('div');
-                layer.appendChild(markerDiv);
-                this.getPanes().overlayLayer.appendChild(layer);
+                    const panes = this.getPanes();
+                    panes.overlayImage.appendChild(this.div);
+                }
 
-                const projection = this.getProjection();
-                const position = projection.fromLatLngToDivPixel(pos);
+                draw() {
+                    const overlayProjection = this.getProjection();
+                    const pixel = overlayProjection.fromLatLngToDivPixel(this.position);
 
-                markerDiv.style.position = 'absolute';
-                markerDiv.style.left = `${position.x - 25}px`; // Offset for centering
-                markerDiv.style.top = `${position.y - 25}px`;  // Offset for centering
-            };
+                    if (this.div) {
+                        this.div.style.left = `${pixel.x - 25}px`; // Center the circle (50/2)
+                        this.div.style.top = `${pixel.y - 25}px`;
+                        this.div.style.position = "absolute";
+                    }
+                }
 
-            marker.setMap(map);
+                onRemove() {
+                    if (this.div) {
+                        this.div.parentNode.removeChild(this.div);
+                        this.div = null;
+                    }
+                }
+            }
+
+            // Create the custom circular marker
+            new CustomMarker(
+                new google.maps.LatLng(pos.lat, pos.lng),
+                '{{ asset($van->user->profile_photo_path) }}',
+                map
+            );
         }
 
-        // Load Google Maps API
+        // Load the map script
         const script = document.createElement('script');
         script.src = "https://maps.googleapis.com/maps/api/js?key={{ config('services.google_maps.key') }}&callback=initMap";
         script.async = true;
         script.defer = true;
         document.head.appendChild(script);
     </script>
+
 
 @endsection

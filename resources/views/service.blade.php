@@ -1,6 +1,54 @@
 @extends('dashboard-base')
 
 @section('body-content')
+
+    <!-- Services Start -->
+    <div class="container-xxl py-5">
+        <div class="container">
+            <div class="section-title text-center">
+                <h1 class="display-5 mb-5">Our Services</h1>
+            </div>
+            <div class="row mt-n2 wow fadeInUp" data-wow-delay="0.3s">
+                <div class="col-12 text-center">
+                    <ul class="list-inline mb-5" id="portfolio-flters">
+                        <li class="mx-2 active" data-filter="*">All</li>
+                        <li class="mx-2" data-filter=".first">Primary School</li>
+                        <li class="mx-2" data-filter=".second">Secondary School</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row g-4 portfolio-container">
+                @foreach ($schools as $schools)
+                    <div class="col-lg-4 col-md-6 portfolio-item {{ $schools->type }} wow fadeInUp" data-wow-delay="0.4s">
+                        <div class="rounded overflow-hidden">
+                            <div class="position-relative overflow-hidden">
+                                <img style="height: 300px;" class="img-fluid w-100" src="school/{{ $schools->image }}" alt="">
+                                {{-- <div class="portfolio-overlay">
+                                    <a class="btn btn-square btn-outline-light mx-1" href="school/{{ $schools->image }}"
+                                        data-lightbox="portfolio"><i class="fa fa-eye"></i></a>
+                                    <a class="btn btn-square btn-outline-light mx-1" href=""><i class="fa fa-link"></i></a>
+                                </div> --}}
+                            </div>
+                            <div class="border border-5 border-light border-top-0 p-4">
+                                <p class="text-primary fw-medium mb-2">
+                                    @if ($schools->type == 'first')
+                                        Primary School
+                                    @else
+                                        Secondary School
+                                    @endif
+                                </p>
+                                <h5 class="lh-base mb-0">{{ $schools->name }}</a></h5>
+                                <p class="fw-normal mb-0">{{ $schools->first_address }}</p>
+                                <p class="fw-normal mb-0">{{ $schools->second_address }}</p>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    </div>
+    <!-- Services End -->
+
     <!-- Testimonial Start -->
     <div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
         <div class="container">
