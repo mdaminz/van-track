@@ -21,7 +21,7 @@ class SchoolSeeder extends Seeder
                 'name' => 'Sekolah Kebangsaan Sungai Way',
                 'first_address' => 'Sungai Way',
                 'second_address' => 'Jalan SS9/13, Sungai Way, 47300 Petaling Jaya, Selangor',
-                'image' => 'sungai_way.jpg',
+                'image' => 'sungai.jpg',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ],

@@ -29,25 +29,36 @@
         </div>
         <div class="card-body bg-light">
             <div class="tab-content">
-
-               @foreach ($vans as $vans)
-
-                <div class="card bg-dark text-white overflow-hidden light mb-3" style="max-width: 100rem; max-height: 20rem;">
-                    <div class="bg-holder rounded-3 overlay overlay-10"></div>
-                    <div class="card-img-top" style="height: 100%; overflow: hidden;">
-                        <img class="img-fluid w-100" src="homepage/img/choose-us.jpg" alt="Card image"
-                            style="object-fit: cover;" />
+              @foreach ($vans as $vans)
+                <div class="card bg-dark text-white overflow-hidden light mb-3" style="max-width: 100rem; height: 20rem; position: relative;">
+                  
+                  <!-- Background Image -->
+                  <img 
+                    src="homepage/img/carousel-2.jpeg" 
+                    alt="Card image"
+                    style="width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; z-index: 1;"
+                  />
+          
+                  <!-- Dark Overlay -->
+                  <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.3); z-index: 2;"></div>
+          
+                  <!-- Text Content -->
+                  <div class="card-img-overlay d-flex align-items-end" style="z-index: 3;">
+                    <div>
+                      <a href="/view_van_location/{{$vans->user_id}}" class="card-title text-white">
+                        {{ $vans->license_plate }}
+                      </a>
+                      <p class="card-text">{{ $vans->user->name }}</p>
                     </div>
-                    <div class="card-img-overlay d-flex align-items-end">
-                        <div>
-                            <a href="/view_van_location/{{$vans->user_id}}" class="card-title text-white">{{$vans->license_plate}}</a>
-                            <p class="card-text">{{$vans->user->name}}</p>
-                        </div>
-                    </div>
+                  </div>
+          
                 </div>
-
-                @endforeach
+              @endforeach
             </div>
-        </div>
+          </div>
+          
+          
+          
+          
     </div>
 @endsection
