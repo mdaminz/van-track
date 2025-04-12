@@ -186,3 +186,7 @@ Route::get('/view_van_location/{id}', [AdminController::class, 'viewLocation']);
 
 //Pricing
 route::get('/view_pricing', [HomeController::class, 'view_pricing']);
+
+
+//view profile
+route::get('/profile_detail/{id}', [AdminController::class, 'profile_detail']);

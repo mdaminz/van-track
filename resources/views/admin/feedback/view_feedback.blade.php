@@ -73,7 +73,7 @@
                                 <!-- Increment the counter -->
                                 <td class="order py-2 align-middle">{{ $feedback_data->rating }} Star
                                 </td>
-                                <td class="order py-2 align-middle">{{ $feedback_data->user->email }}
+                                <td class="order py-2 align-middle"><a href="profile_detail/{{$feedback_data->user_id}}">{{ $feedback_data->user->email }}</a>
                                 </td>
                                 <td class="address py-2 align-middle">{{ $feedback_data->message }}
                                 </td>

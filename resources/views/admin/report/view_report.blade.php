@@ -62,7 +62,7 @@
                             <tr class="btn-reveal-trigger">
 
                                 <td class="no align-middle" style="min-width: 3rem;">{{ $number++ }}</td>
-                                <td class="name align-middle" style="min-width: 10rem;">{{ $report_data->user->name }}</td>
+                                <td class="name align-middle" style="min-width: 10rem;"><a href="profile_detail/{{$report_data->user_id}}">{{ $report_data->user->name }}</a></td>
                                 <td class="email align-middle" style="min-width: 5rem;">{{ $report_data->type }}</td>
                                 <td class="contact align-middle" style="min-width: 10rem;">{{ $report_data->subject }}</td>
                                 <td class="address align-middle" style="min-width: 10rem;">{{ $report_data->resolved_at }}</td>

@@ -927,6 +927,22 @@ class AdminController extends Controller
         return response()->json(['success' => false, 'message' => 'Van not found']);
     }
 
+    public function profile_detail($id)
+    {
+        $users = User::findOrFail($id); // Find student by ID
+
+        // // Retrieve attendance for this student using RFID tag
+        // $attendance = Attendance::where('rfid_tag', $students->rfid_tag)
+        //     ->orderBy('created_at', 'desc') // Order by latest attendance
+        //     ->get();
+
+        // Retrieve students associated with the authenticated user
+        $students = Student::where('user_id', $id)->get();
+
+        $count_students = Student::where('user_id', $id)->count();
+    
+        return view('profile_detail', compact('users', 'students', 'count_students'));
+    }
     
 
    

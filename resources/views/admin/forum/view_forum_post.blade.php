@@ -67,7 +67,7 @@
 
         </div>
         <div class="flex-1 align-self-center ms-2">
-        <p class="mb-1 lh-1"><a class="fw-semi-bold">{{ $forum_data->user->name }}</a></p>
+        <p class="mb-1 lh-1"><a href="profile_detail/{{$forum_data->user_id}}" class="fw-semi-bold">{{ $forum_data->user->name }}</a></p>
         <p class="mb-0 fs--1">{{ $forum_data->date }} &bull; {{ $forum_data->time }}</p>
         </div>
       </div>
@@ -153,7 +153,7 @@
 
       </div>
       <div class="flex-1 ms-2">
-      <h6 class="mb-0"><a>{{$user_data->name}}</a></h6>
+      <h6 class="mb-0"><a href="profile_detail/{{$user_data->id}}">{{$user_data->name}}</a></h6>
       <button class="btn btn-light btn-sm py-0 mt-1 border" type="button" style="pointer-events: none;">
         <span class="fas fa-user" data-fa-transform="shrink-5 left-2"></span>
         <span class="fs--1">{{ ucfirst($user_data->usertype) }}</span>

@@ -59,7 +59,7 @@
 
                                 <td class="no align-middle">{{ $number++ }}</td>
                                 <td class="name align-middle">{{ $van_data->license_plate }}</td>
-                                <td class="email align-middle">{{ $van_data->user->name }}</td>
+                                <td class="email align-middle"><a href="profile_detail/{{$van_data->user_id}}">{{ $van_data->user->name }}</a></td>
                                 <td class="email align-middle">{{ $van_data->capacity }} Students</td>
                                 {{-- <td class="contact align-middle" style="min-width: 5rem;"><img style="width: 120px;"
                                         src="van/{{ $van_data->image }}" alt=""></td> --}}

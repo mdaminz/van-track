@@ -65,7 +65,7 @@
 
                                 <td class="no align-middle">{{ $number++ }}</td>
                                 <td class="name align-middle">{{ $students->full_name }}</td>
-                                <td class="parent align-middle">{{ $students->user->name }}</td>
+                                <td class="parent align-middle"><a href="profile_detail/{{$students->user_id}}">{{ $students->user->name }}</a></td>
                                 <td class="rfid align-middle">{{ $students->rfid_tag }}</td>
 
                                 </td>
