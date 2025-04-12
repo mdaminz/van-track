@@ -28,4 +28,17 @@ class Student extends Model
         return $this->hasMany(Bill::class, 'student_id');
     }
 
+    public function rate()
+    {
+        return $this->belongsTo(Rate::class);
+    }
+
+// Optional shortcut to access van directly from student
+    public function van()
+    {
+        return $this->hasOneThrough(Van::class, Rate::class, 'id', 'id', 'rate_id', 'van_id');
+    }
+
+    
+
 }

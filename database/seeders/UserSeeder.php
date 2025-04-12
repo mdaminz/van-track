@@ -24,7 +24,7 @@ class UserSeeder extends Seeder
                 'usertype' => 'admin',
                 'email_verified_at' => now(),
                 'password' => Hash::make('password'), // Encrypt the password
-                'profile_photo_path' => 'profile_photos/default.png',
+                'profile_photo_path' => 'profile_photos/general.jpg',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],

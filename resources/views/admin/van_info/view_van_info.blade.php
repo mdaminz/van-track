@@ -21,9 +21,9 @@
         <div class="card-header">
             <div class="row flex-between-center">
                 <div class="col-4 col-sm-auto d-flex align-items-center pe-0">
-                    <h5 class="fs-0 mb-0 text-nowrap py-2 py-xl-0">Report</h5>
+                    <h5 class="fs-0 mb-0 text-nowrap py-2 py-xl-0">Van Information</h5>
 
-                    <a style="margin-left: 10px;" href="create_van" class="btn btn-falcon-default btn-sm">
+                    <a style="margin-left: 10px;" href="create_van_info" class="btn btn-falcon-default btn-sm">
                         <span class="fas fa-plus" data-fa-transform="shrink-3 down-2"></span>
                         <span class="d-none d-sm-inline-block ms-1">New</span>
                     </a>
@@ -43,10 +43,10 @@
                     <thead class="bg-200 text-900">
                         <tr>
                             <th class="sort align-middle" style="min-width: 3rem;" data-sort="no">No</th>
-                            <th class="sort align-middle" style="min-width: 10rem;" data-sort="name">License Plate</th>
-                            <th class="sort align-middle" style="min-width: 10rem;" data-sort="email">Capacity</th>
-                            <th class="sort align-middle" style="min-width: 10rem;" data-sort="contact">Driver</th>
-                            <th class="sort align-middle" style="min-width: 5rem;" data-sort="status">Image</th>
+                            <th class="sort align-middle" style="min-width: 5rem;" data-sort="name">License Plate</th>
+                            <th class="sort align-middle" style="min-width: 20rem;" data-sort="contact">Driver Name</th>
+                            <th class="sort align-middle" style="min-width: 5rem;" data-sort="email">Capacity</th>
+                            {{-- <th class="sort align-middle" style="min-width: 5rem;" data-sort="status">Image</th> --}}
                             <th class="no-sort"></th>
                         </tr>
                     </thead>
@@ -57,12 +57,12 @@
                         @foreach ($van_data as $van_data)
                             <tr class="btn-reveal-trigger">
 
-                                <td class="no align-middle" style="min-width: 3rem;">{{ $number++ }}</td>
-                                <td class="name align-middle" style="min-width: 10rem;">{{ $van_data->license_plate }}</td>
-                                <td class="email align-middle" style="min-width: 10rem;">{{ $van_data->capacity }} Students</td>
-                                <td class="email align-middle" style="min-width: 10rem;">{{ $van_data->user->name }}</td>
-                                <td class="contact align-middle" style="min-width: 10rem;"><img style="width: 120px;"
-                                        src="van/{{ $van_data->image }}" alt=""></td>
+                                <td class="no align-middle">{{ $number++ }}</td>
+                                <td class="name align-middle">{{ $van_data->license_plate }}</td>
+                                <td class="email align-middle">{{ $van_data->user->name }}</td>
+                                <td class="email align-middle">{{ $van_data->capacity }} Students</td>
+                                {{-- <td class="contact align-middle" style="min-width: 5rem;"><img style="width: 120px;"
+                                        src="van/{{ $van_data->image }}" alt=""></td> --}}
 
                                 <td class="align-middle text-end">
                                     <div class="dropdown font-sans-serif position-static">
@@ -72,9 +72,9 @@
                                                 class="fas fa-ellipsis-h fs--1"></span></button>
                                         <div class="dropdown-menu dropdown-menu-end border py-0"
                                             aria-labelledby="order-dropdown-0">
-                                            <div class="bg-white py-2"><a class="dropdown-item" href="">Edit</a>
+                                            <div class="bg-white py-2"><a class="dropdown-item" href="{{ url('update_van_info', $van_data->id) }}">Edit</a>
                                                 <div class="dropdown-divider"></div>
-                                                <a class="dropdown-item text-danger" href="">Delete</a>
+                                                <a class="dropdown-item text-danger" href="{{ url('delete_van_info', $van_data->id) }}">Delete</a>
                                             </div>
                                         </div>
                                     </div>

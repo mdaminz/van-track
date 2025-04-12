@@ -16,6 +16,10 @@ return new class extends Migration
             $table->string('school_id')->nullable();
             $table->string('district')->nullable();
             $table->decimal('price', 8, 2)->nullable();
+            $table->string('van_id')->nullable();
+
+            $table->string('start_time')->nullable();
+            $table->string('end_time')->nullable();
             $table->timestamps();
 
            

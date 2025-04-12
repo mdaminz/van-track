@@ -137,7 +137,7 @@
                     <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                         <div class="team-item">
                             <div class="overflow-hidden position-relative">
-                                <img style="height: 390px;" class="img-fluid" src="{{$team_members->profile_photo_path}}" alt="">
+                                <img style="height: 450px;" class="img-fluid" src="{{$team_members->profile_photo_path}}" alt="">
                                 {{-- <div class="team-social">
                                     <a class="btn btn-square" href=""><i class="fab fa-facebook-f"></i></a>
                                     <a class="btn btn-square" href=""><i class="fab fa-twitter"></i></a>

@@ -60,6 +60,7 @@
                             <th class="sort pe-1 align-middle" data-sort="order">No</th>
                             <th class="sort pe-1 align-middle" data-sort="order">School</th>
                             <th class="sort pe-1 align-middle" data-sort="order">District</th>
+                            <th class="sort pe-1 align-middle" data-sort="order">Van Plate</th>
                             <th class="sort pe-1 align-middle" data-sort="address">Price</th>
                             {{-- <th class="sort pe-1 align-middle white-space-nowrap text-center" data-sort="status">
                                 Profile
@@ -80,6 +81,7 @@
                                 </td>
                                 <td class="order py-2 align-middle">{{ $rates->district }}
                                 </td>
+                                <td class="address py-2 align-middle">{{ $rates->van->license_plate }}
                                 <td class="address py-2 align-middle">RM {{ $rates->price }}
                                 </td>
 

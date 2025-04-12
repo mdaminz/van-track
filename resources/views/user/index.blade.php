@@ -246,224 +246,43 @@
                         $maxToShow = 4;
                     @endphp
 
-                    @foreach ($attendances->take($maxToShow) as $attendance)
-                        <a class="border-bottom-0 notification rounded-0 border-x-0 border border-300" href="#!">
-                            <div class="notification-avatar">
-                                <div class="avatar avatar-xl me-3">
-                                    <div class="avatar-emoji rounded-circle"><span role="img" aria-label="Emoji">📅️</span>
+                    @if ($attendances->isEmpty())
+                        <div class="text-center py-4">
+                            <p class="mb-0">No Records Found</p>
+                        </div>
+                    @else
+                        @foreach ($attendances->take($maxToShow) as $attendance)
+                            <a class="border-bottom-0 notification rounded-0 border-x-0 border border-300" href="#!">
+                                <div class="notification-avatar">
+                                    <div class="avatar avatar-xl me-3">
+                                        <div class="avatar-emoji rounded-circle"><span role="img" aria-label="Emoji">📅️</span>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="notification-body">
-                                <p class="mb-1">
-                                    <strong>{{ $attendance->student->full_name }}</strong> with
-                                    <strong>{{ $attendance->student->rfid_tag }}</strong> tag card at
-                                </p>
-                                <span class="notification-time">
-                                    {{ \Carbon\Carbon::parse($attendance->created_at)->format('d M Y, h:i A') }}
-                                </span>
-                            </div>
-                        </a>
-                    @endforeach
+                                <div class="notification-body">
+                                    <p class="mb-1">
+                                        <strong>{{ $attendance->student->full_name }}</strong> with
+                                        <strong>{{ $attendance->student->rfid_tag }}</strong> tag card at
+                                    </p>
+                                    <span class="notification-time">
+                                        {{ \Carbon\Carbon::parse($attendance->created_at)->format('d M Y, h:i A') }}
+                                    </span>
+                                </div>
+                            </a>
+                        @endforeach
 
-                    {{-- Show "See all" if more than 4 --}}
-                    @if ($attendances->count() > $maxToShow)
-                        <div class="text-center mt-2 mb-1">
-                            <a href="{{ url('parent_view_attendance') }}" class="btn btn-sm btn-link">See all attendance</a>
-                        </div>
+                        {{-- Show "See all" if more than 4 --}}
+                        @if ($attendances->count() > $maxToShow)
+                            <div class="text-center mt-2 mb-1">
+                                <a href="{{ url('parent_view_attendance') }}" class="btn btn-sm btn-link">See all attendance</a>
+                            </div>
+                        @endif
                     @endif
 
                 </div>
             </div>
-            {{-- <div class="card h-100">
-                <div class="card-header">
-                    <h6 class="mb-0">To Do List</h6>
-                </div>
-                <div class="card-body p-0 scrollbar to-do-list-body-height">
-                    <div
-                        class="d-flex justify-content-between border-top hover-actions-trigger btn-reveal-trigger px-card border-200 todo-list-item">
-                        <div class="form-check mb-0 d-flex align-items-center">
-                            <input
-                                class="form-check-input rounded-circle form-check-line-through p-2 form-check-input-primary"
-                                type="checkbox" id="checkbox-todo-0" />
-                            <label class="form-check-label mb-0 p-3" for="checkbox-todo-0">Design a facebook ad</label>
-                        </div>
-                        <div class="d-flex align-items-center">
-                            <div class="hover-actions">
-                                <button class="btn btn-light icon-item rounded-3 me-2 fs--2 icon-item-sm"><span
-                                        class="fas fa-clock"></span></button>
-                                <button class="btn btn-light icon-item rounded-3 me-2 fs--2 icon-item-sm"><span
-                                        class="fas fa-user-plus"> </span></button>
-                            </div>
-                            <div class="dropdown font-sans-serif btn-reveal-trigger">
-                                <button
-                                    class="btn btn-link text-600 btn-sm dropdown-toggle dropdown-caret-none btn-reveal-sm transition-none"
-                                    type="button" id="management-to-do-list-0" data-bs-toggle="dropdown"
-                                    data-boundary="viewport" aria-haspopup="true" aria-expanded="false"><span
-                                        class="fas fa-ellipsis-h fs--2"></span></button>
-                                <div class="dropdown-menu dropdown-menu-end border py-2"
-                                    aria-labelledby="management-to-do-list-0"><a class="dropdown-item" href="#!">View</a><a
-                                        class="dropdown-item" href="#!">Export</a>
-                                    <div class="dropdown-divider"></div><a class="dropdown-item text-danger"
-                                        href="#!">Remove</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div
-                        class="d-flex justify-content-between border-top hover-actions-trigger btn-reveal-trigger px-card border-200 todo-list-item">
-                        <div class="form-check mb-0 d-flex align-items-center">
-                            <input
-                                class="form-check-input rounded-circle form-check-line-through p-2 form-check-input-secondary"
-                                type="checkbox" id="checkbox-todo-1" />
-                            <label class="form-check-label mb-0 p-3" for="checkbox-todo-1">Analyze Data</label>
-                        </div>
-                        <div class="d-flex align-items-center">
-                            <div class="hover-actions">
-                                <button class="btn btn-light icon-item rounded-3 me-2 fs--2 icon-item-sm"><span
-                                        class="fas fa-clock"></span></button>
-                                <button class="btn btn-light icon-item rounded-3 me-2 fs--2 icon-item-sm"><span
-                                        class="fas fa-user-plus"> </span></button>
-                            </div>
-                            <div class="dropdown font-sans-serif btn-reveal-trigger">
-                                <button
-                                    class="btn btn-link text-600 btn-sm dropdown-toggle dropdown-caret-none btn-reveal-sm transition-none"
-                                    type="button" id="management-to-do-list-1" data-bs-toggle="dropdown"
-                                    data-boundary="viewport" aria-haspopup="true" aria-expanded="false"><span
-                                        class="fas fa-ellipsis-h fs--2"></span></button>
-                                <div class="dropdown-menu dropdown-menu-end border py-2"
-                                    aria-labelledby="management-to-do-list-1"><a class="dropdown-item" href="#!">View</a><a
-                                        class="dropdown-item" href="#!">Export</a>
-                                    <div class="dropdown-divider"></div><a class="dropdown-item text-danger"
-                                        href="#!">Remove</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div
-                        class="d-flex justify-content-between border-top hover-actions-trigger btn-reveal-trigger px-card border-200 todo-list-item">
-                        <div class="form-check mb-0 d-flex align-items-center">
-                            <input
-                                class="form-check-input rounded-circle form-check-line-through p-2 form-check-input-success"
-                                type="checkbox" id="checkbox-todo-2" />
-                            <label class="form-check-label mb-0 p-3" for="checkbox-todo-2">Youtube campaign</label>
-                        </div>
-                        <div class="d-flex align-items-center">
-                            <div class="hover-actions">
-                                <button class="btn btn-light icon-item rounded-3 me-2 fs--2 icon-item-sm"><span
-                                        class="fas fa-clock"></span></button>
-                                <button class="btn btn-light icon-item rounded-3 me-2 fs--2 icon-item-sm"><span
-                                        class="fas fa-user-plus"> </span></button>
-                            </div>
-                            <div class="dropdown font-sans-serif btn-reveal-trigger">
-                                <button
-                                    class="btn btn-link text-600 btn-sm dropdown-toggle dropdown-caret-none btn-reveal-sm transition-none"
-                                    type="button" id="management-to-do-list-2" data-bs-toggle="dropdown"
-                                    data-boundary="viewport" aria-haspopup="true" aria-expanded="false"><span
-                                        class="fas fa-ellipsis-h fs--2"></span></button>
-                                <div class="dropdown-menu dropdown-menu-end border py-2"
-                                    aria-labelledby="management-to-do-list-2"><a class="dropdown-item" href="#!">View</a><a
-                                        class="dropdown-item" href="#!">Export</a>
-                                    <div class="dropdown-divider"></div><a class="dropdown-item text-danger"
-                                        href="#!">Remove</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div
-                        class="d-flex justify-content-between border-top hover-actions-trigger btn-reveal-trigger px-card border-200 todo-list-item">
-                        <div class="form-check mb-0 d-flex align-items-center">
-                            <input
-                                class="form-check-input rounded-circle form-check-line-through p-2 form-check-input-warning"
-                                type="checkbox" id="checkbox-todo-3" />
-                            <label class="form-check-label mb-0 p-3" for="checkbox-todo-3">Assign 10 employee</label>
-                        </div>
-                        <div class="d-flex align-items-center">
-                            <div class="hover-actions">
-                                <button class="btn btn-light icon-item rounded-3 me-2 fs--2 icon-item-sm"><span
-                                        class="fas fa-clock"></span></button>
-                                <button class="btn btn-light icon-item rounded-3 me-2 fs--2 icon-item-sm"><span
-                                        class="fas fa-user-plus"> </span></button>
-                            </div>
-                            <div class="dropdown font-sans-serif btn-reveal-trigger">
-                                <button
-                                    class="btn btn-link text-600 btn-sm dropdown-toggle dropdown-caret-none btn-reveal-sm transition-none"
-                                    type="button" id="management-to-do-list-3" data-bs-toggle="dropdown"
-                                    data-boundary="viewport" aria-haspopup="true" aria-expanded="false"><span
-                                        class="fas fa-ellipsis-h fs--2"></span></button>
-                                <div class="dropdown-menu dropdown-menu-end border py-2"
-                                    aria-labelledby="management-to-do-list-3"><a class="dropdown-item" href="#!">View</a><a
-                                        class="dropdown-item" href="#!">Export</a>
-                                    <div class="dropdown-divider"></div><a class="dropdown-item text-danger"
-                                        href="#!">Remove</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div
-                        class="d-flex justify-content-between border-top hover-actions-trigger btn-reveal-trigger px-card border-200 todo-list-item">
-                        <div class="form-check mb-0 d-flex align-items-center">
-                            <input
-                                class="form-check-input rounded-circle form-check-line-through p-2 form-check-input-danger"
-                                type="checkbox" id="checkbox-todo-4" />
-                            <label class="form-check-label mb-0 p-3" for="checkbox-todo-4">Meeting at 12</label>
-                        </div>
-                        <div class="d-flex align-items-center">
-                            <div class="hover-actions">
-                                <button class="btn btn-light icon-item rounded-3 me-2 fs--2 icon-item-sm"><span
-                                        class="fas fa-clock"></span></button>
-                                <button class="btn btn-light icon-item rounded-3 me-2 fs--2 icon-item-sm"><span
-                                        class="fas fa-user-plus"> </span></button>
-                            </div>
-                            <div class="dropdown font-sans-serif btn-reveal-trigger">
-                                <button
-                                    class="btn btn-link text-600 btn-sm dropdown-toggle dropdown-caret-none btn-reveal-sm transition-none"
-                                    type="button" id="management-to-do-list-4" data-bs-toggle="dropdown"
-                                    data-boundary="viewport" aria-haspopup="true" aria-expanded="false"><span
-                                        class="fas fa-ellipsis-h fs--2"></span></button>
-                                <div class="dropdown-menu dropdown-menu-end border py-2"
-                                    aria-labelledby="management-to-do-list-4"><a class="dropdown-item" href="#!">View</a><a
-                                        class="dropdown-item" href="#!">Export</a>
-                                    <div class="dropdown-divider"></div><a class="dropdown-item text-danger"
-                                        href="#!">Remove</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div
-                        class="d-flex justify-content-between border-top hover-actions-trigger btn-reveal-trigger px-card border-200 todo-list-item border-bottom">
-                        <div class="form-check mb-0 d-flex align-items-center">
-                            <input class="form-check-input rounded-circle form-check-line-through p-2 form-check-input-info"
-                                type="checkbox" id="checkbox-todo-5" />
-                            <label class="form-check-label mb-0 p-3" for="checkbox-todo-5">Meeting at 10</label>
-                        </div>
-                        <div class="d-flex align-items-center">
-                            <div class="hover-actions">
-                                <button class="btn btn-light icon-item rounded-3 me-2 fs--2 icon-item-sm"><span
-                                        class="fas fa-clock"></span></button>
-                                <button class="btn btn-light icon-item rounded-3 me-2 fs--2 icon-item-sm"><span
-                                        class="fas fa-user-plus"> </span></button>
-                            </div>
-                            <div class="dropdown font-sans-serif btn-reveal-trigger">
-                                <button
-                                    class="btn btn-link text-600 btn-sm dropdown-toggle dropdown-caret-none btn-reveal-sm transition-none"
-                                    type="button" id="management-to-do-list-5" data-bs-toggle="dropdown"
-                                    data-boundary="viewport" aria-haspopup="true" aria-expanded="false"><span
-                                        class="fas fa-ellipsis-h fs--2"></span></button>
-                                <div class="dropdown-menu dropdown-menu-end border py-2"
-                                    aria-labelledby="management-to-do-list-5"><a class="dropdown-item" href="#!">View</a><a
-                                        class="dropdown-item" href="#!">Export</a>
-                                    <div class="dropdown-divider"></div><a class="dropdown-item text-danger"
-                                        href="#!">Remove</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-footer bg-light p-0"><a class="btn btn-sm btn-link d-block py-2" href="#!"><span
-                            class="fas fa-plus me-1 fs--2"></span>Add New Task</a></div>
-            </div> --}}
         </div>
+
     </div>
 
 @endsection

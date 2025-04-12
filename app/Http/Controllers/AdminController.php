@@ -20,8 +20,7 @@ use App\Models\Schedule;
 use App\Models\Forum;
 use App\Models\Bill;
 
-
-
+use Illuminate\Support\Facades\DB;
 use Session;
 
 
@@ -222,10 +221,10 @@ class AdminController extends Controller
         return view('admin.student.view_student', compact('students'));
     }
 
-    public function admin_create_student()
-    {
-        return view('admin.student.create_student');
-    }
+    // public function admin_create_student()
+    // {
+    //     return view('admin.student.create_student');
+    // }
 
     public function admin_update_student($id)
     {
@@ -259,6 +258,13 @@ class AdminController extends Controller
 
         $students->rfid_tag = $request->rfid_tag;
         $students->status = $request->status;
+
+        // ✅ Match district + school_id
+        $rate = Rate::where('district', $request->district)
+        ->where('school_id', $request->school_id)
+        ->first();
+
+        $students->rate_id = $rate ? $rate->id : 'No Rate';
 
         $students->save();
 
@@ -300,6 +306,8 @@ class AdminController extends Controller
     public function detail_student($id)
     {
         $students = Student::findOrFail($id); // Find student by ID
+
+        
 
         // Retrieve attendance for this student using RFID tag
         $attendance = Attendance::where('rfid_tag', $students->rfid_tag)
@@ -559,12 +567,76 @@ class AdminController extends Controller
         return redirect()->back();
     }
 
+    //Van Information
     public function view_van_info()
     {
         // Retrieve users with usertype 'user', ordered by latest, descending
         $van_data = Van::orderBy('created_at', 'desc')->get(); // Order by the `created_at` column in descending order
 
         return view("admin.van_info.view_van_info", compact('van_data'));
+    }
+
+    public function create_van_info()
+    {
+        $assignedDriverIds = DB::table('vans')->pluck('user_id');
+
+        $drivers = User::where('usertype', 'driver')
+                   ->whereNotIn('id', $assignedDriverIds)
+                   ->get();
+
+        return view('admin.van_info.create_van_info', compact('drivers'));
+    }
+
+    public function add_van_info(Request $request)
+    {
+
+        $vans = new Van;
+
+        $vans->license_plate = $request->license_plate;
+        $vans->capacity = $request->capacity;
+        $vans->user_id = $request->user_id;
+        
+        $vans->save();
+
+        return redirect('view_van_info');
+    }
+
+
+    public function update_van_info($id)
+    {
+        $vans = Van::find($id);
+
+        $assignedDriverIds = DB::table('vans')->pluck('user_id');
+
+        $drivers = User::where('usertype', 'driver')
+                   ->whereNotIn('id', $assignedDriverIds)
+                   ->get();
+
+        return view('admin.van_info.update_van_info', compact('vans', 'drivers'));
+    }
+
+
+    public function edit_van_info(Request $request, $id)
+    {
+
+        $vans = Van::find($id);
+
+        $vans->license_plate = $request->license_plate;
+        $vans->capacity = $request->capacity;
+        $vans->user_id = $request->user_id;
+        
+        $vans->save();
+
+        return redirect('view_van_info');
+    }
+
+    public function delete_van_info($id)
+    {
+        $vans = Van::find($id);
+
+        $vans->delete();
+
+        return redirect()->back();
     }
 
     //schedule
@@ -600,34 +672,7 @@ class AdminController extends Controller
         return redirect('view_schedule');
     }
 
-    // public function admin_update_student($id)
-    // {
-    //     $students = Student::find($id);
-
-    //     return view('admin.student.update_student', compact('students'));
-    // }
-
-    // public function admin_edit_student(Request $request, $id)
-    // {
-
-    //     $students = Student::find($id);
-
-    //     $students->full_name = $request->full_name;
-    //     $students->date_of_birth = $request->date_of_birth;
-    //     $students->relationship = $request->relationship;
-    //     $students->emergency_contact = $request->emergency_contact;
-    //     $students->address = $request->address;
-    //     $students->user_id = $request->user_id;
-
-    //     $students->rfid_tag = $request->rfid_tag;
-    //     $students->status = $request->status;
-
-
-    //     $students->save();
-
-    //     return redirect('admin_view_student');
-    // }
-
+   
     public function delete_schedule($id)
     {
         $schedules = Schedule::find($id);
@@ -731,7 +776,9 @@ class AdminController extends Controller
     {
         $schools = School::all();
 
-        return view('admin.rate.create_rate', compact('schools'));
+        $vans = Van::all();
+
+        return view('admin.rate.create_rate', compact('schools', 'vans'));
     }
 
     public function add_rate(Request $request)
@@ -741,6 +788,10 @@ class AdminController extends Controller
         $rate->school_id = $request->school_id;
         $rate->district = $request->district;
         $rate->price = $request->price;
+
+        $rate->van_id = $request->van_id;
+        $rate->start_time = $request->start_time;
+        $rate->end_time = $request->end_time;
         
         $rate->save();
 
@@ -753,7 +804,9 @@ class AdminController extends Controller
 
         $schools = School::all();
 
-        return view('admin.rate.update_rate', compact('rate', 'schools'));
+        $vans = Van::all();
+
+        return view('admin.rate.update_rate', compact('rate', 'schools', 'vans'));
     }
 
     public function edit_rate(Request $request, $id)
@@ -764,6 +817,10 @@ class AdminController extends Controller
         $rate->school_id = $request->school_id;
         $rate->district = $request->district;
         $rate->price = $request->price;
+
+        $rate->van_id = $request->van_id;
+        $rate->start_time = $request->start_time;
+        $rate->end_time = $request->end_time;
     
 
         $rate->save();

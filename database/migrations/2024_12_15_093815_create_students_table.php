@@ -24,7 +24,10 @@ return new class extends Migration
             $table->string('emergency_contact')->nullable();
             $table->string('relationship')->nullable();
             $table->string('status')->nullable();
+
             $table->string('user_id')->nullable();
+            $table->string('rate_id')->nullable();
+            
             $table->timestamps();
         });
     }

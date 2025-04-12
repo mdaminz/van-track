@@ -10,4 +10,10 @@ class Van extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function rates()
+    {
+        return $this->hasMany(Rate::class);
+    }
+
 }

@@ -24,14 +24,18 @@
                     <h5 class="mb-0">Update Rate</h5>
                 </div>
                 <div class="card-body bg-light">
-                    <form action="{{ url('edit_rate', $rate->id) }}" method="POST" class="row g-3 needs-validation" novalidate=""
-                        enctype="multipart/form-data">
+                    <form action="{{ url('edit_rate', $rate->id) }}" method="POST" class="row g-3 needs-validation"
+                        novalidate="" enctype="multipart/form-data">
                         @csrf
 
                         <div class="col-md-6">
                             <label class="form-label" for="validationCustom02">District</label>
-                            <input value="{{$rate->district}}" name="district" class="form-control" id="validationCustom02"
-                                type="text" required="" />
+                            <select class="form-control" name="district" id="">
+                                <option selected value="{{$rate->district}}">{{$rate->district}}</option>
+
+                                <option value="Kelana Jaya">Kelana Jaya</option>
+                                <option value="Sungai Way">Sungai Way</option>
+                            </select>
                             <div class="invalid-feedback">Enter a District Name.</div>
                         </div>
 
@@ -45,11 +49,33 @@
                             </select>
                         </div>
 
-                        <div class="col-md-12">
+                        <div class="col-md-6">
                             <label class="form-label" for="validationCustom03">Price</label>
-                            <input value="{{$rate->price}}" name="price" class="form-control" id="validationCustom03" type="number"
-                                required="" />
+                            <input value="{{$rate->price}}" name="price" class="form-control" id="validationCustom03"
+                                type="number" required="" />
                             <div class="invalid-feedback">Enter a Price.</div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label" for="validationCustom04">Van</label>
+                            <select class="form-control" name="van_id" id="">
+                                <option selected value="{{$rate->van_id}}">{{$rate->van->license_plate}}</option>
+                                @foreach ($vans as $vans)
+                                    <option value="{{$vans->id}}">{{$vans->license_plate}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label" for="validationCustom05">Start Time</label>
+                            <input value="{{$rate->start_time}}" name="start_time" class="form-control" id="validationCustom05" type="time" required="" />
+                            <div class="invalid-feedback">Enter a Start time.</div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label" for="validationCustom06">End Time</label>
+                            <input value="{{$rate->end_time}}" name="end_time" class="form-control" id="validationCustom06" type="time" required="" />
+                            <div class="invalid-feedback">Enter a End time.</div>
                         </div>
 
                         <div class="col-12 mt-4">

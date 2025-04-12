@@ -10,4 +10,11 @@ class Rate extends Model
     {
         return $this->belongsTo(School::class, 'school_id');
     }
+
+    public function van()
+    {
+        return $this->belongsTo(Van::class);
+    }
+
+    
 }

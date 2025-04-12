@@ -76,19 +76,21 @@
 
                         <div class="col-lg-6">
                             <label class="form-label">Date of Birth</label>
-                            <input name="name" class="form-control" type="text" value="{{$students->date_of_birth}}" disabled />
+                            <input name="name" class="form-control" type="text" value="{{$students->date_of_birth}}"
+                                disabled />
                         </div>
                         <div class="col-lg-6">
                             <label class="form-label">Address</label>
-                            <input name="email" class="form-control" type="text" value="{{$students->address}}" disabled/>
+                            <input name="email" class="form-control" type="text" value="{{$students->address}}" disabled />
                         </div>
                         <div class="col-lg-6">
                             <label class="form-label">RFID Tag</label>
-                            <input name="phone" class="form-control" type="text" value="{{$students->rfid_tag}}" disabled/>
+                            <input name="phone" class="form-control" type="text" value="{{$students->rfid_tag}}" disabled />
                         </div>
                         <div class="col-lg-6">
                             <label class="form-label">Contact</label>
-                            <input name="address" class="form-control" type="text" value="{{$students->emergency_contact}}" disabled/>
+                            <input name="address" class="form-control" type="text" value="{{$students->emergency_contact}}"
+                                disabled />
                         </div>
                     </form>
                 </div>
@@ -100,27 +102,36 @@
                 </div>
                 <div class="card-body fs--1 p-0">
 
-                    @foreach ($attendance as $attendance)
-                        <a class="notification border-x-0 border-bottom-0 border-300 rounded-top-0" href="#!">
-                            <div class="notification-avatar">
-                                <div class="avatar avatar-xl me-3">
-                                    <div class="avatar-emoji rounded-circle "><span role="img" aria-label="Emoji">📅️</span>
+                    @if ($attendance->isEmpty())
+                        <div class="text-center py-4">
+                            <p class="mb-0">No Records Found</p>
+                        </div>
+                    @else
+                        @foreach ($attendance as $record)
+                            <a class="notification border-x-0 border-bottom-0 border-300 rounded-top-0" href="#!">
+                                <div class="notification-avatar">
+                                    <div class="avatar avatar-xl me-3">
+                                        <div class="avatar-emoji rounded-circle">
+                                            <span role="img" aria-label="Emoji">📅️</span>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="notification-body">
-                                <p class="mb-1"><strong>{{$students->full_name}}</strong> with
-                                    <strong>{{$students->rfid_tag}}</strong> tag card at
-                                </p>
-                                <span
-                                    class="notification-time">{{ \Carbon\Carbon::parse($attendance->created_at)->format('d M Y, h:i A') }}</span>
+                                <div class="notification-body">
+                                    <p class="mb-1">
+                                        <strong>{{ $students->full_name }}</strong> with
+                                        <strong>{{ $students->rfid_tag }}</strong> tag card at
+                                    </p>
+                                    <span class="notification-time">
+                                        {{ \Carbon\Carbon::parse($record->created_at)->format('d M Y, h:i A') }}
+                                    </span>
+                                </div>
+                            </a>
+                        @endforeach
+                    @endif
 
-
-                            </div>
-                        </a>
-                    @endforeach
                 </div>
             </div>
+
         </div>
         <div class="col-lg-4 ps-lg-2">
             <div class="sticky-sidebar">
@@ -141,7 +152,7 @@
                                 <p class="text-1000 mb-0"> <a href="">{{ $students->user->email }}</a> &bull; <a
                                         href="#!">{{ $students->user->phone }}</a></p>
                                 <p class="text-1000 mb-0">{{ $students->user->address }}</p>
-                                
+
 
                             </div>
                         </div>
@@ -162,10 +173,35 @@
                                             data-bs-placement="top" title="Verified"><small
                                                 class="fa fa-check-circle text-primary"
                                                 data-fa-transform="shrink-4 down-2"></small></span></a></h6>
-                                <p class="mb-1">{{ $students->type == 'second' ? 'Primary School' : 'Secondary School' }}</p>
+                                <p class="mb-1">{{ $students->type == 'second' ? 'Primary School' : 'Secondary School' }}
+                                </p>
 
                                 <p class="text-1000 mb-0">{{$students->school->first_address}}</p>
                                 <p class="text-1000 mb-0">{{$students->school->second_address}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card mb-3">
+                    <div class="card-header bg-light">
+                        <h5 class="mb-0">Van Information</h5>
+                    </div>
+                    <div class="card-body fs--1">
+                        <div class="d-flex"><a href="#!">
+                                <div class="avatar avatar-3xl">
+                                    <div class="avatar-name rounded-circle"><span>Van</span></div>
+                                </div>
+                            </a>
+                            <div class="flex-1 position-relative ps-3">
+                                <h6 class="fs-0 mb-0"> <a>{{$students->rate?->van?->user?->name}}<span data-bs-toggle="tooltip"
+                                            data-bs-placement="top" title="Verified"><small
+                                                class="fa fa-check-circle text-primary"
+                                                data-fa-transform="shrink-4 down-2"></small></span></a></h6>
+                                <p class="mb-1">{{$students->van?->license_plate}}
+                                </p>
+
+                                <p class="text-1000 mb-0">{{$students->district}}</p>
+                                <p class="text-1000 mb-0">{{$students->school->name}}</p>
                             </div>
                         </div>
                     </div>

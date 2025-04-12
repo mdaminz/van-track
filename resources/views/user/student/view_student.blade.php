@@ -78,7 +78,7 @@
 
                                 <td class="order py-2 align-middle white-space-nowrap">{{ $number++ }}</td>
                                 <!-- Increment the counter -->
-                                <td class="order py-2 align-middle white-space-nowrap">
+                                <td class="order py-2 align-middle white-space-nowrap">{{ $students->full_name }}</td>
                                 </td>
                                 <td class="date py-2 align-middle">{{ $students->rfid_tag }}</td>
                                 @if (Auth::user()->usertype == 'admin')

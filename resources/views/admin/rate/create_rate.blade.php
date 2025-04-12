@@ -28,7 +28,12 @@
 
                         <div class="col-md-6">
                             <label class="form-label" for="validationCustom02">District</label>
-                            <input name="district" class="form-control" id="validationCustom02" type="text" required="" />
+                            <select class="form-control" name="district" id="">
+                                <option selected="" disabled="" value="">Choose...</option>
+
+                                <option value="Kelana Jaya">Kelana Jaya</option>
+                                <option value="Sungai Way">Sungai Way</option>
+                            </select>
                             <div class="invalid-feedback">Enter a District Name.</div>
                         </div>
 
@@ -42,11 +47,33 @@
                             </select>
                         </div>
 
-                        <div class="col-md-12">
+                        <div class="col-md-6">
                             <label class="form-label" for="validationCustom03">Price</label>
                             <input placeholder="RM " name="price" class="form-control" id="validationCustom03" type="number"
                                 required="" />
                             <div class="invalid-feedback">Enter a Price.</div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label" for="validationCustom04">Van</label>
+                            <select class="form-control" name="van_id" id="">
+                                <option selected="" disabled="" value="">Choose...</option>
+                                @foreach ($vans as $vans)
+                                    <option value="{{$vans->id}}">{{$vans->license_plate}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label" for="validationCustom05">Start Time</label>
+                            <input name="start_time" class="form-control" id="validationCustom05" type="time" required="" />
+                            <div class="invalid-feedback">Enter a Start time.</div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label" for="validationCustom06">End Time</label>
+                            <input name="end_time" class="form-control" id="validationCustom06" type="time" required="" />
+                            <div class="invalid-feedback">Enter a End time.</div>
                         </div>
 
                         <div class="col-12 mt-4">

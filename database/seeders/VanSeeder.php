@@ -14,7 +14,7 @@ class VanSeeder extends Seeder
     public function run(): void
     {
         Van::create([
-            'license_plate' => 'ABC123',
+            'license_plate' => 'BPK 5397',
             'capacity' => '20',
             'coor' => '',  // Sample coordinates
             'image' => '',
@@ -22,7 +22,7 @@ class VanSeeder extends Seeder
         ]);
 
         Van::create([
-            'license_plate' => 'ABC123',
+            'license_plate' => 'VMV 1150',
             'capacity' => '20',
             'coor' => '',  // Sample coordinates
             'image' => '',

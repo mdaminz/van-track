@@ -91,8 +91,8 @@ class HomeController extends Controller
     public function create_student()
     {
         $rates = Rate::all();
-        $rate = Rate::all();
 
+        $rate = Rate::all();
 
         return view('user.student.create_student', compact('rates', 'rate'));
     }
@@ -117,6 +117,13 @@ class HomeController extends Controller
 
         $student_data->rfid_tag = 'No Rfid Tag';
         $student_data->status = $request->Inactive;
+
+        // ✅ Match district + school_id
+        $rate = Rate::where('district', $request->district)
+        ->where('school_id', $request->school_id)
+        ->first();
+
+        $student_data->rate_id = $rate ? $rate->id : 'No Rate';
 
         $student_data->profile_photo = $request->profile_photo;
         
@@ -161,6 +168,13 @@ class HomeController extends Controller
         $student_data->district = $request->district;
         $student_data->school_id = $request->school_id;
         $student_data->user_id = Auth::id();
+
+        // ✅ Match district + school_id
+        $rate = Rate::where('district', $request->district)
+        ->where('school_id', $request->school_id)
+        ->first();
+
+        $student_data->rate_id = $rate ? $rate->id : 'No Rate';
 
         if ($request->hasFile('profile_photo')) {
             // Delete the old profile photo (optional, if updating an existing student)

@@ -20,5 +20,7 @@ class DatabaseSeeder extends Seeder
         $this->call(ReportSeeder::class);
         $this->call(ForumSeeder::class);
         $this->call(VanSeeder::class);
+        $this->call(RateSeeder::class);
+        $this->call(StudentSeeder::class);
     }
 }

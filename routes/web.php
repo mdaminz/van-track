@@ -125,6 +125,15 @@ Route::post('/store_post', [AdminController::class, 'store'])->name('store_post'
 //van
 route::get('/view_van_info', [AdminController::class, 'view_van_info']);
 
+route::get('/create_van_info', [AdminController::class, 'create_van_info']);
+route::post('/add_van_info', [AdminController::class, 'add_van_info']);
+
+route::get('/update_van_info/{id}', [AdminController::class, 'update_van_info']);
+route::post('/edit_van_info/{id}', [AdminController::class, 'edit_van_info']);
+
+route::get('/delete_van_info/{id}', [AdminController::class, 'delete_van_info']);
+
+
 //schedule
 route::get('/view_schedule', [AdminController::class, 'view_schedule']);
 route::get('/create_schedule', [AdminController::class, 'create_schedule']);
@@ -146,6 +155,7 @@ route::post('/add_rate', [AdminController::class, 'add_rate']);
 
 route::get('/update_rate/{id}', [AdminController::class, 'update_rate']);
 route::post('/edit_rate/{id}', [AdminController::class, 'edit_rate']);
+
 route::get('/delete_rate/{id}', [AdminController::class, 'delete_rate']);
 
 
