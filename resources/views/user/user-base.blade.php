@@ -132,7 +132,7 @@
                                     </div>
                                 </a>
 
-                                
+
                                 {{-- <!-- parent pages--><a class="nav-link dropdown-indicator" href="#events"
                                     role="button" data-bs-toggle="collapse" aria-expanded="false"
                                     aria-controls="events">
@@ -195,10 +195,16 @@
                                 </div>
                                 <!-- parent pages--><a class="nav-link" href="user_view_bill" role="button">
                                     <div class="d-flex align-items-center"><span class="nav-link-icon"><span
-                                        class="far fa-money-bill-alt"></span></span><span
-                                    class="nav-link-text ps-1">Billing</span>
-                            </div>
-                        </a>
+                                                class="far fa-money-bill-alt"></span></span><span
+                                            class="nav-link-text ps-1">Billing</span>
+                                    </div>
+                                </a>
+                                <!-- parent pages--><a class="nav-link" href="view_pricing" role="button">
+                                    <div class="d-flex align-items-center"><span class="nav-link-icon"><span
+                                                class="fas fa-hand-holding-usd"></span></span><span
+                                            class="nav-link-text ps-1">Pricing List</span>
+                                    </div>
+                                </a>
 
 
                             </li>
@@ -211,7 +217,7 @@
                                         <hr class="mb-0 navbar-vertical-divider" />
                                     </div>
                                 </div>
-                               
+
 
 
 

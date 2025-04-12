@@ -183,3 +183,6 @@ Route::post('/upload-receipt', [HomeController::class, 'uploadReceipt'])->name('
 Route::middleware(['auth'])->post('/update-coor', [AdminController::class, 'updateCoor'])->name('update.coor');
 
 Route::get('/view_van_location/{id}', [AdminController::class, 'viewLocation']);
+
+//Pricing
+route::get('/view_pricing', [HomeController::class, 'view_pricing']);

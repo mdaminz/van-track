@@ -369,5 +369,11 @@ class HomeController extends Controller
         return redirect()->back()->with('success', 'Receipt uploaded successfully!');
     }
 
+    //pricing
+    public function view_pricing()
+    {
+        $rates = Rate::all();
 
+        return view('user.pricing.view_pricing', compact('rates'));
+    }
 }
