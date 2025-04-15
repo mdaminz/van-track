@@ -66,7 +66,7 @@
                                 <td class="no align-middle" style="min-width: 3rem;">{{ $number++ }}</td>
                                 <td class="email align-middle" style="min-width: 5rem;">{{ $report_data->type }}</td>
                                 <td class="contact align-middle" style="min-width: 10rem;">{{ $report_data->subject }}</td>
-                                <td class="address align-middle" style="min-width: 10rem;">{{ $report_data->resolved_at }}</td>
+                                <td class="address align-middle" style="min-width: 10rem;">{{ \Carbon\Carbon::parse($report_data->resolved_at)->format('d M Y, h:i A') }}</td>
                                 </td>
                                 @if ($report_data->status == 'Resolved')
                                     <td class="align-middle"><span

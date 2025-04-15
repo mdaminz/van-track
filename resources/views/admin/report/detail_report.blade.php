@@ -33,7 +33,7 @@
                 <div class="card-body">
                     <h5 class="fs-0 mb-3">{{$report_data->subject}}</h5>
                     <p>{!! nl2br(e($report_data->description)) !!}</p>
-                    <img style="height: 400px" src="report/{{$report_data->image}}" alt="">
+                    <img class="img-fluid w-100" style="" src="report/{{$report_data->image}}" alt="">
                 </div>
             </div>
         </div>

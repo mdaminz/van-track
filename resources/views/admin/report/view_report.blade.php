@@ -51,6 +51,7 @@
                             <th class="sort align-middle" style="min-width: 15rem;" data-sort="contact">Subject</th>
                             <th class="sort align-middle" style="min-width: 10rem;" data-sort="address">Resolved At</th>
                             <th class="sort align-middle" style="min-width: 10rem;" data-sort="status">Status</th>
+                            
                             <th class="no-sort"></th>
                         </tr>
                     </thead>
@@ -65,7 +66,7 @@
                                 <td class="name align-middle" style="min-width: 10rem;"><a href="profile_detail/{{$report_data->user_id}}">{{ $report_data->user->name }}</a></td>
                                 <td class="email align-middle" style="min-width: 5rem;">{{ $report_data->type }}</td>
                                 <td class="contact align-middle" style="min-width: 10rem;">{{ $report_data->subject }}</td>
-                                <td class="address align-middle" style="min-width: 10rem;">{{ $report_data->resolved_at }}</td>
+                                <td class="address align-middle" style="min-width: 10rem;">{{ \Carbon\Carbon::parse($report_data->resolved_at)->format('d M Y, h:i A') }}</td>
                                 </td>
                                 @if ($report_data->status == 'Resolved')
                                     <td class="align-middle"><span
