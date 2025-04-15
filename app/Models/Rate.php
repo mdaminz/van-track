@@ -16,5 +16,8 @@ class Rate extends Model
         return $this->belongsTo(Van::class);
     }
 
-    
+    public function students()
+    {
+        return $this->hasMany(Student::class);
+    }
 }

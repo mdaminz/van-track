@@ -255,8 +255,15 @@
                             <a class="border-bottom-0 notification rounded-0 border-x-0 border border-300" href="#!">
                                 <div class="notification-avatar">
                                     <div class="avatar avatar-xl me-3">
-                                        <div class="avatar-emoji rounded-circle"><span role="img" aria-label="Emoji">📅️</span>
-                                        </div>
+                                        @if ($attendance->status == 'In')
+                                            <div class="avatar-emoji rounded-circle"><span role="img" aria-label="Emoji">🚍</span>
+                                            </div>
+                                        @else
+                                            <div class="avatar-emoji rounded-circle"><span role="img" aria-label="Emoji">🚶‍♂️</span>
+                                            </div>
+                                        {{-- <div class="avatar-emoji rounded-circle"><span role="img" aria-label="Emoji">✔️</span>
+                                        </div> --}}
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="notification-body">

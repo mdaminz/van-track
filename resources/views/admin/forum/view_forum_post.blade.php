@@ -67,8 +67,9 @@
 
         </div>
         <div class="flex-1 align-self-center ms-2">
-        <p class="mb-1 lh-1"><a href="profile_detail/{{$forum_data->user_id}}" class="fw-semi-bold">{{ $forum_data->user->name }}</a></p>
-        <p class="mb-0 fs--1">{{ $forum_data->date }} &bull; {{ $forum_data->time }}</p>
+        <p class="mb-1 lh-1"><a href="profile_detail/{{$forum_data->user_id}}"
+        class="fw-semi-bold">{{ $forum_data->user->name }}</a></p>
+        <p class="mb-0 fs--1">{{ \Carbon\Carbon::parse($forum_data->created_at)->format('d M Y, h:i A') }}</p>
         </div>
       </div>
       </div>

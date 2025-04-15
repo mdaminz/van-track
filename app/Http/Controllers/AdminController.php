@@ -74,10 +74,12 @@ class AdminController extends Controller
 
                 // $total_active_users = Session::count();
 
+                $vans = Van::all();
+
                 // Calculate total paid revenue
                 $paid_revenue = \App\Models\Bill::where('status', 'Paid')->sum('amount');
 
-                return view('admin.index', compact( 'total_students', 'user','total_users', 'paid_revenue'));
+                return view('admin.index', compact( 'total_students', 'user','total_users', 'paid_revenue', 'vans'));
 
             } else if ($usertype == 'driver') {
 
@@ -943,6 +945,7 @@ class AdminController extends Controller
     
         return view('profile_detail', compact('users', 'students', 'count_students'));
     }
+    
     
 
    

@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\DriverController;
 
 route::get('/', [HomeController::class, 'index']);
 
@@ -190,3 +191,9 @@ route::get('/view_pricing', [HomeController::class, 'view_pricing']);
 
 //view profile
 route::get('/profile_detail/{id}', [AdminController::class, 'profile_detail']);
+
+//driver view student
+route::get('/driver_view_student', [DriverController::class, 'driver_view_student']);
+
+//driver view attendance
+route::get('/driver_view_attendance', [DriverController::class, 'driver_view_attendance']);

@@ -117,7 +117,7 @@
                                         <hr class="mb-0 navbar-vertical-divider" />
                                     </div>
                                 </div>
-                                <!-- parent pages--><a class="nav-link" href="admin_view_student" role="button">
+                                <!-- parent pages--><a class="nav-link" href="driver_view_student" role="button">
                                     <div class="d-flex align-items-center"><span class="nav-link-icon"><span
                                                 class="fab fa-odnoklassniki"></span></span><span
                                             class="nav-link-text ps-1">Student</span>
@@ -126,7 +126,7 @@
 
 
 
-                                <!-- parent pages--><a class="nav-link" href="admin_view_attendance" role="button">
+                                <!-- parent pages--><a class="nav-link" href="driver_view_attendance" role="button">
                                     <div class="d-flex align-items-center"><span class="nav-link-icon"><span
                                                 class="far fa-window-restore"></span></span><span
                                             class="nav-link-text ps-1">Attendance</span>

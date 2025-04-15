@@ -9,18 +9,40 @@ class RFIDController extends Controller
 {
     public function storeRFIDData(Request $request)
     {
-        // Validate incoming data
         $request->validate([
-            'rfid' => 'string',
+            'rfid' => 'string|required',
         ]);
 
-        // Save the RFID data to the database
+        $rfid = $request->input('rfid');
+
+        // Check if the RFID tag exists in the students table
+        $student = DB::table('students')->where('rfid_tag', $rfid)->first();
+
+        if (!$student) {
+            return response()->json([
+                'message' => 'RFID tag not registered',
+            ], 404);
+        }
+
+        // Get last attendance status
+        $lastRecord = DB::table('attendances')
+            ->where('rfid_tag', $rfid)
+            ->orderBy('created_at', 'desc')
+            ->first();
+
+        $newStatus = ($lastRecord && $lastRecord->status === 'In') ? 'Out' : 'In';
+
         DB::table('attendances')->insert([
-            'rfid_tag' => $request->input('rfid'),
+            'rfid_tag' => $rfid,
+            'student_id' => $student->id, // optional, if needed
+            'status' => $newStatus,
             'created_at' => now(),
             'updated_at' => now(),
         ]);
 
-        return response()->json(['message' => 'RFID data stored successfully'], 201);
+        return response()->json([
+            'message' => "Attendance recorded with status: $newStatus"
+        ], 201);
     }
+
 }

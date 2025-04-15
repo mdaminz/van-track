@@ -95,10 +95,21 @@
                                 <td class="address py-2">
                                     {{ $attendances->student->address }}
                                 </td>
-                                <td class="order py-2">{{ $attendances->status }}
-                                </td>
 
-                                {{-- <td class="status py-2 align-middle text-center fs-0 white-space-nowrap">
+                                @if ($attendances->status == 'In')
+                                    <td class="align-middle"><span
+                                            class="badge badge rounded-pill d-block py-2 badge-soft-success">In<span
+                                                class="fas fa-check" data-fa-transform="shrink-2"></span></span>
+                                    </td>
+                                @else
+                                    <td class="align-middle"><span
+                                            class="badge badge rounded-pill d-block p-2 badge-soft-secondary">Out<span
+                                                class="ms-1 fas fa-ban" data-fa-transform="shrink-2"></span></span>
+                                @endif
+
+
+                                    {{--
+                                <td class="status py-2 align-middle text-center fs-0 white-space-nowrap">
                                     <img style="width: 120px;" src="student/{{ $attendances->student->profile_photo }}" alt="">
                                 </td> --}}
                                 {{-- <td class="py-2 align-middle white-space-nowrap text-end">
