@@ -250,6 +250,12 @@
                     </a>
                     <ul class="navbar-nav navbar-nav-icons ms-auto flex-row align-items-center">
                         <li class="nav-item">
+                            <h5 class="text-primary d-none d-md-block"
+                                style="font-size: 12px; margin-right: 10px; font-weight: medium;">
+                                {{ Auth::user()->name }}
+                            </h5>
+                        </li>
+                        <li class="nav-item">
                             <div class="theme-control-toggle fa-icon-wait px-2">
                                 <input class="form-check-input ms-0 theme-control-toggle-input" id="themeControlToggle"
                                     type="checkbox" data-theme-control="theme" value="dark" />

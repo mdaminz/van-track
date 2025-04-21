@@ -362,14 +362,14 @@
                                         <hr class="mb-0 navbar-vertical-divider" />
                                     </div>
                                 </div>
-                                
+
                                 <!-- parent pages--><a class="nav-link" href="/view_van_info" role="button">
                                     <div class="d-flex align-items-center"><span class="nav-link-icon"><span
                                                 class="fas fa-caravan"></span></span><span
                                             class="nav-link-text ps-1">Van</span>
                                     </div>
                                 </a>
-  
+
                             </li>
                             <li class="nav-item">
                                 <!-- label-->
@@ -380,7 +380,7 @@
                                         <hr class="mb-0 navbar-vertical-divider" />
                                     </div>
                                 </div>
-                                
+
                                 <!-- parent pages--><a class="nav-link" href="/admin_view_feedback" role="button">
                                     <div class="d-flex align-items-center"><span class="nav-link-icon"><span
                                                 class="fas fa-star"></span></span><span
@@ -394,7 +394,7 @@
                                     </div>
                                 </a>
 
-                               
+
                             </li>
                             <li class="nav-item">
                                 <!-- label-->
@@ -790,6 +790,13 @@
                     </a>
                     <ul class="navbar-nav navbar-nav-icons ms-auto flex-row align-items-center">
                         <li class="nav-item">
+                            <h5 class="text-primary d-none d-md-block"
+                                style="font-size: 12px; margin-right: 10px; font-weight: medium;">
+                                {{ Auth::user()->name }}
+                            </h5>
+                        </li>
+
+                        <li class="nav-item">
                             <div class="theme-control-toggle fa-icon-wait px-2">
                                 <input class="form-check-input ms-0 theme-control-toggle-input" id="themeControlToggle"
                                     type="checkbox" data-theme-control="theme" value="dark" />
@@ -930,6 +937,7 @@
                             </div>
 
                         </li>
+
                         <li class="nav-item dropdown"><a class="nav-link pe-0" id="navbarDropdownUser" href="#"
                                 role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <div class="avatar avatar-xl">
