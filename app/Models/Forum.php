@@ -10,4 +10,9 @@ class Forum extends Model
     {
         return $this->belongsTo(User::class, 'user_id', 'id'); // Join using rfid_tag
     }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
 }

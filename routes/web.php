@@ -197,3 +197,6 @@ route::get('/driver_view_student', [DriverController::class, 'driver_view_studen
 
 //driver view attendance
 route::get('/driver_view_attendance', [DriverController::class, 'driver_view_attendance']);
+
+//store comment
+Route::post('/store-comment', [AdminController::class, 'store_comment'])->name('store_comment');

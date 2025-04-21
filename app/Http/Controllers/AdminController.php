@@ -19,6 +19,7 @@ use App\Models\Van;
 use App\Models\Schedule;
 use App\Models\Forum;
 use App\Models\Bill;
+use App\Models\Comment;
 
 use Illuminate\Support\Facades\DB;
 use Session;
@@ -44,25 +45,25 @@ class AdminController extends Controller
 
 
                 $overdue = \App\Models\Bill::where('status', 'Unpaid')
-                ->where('user_id', Auth::id())
-                ->sum('amount');
+                    ->where('user_id', Auth::id())
+                    ->sum('amount');
 
                 $unresolved_reports = Student::where('status', 'Unresolved')
-                              ->where('user_id', Auth::id())
-                              ->count();
+                    ->where('user_id', Auth::id())
+                    ->count();
 
                 $user_id = Auth::id(); // Get the authenticated parent's ID
 
                 // Retrieve students associated with the authenticated parent
-                $students = Student::where('user_id', $user_id)->pluck('rfid_tag'); 
-                              
+                $students = Student::where('user_id', $user_id)->pluck('rfid_tag');
+
                 // Retrieve today's attendance for those students
                 $attendances = Attendance::whereIn('rfid_tag', $students)
                     ->whereDate('created_at', Carbon::today()) // Filter for today only
                     ->orderBy('created_at', 'desc')
                     ->get();
-                              
-                return view('user.index', compact('user', 'total_users', 'total_students', 'overdue', 'unresolved_reports', 'attendances'));    
+
+                return view('user.index', compact('user', 'total_users', 'total_students', 'overdue', 'unresolved_reports', 'attendances'));
 
             } else if ($usertype == 'admin') {
 
@@ -79,7 +80,7 @@ class AdminController extends Controller
                 // Calculate total paid revenue
                 $paid_revenue = \App\Models\Bill::where('status', 'Paid')->sum('amount');
 
-                return view('admin.index', compact( 'total_students', 'user','total_users', 'paid_revenue', 'vans'));
+                return view('admin.index', compact('total_students', 'user', 'total_users', 'paid_revenue', 'vans'));
 
             } else if ($usertype == 'driver') {
 
@@ -90,14 +91,14 @@ class AdminController extends Controller
                 $total_students = Student::count();
 
                 $unresolved_reports = Student::where('status', 'Unresolved')
-                ->where('user_id', Auth::id())
-                ->count();
+                    ->where('user_id', Auth::id())
+                    ->count();
 
-                 // Calculate total paid revenue
-                 $paid_revenue = \App\Models\Bill::where('status', 'Paid')->sum('amount');
+                // Calculate total paid revenue
+                $paid_revenue = \App\Models\Bill::where('status', 'Paid')->sum('amount');
 
 
-                return view('driver.index', compact('user','total_users','total_students', 'paid_revenue', 'unresolved_reports'));
+                return view('driver.index', compact('user', 'total_users', 'total_students', 'paid_revenue', 'unresolved_reports'));
 
             } else {
                 return redirect()->back();
@@ -263,8 +264,8 @@ class AdminController extends Controller
 
         // ✅ Match district + school_id
         $rate = Rate::where('district', $request->district)
-        ->where('school_id', $request->school_id)
-        ->first();
+            ->where('school_id', $request->school_id)
+            ->first();
 
         $students->rate_id = $rate ? $rate->id : 'No Rate';
 
@@ -281,17 +282,17 @@ class AdminController extends Controller
     private function generateBill($student)
     {
         $rate = Rate::where('district', $student->district)
-                    ->where('school_id', $student->school_id)
-                    ->first();
+            ->where('school_id', $student->school_id)
+            ->first();
 
         if ($rate) {
             Bill::create([
-                'student_id'   => $student->id,
-                'user_id'      => $student->user_id,
-                'amount'       => $rate->price,
+                'student_id' => $student->id,
+                'user_id' => $student->user_id,
+                'amount' => $rate->price,
                 'billing_date' => Carbon::now(),
-                'due_date'     => Carbon::now()->addDays(10), // Due date is 10 days from billing date
-                'status'       => 'Unpaid',
+                'due_date' => Carbon::now()->addDays(10), // Due date is 10 days from billing date
+                'status' => 'Unpaid',
             ]);
         }
     }
@@ -309,13 +310,13 @@ class AdminController extends Controller
     {
         $students = Student::findOrFail($id); // Find student by ID
 
-        
+
 
         // Retrieve attendance for this student using RFID tag
         $attendance = Attendance::where('rfid_tag', $students->rfid_tag)
             ->orderBy('created_at', 'desc') // Order by latest attendance
             ->get();
-    
+
         return view('admin.student.detail_student', compact('students', 'attendance'));
     }
 
@@ -456,7 +457,7 @@ class AdminController extends Controller
     // public function view_van_location()
     // {
 
-        
+
     //     return view('admin.van.view_van_location');
     // }
 
@@ -483,7 +484,7 @@ class AdminController extends Controller
 
     public function detail_report($id)
     {
-        
+
         $report_data = Report::find($id);
 
         return view('admin.report.detail_report', compact("report_data"));
@@ -505,10 +506,10 @@ class AdminController extends Controller
         $report_data->remarks = $request->remarks;
         // Set resolved_at to the current date and time
 
-    
+
         $report_data->resolved_at = now();
-    
-        
+
+
 
         $report_data->save();
 
@@ -529,45 +530,64 @@ class AdminController extends Controller
 
     public function view_forum()
     {
-        $forum_data = Forum::orderBy('created_at', 'desc')->get();
+        $forum_data = Forum::with(['user', 'comments.user'])->orderBy('created_at', 'desc')->get();
+
 
         $user_data = User::orderBy('created_at', 'asc')->get();
+
 
         return view("admin.forum.view_forum_post", compact("forum_data", "user_data"));
     }
 
     public function store(Request $request)
     {
-     // Validate input
-    $request->validate([
-        'post_content' => 'required|string|max:5000',
-        'post_image' => 'image|mimes:jpeg,png,jpg,gif|max:2048' // Validate image
-    ]);
+        // Validate input
+        $request->validate([
+            'post_content' => 'required|string|max:5000',
+            'post_image' => 'image|mimes:jpeg,png,jpg,gif|max:2048' // Validate image
+        ]);
 
-    $forum_data = new Forum;
+        $forum_data = new Forum;
 
-    $forum_data->post_content = $request->post_content;
-    $forum_data->date = Carbon::now()->format('d F Y'); // Example: 14 March 2025
-    $forum_data->time = Carbon::now()->format('h:i A'); // Example: 10:30 AM
-    $forum_data->user_id = Auth::user()->id;
+        $forum_data->post_content = $request->post_content;
+        $forum_data->date = Carbon::now()->format('d F Y'); // Example: 14 March 2025
+        $forum_data->time = Carbon::now()->format('h:i A'); // Example: 10:30 AM
+        $forum_data->user_id = Auth::user()->id;
 
-    // Handle single image upload
-    $image = $request->post_image;
+        // Handle single image upload
+        $image = $request->post_image;
 
-    if ($image) {
-        $imagename = time() . '.' . $image->getClientOriginalExtension();
+        if ($image) {
+            $imagename = time() . '.' . $image->getClientOriginalExtension();
 
-        // Move image to 'public/forum_images'
-        $image->move('forum_images', $imagename);
+            // Move image to 'public/forum_images'
+            $image->move('forum_images', $imagename);
 
-        // Save image path in database
-        $forum_data->image = 'forum_images/' . $imagename;
-    }
+            // Save image path in database
+            $forum_data->image = 'forum_images/' . $imagename;
+        }
 
-    $forum_data->save();
+        $forum_data->save();
 
         return redirect()->back();
     }
+
+    public function store_comment(Request $request)
+    {
+        $request->validate([
+            'comment_text' => 'required|string|max:1000',
+            'forum_id' => 'required|exists:forums,id',
+        ]);
+
+        Comment::create([
+            'forum_id' => $request->forum_id,
+            'user_id' => Auth::id(),
+            'comment_text' => $request->comment_text,
+        ]);
+
+        return redirect()->back();
+    }
+
 
     //Van Information
     public function view_van_info()
@@ -583,8 +603,8 @@ class AdminController extends Controller
         $assignedDriverIds = DB::table('vans')->pluck('user_id');
 
         $drivers = User::where('usertype', 'driver')
-                   ->whereNotIn('id', $assignedDriverIds)
-                   ->get();
+            ->whereNotIn('id', $assignedDriverIds)
+            ->get();
 
         return view('admin.van_info.create_van_info', compact('drivers'));
     }
@@ -597,7 +617,7 @@ class AdminController extends Controller
         $vans->license_plate = $request->license_plate;
         $vans->capacity = $request->capacity;
         $vans->user_id = $request->user_id;
-        
+
         $vans->save();
 
         return redirect('view_van_info');
@@ -611,8 +631,8 @@ class AdminController extends Controller
         $assignedDriverIds = DB::table('vans')->pluck('user_id');
 
         $drivers = User::where('usertype', 'driver')
-                   ->whereNotIn('id', $assignedDriverIds)
-                   ->get();
+            ->whereNotIn('id', $assignedDriverIds)
+            ->get();
 
         return view('admin.van_info.update_van_info', compact('vans', 'drivers'));
     }
@@ -626,7 +646,7 @@ class AdminController extends Controller
         $vans->license_plate = $request->license_plate;
         $vans->capacity = $request->capacity;
         $vans->user_id = $request->user_id;
-        
+
         $vans->save();
 
         return redirect('view_van_info');
@@ -674,7 +694,7 @@ class AdminController extends Controller
         return redirect('view_schedule');
     }
 
-   
+
     public function delete_schedule($id)
     {
         $schedules = Schedule::find($id);
@@ -710,33 +730,33 @@ class AdminController extends Controller
 
 
     public function update_profile_photo(Request $request, $id)
-{
-    $user = User::findOrFail($id);
+    {
+        $user = User::findOrFail($id);
 
-    if ($request->hasFile('profile_photo')) {
-        $image = $request->file('profile_photo');
+        if ($request->hasFile('profile_photo')) {
+            $image = $request->file('profile_photo');
 
-        // Generate a single unique file name and use it for both storage & database
-        $imageName = time() . '.' . $image->getClientOriginalExtension();
+            // Generate a single unique file name and use it for both storage & database
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
 
-        // Define the full path
-        $imagePath = 'profile_photos/' . $imageName;
+            // Define the full path
+            $imagePath = 'profile_photos/' . $imageName;
 
-        // Move the image to 'public/profile_photos' with the same name
-        $image->move(public_path('profile_photos'), $imageName);
+            // Move the image to 'public/profile_photos' with the same name
+            $image->move(public_path('profile_photos'), $imageName);
 
-        // Delete old profile image if exists
-        if ($user->profile_photo_path && file_exists(public_path($user->profile_photo_path))) {
-            unlink(public_path($user->profile_photo_path));
+            // Delete old profile image if exists
+            if ($user->profile_photo_path && file_exists(public_path($user->profile_photo_path))) {
+                unlink(public_path($user->profile_photo_path));
+            }
+
+            // Save the same image name in the database
+            $user->profile_photo_path = $imagePath;
+            $user->save();
         }
 
-        // Save the same image name in the database
-        $user->profile_photo_path = $imagePath;
-        $user->save();
+        return redirect()->back()->with('success', 'Profile photo updated successfully!');
     }
-
-    return redirect()->back()->with('success', 'Profile photo updated successfully!');
-}
 
 
 
@@ -794,7 +814,7 @@ class AdminController extends Controller
         $rate->van_id = $request->van_id;
         $rate->start_time = $request->start_time;
         $rate->end_time = $request->end_time;
-        
+
         $rate->save();
 
         return redirect('view_rate');
@@ -823,7 +843,7 @@ class AdminController extends Controller
         $rate->van_id = $request->van_id;
         $rate->start_time = $request->start_time;
         $rate->end_time = $request->end_time;
-    
+
 
         $rate->save();
 
@@ -844,8 +864,8 @@ class AdminController extends Controller
     {
         // Get unpaid bills (sorted by latest)
         $paidBills = Bill::where('status', 'Paid')
-                            ->orderBy('created_at', 'desc')
-                            ->get();
+            ->orderBy('created_at', 'desc')
+            ->get();
 
         return view('admin.bill.paid_bill', compact('paidBills'));
     }
@@ -854,8 +874,8 @@ class AdminController extends Controller
     {
         // Get unpaid bills (sorted by latest)
         $pendingBills = Bill::where('status', 'Pending')
-                            ->orderBy('created_at', 'desc')
-                            ->get();
+            ->orderBy('created_at', 'desc')
+            ->get();
 
         return view('admin.bill.pending_bill', compact('pendingBills'));
     }
@@ -864,8 +884,8 @@ class AdminController extends Controller
     {
         // Get unpaid bills (sorted by latest)
         $unpaidBills = Bill::where('status', 'Unpaid')
-                            ->orderBy('created_at', 'desc')
-                            ->get();
+            ->orderBy('created_at', 'desc')
+            ->get();
 
         return view('admin.bill.unpaid_bill', compact('unpaidBills'));
     }
@@ -876,7 +896,7 @@ class AdminController extends Controller
 
         return view('admin.bill.bill_receipt', compact('bill'));
     }
-    
+
     public function verify_bill($id)
     {
         $bill = Bill::find($id);
@@ -906,25 +926,25 @@ class AdminController extends Controller
     {
         // Get the currently logged-in user's ID
         $userId = Auth::id();
-    
+
         // Get the coordinates from the request (lat, lng)
         $coor = $request->input('coor');
-    
+
         // Log the coordinates for debugging
         \Log::info("User $userId updating coordinates: $coor");
-    
+
         // Find the van record for the logged-in user
         $van = Van::where('user_id', $userId)->first();
-    
+
         if ($van) {
             // Update the coordinates and save to the database
             $van->coor = $coor;
             $van->save();
-    
+
             // Respond back with success
             return response()->json(['success' => true]);
         }
-    
+
         // If no van is found for the logged-in user
         return response()->json(['success' => false, 'message' => 'Van not found']);
     }
@@ -942,13 +962,13 @@ class AdminController extends Controller
         $students = Student::where('user_id', $id)->get();
 
         $count_students = Student::where('user_id', $id)->count();
-    
+
         return view('profile_detail', compact('users', 'students', 'count_students'));
     }
-    
-    
 
-   
-    
+
+
+
+
 
 }

@@ -63,73 +63,66 @@
                             <div class="col">
                                 <div class="d-flex">
                                     <div class="avatar avatar-2xl status-online">
-                                        <img class="rounded-circle" src="{{ $forum_data->user->profile_photo_path }}"
-                                            alt="" />
+                                        <img class="rounded-circle" src="{{ $forum_data->user->profile_photo_path }}" alt="" />
 
                                     </div>
                                     <div class="flex-1 align-self-center ms-2">
                                         <p class="mb-1 lh-1"><a href="profile_detail/{{ $forum_data->user_id }}"
                                                 class="fw-semi-bold">{{ $forum_data->user->name }}</a></p>
                                         <p class="mb-0 fs--1">
-                                            {{ \Carbon\Carbon::parse($forum_data->created_at)->format('d M Y, h:i A') }}</p>
+                                            {{ \Carbon\Carbon::parse($forum_data->created_at)->format('d M Y, h:i A') }}
+                                        </p>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-auto">
                                 {{-- <div class="dropdown font-sans-serif">
-        <button class="btn btn-sm dropdown-toggle p-1 dropdown-caret-none" type="button" id="post-album-action"
-        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span
-        class="fas fa-ellipsis-h fs--1"></span></button>
-        <div class="dropdown-menu dropdown-menu-end py-3" aria-labelledby="post-album-action"><a
-        class="dropdown-item" href="#!">View</a><a class="dropdown-item" href="#!">Edit</a><a
-        class="dropdown-item" href="#!">Report</a>
-        <div class="dropdown-divider"></div><a class="dropdown-item text-warning" href="#!">Archive</a><a
-        class="dropdown-item text-danger" href="#!">Delete </a>
-        </div>
-      </div> --}}
+                                    <button class="btn btn-sm dropdown-toggle p-1 dropdown-caret-none" type="button"
+                                        id="post-album-action" data-bs-toggle="dropdown" aria-haspopup="true"
+                                        aria-expanded="false"><span class="fas fa-ellipsis-h fs--1"></span></button>
+                                    <div class="dropdown-menu dropdown-menu-end py-3" aria-labelledby="post-album-action"><a
+                                            class="dropdown-item" href="#!">View</a><a class="dropdown-item"
+                                            href="#!">Edit</a><a class="dropdown-item" href="#!">Report</a>
+                                        <div class="dropdown-divider"></div><a class="dropdown-item text-warning"
+                                            href="#!">Archive</a><a class="dropdown-item text-danger" href="#!">Delete </a>
+                                    </div>
+                                </div> --}}
                             </div>
                         </div>
                     </div>
-                    <div class="card-body overflow-hidden">
+                    <div class="card-body overflow-hidden pb-0">
                         <p>{!! nl2br(e($forum_data->post_content)) !!}</p>
                         <img class="img-fluid rounded" src="{{ asset($forum_data->image) }}" alt="" />
                     </div>
-                    <!-- <div class="card-footer bg-light pt-0">
-        <div class="border-bottom border-200 fs--1 py-3"><a class="text-700" href="#!">345 Likes</a> &bull; <a class="text-700" href="#!">34 Comments</a>
-        </div>
-        <div class="row g-0 fw-semi-bold text-center py-2 fs--1">
-        <div class="col-auto"><a class="rounded-2 d-flex align-items-center me-3" href="#!"><img src="../../assets/img/icons/spot-illustrations/like-active.png" width="20" alt="" /><span class="ms-1">Like</span></a></div>
-        <div class="col-auto"><a class="rounded-2 d-flex align-items-center me-3" href="#!"><img src="../../assets/img/icons/spot-illustrations/comment-active.png" width="20" alt="" /><span class="ms-1">Comment</span></a></div>
-        <div class="col-auto d-flex align-items-center"><a class="rounded-2 text-700 d-flex align-items-center" href="#!"><img src="../../assets/img/icons/spot-illustrations/share-inactive.png" width="20" alt="" /><span class="ms-1">Share</span></a></div>
-        </div>
-        <form class="d-flex align-items-center border-top border-200 pt-3">
-        <div class="avatar avatar-xl">
-        <img class="rounded-circle" src="../../assets/img/team/3.jpg" alt="" />
+                    <div class="card-footer bg-light pt-0">
 
-        </div>
-        <input class="form-control rounded-pill ms-2 fs--1" type="text" placeholder="Write a comment..." />
-        </form>
-        <div class="d-flex mt-3">
-        <div class="avatar avatar-xl">
-        <img class="rounded-circle" src="../../assets/img/team/4.jpg" alt="" />
+                        <form action="{{ route('store_comment') }}" method="POST" class="d-flex align-items-center border-top border-200 pt-3" >
+                            @csrf
+                            <div class="avatar avatar-xl">
+                                <img class="rounded-circle" src="{{ Auth::user()->profile_photo_path ?? asset('homepage/img/no-profile-photo.jpg') }}" alt="" />
+                            </div>
+                            <input type="hidden" name="forum_id" value="{{ $forum_data->id }}">
+                            <input name="comment_text" class="form-control rounded-pill ms-2 fs--1" type="text" placeholder="Write a comment..." />
+                        </form>
 
-        </div>
-        <div class="flex-1 ms-2 fs--1">
-        <p class="mb-1 bg-200 rounded-3 p-2"><a class="fw-semi-bold" href="../../pages/user/profile.html">Rowan Atkinson</a> She starred as Jane Porter in The <a href="#!">@Legend of Tarzan (2016)</a>, Tanya Vanderpoel in Whiskey Tango Foxtrot (2016) and as DC comics villain Harley Quinn in Suicide Squad (2016), for which she was nominated for a Teen Choice Award, and many other awards.</p>
-        <div class="px-2"><a href="#!">Like</a> &bull; <a href="#!">Reply</a> &bull; 23min </div>
-        </div>
-        </div>
-        <div class="d-flex mt-3">
-        <div class="avatar avatar-xl">
-        <img class="rounded-circle" src="../../assets/img/team/3.jpg" alt="" />
+                        @foreach ($forum_data->comments as $comment)
+                            <div class="d-flex mt-3">
+                                <div class="avatar avatar-xl">
+                                    <img class="rounded-circle"
+                                        src="{{ $comment->user->profile_photo_path ?? asset('homepage/img/no-profile-photo.jpg') }}"
+                                        alt="" />
 
-        </div>
-        <div class="flex-1 ms-2 fs--1">
-        <p class="mb-1 bg-200 rounded-3 p-2"><a class="fw-semi-bold" href="../../pages/user/profile.html">Jessalyn Gilsig</a> Jessalyn Sarah Gilsig is a Canadian-American actress known for her roles in television series, e.g., as Lauren Davis in Boston Public, Gina Russo in Nip/Tuck, Terri Schuester in Glee, and as Siggy Haraldson on the History Channel series Vikings. 🏆</p>
-        <div class="px-2"><a href="#!">Like</a> &bull; <a href="#!">Reply</a> &bull; 3hrs </div>
-        </div>
-        </div><a class="fs--1 text-700 d-inline-block mt-2" href="#!">Load more comments (2 of 34)</a>
-        </div> -->
+                                </div>
+                                <div class="flex-1 ms-2 fs--1">
+                                    <p class="mb-1 bg-200 rounded-3 p-2">
+                                        <a class="fw-semi-bold" href="profile_detail/{{ $comment->user->id }}">{{ $comment->user->name }}</a> {{ $comment->comment_text }}
+                                    </p>
+                                    <div class="px-2"> {{ $comment->created_at->diffForHumans() }}</div>
+                                </div>
+                            </div>
+                        @endforeach
+                        {{-- <a class="fs--1 text-700 d-inline-block mt-2" href="#!">Load more comments (2 of 34)</a> --}}
+                    </div>
                 </div>
             @endforeach
 
@@ -155,8 +148,7 @@
 
                             </div>
                             <div class="flex-1 ms-2">
-                                <h6 class="mb-0"><a
-                                        href="profile_detail/{{ $user_data->id }}">{{ $user_data->name }}</a></h6>
+                                <h6 class="mb-0"><a href="profile_detail/{{ $user_data->id }}">{{ $user_data->name }}</a></h6>
                                 <button class="btn btn-light btn-sm py-0 mt-1 border" type="button"
                                     style="pointer-events: none;">
                                     <span class="fas fa-user" data-fa-transform="shrink-5 left-2"></span>
@@ -184,7 +176,7 @@
 
             if (file) {
                 let reader = new FileReader();
-                reader.onload = function(e) {
+                reader.onload = function (e) {
                     imagePreview.innerHTML =
                         `<img src="${e.target.result}" alt="Selected Image" width="100" class="mt-2 rounded">`;
                 };
