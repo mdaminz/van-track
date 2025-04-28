@@ -121,6 +121,7 @@ route::get('/user_view_report', [HomeController::class, 'user_view_report']);
 //forum
 route::get('/view_forum_post', [AdminController::class, 'view_forum']);
 Route::post('/store_post', [AdminController::class, 'store'])->name('store_post');
+route::get('/delete_forum_post/{id}', [AdminController::class, 'delete_forum_post']);
 
 
 //van
@@ -200,3 +201,6 @@ route::get('/driver_view_attendance', [DriverController::class, 'driver_view_att
 
 //store comment
 Route::post('/store-comment', [AdminController::class, 'store_comment'])->name('store_comment');
+
+//calendar driver
+route::get('/driver_calendar', [DriverController::class, 'driver_calendar']);

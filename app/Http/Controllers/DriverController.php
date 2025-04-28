@@ -47,4 +47,9 @@ class DriverController extends Controller
         return view('driver.attendance.view_attendance', compact('attendances', 'rates'));
 
     }
+
+    public function driver_calendar()
+    {
+        return view('driver.calendar.view_calendar');
+    }
 }

@@ -539,6 +539,15 @@ class AdminController extends Controller
         return view("admin.forum.view_forum_post", compact("forum_data", "user_data"));
     }
 
+    public function delete_forum_post($id)
+    {
+        $forums = Forum::find($id);
+
+        $forums->delete();
+
+        return redirect()->back();
+    }
+
     public function store(Request $request)
     {
         // Validate input

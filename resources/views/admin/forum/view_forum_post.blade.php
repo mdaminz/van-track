@@ -70,24 +70,29 @@
                                         <p class="mb-1 lh-1"><a href="profile_detail/{{ $forum_data->user_id }}"
                                                 class="fw-semi-bold">{{ $forum_data->user->name }}</a></p>
                                         <p class="mb-0 fs--1">
-                                            {{ \Carbon\Carbon::parse($forum_data->created_at)->format('d M Y, h:i A') }}
+                                            {{ \Carbon\Carbon::parse($forum_data->created_at)->format('d M Y') }} &bull;
+                                            {{ \Carbon\Carbon::parse($forum_data->created_at)->format('h:i A') }}
                                         </p>
+
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-auto">
-                                {{-- <div class="dropdown font-sans-serif">
-                                    <button class="btn btn-sm dropdown-toggle p-1 dropdown-caret-none" type="button"
-                                        id="post-album-action" data-bs-toggle="dropdown" aria-haspopup="true"
-                                        aria-expanded="false"><span class="fas fa-ellipsis-h fs--1"></span></button>
-                                    <div class="dropdown-menu dropdown-menu-end py-3" aria-labelledby="post-album-action"><a
-                                            class="dropdown-item" href="#!">View</a><a class="dropdown-item"
-                                            href="#!">Edit</a><a class="dropdown-item" href="#!">Report</a>
-                                        <div class="dropdown-divider"></div><a class="dropdown-item text-warning"
-                                            href="#!">Archive</a><a class="dropdown-item text-danger" href="#!">Delete </a>
+
+                            @if (Auth::user() && Auth::user()->usertype == 'admin')
+                                <div class="col-auto">
+                                    <div class="dropdown font-sans-serif">
+                                        <button class="btn btn-sm dropdown-toggle p-1 dropdown-caret-none" type="button"
+                                            id="post-album-action" data-bs-toggle="dropdown" aria-haspopup="true"
+                                            aria-expanded="false">
+                                            <span class="fas fa-ellipsis-h fs--1"></span>
+                                        </button>
+                                        <div class="dropdown-menu dropdown-menu-end py-3" aria-labelledby="post-album-action">
+                                            <a class="dropdown-item text-danger" href="{{ url('delete_forum_post', $forum_data->id) }}">Delete</a>
+                                        </div>
                                     </div>
-                                </div> --}}
-                            </div>
+                                </div>
+                            @endif
+
                         </div>
                     </div>
                     <div class="card-body overflow-hidden pb-0">
@@ -96,13 +101,17 @@
                     </div>
                     <div class="card-footer bg-light pt-0">
 
-                        <form action="{{ route('store_comment') }}" method="POST" class="d-flex align-items-center border-top border-200 pt-3" >
+                        <form action="{{ route('store_comment') }}" method="POST"
+                            class="d-flex align-items-center border-top border-200 pt-3">
                             @csrf
                             <div class="avatar avatar-xl">
-                                <img class="rounded-circle" src="{{ Auth::user()->profile_photo_path ?? asset('homepage/img/no-profile-photo.jpg') }}" alt="" />
+                                <img class="rounded-circle"
+                                    src="{{ Auth::user()->profile_photo_path ?? asset('homepage/img/no-profile-photo.jpg') }}"
+                                    alt="" />
                             </div>
                             <input type="hidden" name="forum_id" value="{{ $forum_data->id }}">
-                            <input name="comment_text" class="form-control rounded-pill ms-2 fs--1" type="text" placeholder="Write a comment..." />
+                            <input name="comment_text" class="form-control rounded-pill ms-2 fs--1" type="text"
+                                placeholder="Write a comment..." />
                         </form>
 
                         @foreach ($forum_data->comments as $comment)
@@ -115,7 +124,9 @@
                                 </div>
                                 <div class="flex-1 ms-2 fs--1">
                                     <p class="mb-1 bg-200 rounded-3 p-2">
-                                        <a class="fw-semi-bold" href="profile_detail/{{ $comment->user->id }}">{{ $comment->user->name }}</a> {{ $comment->comment_text }}
+                                        <a class="fw-semi-bold"
+                                            href="profile_detail/{{ $comment->user->id }}">{{ $comment->user->name }}</a>
+                                        {{ $comment->comment_text }}
                                     </p>
                                     <div class="px-2"> {{ $comment->created_at->diffForHumans() }}</div>
                                 </div>

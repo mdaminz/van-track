@@ -46,12 +46,11 @@
                 <table class="table table-sm table-striped fs--1 mb-0 overflow-hidden">
                     <thead class="bg-200 text-900">
                         <tr>
-                            <th class="sort" style="min-width: 3rem;" data-sort="no">No</th>
-                            <th class="sort" style="min-width: 10rem;" data-sort="name">Full Name</th>
-                            <th class="sort" style="min-width: 5rem;" data-sort="parent">Parent Name</th>
-                            <th class="sort" style="min-width: 5rem;" data-sort="rfid">RFID Tag</th>
-
-                            <th class="sort" style="min-width: 5rem;" data-sort="address">Address</th>
+                            <th class="sort" style="min-width: 20%;" data-sort="no">No</th>
+                            <th class="sort" style="min-width: 10%;" data-sort="name">Full Name</th>
+                            <th class="sort" style="min-width: 40%;" data-sort="parent">Parent Name</th>
+                            <th class="sort" style="min-width: 10%;" data-sort="rfid">RFID Tag</th>
+                            {{-- <th class="sort" style="min-width: 5rem;" data-sort="address">Address</th> --}}
                             <th class="sort" style="min-width: 5rem;" data-sort="status">Status</th>
                             <th class="no-sort"></th>
                         </tr>
@@ -60,56 +59,50 @@
                         @php
                             $number = 1;
                         @endphp
-                        @foreach ($students as $students)
+                        @foreach ($students as $student)
                             <tr class="btn-reveal-trigger">
-
                                 <td class="no align-middle">{{ $number++ }}</td>
-                                <td class="name align-middle">{{ $students->full_name }}</td>
-                                <td class="parent align-middle"><a href="profile_detail/{{$students->user_id}}">{{ $students->user->name }}</a></td>
-                                <td class="rfid align-middle">{{ $students->rfid_tag }}</td>
-
+                                <td class="name align-middle" >{{ $student->full_name }}</td>
+                                <td class="parent align-middle">
+                                    <a href="profile_detail/{{ $student->user_id }}">{{ $student->user->name }}</a>
                                 </td>
-                                <td class="address align-middle">{{ $students->address}}
-                                </td>
-                                @if ($students->status == 'Active')
-                                    <td class="align-middle"><span
-                                            class="badge badge rounded-pill d-block py-2 badge-soft-success">Active<span
-                                                class="fas fa-check" data-fa-transform="shrink-2"></span></span>
-                                    </td>
-                                @else
-                                    <td class="align-middle"><span
-                                            class="badge badge rounded-pill d-block p-2 badge-soft-secondary">Inactive<span
-                                                class="ms-1 fas fa-ban" data-fa-transform="shrink-2"></span></span>
-                                @endif
+                                <td class="rfid align-middle">{{ $student->rfid_tag }}</td>
+                                {{-- <td class="address align-middle">{{ $student->address }}</td> --}}
+                                <td class="align-middle">
+                                    @if ($student->status == 'Active')
+                                        <span class="badge badge rounded-pill d-block py-2 badge-soft-success">
+                                            Active <span class="fas fa-check" data-fa-transform="shrink-2"></span>
+                                        </span>
+                                    @else
+                                        <span class="badge badge rounded-pill d-block py-2 badge-soft-secondary">
+                                            Inactive <span class="ms-1 fas fa-ban" data-fa-transform="shrink-2"></span>
+                                        </span>
+                                    @endif
                                 </td>
                                 <td class="align-middle text-end">
                                     <div class="dropdown font-sans-serif position-static">
                                         <button class="btn btn-link text-600 btn-sm dropdown-toggle btn-reveal" type="button"
-                                            id="order-dropdown-0" data-bs-toggle="dropdown" data-boundary="viewport"
-                                            aria-haspopup="true" aria-expanded="false"><span
-                                                class="fas fa-ellipsis-h fs--1"></span></button>
-                                        <div class="dropdown-menu dropdown-menu-end border py-0"
-                                            aria-labelledby="order-dropdown-0">
+                                            id="order-dropdown-{{ $student->id }}" data-bs-toggle="dropdown" data-boundary="viewport"
+                                            aria-haspopup="true" aria-expanded="false">
+                                            <span class="fas fa-ellipsis-h fs--1"></span>
+                                        </button>
+                                        <div class="dropdown-menu dropdown-menu-end border py-0" aria-labelledby="order-dropdown-{{ $student->id }}">
                                             <div class="bg-white py-2">
-                                                <a class="dropdown-item"
-                                                    href="{{ url('detail_student', $students->id) }}">View</a>
-
-                                                @if(Auth::user()->usertype == 'admin')
-                                                    <a class="dropdown-item"
-                                                        href="{{ url('admin_update_student', $students->id) }}">Edit</a>
+                                                <a class="dropdown-item" href="{{ url('detail_student', $student->id) }}">View</a>
+                                                @if (Auth::user()->usertype == 'admin')
+                                                    <a class="dropdown-item" href="{{ url('admin_update_student', $student->id) }}">Edit</a>
                                                     <div class="dropdown-divider"></div>
-                                                    <a class="dropdown-item text-danger"
-                                                        href="{{ url('delete_student', $students->id) }}">Delete</a>
+                                                    <a class="dropdown-item text-danger" href="{{ url('delete_student', $student->id) }}">Delete</a>
                                                 @endif
                                             </div>
                                         </div>
-
                                     </div>
                                 </td>
                             </tr>
                         @endforeach
                     </tbody>
                 </table>
+                
             </div>
         </div>
         <div class="card-footer">
