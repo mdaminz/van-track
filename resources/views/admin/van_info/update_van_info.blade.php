@@ -42,7 +42,7 @@
                         <div class="col-md-12">
                             <label class="form-label" for="validationCustom01">Driver Name</label>
                             <select class="form-control" name="user_id" id="">
-                                <option selected value="{{$vans->user_id}}">{{$vans->user_id}}</option>
+                                <option selected value="{{$vans->user_id}}">{{$vans->user->name}}</option>
                                 @foreach ($drivers as $drivers)
                                     <option value="{{$drivers->id}}">{{$drivers->name}}</option>
                                 @endforeach

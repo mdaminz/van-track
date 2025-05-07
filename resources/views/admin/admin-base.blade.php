@@ -387,12 +387,30 @@
                                             class="nav-link-text ps-1">Feedback</span>
                                     </div>
                                 </a>
-                                <!-- parent pages--><a class="nav-link" href="/view_report" role="button">
+
+                                <!-- parent pages--><a class="nav-link dropdown-indicator" href="#report" role="button"
+                                    data-bs-toggle="collapse" aria-expanded="false" aria-controls="report">
                                     <div class="d-flex align-items-center"><span class="nav-link-icon"><span
                                                 class="far fa-file-alt"></span></span><span
                                             class="nav-link-text ps-1">Report</span>
                                     </div>
                                 </a>
+                                <ul class="nav collapse false" id="report">
+                                    <li class="nav-item"><a class="nav-link" href="/view_report">
+                                            <div class="d-flex align-items-center"><span
+                                                    class="nav-link-text ps-1">Report</span>
+                                            </div>
+                                        </a>
+                                        <!-- more inner pages-->
+                                    </li>
+                                    <li class="nav-item"><a class="nav-link" href="/view_report_history">
+                                            <div class="d-flex align-items-center"><span
+                                                    class="nav-link-text ps-1">Report History</span>
+                                            </div>
+                                        </a>
+                                        <!-- more inner pages-->
+                                    </li>
+                                </ul>
 
 
                             </li>

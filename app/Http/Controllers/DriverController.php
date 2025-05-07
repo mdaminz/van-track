@@ -50,6 +50,11 @@ class DriverController extends Controller
 
     public function driver_calendar()
     {
-        return view('driver.calendar.view_calendar');
+        // Fetch rates for Monday to Friday
+        $rates = Rate::whereIn('start_time', ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'])
+            ->orderBy('start_time')
+            ->get();
+
+        return view('driver.calendar.view_calendar', compact('rates'));
     }
 }

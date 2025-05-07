@@ -89,12 +89,8 @@
                                         <div class="dropdown-menu dropdown-menu-end border py-0"
                                             aria-labelledby="order-dropdown-0">
                                             <div class="bg-white py-2"><a class="dropdown-item"
-                                                    href="{{ url('detail_report', $report_data->id) }}">View</a><a
-                                                    class="dropdown-item"
-                                                    href="{{ url('update_report', $report_data->id) }}">Resolve</a>
-                                                <div class="dropdown-divider"></div>
-                                                <a class="dropdown-item text-danger"
-                                                    href="{{ url('delete_report', $report_data->id) }}">Delete</a>
+                                                    href="{{ url('detail_report', $report_data->id) }}">View</a>
+                                                
                                             </div>
                                         </div>
                                     </div>

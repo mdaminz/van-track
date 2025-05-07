@@ -25,9 +25,15 @@
                 <div class="col-8 col-sm-auto ms-auto text-end ps-0">
 
                     <div id="orders-actions">
-                        {{-- <button class="btn btn-falcon-default btn-sm mx-2" type="button"><span class="fas fa-filter"
-                                data-fa-transform="shrink-3 down-2"></span><span
-                                class="d-none d-sm-inline-block ms-1">Filter</span></button> --}}
+                        <form method="GET" action="{{ route('parent_view_attendance') }}" class="d-inline">
+                            <button class="btn btn-falcon-default btn-sm" type="submit" name="today"
+                                value="{{ $isToday ? '0' : '1' }}">
+                                <span class="fas fa-calendar-day"></span>
+                                <span class="d-none d-sm-inline-block ms-1">{{ $isToday ? 'Show All' : 'Today' }}</span>
+                            </button>
+                        </form>
+
+
                         <button class="btn btn-falcon-default btn-sm" type="button"><span class="fas fa-external-link-alt"
                                 data-fa-transform="shrink-3 down-2"></span><span
                                 class="d-none d-sm-inline-block ms-1">Export</span></button>

@@ -65,15 +65,15 @@
                         </div>
 
                         <div class="col-md-6">
-                            <label class="form-label" for="validationCustom05">Start Time</label>
+                            <label class="form-label" for="validationCustom05">Pickup Time (To school)</label>
                             <input name="start_time" class="form-control" id="validationCustom05" type="time" required="" />
-                            <div class="invalid-feedback">Enter a Start time.</div>
+                            <div class="invalid-feedback">Enter a Pickup Time (To school).</div>
                         </div>
 
                         <div class="col-md-6">
-                            <label class="form-label" for="validationCustom06">End Time</label>
+                            <label class="form-label" for="validationCustom06">Pickup Time (Back home)</label>
                             <input name="end_time" class="form-control" id="validationCustom06" type="time" required="" />
-                            <div class="invalid-feedback">Enter a End time.</div>
+                            <div class="invalid-feedback">Enter a Pickup Time (Back home).</div>
                         </div>
 
                         <div class="col-12 mt-4">

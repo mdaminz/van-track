@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->foreignId('current_team_id')->nullable();
-            $table->string('profile_photo_path', 2048)->default('homepage/img/no-profile-photo.jpg');
+            $table->string('profile_photo_path', 2048)->default('profile_photos/no-profile.png');
             $table->timestamps();
         });
 

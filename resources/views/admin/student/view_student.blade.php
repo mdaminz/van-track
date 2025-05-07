@@ -50,7 +50,7 @@
                             <th class="sort" style="min-width: 10%;" data-sort="name">Full Name</th>
                             <th class="sort" style="min-width: 40%;" data-sort="parent">Parent Name</th>
                             <th class="sort" style="min-width: 10%;" data-sort="rfid">RFID Tag</th>
-                            {{-- <th class="sort" style="min-width: 5rem;" data-sort="address">Address</th> --}}
+                            <th class="sort" style="min-width: 5rem;" data-sort="address">Address</th>
                             <th class="sort" style="min-width: 5rem;" data-sort="status">Status</th>
                             <th class="no-sort"></th>
                         </tr>
@@ -61,13 +61,13 @@
                         @endphp
                         @foreach ($students as $student)
                             <tr class="btn-reveal-trigger">
-                                <td class="no align-middle">{{ $number++ }}</td>
-                                <td class="name align-middle" >{{ $student->full_name }}</td>
-                                <td class="parent align-middle">
+                                <td class="no align-middle" style="max-width: 10%;">{{ $number++ }}</td>
+                                <td class="name align-middle" style="max-width: 10%;">{{ $student->full_name }}</td>
+                                <td class="parent align-middle" style="max-width: 20%;">
                                     <a href="profile_detail/{{ $student->user_id }}">{{ $student->user->name }}</a>
                                 </td>
-                                <td class="rfid align-middle">{{ $student->rfid_tag }}</td>
-                                {{-- <td class="address align-middle">{{ $student->address }}</td> --}}
+                                <td class="rfid align-middle" style="min-width: 20%;">{{ $student->rfid_tag }}</td>
+                                <td class="address align-middle">{{ $student->address }}</td>
                                 <td class="align-middle">
                                     @if ($student->status == 'Active')
                                         <span class="badge badge rounded-pill d-block py-2 badge-soft-success">

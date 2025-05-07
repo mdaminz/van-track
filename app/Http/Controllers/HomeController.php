@@ -15,6 +15,8 @@ use App\Models\Report;
 use App\Models\Attendance;
 use App\Models\Rate;
 
+use Illuminate\Support\Carbon;
+
 
 class HomeController extends Controller
 {
@@ -120,13 +122,13 @@ class HomeController extends Controller
 
         // ✅ Match district + school_id
         $rate = Rate::where('district', $request->district)
-        ->where('school_id', $request->school_id)
-        ->first();
+            ->where('school_id', $request->school_id)
+            ->first();
 
         $student_data->rate_id = $rate ? $rate->id : 'No Rate';
 
         $student_data->profile_photo = $request->profile_photo;
-        
+
         $image = $request->profile_photo;
 
         if ($image) {
@@ -150,7 +152,7 @@ class HomeController extends Controller
 
         $rates = Rate::all();
 
-        return view('user.student.update_student', compact('student_data', 'rate','rates'));
+        return view('user.student.update_student', compact('student_data', 'rate', 'rates'));
     }
 
     public function edit_student(Request $request, $id)
@@ -171,8 +173,8 @@ class HomeController extends Controller
 
         // ✅ Match district + school_id
         $rate = Rate::where('district', $request->district)
-        ->where('school_id', $request->school_id)
-        ->first();
+            ->where('school_id', $request->school_id)
+            ->first();
 
         $student_data->rate_id = $rate ? $rate->id : 'No Rate';
 
@@ -189,7 +191,7 @@ class HomeController extends Controller
             $student_data->profile_photo = $imagename;
         }
 
-        
+
 
         $student_data->save();
 
@@ -289,19 +291,22 @@ class HomeController extends Controller
         return redirect('user_view_report');
     }
 
-    public function parent_view_attendance()
+    public function parent_view_attendance(Request $request)
     {
-        $user_id = Auth::id(); // Get the authenticated parent's ID
+        $user_id = Auth::id();
+        $students = Student::where('user_id', $user_id)->pluck('rfid_tag');
 
-        // Retrieve students associated with the authenticated parent
-        $students = Student::where('user_id', $user_id)->pluck('rfid_tag'); 
+        // Check if request has 'today' toggle (1 = show today only, 0 = show all)
+        $isToday = $request->input('today') == '1';
 
-        // Retrieve attendance for those students, ordered by latest first
         $attendances = Attendance::whereIn('rfid_tag', $students)
+            ->when($isToday, function ($query) {
+                $query->whereDate('created_at', Carbon::today());
+            })
             ->orderBy('created_at', 'desc')
             ->get();
 
-        return view('user.attendance.view_attendance', compact('attendances'));
+        return view('user.attendance.view_attendance', compact('attendances', 'isToday'));
     }
 
     public function user_view_report(Request $request)
@@ -310,10 +315,16 @@ class HomeController extends Controller
 
         // Retrieve students' reports associated with the authenticated user, ordered by latest
         $report_data = Report::where('user_id', $user_id)
-                            ->orderBy('created_at', 'desc')
-                            ->get();
+            ->where('status', 'Unresolved')
+            ->orderBy('created_at', 'desc')
+            ->get();
 
-        return view('user.report.user_view_report', compact('report_data'));
+        $report_history = Report::where('user_id', $user_id)
+            ->where('status', 'Resolved')
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        return view('user.report.user_view_report', compact('report_data', 'report_history'));
     }
 
     public function user_view_bill()
@@ -322,24 +333,24 @@ class HomeController extends Controller
 
         // Get unpaid bills (sorted by latest)
         $unpaidBills = Bill::where('user_id', $userId)
-                            ->where('status', 'Unpaid')
-                            ->orderBy('created_at', 'desc')
-                            ->get();
+            ->where('status', 'Unpaid')
+            ->orderBy('created_at', 'desc')
+            ->get();
 
         // Get unpaid bills (sorted by latest)
         $pendingBills = Bill::where('user_id', $userId)
-                            ->where('status', 'Pending')
-                            ->orderBy('created_at', 'desc')
-                            ->get();
+            ->where('status', 'Pending')
+            ->orderBy('created_at', 'desc')
+            ->get();
 
         // Get paid bills (sorted by latest)
         $paidBills = Bill::where('user_id', $userId)
-                        ->where('status', 'Paid')
-                        ->orderBy('created_at', 'desc')
-                        ->get();
+            ->where('status', 'Paid')
+            ->orderBy('created_at', 'desc')
+            ->get();
 
         return view('user.bill.user_view_bill', compact('unpaidBills', 'paidBills', 'pendingBills'));
-    }   
+    }
 
     public function pay_bill($id)
     {

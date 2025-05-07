@@ -42,7 +42,7 @@
                 <div class="card mb-3 fs--1">
                     <div class="card-body">
                         <h6>Date And Time</h6>
-                        <p class="mb-1">{{$report_data->created_at}}
+                        <p class="mb-1">{{ \Carbon\Carbon::parse($report_data->created_at)->format('d M Y, h:i A') }}
 
                         <h6 class="mt-4">User Information</h6>
                         <p class="mb-1">Name: {{$report_data->user->name}}
@@ -51,7 +51,7 @@
                         <p class="mb-1">Address: {{$report_data->user->address}}
 
                         <h6 class="mt-4">Status</h6>
-                        <p class="fs--1 mb-0">Resolved At: {{$report_data->resolved_at}}</p>
+                        <p class="fs--1 mb-0">Resolved At: {{ \Carbon\Carbon::parse($report_data->resolved_at)->format('d M Y, h:i A') }}</p>
                         <p class="fs--1 mb-0">Remarks: {{$report_data->remarks}}</p>
                     </div>
                 </div>

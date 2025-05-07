@@ -46,13 +46,13 @@
       <form action="" method="POST" class="row g-3">
         <div class="col-lg-6">
         <label class="form-label">User Type</label>
-        <input name="name" class="form-control" type="text" value="{{$users->usertype}}" disabled />
+        <input name="name" class="form-control" type="text" value="{{ ucfirst($users->usertype) }}" disabled />
         </div>
         <div class="col-lg-6 mb-0">
         <label class="form-label">Status</label>
         <input name="email" class="form-control" type="text" value="{{$users->status}}" disabled />
         </div>
-        
+
       </form>
       </div>
     </div>
@@ -76,11 +76,11 @@
         <div class="flex-1 position-relative ps-3">
           <h6 class="fs-0 mb-0">
           {{$users->name}}
-          
+
           </h6>
           <p class="mb-1">{{$users->address}}</p>
           <p class="text-1000 mb-0">
-          <a href="">{{$users->email}}</a> 
+          <a>{{$users->email}}</a>
           </p>
           <p class="text-1000 mb-0">{{$users->phone}}</p>
         </div>
@@ -93,12 +93,13 @@
     </div>
   </div>
 
-  <div class="card">
+  @if (Auth::user()->usertype === 'user')
+    <div class="card">
     <div class="card-header bg-light">
     <div class="row align-items-center">
       <div class="col">
       <h5 class="mb-0" id="followers">Children
-        <span class="d-none d-sm-inline-block">({{ $count_students }})</span>
+      <span class="d-none d-sm-inline-block">({{ $count_students }})</span>
       </h5>
       </div>
       <div class="col text-end">
@@ -114,7 +115,7 @@
       <div class="bg-white dark__bg-1100 p-3 h-100">
       <a href="../../pages/user/profile.html">
       <img src="student/{{ $students->profile_photo }}" alt="{{ $students->full_name }}"
-        class="rounded-circle mb-3 shadow-sm" width="100" height="100" style="object-fit: cover;" />
+      class="rounded-circle mb-3 shadow-sm" width="100" height="100" style="object-fit: cover;" />
       </a>
       <h6 class="mb-1">
       <a href="#">{{ $students->full_name }}</a>
@@ -127,7 +128,8 @@
     @endforeach
     </div>
     </div>
-  </div>
+    </div>
+  @endif
 
 
 @endsection

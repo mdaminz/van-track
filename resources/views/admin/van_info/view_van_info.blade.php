@@ -28,12 +28,12 @@
                         <span class="d-none d-sm-inline-block ms-1">New</span>
                     </a>
                 </div>
-                <div class="col-8 col-sm-auto ms-auto text-end ps-0">
+                {{-- <div class="col-8 col-sm-auto ms-auto text-end ps-0">
                     <form class="position-relative" data-bs-toggle="search" data-bs-display="static">
                         <input class="form-control search-input fuzzy-search" type="search" placeholder="Search..."
                             aria-label="Search" />
                     </form>
-                </div>
+                </div> --}}
             </div>
         </div>
         <div class="card-body p-0">

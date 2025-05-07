@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('postcode')->nullable();
             $table->string('district')->nullable();
             $table->string('school_id')->nullable();
-            $table->string('profile_photo')->nullable();
+            $table->string('profile_photo')->default('no-profile.png');
             $table->string('rfid_tag')->nullable();
             $table->string('emergency_contact')->nullable();
             $table->string('relationship')->nullable();

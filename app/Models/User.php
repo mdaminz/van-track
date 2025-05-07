@@ -105,7 +105,12 @@ class User extends Authenticatable
     }
 
     public function van()
-{
-    return $this->hasOne(Van::class);
-}
+    {
+        return $this->hasOne(Van::class);
+    }
+
+    public function sessions()
+    {
+        return $this->hasMany(Session::class);
+    }
 }

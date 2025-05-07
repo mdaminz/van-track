@@ -42,7 +42,13 @@
     <link href="assets/css/theme.min.css" rel="stylesheet" id="style-default">
     <link href="assets/css/user-rtl.min.css" rel="stylesheet" id="user-style-rtl">
     <link href="assets/css/user.min.css" rel="stylesheet" id="user-style-default">
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.css" rel="stylesheet" />
     <link href="../vendors/fullcalendar/main.min.css" rel="stylesheet">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.2.0/fullcalendar.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.2.0/fullcalendar.min.js"></script>
+
 
 
     <script>

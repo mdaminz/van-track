@@ -38,7 +38,7 @@ route::post('/edit_school/{id}', [AdminController::class, 'edit_school']);
 route::get('/delete_school/{id}', [AdminController::class, 'delete_school']);
 
 //Attendance
-route::get('/admin_view_attendance', [AdminController::class, 'admin_view_attendance']);
+Route::get('/admin_view_attendance', [AdminController::class, 'admin_view_attendance'])->name('admin_view_attendance');
 
 //Feedback
 route::get('/admin_view_feedback', [AdminController::class, 'admin_view_feedback']);
@@ -89,7 +89,8 @@ route::post('/add_feedback', [HomeController::class, 'add_feedback']);
 route::get('/delete_feedback/{id}', [HomeController::class, 'delete_feedback']);
 
 //parent view attendance
-route::get('/parent_view_attendance', [HomeController::class, 'parent_view_attendance']);
+Route::get('/parent_view_attendance', [HomeController::class, 'parent_view_attendance'])->name('parent_view_attendance');
+
 
 
 //report and complaint
@@ -104,6 +105,7 @@ route::get('/view_van_location', [AdminController::class, 'view_van_location']);
 //Report
 
 route::get('/view_report', [AdminController::class, 'view_report']);
+route::get('/view_report_history', [AdminController::class, 'view_report_history']);
 
 route::get('/detail_report/{id}', [AdminController::class, 'detail_report']);
 
@@ -113,6 +115,8 @@ route::post('/edit_report/{id}', [AdminController::class, 'edit_report']);
 route::get('/create_report', [HomeController::class, 'create_report']);
 route::post('/add_report', [HomeController::class, 'add_report']);
 route::get('/delete_report/{id}', [AdminController::class, 'delete_report']);
+
+
 
 //report and complaint (User and Driver)
 route::get('/user_view_report', [HomeController::class, 'user_view_report']);

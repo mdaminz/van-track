@@ -20,9 +20,10 @@ use App\Models\Schedule;
 use App\Models\Forum;
 use App\Models\Bill;
 use App\Models\Comment;
+use App\Models\Session;
 
 use Illuminate\Support\Facades\DB;
-use Session;
+
 
 
 
@@ -80,7 +81,15 @@ class AdminController extends Controller
                 // Calculate total paid revenue
                 $paid_revenue = \App\Models\Bill::where('status', 'Paid')->sum('amount');
 
-                return view('admin.index', compact('total_students', 'user', 'total_users', 'paid_revenue', 'vans'));
+                $active_user = Session::count();
+
+                $session = Session::with('user')
+                    ->where('last_activity', '>=', now()->subMinutes(config('session.lifetime'))->timestamp)
+                    ->whereNotNull('user_id')
+                    ->take(5)
+                    ->get();
+
+                return view('admin.index', compact('total_students', 'user', 'total_users', 'paid_revenue', 'vans', 'active_user', 'active_user', 'session'));
 
             } else if ($usertype == 'driver') {
 
@@ -97,8 +106,16 @@ class AdminController extends Controller
                 // Calculate total paid revenue
                 $paid_revenue = \App\Models\Bill::where('status', 'Paid')->sum('amount');
 
+                $active_user = Session::count();
 
-                return view('driver.index', compact('user', 'total_users', 'total_students', 'paid_revenue', 'unresolved_reports'));
+                $session = Session::with('user')
+                    ->where('last_activity', '>=', now()->subMinutes(config('session.lifetime'))->timestamp)
+                    ->whereNotNull('user_id')
+                    ->take(5)
+                    ->get();
+
+
+                return view('driver.index', compact('user', 'total_users', 'total_students', 'paid_revenue', 'unresolved_reports', 'active_user','session'));  
 
             } else {
                 return redirect()->back();
@@ -190,15 +207,28 @@ class AdminController extends Controller
     }
 
     //Atendance
-    public function admin_view_attendance()
+    public function admin_view_attendance(Request $request)
     {
+        $query = Attendance::with(['student.school']);
 
-        $attendances = Attendance::with('student')
-            ->orderBy('created_at', 'desc') // Order by latest
-            ->get(); // Eager load students
+        // Filter by today's date if 'today' is 1
+        if ($request->today == 1) {
+            $query->whereDate('created_at', now()->toDateString());
+        }
 
-        return view('admin.attendance.view_attendance', compact('attendances'));
+        // Filter by selected rate
+        if ($request->filled('rate_id')) {
+            $query->whereHas('student', function ($q) use ($request) {
+                $q->where('rate_id', $request->rate_id);
+            });
+        }
+
+        $attendances = $query->orderBy('created_at', 'desc')->get();
+        $rates = Rate::with('school')->get();
+
+        return view('admin.attendance.view_attendance', compact('attendances', 'rates'));
     }
+
 
     public function admin_view_feedback()
     {
@@ -440,6 +470,8 @@ class AdminController extends Controller
         $user->address = $request->address;
         $user->status = $request->status;
 
+        $user->usertype = $request->usertype;
+
         $user->save();
 
         return redirect('view_alluser');
@@ -476,11 +508,23 @@ class AdminController extends Controller
 
     public function view_report()
     {
-        // Retrieve users with usertype 'user', ordered by latest, descending
-        $report_data = Report::orderBy('created_at', 'desc')->get(); // Order by the `created_at` column in descending order
+        $report_data = Report::where('status', 'unresolved')
+            ->orderBy('created_at', 'desc')
+            ->get();
+
 
         return view('admin.report.view_report', compact("report_data"));
     }
+
+    public function view_report_history()
+    {
+        $report_data = Report::where('status', 'resolved')
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        return view('admin.report.view_report_history', compact("report_data"));
+    }
+
 
     public function detail_report($id)
     {

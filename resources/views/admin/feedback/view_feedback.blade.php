@@ -18,27 +18,18 @@
     </div>
 
     <div class="card mb-3" id="ordersTable"
-        data-list='{"valueNames":["order","date","address","status","amount"],"page":10,"pagination":true}'>
+        data-list='{"valueNames":["no","rating","email","message",],"page":10,"pagination":true}'>
         <div class="card-header">
             <div class="row flex-between-center">
                 <div class="col-4 col-sm-auto d-flex align-items-center pe-0">
                     <h5 class="fs-0 mb-0 text-nowrap py-2 py-xl-0">Feedbacks</h5>
                 </div>
-                <div class="col-8 col-sm-auto ms-auto text-end ps-0">
-                    <div id="orders-actions">
-                        {{-- <a href="admin_create_student" class="btn btn-falcon-default btn-sm">
-                            <span class="fas fa-plus" data-fa-transform="shrink-3 down-2"></span>
-                            <span class="d-none d-sm-inline-block ms-1">New</span>
-                        </a> --}}
-
-                        {{-- <button class="btn btn-falcon-default btn-sm mx-2" type="button"><span class="fas fa-filter"
-                                data-fa-transform="shrink-3 down-2"></span><span
-                                class="d-none d-sm-inline-block ms-1">Filter</span></button> --}}
-                        <button class="btn btn-falcon-default btn-sm" type="button"><span class="fas fa-external-link-alt"
-                                data-fa-transform="shrink-3 down-2"></span><span
-                                class="d-none d-sm-inline-block ms-1">Export</span></button>
-                    </div>
-                </div>
+                {{-- <div class="col-8 col-sm-auto ms-auto text-end ps-0">
+                    <form class="position-relative" data-bs-toggle="search" data-bs-display="static">
+                        <input class="form-control search-input fuzzy-search" type="search" placeholder="Search..."
+                            aria-label="Search" />
+                    </form>
+                </div> --}}
             </div>
         </div>
         <div class="card-body p-0">
@@ -53,8 +44,8 @@
                                 </div>
                             </th> --}}
                             <th class="sort pe-1 align-middle" data-sort="order">No</th>
-                            <th class="sort pe-1 align-middle" data-sort="order">Rating</th>
-                            <th class="sort pe-1 align-middle" data-sort="order">Email</th>
+                            <th class="sort pe-1 align-middle" data-sort="rating">Rating</th>
+                            <th class="sort pe-1 align-middle" data-sort="email">Email</th>
                             <th class="sort pe-1 align-middle" data-sort="address" style="min-width: 12.5rem;">Message</th>
                             {{-- <th class="sort pe-1 align-middle white-space-nowrap text-center" data-sort="status">
                                 Profile
@@ -71,11 +62,12 @@
 
                                 <td class="order py-2 align-middle">{{ $number++ }}</td>
                                 <!-- Increment the counter -->
-                                <td class="order py-2 align-middle">{{ $feedback_data->rating }} Star
+                                <td class="py-2 align-middle">{{ $feedback_data->rating }} Star
                                 </td>
-                                <td class="order py-2 align-middle"><a href="profile_detail/{{$feedback_data->user_id}}">{{ $feedback_data->user->email }}</a>
+                                <td class="email py-2 align-middle"><a
+                                        href="profile_detail/{{$feedback_data->user_id}}">{{ $feedback_data->user->email }}</a>
                                 </td>
-                                <td class="address py-2 align-middle">{{ $feedback_data->message }}
+                                <td class="message py-2 align-middle">{{ $feedback_data->message }}
                                 </td>
                                 {{-- <td class="status py-2 align-middle text-center fs-0 white-space-nowrap">
                                     <img style="width: 120px;" src="student/{{ $students->profile_photo }}" alt="">

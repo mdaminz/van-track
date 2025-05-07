@@ -30,18 +30,37 @@
                 <div class="col-4 col-sm-auto d-flex align-items-center pe-0">
                     <h5 class="fs-0 mb-0 text-nowrap py-2 py-xl-0">Student Attendance</h5>
                 </div>
+
                 <div class="col-8 col-sm-auto ms-auto text-end ps-0">
 
-                    <div id="orders-actions">
-                        {{-- <button class="btn btn-falcon-default btn-sm mx-2" type="button"><span class="fas fa-filter"
-                                data-fa-transform="shrink-3 down-2"></span><span
-                                class="d-none d-sm-inline-block ms-1">Filter</span></button> --}}
-                        <button class="btn btn-falcon-default btn-sm" type="button" onclick="exportAttendanceTable()">
-                            <span class="fas fa-external-link-alt" data-fa-transform="shrink-3 down-2"></span>
-                            <span class="d-none d-sm-inline-block ms-1">Export</span>
-                        </button>
 
-                    </div>
+
+                    <form id="filterForm" method="GET" action="{{ route('admin_view_attendance') }}">
+                        <div class="d-flex gap-2">
+                            @php
+                                $isToday = request('today') == 1;
+                            @endphp
+                            <select id="rate-select" name="rate_id" class="form-select form-select-sm"
+                                style="max-width: 200px;" onchange="document.getElementById('filterForm').submit()">
+                                <option value="">All Rates</option>
+                                @foreach ($rates as $rate)
+                                    <option value="{{ $rate->id }}" {{ request('rate_id') == $rate->id ? 'selected' : '' }}>
+                                        School: {{ $rate->school->name ?? 'N/A' }} | District: {{ $rate->district }}
+                                    </option>
+                                @endforeach
+                            </select>
+
+                            <button class="btn btn-falcon-default btn-sm" type="submit" name="today" value="{{ $isToday ? '0' : '1' }}">
+                                <span class="fas fa-calendar-day"></span>
+                                <span class="d-none d-sm-inline-block ms-1">{{ $isToday ? 'Show All' : 'Today' }}</span>
+                            </button>
+
+                            <button class="btn btn-falcon-default btn-sm" type="button" onclick="exportAttendanceTable()">
+                                <span class="fas fa-external-link-alt" data-fa-transform="shrink-3 down-2"></span>
+                                <span class="d-none d-sm-inline-block ms-1">Export</span>
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
