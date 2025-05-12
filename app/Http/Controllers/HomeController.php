@@ -14,6 +14,7 @@ use App\Models\User;
 use App\Models\Report;
 use App\Models\Attendance;
 use App\Models\Rate;
+use App\Notifications\NewReportNotification;
 
 use Illuminate\Support\Carbon;
 
@@ -270,7 +271,7 @@ class HomeController extends Controller
         $report_data->subject = $request->subject;
         $report_data->description = $request->description;
         $report_data->status = "Unresolved";
-        $report_data->resolved_at = "N/A";
+        $report_data->resolved_at = null;
 
         $report_data->user_id = Auth::id();
 
@@ -287,6 +288,12 @@ class HomeController extends Controller
         }
 
         $report_data->save();
+
+        // // ✅ Notify Admin(s)
+        // $admins = User::where('usertype', 'admin')->get(); // make sure you have a 'role' column in users table
+        // foreach ($admins as $admin) {
+        //     $admin->notify(new NewReportNotification($report_data));
+        // }
 
         return redirect('user_view_report');
     }

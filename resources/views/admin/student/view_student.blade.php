@@ -25,6 +25,37 @@
             </div>
         </div>
     </div>
+
+    <div class="row g-3 mb-3">
+        <div class="col-sm-6 col-md-6">
+            <div class="card overflow-hidden" style="min-width: 12rem">
+                <div class="bg-holder bg-card"
+                    style="background-image:url(assets/img/icons/spot-illustrations/corner-1.png);">
+                </div>
+                <!--/.bg-holder-->
+
+                <div class="card-body position-relative">
+                    <h6>Total Student</h6>
+                    <div class="display-4 fs-4 mb-2 fw-normal font-sans-serif text-warning"
+                        data-countup='{"endValue":58.386,"decimalPlaces":2,"suffix":"k"}'>{{$total_students}}</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-6">
+            <div class="card overflow-hidden" style="min-width: 12rem">
+                <div class="bg-holder bg-card"
+                    style="background-image:url(assets/img/icons/spot-illustrations/corner-2.png);">
+                </div>
+                <!--/.bg-holder-->
+
+                <div class="card-body position-relative">
+                    <h6>Active Student</h6>
+                    <div class="display-4 fs-4 mb-2 fw-normal font-sans-serif text-info"
+                        data-countup='{"endValue":23.434,"decimalPlaces":2,"suffix":"k"}'>{{$totalActiveStudents}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="card mb-3" id="table-student"
         data-list='{"valueNames":["name", "no", "rfid", "contact", "address", "status"],"page":10,"pagination":true}'>
         <div class="card-header">
@@ -82,17 +113,21 @@
                                 <td class="align-middle text-end">
                                     <div class="dropdown font-sans-serif position-static">
                                         <button class="btn btn-link text-600 btn-sm dropdown-toggle btn-reveal" type="button"
-                                            id="order-dropdown-{{ $student->id }}" data-bs-toggle="dropdown" data-boundary="viewport"
-                                            aria-haspopup="true" aria-expanded="false">
+                                            id="order-dropdown-{{ $student->id }}" data-bs-toggle="dropdown"
+                                            data-boundary="viewport" aria-haspopup="true" aria-expanded="false">
                                             <span class="fas fa-ellipsis-h fs--1"></span>
                                         </button>
-                                        <div class="dropdown-menu dropdown-menu-end border py-0" aria-labelledby="order-dropdown-{{ $student->id }}">
+                                        <div class="dropdown-menu dropdown-menu-end border py-0"
+                                            aria-labelledby="order-dropdown-{{ $student->id }}">
                                             <div class="bg-white py-2">
-                                                <a class="dropdown-item" href="{{ url('detail_student', $student->id) }}">View</a>
+                                                <a class="dropdown-item"
+                                                    href="{{ url('detail_student', $student->id) }}">View</a>
                                                 @if (Auth::user()->usertype == 'admin')
-                                                    <a class="dropdown-item" href="{{ url('admin_update_student', $student->id) }}">Edit</a>
+                                                    <a class="dropdown-item"
+                                                        href="{{ url('admin_update_student', $student->id) }}">Edit</a>
                                                     <div class="dropdown-divider"></div>
-                                                    <a class="dropdown-item text-danger" href="{{ url('delete_student', $student->id) }}">Delete</a>
+                                                    <a class="dropdown-item text-danger"
+                                                        href="{{ url('delete_student', $student->id) }}">Delete</a>
                                                 @endif
                                             </div>
                                         </div>
@@ -102,7 +137,7 @@
                         @endforeach
                     </tbody>
                 </table>
-                
+
             </div>
         </div>
         <div class="card-footer">
@@ -115,4 +150,6 @@
             </div>
         </div>
     </div>
+
+    
 @endsection

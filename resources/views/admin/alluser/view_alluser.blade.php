@@ -16,6 +16,52 @@
             </div>
         </div>
     </div>
+
+    <div class="row g-3 mb-3">
+        <div class="col-sm-6 col-md-4">
+            <div class="card overflow-hidden" style="min-width: 12rem">
+                <div class="bg-holder bg-card"
+                    style="background-image:url(assets/img/icons/spot-illustrations/corner-1.png);">
+                </div>
+                <!--/.bg-holder-->
+
+                <div class="card-body position-relative">
+                    <h6>Total Admins</h6>
+                    <div class="display-4 fs-4 mb-2 fw-normal font-sans-serif text-warning"
+                        data-countup='{"endValue":58.386,"decimalPlaces":2,"suffix":"k"}'>{{$total_admin}}</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-4">
+            <div class="card overflow-hidden" style="min-width: 12rem">
+                <div class="bg-holder bg-card"
+                    style="background-image:url(assets/img/icons/spot-illustrations/corner-2.png);">
+                </div>
+                <!--/.bg-holder-->
+
+                <div class="card-body position-relative">
+                    <h6>Total Van Drivers</h6>
+                    <div class="display-4 fs-4 mb-2 fw-normal font-sans-serif text-info"
+                        data-countup='{"endValue":23.434,"decimalPlaces":2,"suffix":"k"}'>{{$total_driver}}</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card overflow-hidden" style="min-width: 12rem">
+                <div class="bg-holder bg-card"
+                    style="background-image:url(assets/img/icons/spot-illustrations/corner-3.png);">
+                </div>
+                <!--/.bg-holder-->
+
+                <div class="card-body position-relative">
+                    <h6>Total Parents</h6>
+                    <div class="display-4 fs-4 mb-2 fw-normal font-sans-serif"
+                        data-countup='{"endValue":43594,"prefix":"$"}'>{{$total_parent}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="card mb-3" id="table-student"
         data-list='{"valueNames":["no", "name", "email", "contact", "address", "status"],"page":10,"pagination":true}'>
         <div class="card-header">

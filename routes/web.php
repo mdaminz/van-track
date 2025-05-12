@@ -19,7 +19,7 @@ Route::middleware([
 });
 
 
-route::get('/home', [AdminController::class, 'index']);
+route::get('/home', [AdminController::class, 'index'])->name('index');;
 
 //main-dashboard
 route::get('/contact', [HomeController::class, 'contact']);

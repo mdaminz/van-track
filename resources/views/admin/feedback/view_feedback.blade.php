@@ -17,6 +17,38 @@
         </div>
     </div>
 
+    <div class="row g-3 mb-3">
+        <div class="col-sm-6 col-md-6">
+            <div class="card overflow-hidden" style="min-width: 12rem">
+                <div class="bg-holder bg-card"
+                    style="background-image:url(assets/img/icons/spot-illustrations/corner-1.png);">
+                </div>
+                <!--/.bg-holder-->
+
+                <div class="card-body position-relative">
+                    <h6>Total Reviews</h6>
+                    <div class="display-4 fs-4 mb-2 fw-normal font-sans-serif text-warning"
+                        data-countup='{"endValue":58.386,"decimalPlaces":2,"suffix":"k"}'>{{$total_feedback}}</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-6">
+            <div class="card overflow-hidden" style="min-width: 12rem">
+                <div class="bg-holder bg-card"
+                    style="background-image:url(assets/img/icons/spot-illustrations/corner-2.png);">
+                </div>
+                <!--/.bg-holder-->
+
+                <div class="card-body position-relative">
+                    <h6>5 Star Ratings</h6>
+                    <div class="display-4 fs-4 mb-2 fw-normal font-sans-serif text-info"
+                        data-countup='{"endValue":23.434,"decimalPlaces":2,"suffix":"k"}'>{{$fivestar}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <div class="card mb-3" id="ordersTable"
         data-list='{"valueNames":["no","rating","email","message",],"page":10,"pagination":true}'>
         <div class="card-header">
@@ -103,4 +135,59 @@
             </div>
         </div>
     </div>
+
+    <div class="col-sm-6 col-md-12">
+        <div class="card overflow-hidden" style="min-width: 12rem">
+            <div class="bg-holder bg-card">
+            </div>
+            <!--/.bg-holder-->
+
+            <div class="card-body position-relative">
+
+                <div class="display-4 fs-4 mb-2 fw-normal font-sans-serif text-info">
+                    <!-- This is the chart container -->
+                    <canvas id="ratingChart" width="500" height="300" style="max-height: 300px;"></canvas>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const ctx = document.getElementById('ratingChart').getContext('2d');
+
+        const ratingChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: {!! json_encode($ratingCounts->pluck('rating')->map(fn($r) => $r . ' Star')) !!},
+                datasets: [{
+                    data: {!! json_encode($ratingCounts->pluck('total')) !!},
+                    backgroundColor: [
+                        '#ef4444', // 1 star
+                        '#f97316', // 2 stars
+                        '#facc15', // 3 stars
+                        '#4ade80', // 4 stars
+                        '#60a5fa'  // 5 stars
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    },
+                    title: {
+                        display: true,
+                        text: 'Feedback Star Ratings'
+                    }
+                }
+            }
+        });
+    </script>
+
 @endsection

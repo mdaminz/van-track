@@ -26,7 +26,6 @@ use Illuminate\Support\Facades\DB;
 
 
 
-
 class AdminController extends Controller
 {
 
@@ -115,7 +114,7 @@ class AdminController extends Controller
                     ->get();
 
 
-                return view('driver.index', compact('user', 'total_users', 'total_students', 'paid_revenue', 'unresolved_reports', 'active_user','session'));  
+                return view('driver.index', compact('user', 'total_users', 'total_students', 'paid_revenue', 'unresolved_reports', 'active_user', 'session'));
 
             } else {
                 return redirect()->back();
@@ -206,17 +205,14 @@ class AdminController extends Controller
         return redirect()->back();
     }
 
-    //Atendance
     public function admin_view_attendance(Request $request)
     {
         $query = Attendance::with(['student.school']);
 
-        // Filter by today's date if 'today' is 1
         if ($request->today == 1) {
             $query->whereDate('created_at', now()->toDateString());
         }
 
-        // Filter by selected rate
         if ($request->filled('rate_id')) {
             $query->whereHas('student', function ($q) use ($request) {
                 $q->where('rate_id', $request->rate_id);
@@ -226,15 +222,50 @@ class AdminController extends Controller
         $attendances = $query->orderBy('created_at', 'desc')->get();
         $rates = Rate::with('school')->get();
 
-        return view('admin.attendance.view_attendance', compact('attendances', 'rates'));
+        // 📅 Monthly Attendance
+        $monthlyAttendance = Attendance::select(
+            DB::raw("DATE_FORMAT(created_at, '%M') as month"),
+            DB::raw("COUNT(*) as total")
+        )
+            ->groupBy(DB::raw("DATE_FORMAT(created_at, '%M')"))
+            ->orderBy(DB::raw("MIN(created_at)"))
+            ->get();
+
+        // 🕒 Hourly Attendance for Today
+        $hourlyAttendance = Attendance::whereDate('created_at', now())
+            ->select(
+                DB::raw("HOUR(created_at) as hour"),
+                DB::raw("COUNT(*) as total")
+            )
+            ->groupBy(DB::raw("HOUR(created_at)"))
+            ->orderBy('hour')
+            ->get();
+
+        return view('admin.attendance.view_attendance', compact(
+            'attendances',
+            'rates',
+            'monthlyAttendance',
+            'hourlyAttendance'
+        ));
     }
+
 
 
     public function admin_view_feedback()
     {
         $feedback_data = Feedback::all();
 
-        return view('admin.feedback.view_feedback', compact('feedback_data'));
+        $ratingCounts = DB::table('feedback')
+            ->select('rating', DB::raw('COUNT(*) as total'))
+            ->groupBy('rating')
+            ->orderBy('rating')
+            ->get();
+
+        $total_feedback = Feedback::count();
+
+        $fivestar = Feedback::where('rating', 5)->count();
+
+        return view('admin.feedback.view_feedback', compact('feedback_data', 'ratingCounts', 'total_feedback', 'fivestar'));
     }
 
     public function delete_feedback($id)
@@ -251,7 +282,11 @@ class AdminController extends Controller
         // Retrieve users with usertype 'user', ordered by latest, descending
         $students = Student::orderBy('created_at', 'desc')->get(); // Order by the `created_at` column in descending order
 
-        return view('admin.student.view_student', compact('students'));
+        $total_students = Student::count();
+
+        $totalActiveStudents = Student::where('status', 'Active')->count();
+
+        return view('admin.student.view_student', compact('students', 'total_students', 'totalActiveStudents'));
     }
 
     // public function admin_create_student()
@@ -448,7 +483,13 @@ class AdminController extends Controller
         // Retrieve users with usertype 'user', ordered by latest, descending
         $alluser_data = User::orderBy('created_at', 'desc')->get(); // Order by the `created_at` column in descending order
 
-        return view('admin.alluser.view_alluser', compact('alluser_data'));
+        $total_admin = User::where('usertype', 'admin')->count();
+
+        $total_driver = User::where('usertype', 'driver')->count();
+
+        $total_parent = User::where('usertype', 'user')->count();
+
+        return view('admin.alluser.view_alluser', compact('alluser_data', 'total_admin', 'total_driver', 'total_parent'));
     }
 
     public function update_alluser($id)
@@ -512,8 +553,16 @@ class AdminController extends Controller
             ->orderBy('created_at', 'desc')
             ->get();
 
+        $totalReports = Report::where('status', 'unresolved')
+            ->orderBy('created_at', 'desc')
+            ->count();
 
-        return view('admin.report.view_report', compact("report_data"));
+        // New reports today
+        $newReportsToday = Report::where('status', 'unresolved')
+            ->whereDate('created_at', Carbon::today())
+            ->count();
+
+        return view('admin.report.view_report', compact("report_data", "totalReports", "newReportsToday"));
     }
 
     public function view_report_history()
@@ -522,7 +571,15 @@ class AdminController extends Controller
             ->orderBy('created_at', 'desc')
             ->get();
 
-        return view('admin.report.view_report_history', compact("report_data"));
+        $totalReports = Report::where('status', 'resolved')
+            ->orderBy('created_at', 'desc')
+            ->count();
+
+        $newReportsToday = Report::where('status', 'resolved')
+            ->whereDate('created_at', Carbon::today())
+            ->count();
+
+        return view('admin.report.view_report_history', compact("report_data", "totalReports", "newReportsToday"));
     }
 
 
@@ -920,7 +977,15 @@ class AdminController extends Controller
             ->orderBy('created_at', 'desc')
             ->get();
 
-        return view('admin.bill.paid_bill', compact('paidBills'));
+        $paid_bills = Bill::where('status', 'Paid')
+            ->orderBy('created_at', 'desc')
+            ->count();
+
+        $total_paid = Bill::where('status', 'Paid')
+            ->orderBy('created_at', 'desc')
+            ->sum('amount');
+
+        return view('admin.bill.paid_bill', compact('paidBills', 'paid_bills', 'total_paid'));
     }
 
     public function pending_bill()
@@ -930,7 +995,15 @@ class AdminController extends Controller
             ->orderBy('created_at', 'desc')
             ->get();
 
-        return view('admin.bill.pending_bill', compact('pendingBills'));
+        $pending_bills = Bill::where('status', 'Pending')
+            ->orderBy('created_at', 'desc')
+            ->count();
+
+        $total_pending = Bill::where('status', 'Pending')
+            ->orderBy('created_at', 'desc')
+            ->sum('amount');
+
+        return view('admin.bill.pending_bill', compact('pendingBills', 'pending_bills', 'total_pending'));
     }
 
     public function unpaid_bill()
@@ -940,7 +1013,15 @@ class AdminController extends Controller
             ->orderBy('created_at', 'desc')
             ->get();
 
-        return view('admin.bill.unpaid_bill', compact('unpaidBills'));
+        $unpaid_bills = Bill::where('status', 'Unpaid')
+            ->orderBy('created_at', 'desc')
+            ->count();
+
+        $total_unpaid = Bill::where('status', 'Unpaid')
+            ->orderBy('created_at', 'desc')
+            ->sum('amount');
+
+        return view('admin.bill.unpaid_bill', compact('unpaidBills', 'unpaid_bills', 'total_unpaid'));
     }
 
     public function bill_receipt($id)

@@ -9,6 +9,8 @@
 @extends($layout)
 
 @section('body-content')
+
+
     <div class="card mb-3">
         <div class="bg-holder d-none d-lg-block bg-card"
             style="background-image:url(../../assets/img/icons/spot-illustrations/corner-4.png);">
@@ -23,6 +25,44 @@
             </div>
         </div>
     </div>
+
+    <div class="row g-3 mb-3">
+        <div class="col-sm-6 col-md-6">
+            <div class="card overflow-hidden" style="min-width: 12rem">
+                <div class="bg-holder bg-card">
+                </div>
+                <!--/.bg-holder-->
+
+                <div class="card-body position-relative">
+                
+                    <div class="display-4 fs-4 mb-2 fw-normal font-sans-serif text-warning"
+                        data-countup='{"endValue":58.386,"decimalPlaces":2,"suffix":"k"}'>
+                        <div>
+                            <canvas id="monthlyAttendanceChart"></canvas>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-6">
+            <div class="card overflow-hidden" style="min-width: 12rem">
+                <div class="bg-holder bg-card">
+
+                </div>
+                <!--/.bg-holder-->
+
+                <div class="card-body position-relative">
+                    
+                    <div class="display-4 fs-4 mb-2 fw-normal font-sans-serif text-info"
+                        data-countup='{"endValue":23.434,"decimalPlaces":2,"suffix":"k"}'>
+                        <canvas id="hourlyAttendanceChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="card mb-3" id="ordersTable"
         data-list='{"valueNames":["order","date","address","status","amount"],"page":10,"pagination":true}'>
         <div class="card-header">
@@ -50,7 +90,8 @@
                                 @endforeach
                             </select>
 
-                            <button class="btn btn-falcon-default btn-sm" type="submit" name="today" value="{{ $isToday ? '0' : '1' }}">
+                            <button class="btn btn-falcon-default btn-sm" type="submit" name="today"
+                                value="{{ $isToday ? '0' : '1' }}">
                                 <span class="fas fa-calendar-day"></span>
                                 <span class="d-none d-sm-inline-block ms-1">{{ $isToday ? 'Show All' : 'Today' }}</span>
                             </button>
@@ -162,6 +203,65 @@
             </div>
         </div>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+        // 📅 Monthly Attendance Bar Chart
+        const monthlyChart = new Chart(document.getElementById('monthlyAttendanceChart').getContext('2d'), {
+            type: 'bar',
+            data: {
+                labels: {!! json_encode($monthlyAttendance->pluck('month')) !!},
+                datasets: [{
+                    label: 'Total Attendance',
+                    data: {!! json_encode($monthlyAttendance->pluck('total')) !!},
+                    backgroundColor: '#60a5fa'
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Monthly Attendance'
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        // 🕒 Hourly Attendance Bar Chart
+        const hourlyChart = new Chart(document.getElementById('hourlyAttendanceChart').getContext('2d'), {
+            type: 'bar',
+            data: {
+                labels: {!! json_encode($hourlyAttendance->pluck('hour')->map(fn($h) => $h . ":00")) !!},
+                datasets: [{
+                    label: 'Attendance Count',
+                    data: {!! json_encode($hourlyAttendance->pluck('total')) !!},
+                    backgroundColor: '#34d399'
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Hourly Attendance (Today)'
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 

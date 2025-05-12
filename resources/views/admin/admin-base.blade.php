@@ -847,46 +847,30 @@
                                         <div class="list-group list-group-flush fw-normal fs--1">
                                             <div class="list-group-title border-bottom">NEW</div>
                                             <div class="list-group-item">
-                                                <a class="notification notification-flush notification-unread"
-                                                    href="#!">
-                                                    <div class="notification-avatar">
-                                                        <div class="avatar avatar-2xl me-3">
-                                                            <img class="rounded-circle"
-                                                                src="assets/img/team/1-thumb.png" alt="" />
-
-                                                        </div>
-                                                    </div>
-                                                    <div class="notification-body">
-                                                        <p class="mb-1"><strong>Emma Watson</strong> replied to your
-                                                            comment : "Hello world 😍"</p>
-                                                        <span class="notification-time"><span class="me-2" role="img"
-                                                                aria-label="Emoji">💬</span>Just
-                                                            now</span>
-
-                                                    </div>
-                                                </a>
-
-                                            </div>
-                                            <div class="list-group-item">
-                                                <a class="notification notification-flush notification-unread"
-                                                    href="#!">
-                                                    <div class="notification-avatar">
-                                                        <div class="avatar avatar-2xl me-3">
-                                                            <div class="avatar-name rounded-circle"><span>AB</span>
+                                                @foreach (auth()->user()->unreadNotifications as $notification)
+                                                    <a class="notification notification-flush notification-unread"
+                                                        href="{{ route('index') }}">
+                                                        <div class="notification-avatar">
+                                                            <div class="avatar avatar-2xl me-3">
+                                                                <img class="rounded-circle"
+                                                                    src="homepage/img/report.png" alt="Report" />
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="notification-body">
-                                                        <p class="mb-1"><strong>Albert Brooks</strong> reacted to
-                                                            <strong>Mia Khalifa's</strong> status
-                                                        </p>
-                                                        <span class="notification-time"><span
-                                                                class="me-2 fab fa-gratipay text-danger"></span>9hr</span>
-
-                                                    </div>
-                                                </a>
-
+                                                        <div class="notification-body">
+                                                            <p class="mb-1">
+                                                                <strong>New Report:</strong>
+                                                                {{ $notification->data['subject'] ?? 'No subject' }}
+                                                            </p>
+                                                            <span class="notification-time">
+                                                                <span class="me-2" role="img" aria-label="Report">📄</span>
+                                                                {{ $notification->created_at->diffForHumans() }}
+                                                            </span>
+                                                        </div>
+                                                    </a>
+                                                @endforeach
                                             </div>
+
+
                                             <div class="list-group-title border-bottom">EARLIER</div>
                                             <div class="list-group-item">
                                                 <a class="notification notification-flush" href="#!">

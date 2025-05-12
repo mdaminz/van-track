@@ -25,7 +25,38 @@
             </div>
         </div>
     </div>
-    
+
+    <div class="row g-3 mb-3">
+        <div class="col-sm-6 col-md-6">
+            <div class="card overflow-hidden" style="min-width: 12rem">
+                <div class="bg-holder bg-card"
+                    style="background-image:url(assets/img/icons/spot-illustrations/corner-1.png);">
+                </div>
+                <!--/.bg-holder-->
+
+                <div class="card-body position-relative">
+                    <h6>Pending Bills</h6>
+                    <div class="display-4 fs-4 mb-2 fw-normal font-sans-serif text-warning"
+                        data-countup='{"endValue":58.386,"decimalPlaces":2,"suffix":"k"}'>{{$paid_bills}}</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-6">
+            <div class="card overflow-hidden" style="min-width: 12rem">
+                <div class="bg-holder bg-card"
+                    style="background-image:url(assets/img/icons/spot-illustrations/corner-2.png);">
+                </div>
+                <!--/.bg-holder-->
+
+                <div class="card-body position-relative">
+                    <h6>Total Pending Bills</h6>
+                    <div class="display-4 fs-4 mb-2 fw-normal font-sans-serif text-info"
+                        data-countup='{"endValue":23.434,"decimalPlaces":2,"suffix":"k"}'>RM {{$total_paid}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="card mb-3" id="table-student"
         data-list='{"valueNames":["no", "name", "school", "address", "amount", "due", "status"],"page":10,"pagination":true}'>
         <div class="card-header">

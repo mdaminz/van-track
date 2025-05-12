@@ -25,7 +25,38 @@
             </div>
         </div>
     </div>
-   
+
+    <div class="row g-3 mb-3">
+        <div class="col-sm-6 col-md-6">
+            <div class="card overflow-hidden" style="min-width: 12rem">
+                <div class="bg-holder bg-card"
+                    style="background-image:url(assets/img/icons/spot-illustrations/corner-1.png);">
+                </div>
+                <!--/.bg-holder-->
+
+                <div class="card-body position-relative">
+                    <h6>Pending Bills</h6>
+                    <div class="display-4 fs-4 mb-2 fw-normal font-sans-serif text-warning"
+                        data-countup='{"endValue":58.386,"decimalPlaces":2,"suffix":"k"}'>{{$pending_bills}}</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-6">
+            <div class="card overflow-hidden" style="min-width: 12rem">
+                <div class="bg-holder bg-card"
+                    style="background-image:url(assets/img/icons/spot-illustrations/corner-2.png);">
+                </div>
+                <!--/.bg-holder-->
+
+                <div class="card-body position-relative">
+                    <h6>Total Pending Bills</h6>
+                    <div class="display-4 fs-4 mb-2 fw-normal font-sans-serif text-info"
+                        data-countup='{"endValue":23.434,"decimalPlaces":2,"suffix":"k"}'>RM {{$total_pending}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="card mb-3" id="table-student"
         data-list='{"valueNames":["no", "name", "school", "address", "amount", "due", "status"],"page":10,"pagination":true}'>
         <div class="card-header">
@@ -41,6 +72,9 @@
                 </div>
             </div>
         </div>
+
+
+
         <div class="card-body p-0">
             <div class="table-responsive scrollbar">
 
@@ -102,7 +136,8 @@
                                                     Pay
                                                 </a> --}}
 
-                                                <a class="dropdown-item" href="{{ url('verify_bill', $pendingBills->id) }}">Verify</a>
+                                                <a class="dropdown-item"
+                                                    href="{{ url('verify_bill', $pendingBills->id) }}">Verify</a>
 
                                                 {{-- <div class="dropdown-divider"></div>
                                                 <a class="dropdown-item text-danger" href="">Delete</a> --}}
@@ -131,7 +166,7 @@
             </div>
         </div>
     </div>
-    
+
 
     <div class="modal fade" id="error-modal" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 500px">
