@@ -1,6 +1,47 @@
 @extends('user.user-base')
 
 @section('body-content')
+    @if (session('success'))
+        <div class="alert alert-success border-2 d-flex align-items-center" role="alert" style="
+                    position: fixed;
+                    top: 20px;
+                    right: 0;
+                    width: 30%;
+                    z-index: 9999;
+                    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+                    transform: translateX(100%);
+                    animation: slideIn 0.5s forwards;
+                    ">
+            <div class="bg-success me-3 icon-item">
+                <span class="fas fa-check-circle text-white fs-3"></span>
+            </div>
+            <p class="mb-0 flex-1">{{ session('success') }}</p>
+            <button class="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+
+        <script>
+            setTimeout(() => {
+                const alert = document.querySelector('.alert');
+                if (alert) alert.remove();
+            }, 3000); // auto-hide after 3 seconds
+        </script>
+
+        <style>
+            @keyframes slideIn {
+                0% {
+                    transform: translateX(100%);
+                }
+
+                100% {
+                    transform: translateX(0);
+                }
+            }
+        </style>
+    @endif
+
+
+
+
 
     <div class="row g-3 mb-3">
         <div class="col-xxl-6 col-lg-12">
@@ -52,11 +93,11 @@
                         <div class="col-sm-6 col-md-5">
                             <div class="d-flex position-relative">
                                 <div class="icon-item icon-item-sm border rounded-3 shadow-none me-2"><span
-                                        class="fas fa-user text-info"></span></div>
-                                <div class="flex-1"><a class="stretched-link" href="view_student">
-                                        <h6 class="text-800 mb-0">Childrens Profile</h6>
+                                        class="fas fa-star"></span></div>
+                                <div class="flex-1"><a class="stretched-link" href="create_feedback">
+                                        <h6 class="text-800 mb-0">Send us a Feedback</h6>
                                     </a>
-                                    <p class="mb-0 fs--2 text-500">Edit and manage children's profile</p>
+                                    <p class="mb-0 fs--2 text-500">Send us a feedback!</p>
                                 </div>
                             </div>
                         </div>
@@ -261,8 +302,8 @@
                                         @else
                                             <div class="avatar-emoji rounded-circle"><span role="img" aria-label="Emoji">🚶‍♂️</span>
                                             </div>
-                                        {{-- <div class="avatar-emoji rounded-circle"><span role="img" aria-label="Emoji">✔️</span>
-                                        </div> --}}
+                                            {{-- <div class="avatar-emoji rounded-circle"><span role="img" aria-label="Emoji">✔️</span>
+                                            </div> --}}
                                         @endif
                                     </div>
                                 </div>

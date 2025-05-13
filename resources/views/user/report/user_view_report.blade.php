@@ -178,10 +178,10 @@
                                         <div class="dropdown-menu dropdown-menu-end border py-0"
                                             aria-labelledby="order-dropdown-0">
                                             <div class="bg-white py-2"><a class="dropdown-item"
-                                                    href="{{ url('report_history', $report_history->id) }}">View</a>
+                                                    href="{{ url('detail_report', $report_history->id) }}">View</a>
                                                 <div class="dropdown-divider"></div>
                                                 <a class="dropdown-item text-danger"
-                                                    href="{{ url('report_history', $report_history->id) }}">Delete</a>
+                                                    href="{{ url('delete_report', $report_history->id) }}">Delete</a>
                                             </div>
                                         </div>
                                     </div>

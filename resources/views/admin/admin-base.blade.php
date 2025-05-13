@@ -839,98 +839,138 @@
                                             <div class="col-auto">
                                                 <h6 class="card-header-title mb-0">Notifications</h6>
                                             </div>
-                                            <div class="col-auto ps-0 ps-sm-3"><a class="card-link fw-normal"
-                                                    href="#">Mark all as read</a></div>
+                                            {{-- <div class="col-auto ps-0 ps-sm-3"><a class="card-link fw-normal"
+                                                    href="#">Mark all as read</a></div> --}}
                                         </div>
                                     </div>
-                                    <div class="scrollbar-overlay" style="max-height:19rem">
+                                    <div class="scrollbar-overlay" style="max-height:50rem">
                                         <div class="list-group list-group-flush fw-normal fs--1">
-                                            <div class="list-group-title border-bottom">NEW</div>
-                                            <div class="list-group-item">
-                                                @foreach (auth()->user()->unreadNotifications as $notification)
-                                                    <a class="notification notification-flush notification-unread"
-                                                        href="{{ route('index') }}">
+
+                                            <div class="list-group-title border-bottom">NEW USER</div>
+                                            {{-- new user --}}
+                                            @foreach ($user_data as $userData)
+
+                                                <div class="list-group-item">
+                                                    <a class="notification notification-flush" href="#!">
                                                         <div class="notification-avatar">
                                                             <div class="avatar avatar-2xl me-3">
                                                                 <img class="rounded-circle"
-                                                                    src="homepage/img/report.png" alt="Report" />
+                                                                    src="{{$userData->profile_photo_path}}" alt="" />
                                                             </div>
                                                         </div>
                                                         <div class="notification-body">
-                                                            <p class="mb-1">
-                                                                <strong>New Report:</strong>
-                                                                {{ $notification->data['subject'] ?? 'No subject' }}
+                                                            <p class="mb-1">{{ $userData->name }} has joined as a new user!
                                                             </p>
-                                                            <span class="notification-time">
-                                                                <span class="me-2" role="img" aria-label="Report">📄</span>
-                                                                {{ $notification->created_at->diffForHumans() }}
-                                                            </span>
+                                                            <span class="me-2" role="img" aria-label="Emoji">🆕</span>
+                                                            {{ $userData->created_at->diffForHumans() }}
+
                                                         </div>
                                                     </a>
-                                                @endforeach
-                                            </div>
+                                                </div>
+                                            @endforeach
 
+                                            <div class="list-group-title border-bottom">NEW PENDING BILLS</div>
+                                            {{-- new bill = pending --}}
+                                            @foreach ($pending_data as $pendingData)
 
-                                            <div class="list-group-title border-bottom">EARLIER</div>
-                                            <div class="list-group-item">
-                                                <a class="notification notification-flush" href="#!">
-                                                    <div class="notification-avatar">
-                                                        <div class="avatar avatar-2xl me-3">
-                                                            <img class="rounded-circle"
-                                                                src="assets/img/icons/weather-sm.jpg" alt="" />
+                                                <div class="list-group-item">
+                                                    <a class="notification notification-flush" href="#!">
+                                                        <div class="notification-avatar">
+                                                            <div class="avatar avatar-2xl me-3">
+                                                                <img class="rounded-circle"
+                                                                    src="{{ $pendingData->user->profile_photo_path }}"
+                                                                    alt="" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="notification-body">
+                                                            <p class="mb-1">{{ $pendingData->user->name }} has paid the
+                                                                bills!
+                                                            </p>
+                                                            <span class="me-2" role="img" aria-label="Emoji">🆕</span>
+                                                            {{ $pendingData->created_at->diffForHumans() }}
 
                                                         </div>
-                                                    </div>
-                                                    <div class="notification-body">
-                                                        <p class="mb-1">The forecast today shows a low of 20&#8451;
-                                                            in California. See today's weather.</p>
-                                                        <span class="notification-time"><span class="me-2" role="img"
-                                                                aria-label="Emoji">🌤️</span>1d</span>
+                                                    </a>
+                                                </div>
+                                            @endforeach
 
-                                                    </div>
-                                                </a>
+                                            <div class="list-group-title border-bottom">NEW REPORT</div>
+                                            {{-- new report --}}
+                                            @foreach ($report_data as $reportData)
 
-                                            </div>
-                                            <div class="list-group-item">
-                                                <a class="border-bottom-0 notification-unread  notification notification-flush"
-                                                    href="#!">
-                                                    <div class="notification-avatar">
-                                                        <div class="avatar avatar-xl me-3">
-                                                            <img class="rounded-circle"
-                                                                src="assets/img/logos/oxford.png" alt="" />
+                                                <div class="list-group-item">
+                                                    <a class="notification notification-flush" href="#!">
+                                                        <div class="notification-avatar">
+                                                            <div class="avatar avatar-2xl me-3">
+                                                                <img class="rounded-circle"
+                                                                    src="{{ $reportData->user->profile_photo_path }}"
+                                                                    alt="" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="notification-body">
+                                                            <p class="mb-1">{{ $reportData->user->name }} has sent new
+                                                                report!
+                                                            </p>
+                                                            <p class="">Subject: {{ $reportData->subject }}
+                                                            </p>
+                                                            <span class="me-2" role="img" aria-label="Emoji">🆕</span>
+                                                            {{ $reportData->created_at->diffForHumans() }}
 
                                                         </div>
-                                                    </div>
-                                                    <div class="notification-body">
-                                                        <p class="mb-1"><strong>University of Oxford</strong>
-                                                            created an event : "Causal Inference Hilary 2019"</p>
-                                                        <span class="notification-time"><span class="me-2" role="img"
-                                                                aria-label="Emoji">✌️</span>1w</span>
+                                                    </a>
+                                                </div>
+                                            @endforeach
 
-                                                    </div>
-                                                </a>
+                                            <div class="list-group-title border-bottom">NEW FEEDBACK</div>
+                                            {{-- new report --}}
+                                            @foreach ($feedback_data as $feedbackData)
 
-                                            </div>
-                                            <div class="list-group-item">
-                                                <a class="border-bottom-0 notification notification-flush" href="#!">
-                                                    <div class="notification-avatar">
-                                                        <div class="avatar avatar-xl me-3">
-                                                            <img class="rounded-circle" src="assets/img/team/10.jpg"
-                                                                alt="" />
+                                                <div class="list-group-item">
+                                                    <a class="notification notification-flush" href="#!">
+                                                        <div class="notification-avatar">
+                                                            <div class="avatar avatar-2xl me-3">
+                                                                <img class="rounded-circle"
+                                                                    src="{{ $feedbackData->user->profile_photo_path }}"
+                                                                    alt="" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="notification-body">
+                                                            <p class="mb-1">{{ $feedbackData->user->name }} has sent a {{$feedbackData->rating}} star feedback!
+                                                            </p>
+                                                            </p>
+                                                            <span class="me-2" role="img" aria-label="Emoji">🆕</span>
+                                                            {{ $reportData->created_at->diffForHumans() }}
 
                                                         </div>
-                                                    </div>
-                                                    <div class="notification-body">
-                                                        <p class="mb-1"><strong>James Cameron</strong> invited to
-                                                            join the group: United Nations International Children's Fund
-                                                        </p>
-                                                        <span class="notification-time"><span class="me-2" role="img"
-                                                                aria-label="Emoji">🙋‍</span>2d</span>
+                                                    </a>
+                                                </div>
+                                            @endforeach
 
-                                                    </div>
-                                                </a>
+                                            <div class="list-group-title border-bottom">NEW FORUM POST</div>
+                                            {{-- new forum --}}
+                                            @foreach ($forum_data as $forumData)
 
-                                            </div>
+                                                <div class="list-group-item">
+                                                    <a class="notification notification-flush" href="#!">
+                                                        <div class="notification-avatar">
+                                                            <div class="avatar avatar-2xl me-3">
+                                                                <img class="rounded-circle"
+                                                                    src="{{ $forumData->user->profile_photo_path }}"
+                                                                    alt="" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="notification-body">
+                                                            <p class="mb-1">{{ $forumData->user->name }} has post in forum!
+                                                            </p>
+                                                            </p>
+                                                            <span class="me-2" role="img" aria-label="Emoji">🆕</span>
+                                                            {{ $forumData->created_at->diffForHumans() }}
+
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                            @endforeach
+
                                         </div>
                                     </div>
                                     <div class="card-footer text-center border-top"><a class="card-link d-block"

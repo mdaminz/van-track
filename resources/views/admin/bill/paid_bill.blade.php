@@ -49,7 +49,7 @@
                 <!--/.bg-holder-->
 
                 <div class="card-body position-relative">
-                    <h6>Total Pending Bills</h6>
+                    <h6>Total Paid Bills</h6>
                     <div class="display-4 fs-4 mb-2 fw-normal font-sans-serif text-info"
                         data-countup='{"endValue":23.434,"decimalPlaces":2,"suffix":"k"}'>RM {{$total_paid}}</div>
                 </div>

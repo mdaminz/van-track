@@ -123,6 +123,12 @@
                                         <hr class="mb-0 navbar-vertical-divider" />
                                     </div>
                                 </div>
+                                <!-- parent pages--><a class="nav-link" href="driver_calendar" role="button">
+                                    <div class="d-flex align-items-center"><span class="nav-link-icon"><span
+                                                class="fas fa-calendar-alt"></span></span><span
+                                            class="nav-link-text ps-1">Calendar</span>
+                                    </div>
+                                </a>
                                 <!-- parent pages--><a class="nav-link" href="driver_view_student" role="button">
                                     <div class="d-flex align-items-center"><span class="nav-link-icon"><span
                                                 class="fab fa-odnoklassniki"></span></span><span
@@ -236,110 +242,62 @@
                                                     href="#">Mark all as read</a></div>
                                         </div>
                                     </div>
-                                    <div class="scrollbar-overlay" style="max-height:19rem">
+                                    <div class="scrollbar-overlay" style="max-height:50rem">
                                         <div class="list-group list-group-flush fw-normal fs--1">
-                                            <div class="list-group-title border-bottom">NEW</div>
-                                            <div class="list-group-item">
-                                                <a class="notification notification-flush notification-unread"
-                                                    href="#!">
-                                                    <div class="notification-avatar">
-                                                        <div class="avatar avatar-2xl me-3">
-                                                            <img class="rounded-circle"
-                                                                src="assets/img/team/1-thumb.png" alt="" />
+                                            <div class="list-group-title border-bottom">NEW RESOLVED REPORT</div>
 
-                                                        </div>
-                                                    </div>
-                                                    <div class="notification-body">
-                                                        <p class="mb-1"><strong>Emma Watson</strong> replied to your
-                                                            comment : "Hello world 😍"</p>
-                                                        <span class="notification-time"><span class="me-2" role="img"
-                                                                aria-label="Emoji">💬</span>Just
-                                                            now</span>
+                                            @foreach ($report_data as $reportData)
 
-                                                    </div>
-                                                </a>
-
-                                            </div>
-                                            <div class="list-group-item">
-                                                <a class="notification notification-flush notification-unread"
-                                                    href="#!">
-                                                    <div class="notification-avatar">
-                                                        <div class="avatar avatar-2xl me-3">
-                                                            <div class="avatar-name rounded-circle"><span>AB</span>
+                                                <div class="list-group-item">
+                                                    <a class="notification notification-flush" href="#!">
+                                                        <div class="notification-avatar">
+                                                            <div class="avatar avatar-2xl me-3">
+                                                                <img class="rounded-circle"
+                                                                    src="{{$reportData->user->profile_photo_path}}"
+                                                                    alt="" />
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="notification-body">
-                                                        <p class="mb-1"><strong>Albert Brooks</strong> reacted to
-                                                            <strong>Mia Khalifa's</strong> status
-                                                        </p>
-                                                        <span class="notification-time"><span
-                                                                class="me-2 fab fa-gratipay text-danger"></span>9hr</span>
-
-                                                    </div>
-                                                </a>
-
-                                            </div>
-                                            <div class="list-group-title border-bottom">EARLIER</div>
-                                            <div class="list-group-item">
-                                                <a class="notification notification-flush" href="#!">
-                                                    <div class="notification-avatar">
-                                                        <div class="avatar avatar-2xl me-3">
-                                                            <img class="rounded-circle"
-                                                                src="assets/img/icons/weather-sm.jpg" alt="" />
+                                                        <div class="notification-body">
+                                                            <p class="mb-1">Your report has been resolved!
+                                                            </p>
+                                                            <p class="">Subject: {{$reportData->subject}}</p>
+                                                            </p>
+                                                            <span class="me-2" role="img" aria-label="Emoji">🆕</span>
+                                                            {{ $reportData->created_at->diffForHumans() }}
 
                                                         </div>
-                                                    </div>
-                                                    <div class="notification-body">
-                                                        <p class="mb-1">The forecast today shows a low of 20&#8451;
-                                                            in California. See today's weather.</p>
-                                                        <span class="notification-time"><span class="me-2" role="img"
-                                                                aria-label="Emoji">🌤️</span>1d</span>
+                                                    </a>
+                                                </div>
+                                            @endforeach
 
-                                                    </div>
-                                                </a>
 
-                                            </div>
-                                            <div class="list-group-item">
-                                                <a class="border-bottom-0 notification-unread  notification notification-flush"
-                                                    href="#!">
-                                                    <div class="notification-avatar">
-                                                        <div class="avatar avatar-xl me-3">
-                                                            <img class="rounded-circle"
-                                                                src="assets/img/logos/oxford.png" alt="" />
+                                            <div class="list-group-title border-bottom">NEW FORUM POST</div>
+                                            {{-- resolved reports --}}
+                                            @foreach ($forum_data as $forumData)
+
+                                                <div class="list-group-item">
+                                                    <a class="notification notification-flush" href="#!">
+                                                        <div class="notification-avatar">
+                                                            <div class="avatar avatar-2xl me-3">
+                                                                <img class="rounded-circle"
+                                                                    src="{{ $forumData->user->profile_photo_path }}"
+                                                                    alt="" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="notification-body">
+                                                            <p class="mb-1">{{ $forumData->user->name }} has post in forum!
+                                                            </p>
+                                                            </p>
+                                                            <span class="me-2" role="img" aria-label="Emoji">🆕</span>
+                                                            {{ $forumData->created_at->diffForHumans() }}
 
                                                         </div>
-                                                    </div>
-                                                    <div class="notification-body">
-                                                        <p class="mb-1"><strong>University of Oxford</strong>
-                                                            created an event : "Causal Inference Hilary 2019"</p>
-                                                        <span class="notification-time"><span class="me-2" role="img"
-                                                                aria-label="Emoji">✌️</span>1w</span>
+                                                    </a>
+                                                </div>
+                                            @endforeach
 
-                                                    </div>
-                                                </a>
 
-                                            </div>
-                                            <div class="list-group-item">
-                                                <a class="border-bottom-0 notification notification-flush" href="#!">
-                                                    <div class="notification-avatar">
-                                                        <div class="avatar avatar-xl me-3">
-                                                            <img class="rounded-circle" src="assets/img/team/10.jpg"
-                                                                alt="" />
 
-                                                        </div>
-                                                    </div>
-                                                    <div class="notification-body">
-                                                        <p class="mb-1"><strong>James Cameron</strong> invited to
-                                                            join the group: United Nations International Children's Fund
-                                                        </p>
-                                                        <span class="notification-time"><span class="me-2" role="img"
-                                                                aria-label="Emoji">🙋‍</span>2d</span>
-
-                                                    </div>
-                                                </a>
-
-                                            </div>
                                         </div>
                                     </div>
                                     <div class="card-footer text-center border-top"><a class="card-link d-block"

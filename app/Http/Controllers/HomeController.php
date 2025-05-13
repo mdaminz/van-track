@@ -239,7 +239,7 @@ class HomeController extends Controller
 
         $feedback_data->save();
 
-        return redirect('view_feedback');
+         return redirect('/home')->with('success', 'Feedback submitted successfully!');
     }
 
     public function delete_feedback($id)

@@ -9,6 +9,7 @@ use App\Models\Student;
 use App\Models\Van;
 use App\Models\Rate;
 use App\Models\Attendance;
+use Carbon\Carbon;
 
 class DriverController extends Controller
 {
@@ -50,11 +51,45 @@ class DriverController extends Controller
 
     public function driver_calendar()
     {
-        // Fetch rates for Monday to Friday
-        $rates = Rate::whereIn('start_time', ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'])
-            ->orderBy('start_time')
-            ->get();
+        $user = Auth::user();
 
-        return view('driver.calendar.view_calendar', compact('rates'));
+    if ($user->usertype !== 'driver') {
+        abort(403);
+    }
+
+    $vanId = $user->vans()->first()?->id;
+    $rates = Rate::where('van_id', $vanId)->with('school')->get();
+
+    $events = [];
+    $startDate = Carbon::now()->startOfWeek(); 
+    $endDate = Carbon::now()->addMonths(3);    
+
+    while ($startDate->lte($endDate)) {
+        for ($i = 0; $i < 5; $i++) { // Monday to Friday
+            $day = $startDate->copy()->addDays($i);
+
+            foreach ($rates as $rate) {
+                $district = $rate->district ?? 'District';
+                $schoolName = $rate->school->name ?? 'School';
+
+                $events[] = [
+                    'title' => "$district → $schoolName",
+                    'start' => $day->format('Y-m-d') . 'T' . $rate->start_time,
+                    'color' => '#3c8dbc',
+                    'font' => '#ebf1f5',
+                ];
+
+                $events[] = [
+                    'title' => "$schoolName → $district",
+                    'start' => $day->format('Y-m-d') . 'T' . $rate->end_time,
+                    'color' => '#a3cde6',
+                    'font' => '#ebf1f5',
+                ];
+            }
+        }
+        $startDate->addWeek();
+    }
+
+        return view('driver.calendar.view_calendar', ['events' => json_encode($events)]);
     }
 }

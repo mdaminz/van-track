@@ -113,4 +113,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Session::class);
     }
+
+    public function vans()
+    {
+        return $this->hasMany(Van::class);
+    }
 }

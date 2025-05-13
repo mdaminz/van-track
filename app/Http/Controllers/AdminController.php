@@ -67,6 +67,8 @@ class AdminController extends Controller
 
             } else if ($usertype == 'admin') {
 
+                
+
                 $user = User::find(Auth::id());
 
                 $total_users = User::count();
