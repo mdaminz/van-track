@@ -68,7 +68,7 @@
                             <th class="sort">RFID Tag</th>
                             <th class="sort">Student Name</th>
                             <th class="sort">School</th>
-                            <th class="sort">Address</th>
+                            <th class="sort d-none d-md-table-cell">Address</th>
                             <th hidden class="sort">Rate</th>
                             <th class="sort">Status</th>
                         </tr>
@@ -88,7 +88,7 @@
                                     </a>
                                 </td>
                                 <td class="school py-2">{{ $attendances->student->school->name }}</td>
-                                <td class="address py-2">{{ $attendances->student->address }}</td>
+                                <td class="address py-2 d-none d-md-table-cell">{{ $attendances->student->address }}</td>
                                 <td hidden class="rate py-2" data-rate="{{ $attendances->student->rate_id }}">
                                     {{ $attendances->student->rate_id }}
                                 </td>

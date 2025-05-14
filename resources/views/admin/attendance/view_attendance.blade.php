@@ -34,7 +34,7 @@
                 <!--/.bg-holder-->
 
                 <div class="card-body position-relative">
-                
+
                     <div class="display-4 fs-4 mb-2 fw-normal font-sans-serif text-warning"
                         data-countup='{"endValue":58.386,"decimalPlaces":2,"suffix":"k"}'>
                         <div>
@@ -53,7 +53,7 @@
                 <!--/.bg-holder-->
 
                 <div class="card-body position-relative">
-                    
+
                     <div class="display-4 fs-4 mb-2 fw-normal font-sans-serif text-info"
                         data-countup='{"endValue":23.434,"decimalPlaces":2,"suffix":"k"}'>
                         <canvas id="hourlyAttendanceChart"></canvas>
@@ -238,7 +238,8 @@
         const hourlyChart = new Chart(document.getElementById('hourlyAttendanceChart').getContext('2d'), {
             type: 'bar',
             data: {
-                labels: {!! json_encode($hourlyAttendance->pluck('hour')->map(fn($h) => $h . ":00")) !!},
+                labels: {!! json_encode($hourlyAttendance->pluck('hour')->map(fn($h) => \Carbon\Carbon::createFromTime($h)->format('g A'))) !!}
+                ,
                 datasets: [{
                     label: 'Attendance Count',
                     data: {!! json_encode($hourlyAttendance->pluck('total')) !!},
@@ -255,11 +256,18 @@
                 },
                 scales: {
                     y: {
-                        beginAtZero: true
+                        beginAtZero: true,
+                        ticks: {
+                            stepSize: 1,
+                            callback: function (value) {
+                                return Number.isInteger(value) ? value : '';
+                            }
+                        }
                     }
                 }
             }
         });
+
     </script>
 
 

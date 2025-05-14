@@ -60,9 +60,9 @@
                         <tr>
                             <th class="sort" style="min-width: 3rem;" data-sort="no">No</th>
                             <th class="sort" style="min-width: 10rem;" data-sort="name">Full Name</th>
-                            <th class="sort" style="min-width: 5rem;" data-sort="parent">Parent Name</th>
+                            <th class="sort d-none d-md-table-cell" style="min-width: 5rem;" data-sort="parent">Parent Name</th>
                             <th class="sort" style="min-width: 5rem;" data-sort="rfid">RFID Tag</th>
-                            <th class="sort" style="min-width: 5rem;" data-sort="address">Address</th>
+                            <th class="sort d-none d-md-table-cell" style="min-width: 5rem;" data-sort="address">Address</th>
                             <th class="sort" style="min-width: 5rem;" data-sort="status">Status</th>
                             <th hidden class="sort" style="min-width: 5rem;" data-sort="rate">Rate</th>
                             <th class="no-sort"></th>
@@ -75,11 +75,11 @@
                             <tr class="btn-reveal-trigger" data-rate="{{ $students->rate_id }}">
                                 <td class="no align-middle">{{ $number++ }}</td>
                                 <td class="name align-middle">{{ $students->full_name }}</td>
-                                <td class="parent align-middle">
+                                <td class="parent align-middle d-none d-md-table-cell">
                                     <a href="profile_detail/{{$students->user_id}}">{{ $students->user->name }}</a>
                                 </td>
                                 <td class="rfid align-middle">{{ $students->rfid_tag }}</td>
-                                <td class="address align-middle">{{ $students->address }}</td>
+                                <td class="address align-middle d-none d-md-table-cell">{{ $students->address }}</td>
                                 <td hidden class="address align-middle">{{ $students->rate_id }}</td>
                                 @if ($students->status == 'Active')
                                     <td class="align-middle">

@@ -93,13 +93,13 @@
     </div>
   </div>
 
-  @if (Auth::user()->usertype === 'user')
-    <div class="card">
+
+  <div class="card">
     <div class="card-header bg-light">
     <div class="row align-items-center">
       <div class="col">
       <h5 class="mb-0" id="followers">Children
-      <span class="d-none d-sm-inline-block">({{ $count_students }})</span>
+        <span class="d-none d-sm-inline-block">({{ $count_students }})</span>
       </h5>
       </div>
       <div class="col text-end">
@@ -115,7 +115,7 @@
       <div class="bg-white dark__bg-1100 p-3 h-100">
       <a href="../../pages/user/profile.html">
       <img src="student/{{ $students->profile_photo }}" alt="{{ $students->full_name }}"
-      class="rounded-circle mb-3 shadow-sm" width="100" height="100" style="object-fit: cover;" />
+        class="rounded-circle mb-3 shadow-sm" width="100" height="100" style="object-fit: cover;" />
       </a>
       <h6 class="mb-1">
       <a href="#">{{ $students->full_name }}</a>
@@ -128,8 +128,8 @@
     @endforeach
     </div>
     </div>
-    </div>
-  @endif
+  </div>
+
 
 
 @endsection

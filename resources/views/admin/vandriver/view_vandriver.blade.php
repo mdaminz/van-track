@@ -39,9 +39,9 @@
                         <tr>
                             <th class="sort align-middle" style="min-width: 3rem;" data-sort="no">No</th>
                             <th class="sort align-middle" style="min-width: 10rem;" data-sort="name">Full Name</th>
-                            <th class="sort align-middle" style="min-width: 10rem;" data-sort="email">Email</th>
+                            <th class="sort align-middle d-none d-md-table-cell" style="min-width: 10rem;" data-sort="email">Email</th>
                             <th class="sort align-middle" style="min-width: 10rem;" data-sort="contact">Phone Number</th>
-                            <th class="sort align-middle" style="min-width: 10rem;" data-sort="address">Address</th>
+                            <th class="sort align-middle d-none d-md-table-cell" style="min-width: 10rem;" data-sort="address">Address</th>
                             <th class="sort align-middle" style="min-width: 5rem;" data-sort="status">Status</th>
                             <th class="no-sort"></th>
                         </tr>
@@ -55,9 +55,9 @@
 
                                 <td class="no align-middle" style="min-width: 3rem;">{{ $number++ }}</td>
                                 <td class="name align-middle" style="min-width: 10rem;">{{ $vandriver_data->name }}</td>
-                                <td class="email align-middle" style="min-width: 10rem;">{{ $vandriver_data->email }}</td>
+                                <td class="email align-middle d-none d-md-table-cell" style="min-width: 10rem;">{{ $vandriver_data->email }}</td>
                                 <td class="contact align-middle" style="min-width: 10rem;">{{ $vandriver_data->phone }}</td>
-                                <td class="address align-middle" style="min-width: 10rem;">{{ $vandriver_data->address }}</td>
+                                <td class="address align-middle d-none d-md-table-cell" style="min-width: 10rem;">{{ $vandriver_data->address }}</td>
                                 </td>
                                 @if ($vandriver_data->status == 'Active')
                                     <td class="align-middle"><span

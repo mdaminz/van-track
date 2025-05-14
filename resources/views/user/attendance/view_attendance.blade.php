@@ -56,7 +56,7 @@
                             <th class="sort" style="min-width: 5rem;" data-sort="address">Date Time</th>
                             <th class="sort" style="min-width: 5rem;" data-sort="order">RFID Tag</th>
                             <th class="sort" style="min-width: 10rem;" data-sort="date">Student Name</th>
-                            <th class="sort" style="min-width: 10rem;" data-sort="address">Address</th>
+                            <th class="sort d-none d-md-table-cell" style="min-width: 10rem;" data-sort="address">Address</th>
                             <th class="sort" data-sort="date">Status</th>
 
                             {{-- <th class="sort pe-1 align-middle white-space-nowrap text-center" data-sort="status">Photo
@@ -86,7 +86,7 @@
                                 <td class="date py-2"><a
                                         href="detail_student/{{$attendances->student->id}}">{{ $attendances->student->full_name }}</a>
                                 </td>
-                                <td class="address py-2">
+                                <td class="address py-2 d-none d-md-table-cell">
                                     {{ $attendances->student->address }}
                                 </td>
                                 @if ($attendances->status == 'In')

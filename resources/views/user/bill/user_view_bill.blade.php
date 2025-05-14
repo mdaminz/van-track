@@ -43,8 +43,8 @@
                         <tr>
                             <th class="sort" style="min-width: 3rem;" data-sort="no">No</th>
                             <th class="sort" style="min-width: 10rem;" data-sort="name">Student Name</th>
-                            <th class="sort" style="min-width: 5rem;" data-sort="name">School</th>
-                            <th class="sort" style="min-width: 5rem;" data-sort="name">Address</th>
+                            <th class="sort d-none d-md-table-cell" style="min-width: 5rem;" data-sort="name">School</th>
+                            <th class="sort d-none d-md-table-cell" style="min-width: 5rem;" data-sort="name">Address</th>
                             <th class="sort" style="min-width: 5rem;" data-sort="rfid">Amount</th>
 
                             <th class="sort" style="min-width: 5rem;" data-sort="address">Due</th>
@@ -61,8 +61,8 @@
 
                                 <td class="no align-middle">VNTRK{{ $unpaidBills->id }}</td>
                                 <td class="name align-middle">{{ $unpaidBills->student->full_name }}</td>
-                                <td class="name align-middle">{{ $unpaidBills->student->school->name }}</td>
-                                <td class="name align-middle">{{ $unpaidBills->student->address }}</td>
+                                <td class="name align-middle d-none d-md-table-cell">{{ $unpaidBills->student->school->name }}</td>
+                                <td class="name align-middle d-none d-md-table-cell">{{ $unpaidBills->student->address }}</td>
                                 <td class="rifd align-middle">RM {{ $unpaidBills->amount }}</td>
 
                                 </td>
@@ -141,8 +141,8 @@
                         <tr>
                             <th class="sort" style="min-width: 3rem;" data-sort="no">No</th>
                             <th class="sort" style="min-width: 10rem;" data-sort="name">Student Name</th>
-                            <th class="sort" style="min-width: 5rem;" data-sort="name">School</th>
-                            <th class="sort" style="min-width: 5rem;" data-sort="name">Address</th>
+                            <th class="sort d-none d-md-table-cell" style="min-width: 5rem;" data-sort="name">School</th>
+                            <th class="sort d-none d-md-table-cell" style="min-width: 5rem;" data-sort="name">Address</th>
                             <th class="sort" style="min-width: 5rem;" data-sort="rfid">Amount</th>
 
                             <th class="sort" style="min-width: 5rem;" data-sort="address">Due</th>
@@ -159,8 +159,8 @@
 
                                 <td class="no align-middle">VNTRK{{ $pendingBills->id }}</td>
                                 <td class="name align-middle">{{ $pendingBills->student->full_name }}</td>
-                                <td class="name align-middle">{{ $pendingBills->student->school->name }}</td>
-                                <td class="name align-middle">{{ $pendingBills->student->address }}</td>
+                                <td class="name align-middle d-none d-md-table-cell">{{ $pendingBills->student->school->name }}</td>
+                                <td class="name align-middle d-none d-md-table-cell">{{ $pendingBills->student->address }}</td>
                                 <td class="rifd align-middle">RM {{ $pendingBills->amount }}</td>
 
                                 </td>
@@ -239,8 +239,8 @@
                         <tr>
                             <th class="sort" style="min-width: 3rem;" data-sort="no">No</th>
                             <th class="sort" style="min-width: 10rem;" data-sort="name">Student Name</th>
-                            <th class="sort" style="min-width: 5rem;" data-sort="name">School</th>
-                            <th class="sort" style="min-width: 5rem;" data-sort="name">Address</th>
+                            <th class="sort d-none d-md-table-cell" style="min-width: 5rem;" data-sort="name">School</th>
+                            <th class="sort d-none d-md-table-cell" style="min-width: 5rem;" data-sort="name">Address</th>
                             <th class="sort" style="min-width: 5rem;" data-sort="rfid">Amount</th>
 
                             <th class="sort" style="min-width: 5rem;" data-sort="address">Due</th>
@@ -257,8 +257,8 @@
 
                                 <td class="no align-middle">VNTRK{{ $paidBills->id }}</td>
                                 <td class="name align-middle">{{ $paidBills->student->full_name }}</td>
-                                <td class="name align-middle">{{ $paidBills->student->school->name }}</td>
-                                <td class="name align-middle">{{ $paidBills->student->address }}</td>
+                                <td class="name align-middle d-none d-md-table-cell">{{ $paidBills->student->school->name }}</td>
+                                <td class="name align-middle d-none d-md-table-cell">{{ $paidBills->student->address }}</td>
                                 <td class="rifd align-middle">RM {{ $paidBills->amount }}</td>
 
                                 </td>

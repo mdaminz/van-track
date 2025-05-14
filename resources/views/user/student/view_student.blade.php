@@ -18,7 +18,7 @@
         </div>
     </div>
     <div class="card mb-3" id="ordersTable"
-        data-list='{"valueNames":["order","date","address","status","amount"],"page":10,"pagination":true}'>
+        data-list='{"valueNames":["no","name","rfid","relationship","contact", "address"],"page":10,"pagination":true}'>
         <div class="card-header">
             <div class="row flex-between-center">
                 <div class="col-4 col-sm-auto d-flex align-items-center pe-0">
@@ -48,20 +48,20 @@
                                         data-bulk-select='{"body":"table-orders-body","actions":"orders-bulk-actions","replacedElement":"orders-actions"}' />
                                 </div>
                             </th> --}}
-                            <th class="sort pe-1 align-middle white-space-nowrap" data-sort="order">No</th>
-                            <th class="sort pe-1 align-middle white-space-nowrap" data-sort="order">Full Name</th>
-                            <th class="sort pe-1 align-middle white-space-nowrap pe-7" data-sort="date">RFID Tag</th>
+                            <th class="sort pe-1 align-middle white-space-nowrap" data-sort="no">No</th>
+                            <th class="sort pe-1 align-middle white-space-nowrap" data-sort="name">Full Name</th>
+                            <th class="sort pe-1 align-middle white-space-nowrap pe-7" data-sort="rfid">RFID Tag</th>
                             @if (Auth::user()->usertype == 'admin')
                                 <th class="sort pe-1 align-middle white-space-nowrap" data-sort="address"
                                     style="min-width: 12.5rem;">Guardian</th>
                             @endif
-                            <th class="sort pe-1 align-middle white-space-nowrap" data-sort="address"
+                            <th class="sort pe-1 align-middle white-space-nowrap d-none d-md-table-cell" data-sort="relationship"
                                 style="min-width: 12.5rem;">Relationship</th>
-                            <th class="sort pe-1 align-middle white-space-nowrap" data-sort="address"
+                            <th class="sort pe-1 align-middle white-space-nowrap d-none d-md-table-cell" data-sort="contact"
                                 style="min-width: 12.5rem;">Emergency Contact</th>
-                            <th class="sort pe-1 align-middle white-space-nowrap" data-sort="address"
+                            <th class="sort pe-1 align-middle white-space-nowrap d-none d-md-table-cell" data-sort="address"
                                 style="min-width: 12.5rem;">Address</th>
-                            <th class="sort pe-1 align-middle white-space-nowrap" data-sort="address"
+                            <th class="sort pe-1 align-middle white-space-nowrap" data-sort="status"
                                 style="min-width: 5rem;">Status</th>
                             {{-- <th class="sort pe-1 align-middle white-space-nowrap text-center" data-sort="status">
                                 Profile
@@ -76,19 +76,19 @@
                         @foreach ($students as $students)
                             <tr class="btn-reveal-trigger">
 
-                                <td class="order py-2 align-middle white-space-nowrap">{{ $number++ }}</td>
+                                <td class="no py-2 align-middle white-space-nowrap">{{ $number++ }}</td>
                                 <!-- Increment the counter -->
-                                <td class="order py-2 align-middle white-space-nowrap">{{ $students->full_name }}</td>
+                                <td class="name py-2 align-middle white-space-nowrap">{{ $students->full_name }}</td>
                                 </td>
                                 <td class="date py-2 align-middle">{{ $students->rfid_tag }}</td>
                                 @if (Auth::user()->usertype == 'admin')
                                     <td class="date py-2 align-middle">{{ $students->user->name }}</td>
                                 @endif
-                                <td class="address py-2 align-middle white-space-nowrap">{{ $students->relationship }}
+                                <td class="relationship py-2 align-middle white-space-nowrap d-none d-md-table-cell">{{ $students->relationship }}
                                 </td>
-                                <td class="address py-2 align-middle white-space-nowrap">{{ $students->emergency_contact }}
+                                <td class="contact py-2 align-middle white-space-nowrap d-none d-md-table-cell">{{ $students->emergency_contact }}
                                 </td>
-                                <td class="address py-2 align-middle white-space-nowrap">{{ $students->address }}
+                                <td class="address py-2 align-middle white-space-nowrap d-none d-md-table-cell">{{ $students->address }}
                                 </td>
                                 </td>
                                 @if ($students->status == 'Active')

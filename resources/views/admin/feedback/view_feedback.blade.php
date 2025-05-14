@@ -47,7 +47,22 @@
             </div>
         </div>
     </div>
+    <div class="col-sm-6 col-md-12 mb-3">
+        <div class="card overflow-hidden" style="min-width: 12rem">
+            <div class="bg-holder bg-card">
+            </div>
+            <!--/.bg-holder-->
 
+            <div class="card-body position-relative">
+
+                <div class="display-4 fs-4 mb-2 fw-normal font-sans-serif text-info">
+                    <!-- This is the chart container -->
+                    <canvas id="ratingChart" width="500" height="300" style="max-height: 300px;"></canvas>
+
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class="card mb-3" id="ordersTable"
         data-list='{"valueNames":["no","rating","email","message",],"page":10,"pagination":true}'>
@@ -64,6 +79,7 @@
                 </div> --}}
             </div>
         </div>
+
         <div class="card-body p-0">
             <div class="table-responsive scrollbar">
                 <table class="table table-sm table-striped fs--1 mb-0 overflow-hidden">
@@ -136,22 +152,7 @@
         </div>
     </div>
 
-    <div class="col-sm-6 col-md-12">
-        <div class="card overflow-hidden" style="min-width: 12rem">
-            <div class="bg-holder bg-card">
-            </div>
-            <!--/.bg-holder-->
 
-            <div class="card-body position-relative">
-
-                <div class="display-4 fs-4 mb-2 fw-normal font-sans-serif text-info">
-                    <!-- This is the chart container -->
-                    <canvas id="ratingChart" width="500" height="300" style="max-height: 300px;"></canvas>
-
-                </div>
-            </div>
-        </div>
-    </div>
 
 
 

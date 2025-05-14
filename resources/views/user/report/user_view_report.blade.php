@@ -49,9 +49,9 @@
                     <thead class="bg-200 text-900">
                         <tr>
                             <th class="sort align-middle" style="min-width: 3rem;" data-sort="no">No</th>
-                            <th class="sort align-middle" style="min-width: 5rem;" data-sort="email">Type</th>
+                            <th class="sort align-middle d-none d-md-table-cell" style="min-width: 5rem;" data-sort="email">Type</th>
                             <th class="sort align-middle" style="min-width: 15rem;" data-sort="contact">Subject</th>
-                            <th class="sort align-middle" style="min-width: 10rem;" data-sort="address">Resolved At</th>
+                            <th class="sort align-middle d-none d-md-table-cell" style="min-width: 10rem;" data-sort="address">Resolved At</th>
                             <th class="sort align-middle" style="min-width: 10rem;" data-sort="status">Status</th>
                             <th class="no-sort"></th>
                         </tr>
@@ -64,9 +64,9 @@
                             <tr class="btn-reveal-trigger">
 
                                 <td class="no align-middle" style="min-width: 3rem;">{{ $number++ }}</td>
-                                <td class="email align-middle" style="min-width: 5rem;">{{ $report_data->type }}</td>
+                                <td class="email align-middle d-none d-md-table-cell" style="min-width: 5rem;">{{ $report_data->type }}</td>
                                 <td class="contact align-middle" style="min-width: 10rem;">{{ $report_data->subject }}</td>
-                                <td class="address align-middle" style="min-width: 10rem;">
+                                <td class="address align-middle d-none d-md-table-cell" style="min-width: 10rem;">
                                     {{ \Carbon\Carbon::parse($report_data->resolved_at)->format('d M Y, h:i A') }}</td>
                                 </td>
                                 @if ($report_data->status == 'Resolved')
@@ -137,9 +137,9 @@
                     <thead class="bg-200 text-900">
                         <tr>
                             <th class="sort align-middle" style="min-width: 3rem;" data-sort="no">No</th>
-                            <th class="sort align-middle" style="min-width: 5rem;" data-sort="email">Type</th>
+                            <th class="sort align-middle d-none d-md-table-cell" style="min-width: 5rem;" data-sort="email">Type</th>
                             <th class="sort align-middle" style="min-width: 15rem;" data-sort="contact">Subject</th>
-                            <th class="sort align-middle" style="min-width: 10rem;" data-sort="address">Resolved At</th>
+                            <th class="sort align-middle d-none d-md-table-cell" style="min-width: 10rem;" data-sort="address">Resolved At</th>
                             <th class="sort align-middle" style="min-width: 10rem;" data-sort="status">Status</th>
                             <th class="no-sort"></th>
                         </tr>
@@ -152,9 +152,9 @@
                             <tr class="btn-reveal-trigger">
 
                                 <td class="no align-middle" style="min-width: 3rem;">{{ $number++ }}</td>
-                                <td class="email align-middle" style="min-width: 5rem;">{{ $report_history->type }}</td>
+                                <td class="email align-middle d-none d-md-table-cell" style="min-width: 5rem;">{{ $report_history->type }}</td>
                                 <td class="contact align-middle" style="min-width: 10rem;">{{ $report_history->subject }}</td>
-                                <td class="address align-middle" style="min-width: 10rem;">
+                                <td class="address align-middle d-none d-md-table-cell" style="min-width: 10rem;">
                                     {{ \Carbon\Carbon::parse($report_history->resolved_at)->format('d M Y, h:i A') }}</td>
                                 </td>
                                 @if ($report_history->status == 'Resolved')
