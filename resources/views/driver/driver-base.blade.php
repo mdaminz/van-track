@@ -252,8 +252,8 @@
                                             <div class="col-auto">
                                                 <h6 class="card-header-title mb-0">Notifications</h6>
                                             </div>
-                                            <div class="col-auto ps-0 ps-sm-3"><a class="card-link fw-normal"
-                                                    href="#">Mark all as read</a></div>
+                                            {{-- <div class="col-auto ps-0 ps-sm-3"><a class="card-link fw-normal"
+                                                    href="#">Mark all as read</a></div> --}}
                                         </div>
                                     </div>
                                     <div class="scrollbar-overlay" style="max-height:50rem">
@@ -314,8 +314,8 @@
 
                                         </div>
                                     </div>
-                                    <div class="card-footer text-center border-top"><a class="card-link d-block"
-                                            href="app/social/notifications.html">View all</a></div>
+                                    {{-- <div class="card-footer text-center border-top"><a class="card-link d-block"
+                                            href="app/social/notifications.html">View all</a></div> --}}
                                 </div>
                             </div>
 

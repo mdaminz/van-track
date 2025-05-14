@@ -393,8 +393,8 @@
 
                                         </div>
                                     </div>
-                                    <div class="card-footer text-center border-top"><a class="card-link d-block"
-                                            href="app/social/notifications.html">View all</a></div>
+                                    {{-- <div class="card-footer text-center border-top"><a class="card-link d-block"
+                                            href="app/social/notifications.html">View all</a></div> --}}
                                 </div>
                             </div>
 
