@@ -136,15 +136,29 @@
                                     </div>
                                 </a>
 
-
-
-                                <!-- parent pages--><a class="nav-link" href="driver_view_attendance" role="button">
-                                    <div class="d-flex align-items-center"><span class="nav-link-icon"><span
-                                                class="far fa-window-restore"></span></span><span
-                                            class="nav-link-text ps-1">Attendance</span>
-                                    </div>
-                                </a>
                             </li>
+                            <!-- parent pages--><a class="nav-link dropdown-indicator" href="#report" role="button"
+                                data-bs-toggle="collapse" aria-expanded="false" aria-controls="report">
+                                <div class="d-flex align-items-center"><span class="nav-link-icon"><span
+                                            class="far fa-window-restore"></span></span><span
+                                        class="nav-link-text ps-1">Attendance</span>
+                                </div>
+                            </a>
+                            <ul class="nav collapse false" id="report">
+                                <li class="nav-item"><a class="nav-link" href="/schedule_list">
+                                        <div class="d-flex align-items-center"><span
+                                                class="nav-link-text ps-1">RT Attendance</span>
+                                        </div>
+                                    </a>
+                                    <!-- more inner pages-->
+                                </li>
+                                <li class="nav-item"><a class="nav-link" href="/driver_view_attendance">
+                                        <div class="d-flex align-items-center"><span class="nav-link-text ps-1">All Attendance</span>
+                                        </div>
+                                    </a>
+                                    <!-- more inner pages-->
+                                </li>
+                            </ul>
                             <li class="nav-item">
                                 <!-- label-->
                                 <div class="row navbar-vertical-label-wrapper mt-3 mb-2">

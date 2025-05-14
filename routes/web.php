@@ -209,5 +209,10 @@ Route::post('/store-comment', [AdminController::class, 'store_comment'])->name('
 //calendar driver
 route::get('/driver_calendar', [DriverController::class, 'driver_calendar']);
 
+//driver attendance list
 
+route::get('/schedule_list', [DriverController::class, 'schedule_list']);
 
+route::get('/student_listToSchool/{id}', [DriverController::class, 'student_listToSchool']);
+
+route::get('/student_listToHome/{id}', [DriverController::class, 'student_listToHome']);
