@@ -18,8 +18,8 @@
             <div class="row">
                 <div class="col-lg-8">
                     <h3>Schedule List</h3>
-                    <p class="mb-0">Below is the list of all schedule currently assign to you.
-                    </p>
+                    {{-- <p class="mb-0">Below is the list of all schedule currently assign to you.
+                    </p> --}}
                 </div>
             </div>
         </div>

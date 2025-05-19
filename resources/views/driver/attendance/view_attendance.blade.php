@@ -18,7 +18,7 @@
             <div class="row">
                 <div class="col-lg-8">
                     <h3>Student Attendance Records</h3>
-                    <p class="mb-0">Below are the attendance details of students registered in the system.</p>
+                    {{-- <p class="mb-0">Below are the attendance details of students registered in the system.</p> --}}
                 </div>
             </div>
         </div>

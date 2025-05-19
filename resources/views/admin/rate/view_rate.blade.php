@@ -10,8 +10,8 @@
         <div class="card-body position-relative">
             <div class="row">
                 <div class="col-lg-8">
-                    <h3>Rate Management</h3>
-                    <p class="mb-0">Below is the list of all rates records in the system.</p>
+                    <h3>Rate & Schedule Management</h3>
+                    {{-- <p class="mb-0">Below is the list of all rates records in the system.</p> --}}
                 </div>
             </div>
         </div>
@@ -39,9 +39,9 @@
                         {{-- <button class="btn btn-falcon-default btn-sm mx-2" type="button"><span class="fas fa-filter"
                                 data-fa-transform="shrink-3 down-2"></span><span
                                 class="d-none d-sm-inline-block ms-1">Filter</span></button> --}}
-                        <button class="btn btn-falcon-default btn-sm" type="button"><span class="fas fa-external-link-alt"
+                        {{-- <button class="btn btn-falcon-default btn-sm" type="button"><span class="fas fa-external-link-alt"
                                 data-fa-transform="shrink-3 down-2"></span><span
-                                class="d-none d-sm-inline-block ms-1">Export</span></button>
+                                class="d-none d-sm-inline-block ms-1">Export</span></button> --}}
                     </div>
                 </div>
             </div>

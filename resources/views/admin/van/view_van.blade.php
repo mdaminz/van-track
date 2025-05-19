@@ -13,7 +13,7 @@
             <div class="row">
                 <div class="col-lg-8">
                     <h3>Track Vans in Real Time</h3>
-                    <p class="mb-0">Below is the list of vans available for live location tracking.</p>
+                    {{-- <p class="mb-0">Below is the list of vans available for live location tracking.</p> --}}
                 </div>
             </div>
         </div>

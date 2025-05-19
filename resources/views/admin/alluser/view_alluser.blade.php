@@ -11,7 +11,6 @@
             <div class="row">
                 <div class="col-lg-8">
                     <h3>User Management</h3>
-                    <p class="mb-0">Below is the list of all users currently registered in the system.</p>
                 </div>
             </div>
         </div>

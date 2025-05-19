@@ -11,12 +11,27 @@
 <base href="/public">
 
 @section('body-content')
+
+    <div class="card mb-3">
+        <div class="bg-holder d-none d-lg-block bg-card"
+            style="background-image:url(../../assets/img/icons/spot-illustrations/corner-4.png);">
+        </div>
+
+        <div class="card-body position-relative">
+            <div class="row">
+                <div class="col-lg-8">
+                    <h3>Attendance List</h3>
+                    {{-- <p class="mb-0">Below is the list of all schedule currently assign to you.
+                    </p> --}}
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="row g-3 mb-3">
         <div class="col-lg-5">
             <div class="card mb-3">
                 <div class="card-header position-relative min-vh-25 mb-7">
-                    <div class="bg-holder rounded-3 rounded-bottom-0"
-                        style="background-image:url(homepage/img/about.jpg);">
+                    <div class="bg-holder rounded-3 rounded-bottom-0" style="background-image:url(homepage/img/about.jpg);">
                     </div>
                     <!--/.bg-holder-->
 

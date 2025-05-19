@@ -45,7 +45,7 @@
       <div class="card-body bg-light">
       <form action="" method="POST" class="row g-3">
         <div class="col-lg-6">
-        <label class="form-label">User Type</label>
+        <label class="form-label">User Role</label>
         <input name="name" class="form-control" type="text" value="{{ ucfirst($users->usertype) }}" disabled />
         </div>
         <div class="col-lg-6 mb-0">
@@ -118,10 +118,10 @@
         class="rounded-circle mb-3 shadow-sm" width="100" height="100" style="object-fit: cover;" />
       </a>
       <h6 class="mb-1">
-      <a href="#">{{ $students->full_name }}</a>
+      <a href="detail_student/{{$students->id}}">{{ $students->full_name }}</a>
       </h6>
       <p class="fs--2 mb-1">
-      <a class="text-700" href="#!">{{ $students->school->name }}</a>
+      <a class="text-700">{{ $students->school->name }}</a>
       </p>
       </div>
       </div>

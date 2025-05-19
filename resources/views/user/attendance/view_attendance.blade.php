@@ -10,7 +10,7 @@
             <div class="row">
                 <div class="col-lg-8">
                     <h3>Children Attendance Records</h3>
-                    <p class="mb-0">Below are the attendance details of Children registered in the system.</p>
+                    {{-- <p class="mb-0">Below are the attendance details of Children registered in the system.</p> --}}
                 </div>
             </div>
         </div>

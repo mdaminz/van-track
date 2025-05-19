@@ -19,7 +19,7 @@
             <div class="row">
                 <div class="col-lg-8">
                     <h3>Calendar</h3>
-                    <p class="mb-0">Below is your schedule of pickups and drop-offs.</p>
+                    {{-- <p class="mb-0">Below is your schedule of pickups and drop-offs.</p> --}}
                 </div>
             </div>
         </div>
