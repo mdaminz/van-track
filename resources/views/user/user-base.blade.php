@@ -252,6 +252,8 @@
                         <li class="nav-item">
                             <h5 class="text-primary d-none d-md-block"
                                 style="font-size: 15px; margin-right: 10px; font-weight: medium;">
+                                <small class="badge fw-semi-bold rounded-pill status badge-soft-primary"
+                                    style="margin-right: 10px">Parent</small>
                                 {{ Auth::user()->name }}
                             </h5>
                         </li>

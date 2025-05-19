@@ -796,7 +796,8 @@
                 <nav class="navbar navbar-light navbar-glass navbar-top navbar-expand">
 
                     <button class="btn navbar-toggler-humburger-icon navbar-toggler me-1 me-sm-3" type="button"
-                        data-bs-toggle="collapse" data-bs-target="#navbarVerticalCollapse"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#navbarVerg:\My Drive\Falcon v3\public\modules\icons\font-awesome.htmlticalCollapse"
                         aria-controls="navbarVerticalCollapse" aria-expanded="false"
                         aria-label="Toggle Navigation"><span class="navbar-toggle-icon"><span
                                 class="toggle-line"></span></span></button>
@@ -810,6 +811,8 @@
                         <li class="nav-item">
                             <h5 class="text-primary d-none d-md-block"
                                 style="font-size: 15px; margin-right: 10px; font-weight: medium;">
+                                <small class="badge fw-semi-bold rounded-pill status badge-soft-primary"
+                                    style="margin-right: 10px">Admin</small>
                                 {{ Auth::user()->name }}
                             </h5>
                         </li>
@@ -935,7 +938,8 @@
                                                             </div>
                                                         </div>
                                                         <div class="notification-body">
-                                                            <p class="mb-1">{{ $feedbackData->user->name }} has sent a {{$feedbackData->rating}} star feedback!
+                                                            <p class="mb-1">{{ $feedbackData->user->name }} has sent a
+                                                                {{$feedbackData->rating}} star feedback!
                                                             </p>
                                                             </p>
                                                             <span class="me-2" role="img" aria-label="Emoji">🆕</span>
@@ -973,8 +977,8 @@
 
                                         </div>
                                     </div>
-                                    <div class="card-footer text-center border-top"><a class="card-link d-block"
-                                            href="app/social/notifications.html">View all</a></div>
+                                    {{-- <div class="card-footer text-center border-top"><a class="card-link d-block"
+                                            href="app/social/notifications.html">View all</a></div> --}}
                                 </div>
                             </div>
 
