@@ -854,7 +854,7 @@
                                             @foreach ($user_data as $userData)
 
                                                 <div class="list-group-item">
-                                                    <a class="notification notification-flush" href="#!">
+                                                    <a class="notification notification-flush" href="view_alluser">
                                                         <div class="notification-avatar">
                                                             <div class="avatar avatar-2xl me-3">
                                                                 <img class="rounded-circle"
@@ -877,7 +877,7 @@
                                             @foreach ($pending_data as $pendingData)
 
                                                 <div class="list-group-item">
-                                                    <a class="notification notification-flush" href="#!">
+                                                    <a class="notification notification-flush" href="pending_bill">
                                                         <div class="notification-avatar">
                                                             <div class="avatar avatar-2xl me-3">
                                                                 <img class="rounded-circle"
@@ -902,7 +902,7 @@
                                             @foreach ($report_data as $reportData)
 
                                                 <div class="list-group-item">
-                                                    <a class="notification notification-flush" href="#!">
+                                                    <a class="notification notification-flush" href="view_report">
                                                         <div class="notification-avatar">
                                                             <div class="avatar avatar-2xl me-3">
                                                                 <img class="rounded-circle"
@@ -929,7 +929,7 @@
                                             @foreach ($feedback_data as $feedbackData)
 
                                                 <div class="list-group-item">
-                                                    <a class="notification notification-flush" href="#!">
+                                                    <a class="notification notification-flush" href="admin_view_feedback">
                                                         <div class="notification-avatar">
                                                             <div class="avatar avatar-2xl me-3">
                                                                 <img class="rounded-circle"
@@ -955,7 +955,7 @@
                                             @foreach ($forum_data as $forumData)
 
                                                 <div class="list-group-item">
-                                                    <a class="notification notification-flush" href="#!">
+                                                    <a class="notification notification-flush" href="view_forum_post">
                                                         <div class="notification-avatar">
                                                             <div class="avatar avatar-2xl me-3">
                                                                 <img class="rounded-circle"

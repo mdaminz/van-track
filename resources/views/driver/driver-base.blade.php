@@ -266,7 +266,7 @@
                                             @foreach ($report_data as $reportData)
 
                                                 <div class="list-group-item">
-                                                    <a class="notification notification-flush" href="#!">
+                                                    <a class="notification notification-flush" href="user_view_report">
                                                         <div class="notification-avatar">
                                                             <div class="avatar avatar-2xl me-3">
                                                                 <img class="rounded-circle"
@@ -293,7 +293,7 @@
                                             @foreach ($forum_data as $forumData)
 
                                                 <div class="list-group-item">
-                                                    <a class="notification notification-flush" href="#!">
+                                                    <a class="notification notification-flush" href="view_forum_post">
                                                         <div class="notification-avatar">
                                                             <div class="avatar avatar-2xl me-3">
                                                                 <img class="rounded-circle"
