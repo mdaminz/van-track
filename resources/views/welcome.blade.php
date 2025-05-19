@@ -17,8 +17,8 @@
                                 <p class="fs-5 fw-medium text-white mb-4 pb-2">Stay connected, informed, and stress-free
                                     with our real-time tracking and communication system.</p>
                                 <!-- <a href="" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Read
-                                                More</a>
-                                            <a href="" class="btn btn-light py-md-3 px-md-5 animated slideInRight">Free Quote</a> -->
+                                                                More</a>
+                                                            <a href="" class="btn btn-light py-md-3 px-md-5 animated slideInRight">Free Quote</a> -->
                             </div>
                         </div>
                     </div>
@@ -37,8 +37,8 @@
                                 <p class="fs-5 fw-medium text-white mb-4 pb-2">Track routes, manage attendance, and simplify
                                     payments with VanTrack's advanced tools system.</p>
                                 <!-- <a href="" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Read
-                                                More</a>
-                                            <a href="" class="btn btn-light py-md-3 px-md-5 animated slideInRight">Free Quote</a> -->
+                                                                More</a>
+                                                            <a href="" class="btn btn-light py-md-3 px-md-5 animated slideInRight">Free Quote</a> -->
                             </div>
                         </div>
                     </div>
@@ -57,8 +57,8 @@
                                 <p class="fs-5 fw-medium text-white mb-4 pb-2">Experience reliable attendance logging,
                                     optimized scheduling, and seamless coordination every day.</p>
                                 <!-- <a href="" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Read
-                                                More</a>
-                                            <a href="" class="btn btn-light py-md-3 px-md-5 animated slideInRight">Free Quote</a> -->
+                                                                More</a>
+                                                            <a href="" class="btn btn-light py-md-3 px-md-5 animated slideInRight">Free Quote</a> -->
                             </div>
                         </div>
                     </div>
@@ -354,7 +354,8 @@
     </div>
     <!-- Choose Us End -->
 
-    {{-- Same delay 3.0s // School type change --}}
+
+
     <!-- Services Start -->
     <div class="container-xxl py-5">
         <div class="container">
@@ -371,11 +372,14 @@
                 </div>
             </div>
             <div class="row g-4 portfolio-container">
-                @foreach ($schools as $schools)
-                    <div class="col-lg-4 col-md-6 portfolio-item {{ $schools->type }} wow fadeInUp" data-wow-delay="0.4s">
+                @foreach ($rates as $rates_data)
+                    <div class="col-lg-4 col-md-6 portfolio-item {{ $rates_data->school->type }} wow fadeInUp"
+                        data-wow-delay="0.4s">
+                        {{-- Price badge in top-right --}}
                         <div class="rounded overflow-hidden">
                             <div class="position-relative overflow-hidden">
-                                <img style="height: 300px;" class="img-fluid w-100" src="school/{{ $schools->image }}" alt="">
+                                <img style="height: 300px;" class="img-fluid w-100"
+                                    src="school/{{ $rates_data->school->image }}" alt="">
                                 {{-- <div class="portfolio-overlay">
                                     <a class="btn btn-square btn-outline-light mx-1" href="school/{{ $schools->image }}"
                                         data-lightbox="portfolio"><i class="fa fa-eye"></i></a>
@@ -384,15 +388,21 @@
                             </div>
                             <div class="border border-5 border-light border-top-0 p-4">
                                 <p class="text-primary fw-medium mb-2">
-                                    @if ($schools->type == 'first')
+                                    @if ($rates_data->school->type == 'first')
                                         Primary School
                                     @else
                                         Secondary School
                                     @endif
                                 </p>
-                                <h5 class="lh-base mb-0">{{ $schools->name }}</a></h5>
-                                <p class="fw-normal mb-0">{{ $schools->first_address }}</p>
-                                <p class="fw-normal mb-0">{{ $schools->second_address }}</p>
+                                <div class="position-absolute top-0 end-0 m-4">
+                                    <span class="badge bg-primary rounded-pill shadow">
+                                        RM {{ number_format($rates_data->price, 2) }}
+                                    </span>
+                                </div>
+                                <h5 class="lh-base mb-0">{{ $rates_data->district }}</a> ➡️</h5>
+                                <h5 class="lh-base mb-0">{{ $rates_data->school->name }}</a></h5>
+                                {{-- <p class="fw-normal mb-0">{{ $rates_data->school->first_address }}</p> --}}
+                                <p class="fw-normal mb-0">{{ $rates_data->school->second_address }}</p>
                             </div>
                         </div>
                     </div>
@@ -401,8 +411,6 @@
         </div>
     </div>
     <!-- Services End -->
-
-
     {{-- <!-- Quote Start -->
     <div class="container-fluid bg-light overflow-hidden my-5 px-lg-0">
         <div class="container quote px-lg-0">

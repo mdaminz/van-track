@@ -48,7 +48,9 @@ class HomeController extends Controller
 
         $feedbacks = Feedback::with('user')->get(); // Eager load students
 
-        return view('service', compact('feedbacks', 'schools'));
+        $rates = Rate::all();
+
+        return view('service', compact('feedbacks', 'schools', 'rates'));
     }
 
     public function index()
@@ -59,11 +61,13 @@ class HomeController extends Controller
 
         $schools = School::all();
 
+        $rates = Rate::all();
+
         $feedbacks = Feedback::with('user')->get(); // Eager load students
 
         $team_members = User::whereIn('id', [1, 2, 3])->get();
 
-        return view('welcome', compact('feedbacks', 'schools', 'userCount', 'studentCount', 'team_members'));
+        return view('welcome', compact('feedbacks', 'schools', 'userCount', 'studentCount', 'team_members', 'rates'));
     }
 
 
