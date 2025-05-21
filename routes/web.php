@@ -39,6 +39,7 @@ route::get('/delete_school/{id}', [AdminController::class, 'delete_school']);
 
 //Attendance
 Route::get('/admin_view_attendance', [AdminController::class, 'admin_view_attendance'])->name('admin_view_attendance');
+Route::get('/attendance_detail/{id}', [AdminController::class, 'attendance_detail'])->name('attendance_detail');
 
 //Feedback
 route::get('/admin_view_feedback', [AdminController::class, 'admin_view_feedback']);

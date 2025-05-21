@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('capacity')->nullable();
             $table->string('coor')->nullable();
             $table->string('image')->nullable();
-            $table->string('user_id')->nullable();
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

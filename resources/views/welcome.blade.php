@@ -388,9 +388,9 @@
                             </div>
                             <div class="border border-5 border-light border-top-0 p-4">
                                 <p class="text-primary fw-medium mb-2">
-                                    @if ($rates_data->school->type == 'first')
+                                    @if ($rates_data->school->type === 'first')
                                         Primary School
-                                    @else
+                                    @elseif ($rates_data->school->type === 'second')
                                         Secondary School
                                     @endif
                                 </p>

@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('rfid_tag')->nullable();
             $table->string('status')->nullable();
-            $table->string('student_id')->nullable();
+            $table->unsignedBigInteger('student_id')->nullable();
             $table->timestamps();
 
             $table->foreign('student_id')->references('id')->on('students')->onDelete('cascade');

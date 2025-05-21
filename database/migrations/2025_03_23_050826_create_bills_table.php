@@ -18,7 +18,7 @@ return new class extends Migration
             $table->date('due_date');
             $table->string('status')->default('Pending'); // Pending, Paid, Overdue
 
-            $table->string('user_id')->nullable();
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->string('receipt')->nullable();
 
             $table->timestamps();

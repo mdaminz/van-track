@@ -18,22 +18,23 @@ return new class extends Migration
             $table->string('address')->nullable();
             $table->string('postcode')->nullable();
             $table->string('district')->nullable();
-            $table->string('school_id')->nullable();
             $table->string('profile_photo')->default('no-profile.png');
             $table->string('rfid_tag')->nullable();
             $table->string('emergency_contact')->nullable();
             $table->string('relationship')->nullable();
             $table->string('status')->nullable();
-
-            $table->string('user_id')->nullable();
-            $table->string('rate_id')->nullable();
             
-            $table->timestamps();
-
+            $table->unsignedBigInteger('school_id')->nullable();
+            $table->unsignedBigInteger('user_id')->nullable();
+            $table->unsignedBigInteger('rate_id')->nullable();
+            
             // Foreign key constraints
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('rate_id')->references('id')->on('rates')->onDelete('cascade');
             $table->foreign('school_id')->references('id')->on('schools')->onDelete('cascade');
+            
+            $table->timestamps();
+
             
         });
     }

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('rates', function (Blueprint $table) {
             $table->id();
-            $table->string('school_id')->nullable();
+            $table->unsignedBigInteger('school_id')->nullable();
             $table->string('district')->nullable();
             $table->decimal('price', 8, 2)->nullable();
             $table->string('van_id')->nullable();

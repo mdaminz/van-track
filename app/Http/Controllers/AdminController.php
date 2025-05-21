@@ -252,6 +252,22 @@ class AdminController extends Controller
         ));
     }
 
+    public function attendance_detail(Request $request, $id)
+    {
+        $student = Student::findOrFail($id);
+        $isToday = $request->today == 1;
+
+        $attendance = $student->attendances()
+            ->when($isToday, function ($query) {
+                $query->whereDate('created_at', now()->toDateString());
+            })
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        return view('admin.attendance.attendance_detail', compact('student', 'attendance', 'isToday'));
+    }
+
+
 
 
     public function admin_view_feedback()

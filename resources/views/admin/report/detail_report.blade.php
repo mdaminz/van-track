@@ -33,7 +33,9 @@
                 <div class="card-body">
                     <h5 class="fs-0 mb-3">{{$report_data->subject}}</h5>
                     <p>{!! nl2br(e($report_data->description)) !!}</p>
-                    <img class="img-fluid w-100" style="" src="report/{{$report_data->image}}" alt="">
+                    @if(!empty($report_data->image) && $report_data->image !== 'null')
+                        <img class="img-fluid w-100" src="report/{{$report_data->image}}" alt="">
+                    @endif
                 </div>
             </div>
         </div>
@@ -51,7 +53,8 @@
                         <p class="mb-1">Address: {{$report_data->user->address}}
 
                         <h6 class="mt-4">Status</h6>
-                        <p class="fs--1 mb-0">Resolved At: {{ \Carbon\Carbon::parse($report_data->resolved_at)->format('d M Y, h:i A') }}</p>
+                        <p class="fs--1 mb-0">Resolved At:
+                            {{ \Carbon\Carbon::parse($report_data->resolved_at)->format('d M Y, h:i A') }}</p>
                         <p class="fs--1 mb-0">Remarks: {{$report_data->remarks}}</p>
                     </div>
                 </div>

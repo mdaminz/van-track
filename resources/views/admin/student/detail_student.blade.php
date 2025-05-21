@@ -102,12 +102,16 @@
                 </div>
                 <div class="card-body fs--1 p-0">
 
+                    @php
+                        $maxToShow = 4;
+                    @endphp
+
                     @if ($attendance->isEmpty())
                         <div class="text-center py-4">
                             <p class="mb-0">No Records Found</p>
                         </div>
                     @else
-                        @foreach ($attendance as $record)
+                        @foreach ($attendance->take($maxToShow) as $record)
                             <a class="notification border-x-0 border-bottom-0 border-300 rounded-top-0" href="#!">
                                 <div class="notification-avatar">
                                     <div class="avatar avatar-xl me-3">
@@ -127,6 +131,12 @@
                                 </div>
                             </a>
                         @endforeach
+                        {{-- Show "See all" if more than 4 --}}
+                        @if ($attendance->count() > $maxToShow)
+                            <div class="text-center mt-2 mb-1">
+                                <a href="attendance_detail/{{$students->id}}" class="btn btn-sm btn-link">See all attendance</a>
+                            </div>
+                        @endif
                     @endif
 
                 </div>
