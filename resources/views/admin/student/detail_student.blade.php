@@ -193,8 +193,8 @@
                                 </div>
                             </a>
                             <div class="flex-1 position-relative ps-3">
-                                <h6 class="fs-0 mb-0"> <a>{{$students->rate?->van?->user?->name}}<span data-bs-toggle="tooltip"
-                                            data-bs-placement="top" title="Verified"><small
+                                <h6 class="fs-0 mb-0"> <a>{{$students->rate?->van?->user?->name}}<span
+                                            data-bs-toggle="tooltip" data-bs-placement="top" title="Verified"><small
                                                 class="fa fa-check-circle text-primary"
                                                 data-fa-transform="shrink-4 down-2"></small></span></a></h6>
                                 <p class="mb-1">{{$students->van?->license_plate}}

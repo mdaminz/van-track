@@ -27,7 +27,7 @@
                     <h5 class="mb-0">User Information</h5>
                 </div>
                 <div class="card-body bg-light">
-                    <form action="{{ url('edit_parent', $vandriver_data->id) }}" method="POST" class="row g-3 needs-validation"
+                    <form action="{{ url('edit_vandriver', $vandriver_data->id) }}" method="POST" class="row g-3 needs-validation"
                         novalidate="" enctype="multipart/form-data">
                         @csrf
                         <div class="col-md-12">

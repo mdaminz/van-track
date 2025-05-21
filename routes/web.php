@@ -77,7 +77,7 @@ route::get('/delete_alluser/{id}', [AdminController::class, 'delete_alluser']);
 //parent
 route::get('/view_student', [HomeController::class, 'view_student']);
 route::get('/create_student', [HomeController::class, 'create_student']);
-route::post('/add_student', [HomeController::class, 'add_student']);
+route::post('/add_student', [HomeController::class, 'add_student'])->name('add_student');
 route::get('/update_student/{id}', [HomeController::class, 'update_student']);
 route::post('/edit_student/{id}', [HomeController::class, 'edit_student']);
 route::get('/delete_student/{id}', [HomeController::class, 'delete_student']);
@@ -216,3 +216,5 @@ route::get('/schedule_list', [DriverController::class, 'schedule_list']);
 route::get('/student_listToSchool/{id}', [DriverController::class, 'student_listToSchool']);
 
 route::get('/student_listToHome/{id}', [DriverController::class, 'student_listToHome']);
+
+Route::get('/get-price', [App\Http\Controllers\HomeController::class, 'getPrice']);

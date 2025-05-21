@@ -13,15 +13,15 @@
     <title>VanTrack - School Van Fleet Tracking Management System</title>
 
     <!-- Favicon -->
-    <link rel="icon" href="homepage/img/web-icon.png">
+    <link rel="icon" href="{{ asset('homepage/img/web-icon.png') }}">
 
     <!-- ===============================================-->
     <!--    Favicons-->
     <!-- ===============================================-->
-    <link rel="apple-touch-icon" sizes="180x180" href="../../../assets/img/favicons/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="../../../assets/img/favicons/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="../../../assets/img/favicons/favicon-16x16.png">
-    <link rel="shortcut icon" type="image/x-icon" href="../../../assets/img/favicons/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('homepage/img/web-icon.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('homepage/img/web-icon.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('homepage/img/web-icon.png') }}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('homepage/img/web-icon.png') }}">
     <link rel="manifest" href="../../../assets/img/favicons/manifest.json">
     <meta name="msapplication-TileImage" content="../../../assets/img/favicons/mstile-150x150.png">
     <meta name="theme-color" content="#ffffff">

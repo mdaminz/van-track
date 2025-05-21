@@ -22,6 +22,8 @@ return new class extends Migration
             $table->text('remarks')->nullable();
             $table->string('user_id')->nullable();
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

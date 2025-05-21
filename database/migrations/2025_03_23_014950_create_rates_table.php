@@ -22,6 +22,8 @@ return new class extends Migration
             $table->string('end_time')->nullable();
             $table->timestamps();
 
+            $table->foreign('school_id')->references('id')->on('schools')->onDelete('cascade');
+
            
         });
     }

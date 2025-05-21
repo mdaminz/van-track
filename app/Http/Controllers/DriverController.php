@@ -19,8 +19,10 @@ class DriverController extends Controller
 
         $rates = $van ? $van->rates : collect();
 
-        // Merge all students from all rates into a single collection and remove duplicates
-        $students = $rates->flatMap->students->unique('id');
+        // Merge all students from all rates into a single collection, remove duplicates, and filter by 'Active' status
+        $students = $rates->flatMap->students
+            ->unique('id')
+            ->where('status', 'Active');
 
         return view('driver.student.view_student', compact('students', 'rates'));
     }
@@ -31,7 +33,7 @@ class DriverController extends Controller
         $user = Auth::user();
 
         // Get the driver's van
-        $van = \App\Models\Van::where('user_id', $user->id)->first();
+        $van = Van::where('user_id', $user->id)->first();
 
         // Get all rates for that van
         $rates = $van ? $van->rates : collect(); // safe if van is null
@@ -42,7 +44,7 @@ class DriverController extends Controller
         $studentIds = $students->pluck('id');
 
         // Get all attendance records for those students
-        $attendances = \App\Models\Attendance::whereIn('student_id', $studentIds)->latest()->get();
+        $attendances = Attendance::whereIn('student_id', $studentIds)->latest()->get();
 
         return view('driver.attendance.view_attendance', compact('attendances', 'rates'));
 
@@ -115,6 +117,7 @@ class DriverController extends Controller
         $rate = Rate::findOrFail($id);
 
         $students = Student::where('rate_id', $id)
+            ->where('status', 'Active')
             ->orderBy('full_name', 'asc')
             ->get()
             ->map(function ($student) use ($today) {
@@ -151,6 +154,7 @@ class DriverController extends Controller
         $rate = Rate::findOrFail($id);
 
         $students = Student::where('rate_id', $id)
+            ->where('status', 'Active')
             ->orderBy('full_name', 'asc')
             ->get()
             ->map(function ($student) use ($today) {

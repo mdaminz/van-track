@@ -13,16 +13,16 @@
     <title>VanTrack - School Van Fleet Tracking Management System</title>
 
     <!-- Favicon -->
-    <link rel="icon" href="homepage/img/web-icon.png">
+    <link rel="icon" href="{{ asset('homepage/img/web-icon.png') }}">
 
 
     <!-- ===============================================-->
     <!--    Favicons-->
     <!-- ===============================================-->
-    <link rel="apple-touch-icon" sizes="180x180" href="../../../assets/img/favicons/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="../../../assets/img/favicons/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="../../../assets/img/favicons/favicon-16x16.png">
-    <link rel="shortcut icon" type="image/x-icon" href="../../../assets/img/favicons/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('homepage/img/web-icon.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('homepage/img/web-icon.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('homepage/img/web-icon.png') }}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('homepage/img/web-icon.png') }}">
     <link rel="manifest" href="../../../assets/img/favicons/manifest.json">
     <meta name="msapplication-TileImage" content="../../../assets/img/favicons/mstile-150x150.png">
     <meta name="theme-color" content="#ffffff">
@@ -87,7 +87,8 @@
                         <div class="col-lg-9 col-xl-8 col-xxl-6">
                             <div class="card">
                                 <div class="card-header bg-circle-shape bg-shape text-center p-2"><a
-                                        class="font-sans-serif fw-bolder fs-4 z-index-1 position-relative link-light light" href="/">VanTrack</a>
+                                        class="font-sans-serif fw-bolder fs-4 z-index-1 position-relative link-light light"
+                                        href="/">VanTrack</a>
                                 </div>
                                 <div class="card-body p-4">
                                     <div class="row flex-between-center">
@@ -118,8 +119,7 @@
                                         <div class="mb-3">
                                             <div class="d-flex justify-content-between">
                                                 <label class="form-label" for="split-login-password">Password</label><a
-                                                    class="fs--1"
-                                                    href="../../../pages/authentication/split/forgot-password.html ">Forgot
+                                                    class="fs--1" href="{{ route('password.request') }}">Forgot
                                                     Password?</a>
                                             </div>
                                             <input class="form-control" id="split-login-password" type="password"
@@ -140,9 +140,9 @@
                                     </div>
                                     <div class="row g-2 mt-2">
                                         <div class="col-sm-6"><a
-                                                class="btn btn-outline-google-plus btn-sm d-block w-100"
-                                                href="#"><span class="fab fa-google-plus-g me-2"
-                                                    data-fa-transform="grow-8"></span> google</a></div>
+                                                class="btn btn-outline-google-plus btn-sm d-block w-100" href="#"><span
+                                                    class="fab fa-google-plus-g me-2" data-fa-transform="grow-8"></span>
+                                                google</a></div>
                                         <div class="col-sm-6"><a class="btn btn-outline-facebook btn-sm d-block w-100"
                                                 href="#"><span class="fab fa-facebook-square me-2"
                                                     data-fa-transform="grow-8"></span> facebook</a></div>

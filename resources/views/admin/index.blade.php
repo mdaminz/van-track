@@ -154,7 +154,7 @@
                 <!--/.bg-holder-->
 
                 <div class="card-body position-relative">
-                    <h6>Total Users</h6>
+                    <h6>Total Active Users</h6>
                     <div class="display-4 fs-4 mb-2 fw-normal font-sans-serif text-warning"
                         data-countup='{"endValue":58.386,"decimalPlaces":2,"suffix":"k"}'>{{$total_users}}</div><a
                         class="fw-semi-bold fs--1 text-nowrap" href="/view_alluser">See all<span
@@ -170,7 +170,7 @@
                 <!--/.bg-holder-->
 
                 <div class="card-body position-relative">
-                    <h6>Total Students</h6>
+                    <h6>Total Active Students</h6>
                     <div class="display-4 fs-4 mb-2 fw-normal font-sans-serif text-info"
                         data-countup='{"endValue":23.434,"decimalPlaces":2,"suffix":"k"}'>{{$total_students}}</div><a
                         class="fw-semi-bold fs--1 text-nowrap" href="/admin_view_student">See all<span

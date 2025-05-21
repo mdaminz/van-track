@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('status')->nullable();
             $table->string('student_id')->nullable();
             $table->timestamps();
+
+            $table->foreign('student_id')->references('id')->on('students')->onDelete('cascade');
         });
     }
 

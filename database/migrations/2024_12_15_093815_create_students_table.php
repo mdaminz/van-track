@@ -29,6 +29,12 @@ return new class extends Migration
             $table->string('rate_id')->nullable();
             
             $table->timestamps();
+
+            // Foreign key constraints
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('rate_id')->references('id')->on('rates')->onDelete('cascade');
+            $table->foreign('school_id')->references('id')->on('schools')->onDelete('cascade');
+            
         });
     }
 

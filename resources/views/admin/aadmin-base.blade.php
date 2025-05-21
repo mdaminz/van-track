@@ -13,15 +13,15 @@
     <title>VanTrack - School Van Fleet Tracking Management System</title>
 
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="{{ asset('homepage/img/web-icon.png') }}">
+    <link rel="icon" href="homepage/img/web-icon.png">
 
     <!-- ===============================================-->
     <!--    Favicons-->
     <!-- ===============================================-->
-    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('homepage/img/web-icon.png') }}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('homepage/img/web-icon.png') }}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('homepage/img/web-icon.png') }}">
-    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('homepage/img/web-icon.png') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="homepage/img/web-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="homepage/img/web-icon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="homepage/img/web-icon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicons/favicon.ico">
     <link rel="manifest" href="assets/img/favicons/manifest.json">
     <meta name="msapplication-TileImage" content="assets/img/favicons/mstile-150x150.png">
     <meta name="theme-color" content="#ffffff">
@@ -65,15 +65,15 @@
 <body>
     @if (session('success'))
         <div class="alert alert-success border-2 d-flex align-items-center" role="alert" style="
-                                    position: fixed;
-                                    top: 20px;
-                                    right: 0;
-                                    width: 30%;
-                                    z-index: 9999;
-                                    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-                                    transform: translateX(100%);
-                                    animation: slideIn 0.5s forwards;
-                                    ">
+                            position: fixed;
+                            top: 20px;
+                            right: 0;
+                            width: 30%;
+                            z-index: 9999;
+                            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+                            transform: translateX(100%);
+                            animation: slideIn 0.5s forwards;
+                            ">
             <div class="bg-success me-3 icon-item">
                 <span class="fas fa-check-circle text-white fs-3"></span>
             </div>
@@ -701,11 +701,12 @@
                 <nav class="navbar navbar-light navbar-glass navbar-top navbar-expand">
 
                     <button class="btn navbar-toggler-humburger-icon navbar-toggler me-1 me-sm-3" type="button"
-                        data-bs-toggle="collapse" data-bs-target="#navbarVerticalCollapse"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#navbarVerg:\My Drive\Falcon v3\public\modules\icons\font-awesome.htmlticalCollapse"
                         aria-controls="navbarVerticalCollapse" aria-expanded="false"
                         aria-label="Toggle Navigation"><span class="navbar-toggle-icon"><span
                                 class="toggle-line"></span></span></button>
-                    <a class="navbar-brand me-1 me-sm-3" href="home">
+                    <a class="navbar-brand me-1 me-sm-3" href="/home">
                         <div class="d-flex align-items-center"><img class="me-2"
                                 src="assets/img/icons/spot-illustrations/falcon.png" alt="" width="40" /><span
                                 class="font-sans-serif">VanTrack</span>
@@ -718,9 +719,9 @@
                                 <small class="badge fw-semi-bold rounded-pill status badge-soft-primary"
                                     style="margin-right: 10px">Admin</small>
                                 {{ Auth::user()->name }}
-
                             </h5>
                         </li>
+
                         <li class="nav-item">
                             <div class="theme-control-toggle fa-icon-wait px-2">
                                 <input class="form-check-input ms-0 theme-control-toggle-input" id="themeControlToggle"
@@ -887,6 +888,7 @@
                             </div>
 
                         </li>
+
                         <li class="nav-item dropdown"><a class="nav-link pe-0" id="navbarDropdownUser" href="#"
                                 role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <div class="avatar avatar-xl">

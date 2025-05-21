@@ -13,15 +13,15 @@
     <title>VanTrack - School Van Fleet Tracking Management System</title>
 
     <!-- Favicon -->
-    <link rel="icon" href="homepage/img/web-icon.png">
+    <link rel="icon" href="{{ asset('homepage/img/web-icon.png') }}">
 
     <!-- ===============================================-->
     <!--    Favicons-->
     <!-- ===============================================-->
-    <link rel="apple-touch-icon" sizes="180x180" href="homepage/img/web-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="homepage/img/web-icon.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="homepage/img/web-icon.png">
-    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicons/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('homepage/img/web-icon.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('homepage/img/web-icon.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('homepage/img/web-icon.png') }}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('homepage/img/web-icon.png') }}">
     <link rel="manifest" href="assets/img/favicons/manifest.json">
     <meta name="msapplication-TileImage" content="assets/img/favicons/mstile-150x150.png">
     <meta name="theme-color" content="#ffffff">
@@ -63,6 +63,45 @@
 
 
 <body>
+
+    @if (session('success'))
+        <div class="alert alert-success border-2 d-flex align-items-center" role="alert" style="
+                        position: fixed;
+                        top: 20px;
+                        right: 0;
+                        width: 30%;
+                        z-index: 9999;
+                        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+                        transform: translateX(100%);
+                        animation: slideIn 0.5s forwards;
+                        ">
+            <div class="bg-success me-3 icon-item">
+                <span class="fas fa-check-circle text-white fs-3"></span>
+            </div>
+            <p class="mb-0 flex-1">{{ session('success') }}</p>
+            <button class="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+
+        <script>
+            setTimeout(() => {
+                const alert = document.querySelector('.alert');
+                if (alert) alert.remove();
+            }, 3000); // auto-hide after 3 seconds
+        </script>
+
+        <style>
+            @keyframes slideIn {
+                0% {
+                    transform: translateX(100%);
+                }
+
+                100% {
+                    transform: translateX(0);
+                }
+            }
+        </style>
+    @endif
+
 
     <!-- ===============================================-->
     <!--    Main Content-->

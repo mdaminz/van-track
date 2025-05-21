@@ -8,6 +8,11 @@ class Attendance extends Model
 {
     public function student()
     {
-        return $this->belongsTo(Student::class, 'rfid_tag', 'rfid_tag'); // Join using rfid_tag
+        return $this->belongsTo(Student::class); // Join using rfid_tag
     }
+
+    // public function student()
+    // {
+    //     return $this->belongsTo(Student::class, 'rfid_tag', 'rfid_tag'); // Join using rfid_tag
+    // }
 }

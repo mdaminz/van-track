@@ -44,7 +44,7 @@ class AdminController extends Controller
                 $total_students = Student::where('user_id', Auth::id())->count();
 
 
-                $overdue = \App\Models\Bill::where('status', 'Unpaid')
+                $overdue = Bill::where('status', 'Unpaid')
                     ->where('user_id', Auth::id())
                     ->sum('amount');
 
@@ -67,13 +67,11 @@ class AdminController extends Controller
 
             } else if ($usertype == 'admin') {
 
-                
-
                 $user = User::find(Auth::id());
 
-                $total_users = User::count();
+                $total_users = User::where("status", "Active")->count();
 
-                $total_students = Student::count();
+                $total_students = Student::where("status", "Active")->count();
 
                 // $total_active_users = Session::count();
 
@@ -160,7 +158,8 @@ class AdminController extends Controller
 
         $school_data->save();
 
-        return redirect('view_school');
+        return redirect('view_school')->with('success', 'School created successfully!');
+        ;
     }
 
     public function update_school($id)
@@ -195,7 +194,8 @@ class AdminController extends Controller
 
         $school_data->save();
 
-        return redirect('view_school');
+        return redirect('view_school')->with('success', 'School information updated successfully!');
+        ;
     }
 
     public function delete_school($id)
@@ -204,7 +204,8 @@ class AdminController extends Controller
 
         $school_data->delete();
 
-        return redirect()->back();
+        return redirect()->back()->with('success', 'School deleted successfully!');
+        ;
     }
 
     public function admin_view_attendance(Request $request)
@@ -276,7 +277,8 @@ class AdminController extends Controller
 
         $fedback_data->delete();
 
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Feedback deleted successfully!');
+        ;
     }
 
     public function admin_view_student()
@@ -343,7 +345,7 @@ class AdminController extends Controller
         //     $this->generateBill($students); // ✅ Fixed: Call the private method correctly
         // }
 
-        return redirect('admin_view_student');
+        return redirect('admin_view_student')->with('success', 'Student Profile updated successfully!');
     }
 
     private function generateBill($student)
@@ -370,7 +372,8 @@ class AdminController extends Controller
 
         $students->delete();
 
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Student Profile deleted successfully!');
+        ;
     }
 
     public function detail_student($id)
@@ -425,7 +428,7 @@ class AdminController extends Controller
 
         $user->save();
 
-        return redirect('view_parent');
+        return redirect('view_parent')->with('success', 'Parent profile updated successfully!');
     }
 
     public function delete_parent($id)
@@ -434,7 +437,8 @@ class AdminController extends Controller
 
         $user->delete();
 
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Parent account deleted successfully!');
+        ;
     }
 
     public function view_vandriver()
@@ -463,12 +467,11 @@ class AdminController extends Controller
         $user->email = $request->email;
         $user->phone = $request->phone;
         $user->address = $request->address;
-        $user->address = $request->address;
         $user->status = $request->status;
 
         $user->save();
 
-        return redirect('view_vandriver');
+        return redirect('view_vandriver')->with('success', 'Van Driver profile updated successfully!');
     }
 
     public function delete_vandriver($id)
@@ -477,7 +480,8 @@ class AdminController extends Controller
 
         $user->delete();
 
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Van Driver account deleted successfully!');
+        ;
     }
 
     public function view_alluser()
@@ -616,7 +620,7 @@ class AdminController extends Controller
 
         $report_data->save();
 
-        return redirect('view_report');
+        return redirect('view_report')->with('success', 'Report updated successfully!');
     }
 
 
@@ -626,7 +630,7 @@ class AdminController extends Controller
 
         $report_data->delete();
 
-        return redirect()->back();
+        return redirect()->back() > with('success', 'Report deleted successfully!');
     }
 
 
@@ -732,7 +736,8 @@ class AdminController extends Controller
 
         $vans->save();
 
-        return redirect('view_van_info');
+        return redirect('view_van_info')->with('success', 'Van created successfully!');
+        ;
     }
 
 
@@ -761,7 +766,8 @@ class AdminController extends Controller
 
         $vans->save();
 
-        return redirect('view_van_info');
+        return redirect('view_van_info')->with('success', 'Rate information updated successfully!');
+        ;
     }
 
     public function delete_van_info($id)
@@ -770,7 +776,8 @@ class AdminController extends Controller
 
         $vans->delete();
 
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Rate deleted successfully!');
+        ;
     }
 
     //schedule
@@ -929,7 +936,8 @@ class AdminController extends Controller
 
         $rate->save();
 
-        return redirect('view_rate');
+        return redirect('view_rate')->with('success', 'Rate created successfully!');
+        ;
     }
 
     public function update_rate($id)
@@ -959,7 +967,8 @@ class AdminController extends Controller
 
         $rate->save();
 
-        return redirect('view_rate');
+        return redirect('view_rate')->with('success', 'Rate information updated successfully!');
+        ;
     }
 
 
@@ -969,7 +978,8 @@ class AdminController extends Controller
 
         $rate->delete();
 
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Rate deleted successfully!');
+        ;
     }
 
     public function paid_bill()
@@ -1087,23 +1097,20 @@ class AdminController extends Controller
 
     public function profile_detail($id)
     {
-        $users = User::findOrFail($id); // Find student by ID
-
-        // // Retrieve attendance for this student using RFID tag
-        // $attendance = Attendance::where('rfid_tag', $students->rfid_tag)
-        //     ->orderBy('created_at', 'desc') // Order by latest attendance
-        //     ->get();
+        $users = User::findOrFail($id); // Find user by ID
 
         // Retrieve students associated with the authenticated user
         $students = Student::where('user_id', $id)->get();
+        $count_students = $students->count();
 
-        $count_students = Student::where('user_id', $id)->count();
+        // Find the van(s) belonging to this user (driver)
+        $vans = Van::where('user_id', $id)->pluck('id'); // returns collection of van IDs
 
-        return view('profile_detail', compact('users', 'students', 'count_students'));
+        // Get all rates that are associated with the vans of this driver
+        $rates = Rate::whereIn('van_id', $vans)->get();
+
+        return view('profile_detail', compact('users', 'students', 'count_students', 'rates'));
     }
-
-
-
 
 
 

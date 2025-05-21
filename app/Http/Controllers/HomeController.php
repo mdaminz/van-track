@@ -104,35 +104,45 @@ class HomeController extends Controller
         return view('user.student.create_student', compact('rates', 'rate'));
     }
 
+
     public function add_student(Request $request)
     {
-        $user = Auth::user();
+        // Validate request data
+        $request->validate([
+            'full_name' => 'required|string|max:255',
+            'date_of_birth' => 'required|date',
+            'relationship' => 'required|string|max:255',
+            'emergency_contact' => 'required|string|max:20',
+            'address' => 'required|string|max:255',
+            'postcode' => 'required|string|max:10',
+            'school_id' => 'required|exists:schools,id',
+            'district' => 'required|string|max:255',
+            'profile_photo' => 'nullable|image|mimes:jpg,jpeg,png|max:4000', // 400 KB max
+        ]);
 
+        $student = new Student();
 
-        $student_data = new Student;
+        $student->full_name = $request->full_name;
+        $student->date_of_birth = $request->date_of_birth;
+        $student->relationship = $request->relationship;
+        $student->emergency_contact = $request->emergency_contact;
+        $student->address = $request->address;
+        $student->postcode = $request->postcode;
+        $student->school_id = $request->school_id;
+        $student->district = $request->district;
+        $student->user_id = Auth::id();
 
-        $student_data->full_name = $request->full_name;
-        $student_data->date_of_birth = $request->date_of_birth;
-        $student_data->relationship = $request->relationship;
-        $student_data->emergency_contact = $request->emergency_contact;
-        $student_data->address = $request->address;
-        $student_data->school_id = $request->school_id;
-        $student_data->postcode = $request->postcode;
-        $student_data->district = $request->district;
+        // Default RFID and Status
+        $student->rfid_tag = 'No RFID Tag';
+        $student->status = 'Inactive';
 
-        $student_data->user_id = Auth::id();
-
-        $student_data->rfid_tag = 'No Rfid Tag';
-        $student_data->status = $request->Inactive;
-
-        // ✅ Match district + school_id
+        // Match Rate by school and district
         $rate = Rate::where('district', $request->district)
             ->where('school_id', $request->school_id)
             ->first();
 
-        $student_data->rate_id = $rate ? $rate->id : 'No Rate';
+        $student->rate_id = $rate ? $rate->id : null;
 
-        $student_data->profile_photo = $request->profile_photo;
 
         $image = $request->profile_photo;
 
@@ -141,13 +151,26 @@ class HomeController extends Controller
 
             $request->profile_photo->move('student', $imagename);
 
-            $student_data->profile_photo = $imagename;
+            $student->profile_photo = $imagename;
         }
 
-        $student_data->save();
+        $student->save();
 
-        return redirect('view_student');
+        return redirect('/view_student')->with('success', 'Child created successfully!');
     }
+
+    public function getPrice(Request $request)
+    {
+        $schoolId = $request->school_id;
+        $district = $request->district;
+
+        $rate = Rate::where('school_id', $schoolId)
+            ->where('district', $district)
+            ->first();
+
+        return response()->json(['price' => $rate ? $rate->price : null]);
+    }
+
 
     public function update_student($id)
     {
@@ -200,7 +223,7 @@ class HomeController extends Controller
 
         $student_data->save();
 
-        return redirect('view_student');
+        return redirect('view_student')->with('success', 'Child updated successfully!');
     }
 
     public function delete_student($id)
@@ -243,7 +266,7 @@ class HomeController extends Controller
 
         $feedback_data->save();
 
-         return redirect('/home')->with('success', 'Feedback submitted successfully!');
+        return redirect('/home')->with('success', 'Feedback submitted! Somewhere, a server just smiled.');
     }
 
     public function delete_feedback($id)
@@ -252,7 +275,7 @@ class HomeController extends Controller
 
         $feedback_data->delete();
 
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Feedback deleted successfully!');
     }
 
     public function view_van()
@@ -299,18 +322,21 @@ class HomeController extends Controller
         //     $admin->notify(new NewReportNotification($report_data));
         // }
 
-        return redirect('user_view_report');
+        return redirect('user_view_report')->with('success', 'Report created successfully!');
     }
 
     public function parent_view_attendance(Request $request)
     {
         $user_id = Auth::id();
-        $students = Student::where('user_id', $user_id)->pluck('rfid_tag');
 
-        // Check if request has 'today' toggle (1 = show today only, 0 = show all)
+        // Get all student IDs that belong to the authenticated user
+        $studentIds = Student::where('user_id', $user_id)->pluck('id');
+
+        // Check if 'today' toggle is set (1 = show today only)
         $isToday = $request->input('today') == '1';
 
-        $attendances = Attendance::whereIn('rfid_tag', $students)
+        // Fetch attendances based on student IDs
+        $attendances = Attendance::whereIn('student_id', $studentIds)
             ->when($isToday, function ($query) {
                 $query->whereDate('created_at', Carbon::today());
             })
@@ -388,7 +414,7 @@ class HomeController extends Controller
         $bill->status = 'Pending'; // optional
         $bill->save();
 
-        return redirect()->back()->with('success', 'Receipt uploaded successfully!');
+        return redirect()->back()->with('success', 'Thanks for paying, cutiepatootie! Our admin squad is now verifying it with serious faces ');
     }
 
     //pricing

@@ -55,7 +55,7 @@
         </div>
     </div>
     <div class="card mb-3" id="table-student"
-        data-list='{"valueNames":["name", "no", "rfid", "contact", "address", "status"],"page":10,"pagination":true}'>
+        data-list='{"valueNames":["name", "no", "rfid", "contact", "district","school", "status"],"page":10,"pagination":true}'>
         <div class="card-header">
             <div class="row flex-between-center">
                 <div class="col-4 col-sm-auto d-flex align-items-center pe-0">
@@ -80,7 +80,9 @@
                             <th class="sort d-none d-md-table-cell" style="min-width: 40%;" data-sort="parent">Parent Name
                             </th>
                             <th class="sort" style="min-width: 10%;" data-sort="rfid">RFID Tag</th>
-                            <th class="sort d-none d-md-table-cell" style="min-width: 5rem;" data-sort="address">Address
+                            <th class="sort d-none d-md-table-cell" style="min-width: 5rem;" data-sort="district">District
+                            </th>
+                            <th class="sort d-none d-md-table-cell" style="min-width: 5rem;" data-sort="school">School
                             </th>
                             <th class="sort" style="min-width: 5rem;" data-sort="status">Status</th>
                             <th class="no-sort"></th>
@@ -98,7 +100,8 @@
                                     <a href="profile_detail/{{ $student->user_id }}">{{ $student->user->name }}</a>
                                 </td>
                                 <td class="rfid align-middle" style="min-width: 20%;">{{ $student->rfid_tag }}</td>
-                                <td class="address align-middle d-none d-md-table-cell">{{ $student->address }}</td>
+                                <td class="district align-middle d-none d-md-table-cell">{{ $student->district }}</td>
+                                <td class="school align-middle d-none d-md-table-cell">{{ $student->school->name }}</td>
                                 <td class="align-middle">
                                     @if ($student->status == 'Active')
                                         <span class="badge badge rounded-pill d-block py-2 badge-soft-success">

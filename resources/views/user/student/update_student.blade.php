@@ -3,11 +3,32 @@
 <base href="/public">
 
 @section('body-content')
+    <style>
+        .upload-box {
+            border: 2px dashed #d5d9de;
+            border-radius: 8px;
+            padding: 1.75rem 1rem;
+            cursor: pointer;
+            background-color: #fff;
+            transition: all .15s;
+        }
+
+        .upload-box:hover {
+            background-color: #f8f9fa;
+            border-color: #84a8ff;
+        }
+
+        .object-fit-cover {
+            object-fit: cover;
+        }
+    </style>
+
+
     <div class="card mb-3">
         <div class="card-body">
             <div class="row flex-between-center">
                 <div class="col-md">
-                    <h5 class="mb-2 mb-md-0">Update Child</h5>
+                    <h5 class="mb-2 mb-md-0">Update Child Profile</h5>
                 </div>
             </div>
         </div>
@@ -21,12 +42,43 @@
         <div class="col-lg-12">
             <div class="card mb-3">
                 <div class="card-header">
-                    <h5 class="mb-0">Update Child</h5>
+                    <h5 class="mb-0">Update Child Profile</h5>
                 </div>
                 <div class="card-body bg-light">
                     <form action="{{ url('edit_student', $student_data->id) }}" method="POST"
                         class="row g-3 needs-validation" novalidate="" enctype="multipart/form-data">
                         @csrf
+
+                        <div class="row align-items-center g-3 mb-4">
+                            {{-- ---------- Left: circular preview ---------- --}}
+                            <div class="col-md-auto text-center">
+                                <div id="preview-container" class="rounded-circle overflow-hidden border shadow-sm"
+                                    style="width: 100px; height: 100px; background:#e0edff; margin-right: 15px;">
+                                    {{-- default avatar --}}
+                                    <img id="image_preview" src="student/{{ $student_data->profile_photo }}"
+                                        alt="preview" class="w-100 h-100 object-fit-cover">
+                                </div>
+                            </div>
+
+                            {{-- ---------- Right: dashed upload box (entire box is a <label>) ---------- --}}
+                                <div class="col-md">
+                                    <label for="profile_photo" {{-- turning the whole box into a clickable label --}}
+                                        class="upload-box w-100 h-100 mb-0"> {{-- custom class below --}}
+                                        <div class="text-center">
+                                            <i class="fas fa-cloud-upload-alt fa-lg mb-2 text-secondary"></i>
+                                            <h6 class="fw-semibold mb-1 text-secondary">Upload a profile picture</h6>
+                                            <p class="small text-muted mb-0">
+                                                Upload a 300x300&nbsp;jpg/png image <br>max&nbsp;size&nbsp;400&nbsp;KB
+                                            </p>
+                                        </div>
+                                    </label>
+
+                                    {{-- actual hidden file input --}}
+                                    <input type="file" name="profile_photo" id="profile_photo" accept="image/*"
+                                        onchange="previewImage(event)" class="d-none">
+                                </div>
+
+                        </div>
                         <div class="col-md-12">
                             <label class="form-label" for="validationCustom01">Full Name</label>
                             <input value="{{ $student_data->full_name }}" name="full_name" class="form-control"
@@ -55,13 +107,7 @@
                             <div class="invalid-feedback">Please select your relationship.</div>
                         </div>
 
-                        <div class="col-md-6">
-                            <label class="form-label" for="validationCustom06">Profile Photo</label>
-                            <input name="profile_photo" class="form-control" type="file" id="validationCustom06" />
-                            <img style="height: 200px;" src="student/{{ $student_data->profile_photo }}" alt="">
-                        </div>
-
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             <label class="form-label" for="validationCustom04">Emergency Contact</label>
                             <input value="{{ $student_data->emergency_contact }}" name="emergency_contact"
                                 class="form-control" id="validationCustom04" type="text" required="" />
@@ -114,4 +160,17 @@
             </div>
         </div>
     </div>
+
+    <script>
+        function previewImage(event) {
+            const file = event.target.files[0];
+            const imgTag = document.getElementById('image_preview');
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = e => imgTag.src = e.target.result;
+                reader.readAsDataURL(file);
+            }
+        }
+    </script>
+
 @endsection
