@@ -142,8 +142,6 @@
                     <a class="btn btn-link" href="about">About Us</a>
                     <a class="btn btn-link" href="feature">Our Features</a>
                     <a class="btn btn-link" href="service">Our Services</a>
-                    <a class="btn btn-link" href="contact">Contact Us</a>
-                    <a class="btn btn-link" href="term">Terms & Condition</a>
                 </div>
                 <div class="col-lg-3 col-md-6">
                     <h4 class="text-light mb-4">Payment Method</h4>

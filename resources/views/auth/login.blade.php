@@ -125,10 +125,6 @@
                                             <input class="form-control" id="split-login-password" type="password"
                                                 name="password" />
                                         </div>
-                                        <div class="form-check mb-0">
-                                            <input class="form-check-input" type="checkbox" id="split-checkbox" />
-                                            <label class="form-check-label" for="split-checkbox">Remember me</label>
-                                        </div>
                                         <div class="mb-3">
                                             <button class="btn btn-primary d-block w-100 mt-3" type="submit"
                                                 name="submit">Log in</button>

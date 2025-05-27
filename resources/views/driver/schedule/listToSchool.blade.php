@@ -57,7 +57,7 @@
             <div class="card" id="TableCrmRecentLeads"
                 data-list='{"valueNames":["name","email","status"],"page":8,"pagination":true}'>
                 <div class="card-header d-flex flex-between-center py-2">
-                    <h6 class="mb-0">Student ({{ $presentCount }}/{{ $totalCount }})</h6>
+                    <h6 style="margin-top: 5px;" class="mb-0">Student ({{ $presentCount }}/{{ $totalCount }})</h6>
                 </div>
                 <div class="card-body px-0 py-0">
                     <div class="table-responsive scrollbar">

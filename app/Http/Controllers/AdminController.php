@@ -96,16 +96,26 @@ class AdminController extends Controller
 
                 $total_users = User::count();
 
-                $total_students = Student::count();
+                $total_students = Student::whereHas('rate.van', function ($query) use ($user) {
+                    $query->where('user_id', $user->id);
+                })->count();
 
                 $unresolved_reports = Student::where('status', 'Unresolved')
                     ->where('user_id', Auth::id())
                     ->count();
 
                 // Calculate total paid revenue
-                $paid_revenue = \App\Models\Bill::where('status', 'Paid')->sum('amount');
+                $paid_revenue = Bill::where('status', 'Paid')->sum('amount');
 
                 $active_user = Session::count();
+
+                $van = Van::where('user_id', $user)->first();
+
+                // Fetch all rates for the user's vans
+                $rates = Rate::whereIn(
+                    'van_id',
+                    $user->vans->pluck('id')
+                )->get();
 
                 $session = Session::with('user')
                     ->where('last_activity', '>=', now()->subMinutes(config('session.lifetime'))->timestamp)
@@ -113,8 +123,7 @@ class AdminController extends Controller
                     ->take(5)
                     ->get();
 
-
-                return view('driver.index', compact('user', 'total_users', 'total_students', 'paid_revenue', 'unresolved_reports', 'active_user', 'session'));
+                return view('driver.index', compact('user', 'total_users', 'total_students', 'paid_revenue', 'unresolved_reports', 'active_user', 'session', 'van', 'rates'));
 
             } else {
                 return redirect()->back();
@@ -858,7 +867,7 @@ class AdminController extends Controller
 
         $user->save();
 
-        return redirect()->back();
+        return back()->with('success', 'Profile updated successfully.');
     }
 
     // Update Profile Picture

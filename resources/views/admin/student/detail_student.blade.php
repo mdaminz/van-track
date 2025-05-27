@@ -27,9 +27,11 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-lg-8">
-                    <h4 class="mb-1">{{$students->full_name}}<span data-bs-toggle="tooltip" data-bs-placement="right"
-                            title="Verified"><small class="fa fa-check-circle text-primary"
+                    <h4 class="mb-1">{{$students->full_name}} @if ($students->status == 'Active')
+                        <span data-bs-toggle="tooltip" data-bs-placement="right"
+                            title="Active"><small class="fa fa-check-circle text-primary"
                                 data-fa-transform="shrink-4 down-2"></small></span>
+                    @endif
                     </h4>
                     <h5 class="fs-0 fw-normal">{{$students->school->name}}</h5>
                     <p class="text-500">{{$students->district}}</p>
@@ -132,11 +134,11 @@
                             </a>
                         @endforeach
                         {{-- Show "See all" if more than 4 --}}
-                        @if ($attendance->count() > $maxToShow)
+                        
                             <div class="text-center mt-2 mb-1">
                                 <a href="attendance_detail/{{$students->id}}" class="btn btn-sm btn-link">See all attendance</a>
                             </div>
-                        @endif
+                       
                     @endif
 
                 </div>
@@ -153,14 +155,10 @@
                         <div class="d-flex"><a href="#!"> <img class="img-fluid"
                                     src="{{ $students->user->profile_photo_path }}" alt="" width="56" /></a>
                             <div class="flex-1 position-relative ps-3">
-                                <h6 class="fs-0 mb-0">{{ $students->user->name }}<span data-bs-toggle="tooltip"
-                                        data-bs-placement="top" title="Verified"><small
-                                            class="fa fa-check-circle text-primary"
-                                            data-fa-transform="shrink-4 down-2"></small></span>
+                                <h6 class="fs-0 mb-0"><a href="profile_detail/{{$students->user->name}}">{{ $students->user->name }}</a>
                                 </h6>
                                 <p class="mb-1">{{ $students->relationship }}</p>
-                                <p class="text-1000 mb-0"> <a href="">{{ $students->user->email }}</a> &bull; <a
-                                        href="#!">{{ $students->user->phone }}</a></p>
+                                <p class="text-1000 mb-0">{{ $students->user->email }} &bull; {{ $students->user->phone }}</p>
                                 <p class="text-1000 mb-0">{{ $students->user->address }}</p>
 
 
@@ -179,10 +177,7 @@
                                 </div>
                             </a>
                             <div class="flex-1 position-relative ps-3">
-                                <h6 class="fs-0 mb-0"> <a>{{$students->school->name}}<span data-bs-toggle="tooltip"
-                                            data-bs-placement="top" title="Verified"><small
-                                                class="fa fa-check-circle text-primary"
-                                                data-fa-transform="shrink-4 down-2"></small></span></a></h6>
+                                <h6 class="fs-0 mb-0">{{$students->school->name}}</h6>
                                 <p class="mb-1">{{ $students->type == 'second' ? 'Primary School' : 'Secondary School' }}
                                 </p>
 
@@ -203,10 +198,7 @@
                                 </div>
                             </a>
                             <div class="flex-1 position-relative ps-3">
-                                <h6 class="fs-0 mb-0"> <a>{{$students->rate?->van?->user?->name}}<span
-                                            data-bs-toggle="tooltip" data-bs-placement="top" title="Verified"><small
-                                                class="fa fa-check-circle text-primary"
-                                                data-fa-transform="shrink-4 down-2"></small></span></a></h6>
+                                <h6 class="fs-0 mb-0"><a href="profile_detail/{{$students->rate?->van?->user?->id}}">{{$students->rate?->van?->user?->name}}</a></h6>
                                 <p class="mb-1">{{$students->van?->license_plate}}
                                 </p>
 

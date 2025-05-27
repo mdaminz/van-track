@@ -484,7 +484,7 @@
                         </div>
                     </div>
                     <hr />
-                    <h5 class="fs-0 d-flex align-items-center">Vertical Navbar Style</h5>
+                    {{-- <h5 class="fs-0 d-flex align-items-center">Vertical Navbar Style</h5>
                     <p class="fs--1 mb-0">Switch between styles for your vertical navbar </p>
                     <div class="btn-group d-block w-100 btn-group-navbar-style">
                         <div class="row gx-2">
@@ -517,7 +517,7 @@
                                         alt="" /><span class="label-text"> Vibrant</span></label>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>

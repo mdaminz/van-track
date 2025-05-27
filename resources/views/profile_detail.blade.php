@@ -140,8 +140,9 @@
                                     <h6 class="fs-0 mb-0">{{ $users->name }}
                                     </h6>
                                     <p class="mb-1"> {{ ucfirst($users->usertype) }}</p>
-                                    <p class="text-1000 mb-0">{{ $users->email }}</p>
-                                    <p class="text-1000 mb-0">{{ $users->phone }}</p>
+                                    <p class="text-1000 mb-0">{{ $users->email }} &bull;
+                                        {{ $users->phone }}</p>
+                                    <p class="text-1000 mb-0">{{ $users->address }}</p>
 
                                 </div>
                             </div>

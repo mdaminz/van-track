@@ -925,8 +925,8 @@
                         <div class="col-12 col-sm-auto text-center">
                             <p class="mb-0 text-600">Designed By Muhammad Amin Bin Abd Rani <span
                                     class="d-none d-sm-inline-block">| </span><br class="d-sm-none" /> All Right
-                                Reserved;
-                                <a href="#">VanTrack</a>
+                                Reserved,
+                                VanTrack
                             </p>
                         </div>
                         <div class="col-12 col-sm-auto text-center">
@@ -1010,7 +1010,7 @@
                         </div>
                     </div>
                     <hr />
-                    <h5 class="fs-0 d-flex align-items-center">Vertical Navbar Style</h5>
+                    {{-- <h5 class="fs-0 d-flex align-items-center">Vertical Navbar Style</h5>
                     <p class="fs--1 mb-0">Switch between styles for your vertical navbar </p>
                     <div class="btn-group d-block w-100 btn-group-navbar-style">
                         <div class="row gx-2">
@@ -1043,7 +1043,7 @@
                                         alt="" /><span class="label-text"> Vibrant</span></label>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>

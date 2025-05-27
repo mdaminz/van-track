@@ -109,7 +109,7 @@
             <div class="card h-100">
                 <div class="card-header d-flex flex-between-center">
                     <h5 class="mb-0">Chil.. Attendance</h5><a class="btn btn-link btn-sm px-0"
-                        href="/admin_view_attendance">Attendance<span class="fas fa-chevron-right ms-1 fs--2"> </span></a>
+                        href="/parent_view_attendance">Attendance<span class="fas fa-chevron-right ms-1 fs--2"> </span></a>
                 </div>
                 <div class="card-body">
                     <p class="fs--1 text-600">See children's attendance, <br /> time, and date</p>
@@ -256,8 +256,7 @@
                                                 class="fas fa-chevron-right"></span></button>
                                     </div>
                                     <button class="btn btn-sm text-primary border order-md-0" type="button"
-                                        data-bs-toggle="modal" data-bs-target="#addEventModal"> <span
-                                            class="fas fa-plus me-2"></span>New Schedule</button>
+                                        data-bs-toggle="modal" data-bs-target="#addEventModal"> {{ \Carbon\Carbon::now()->format('F j, Y') }}</button>
                                 </div>
                             </div>
                             <div class="calendar-outline px-3" id="managementAppCalendar"

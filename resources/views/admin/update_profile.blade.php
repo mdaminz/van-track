@@ -97,10 +97,6 @@
                                 <div class="alert alert-danger">{{ session('error') }}</div>
                             @endif
 
-                            @if (session('success'))
-                                <div class="alert alert-success">{{ session('success') }}</div>
-                            @endif
-
                             <div class="mb-3">
                                 <label class="form-label" for="old-password">Old Password</label>
                                 <input class="form-control @error('old_password') is-invalid @enderror" id="old-password"

@@ -215,8 +215,7 @@
                                                 class="fas fa-chevron-right"></span></button>
                                     </div>
                                     <button class="btn btn-sm text-primary border order-md-0" type="button"
-                                        data-bs-toggle="modal" data-bs-target="#addEventModal"> <span
-                                            class="fas fa-plus me-2"></span>New Schedule</button>
+                                        data-bs-toggle="modal" data-bs-target="#addEventModal">{{ \Carbon\Carbon::now()->format('F j, Y') }}</button>
                                 </div>
                             </div>
                             <div class="calendar-outline px-3" id="managementAppCalendar"
@@ -251,13 +250,13 @@
                             <div class="px-3 bg-transparent text-white d-flex justify-content-between px-0 py-1 fw-semi-bold border-top-0"
                                 style="border-bottom:1px solid rgba(255, 255, 255, 0.15)">
                                 <p class="mb-0">User Name</p>
-                                <p class="mb-0">Ip Address</p>
+                                <p class="mb-0">Email Address</p>
                             </div>
                             @foreach ($session as $session)
                                 <div class="px-3 bg-transparent text-white d-flex justify-content-between px-0 py-1"
                                     style="border-bottom:1px solid rgba(255, 255, 255, 0.05)">
+                                    <p class="mb-0">{{$session->user->name}}</p>
                                     <p class="mb-0">{{$session->user->email}}</p>
-                                    <p class="mb-0">{{$session->ip_address}}</p>
                                 </div>
                             @endforeach
 

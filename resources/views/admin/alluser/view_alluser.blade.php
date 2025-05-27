@@ -66,7 +66,7 @@
         <div class="card-header">
             <div class="row flex-between-center">
                 <div class="col-4 col-sm-auto d-flex align-items-center pe-0">
-                    <h5 class="fs-0 mb-0 text-nowrap py-2 py-xl-0">User</h5>
+                    <h5 class="fs-0 mb-0 text-nowrap py-2 py-xl-0">All User</h5>
                 </div>
                 <div class="col-8 col-sm-auto ms-auto text-end ps-0">
                     <form class="position-relative" data-bs-toggle="search" data-bs-display="static">
@@ -87,6 +87,7 @@
                             <th class="sort align-middle d-none d-md-table-cell" style="min-width: 10rem;" data-sort="email">Email</th>
                             <th class="sort align-middle" style="min-width: 10rem;" data-sort="contact">Phone Number</th>
                             <th class="sort align-middle d-none d-md-table-cell" style="min-width: 10rem;" data-sort="address">Address</th>
+                            <th class="sort align-middle d-none d-md-table-cell" style="min-width: 5rem;" data-sort="address">Role</th>
                             <th class="sort align-middle" style="min-width: 5rem;" data-sort="status">Status</th>
                             <th class="no-sort"></th>
                         </tr>
@@ -99,11 +100,28 @@
                             <tr class="btn-reveal-trigger">
 
                                 <td class="no align-middle" style="min-width: 3rem;">{{ $number++ }}</td>
-                                <td class="name align-middle" style="min-width: 10rem;">{{ $alluser_data->name }}</td>
+                                <td class="name align-middle" style="min-width: 10rem;"><a href="profile_detail/{{$alluser_data->id}}">{{ $alluser_data->name }}</a></td>
                                 <td class="email align-middle d-none d-md-table-cell" style="min-width: 10rem;">{{ $alluser_data->email }}</td>
                                 <td class="contact align-middle" style="min-width: 10rem;">{{ $alluser_data->phone }}</td>
                                 <td class="address align-middle d-none d-md-table-cell" style="min-width: 10rem;">{{ $alluser_data->address }}</td>
-                                </td>
+                                
+                                @if ($alluser_data->usertype == 'admin')
+                                    <td class="align-middle"><span
+                                            class="badge badge rounded-pill d-block py-2 badge-soft-danger">Admin<span
+                                                class="fas fas fa-user" data-fa-transform="shrink-2"></span></span>
+                                    </td>
+                                @elseif ($alluser_data->usertype == 'driver')
+                                    <td class="align-middle"><span
+                                            class="badge badge rounded-pill d-block p-2 badge-soft-warning">Driver<span
+                                                class="ms-1 fas fa-caravan" data-fa-transform="shrink-2"></span></span>
+                                    </td>
+                                @elseif ($alluser_data->usertype == 'user')
+                                    <td class="align-middle"><span
+                                            class="badge badge rounded-pill d-block p-2 badge-soft-info">Parent<span
+                                                class="ms-1 fas fa-users" data-fa-transform="shrink-2"></span></span>
+                                    </td>
+                                @endif
+
                                 @if ($alluser_data->status == 'Active')
                                     <td class="align-middle"><span
                                             class="badge badge rounded-pill d-block py-2 badge-soft-success">Active<span

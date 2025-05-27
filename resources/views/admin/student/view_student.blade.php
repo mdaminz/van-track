@@ -95,7 +95,7 @@
                         @foreach ($students as $student)
                             <tr class="btn-reveal-trigger">
                                 <td class="no align-middle" style="max-width: 10%;">{{ $number++ }}</td>
-                                <td class="name align-middle" style="max-width: 10%;">{{ $student->full_name }}</td>
+                                <td class="name align-middle" style="max-width: 10%;"><a href="detail_student/{{$student->id}}">{{ $student->full_name }}</a></td>
                                 <td class="parent align-middle d-none d-md-table-cell" style="max-width: 20%;">
                                     <a href="profile_detail/{{ $student->user_id }}">{{ $student->user->name }}</a>
                                 </td>

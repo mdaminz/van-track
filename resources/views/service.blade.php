@@ -57,7 +57,7 @@
                                         RM {{ number_format($rates_data->price, 2) }}
                                     </span>
                                 </div>
-                                <h5 class="lh-base mb-0">{{ $rates_data->district }}</a> ➡️</h5>
+                                <h5 class="lh-base mb-0">From {{ $rates_data->district }}</a></h5>
                                 <h5 class="lh-base mb-0">{{ $rates_data->school->name }}</a></h5>
                                 {{-- <p class="fw-normal mb-0">{{ $rates_data->school->first_address }}</p> --}}
                                 <p class="fw-normal mb-0">{{ $rates_data->school->second_address }}</p>
@@ -83,8 +83,18 @@
                         <img class="img-fluid bg-light p-2 mx-auto mb-3" src="/{{ $feedback->user->profile_photo_path }}"
                             style="width: 90px; height: 90px;">
                         <div class="testimonial-text text-center p-4">
-                            <p>{{ $feedback->message }}
-                            </p>
+                            <p>{{ $feedback->message }}</p>
+                            @if ($feedback->rating == '5')
+                                <img class="p-2 mx-auto mb-3" src="homepage/img/5-star.png" style="width: 200px; height: 50px;">
+                            @elseif ($feedback->rating == '4')
+                                <img class="p-2 mx-auto mb-3" src="homepage/img/4-star.png" style="width: 180px; height: 50px;">
+                            @elseif ($feedback->rating == '3')
+                                <img class="p-2 mx-auto mb-3" src="homepage/img/3-star.png" style="width: 140px; height: 50px;">
+                            @elseif ($feedback->rating == '2')
+                                <img class="p-2 mx-auto mb-3" src="homepage/img/2-star.png" style="width: 90px; height: 50px;">
+                            @elseif ($feedback->rating == '1')
+                                <img class="p-2 mx-auto mb-3" src="homepage/img/1-star.png" style="width: 70px; height: 50px;">
+                            @endif
                             <h5 class="mb-1">{{ $feedback->user->name }}</h5>
                             <span class="fst-italic">{{ $feedback->user->email }}</span>
                         </div>

@@ -74,7 +74,7 @@
                         @foreach ($students as $students)
                             <tr class="btn-reveal-trigger" data-rate="{{ $students->rate_id }}">
                                 <td class="no align-middle">{{ $number++ }}</td>
-                                <td class="name align-middle">{{ $students->full_name }}</td>
+                                <td class="name align-middle"><a href="detail_student/{{ $students->id }}">{{ $students->full_name }}</a></td>
                                 <td class="parent align-middle d-none d-md-table-cell">
                                     <a href="profile_detail/{{$students->user_id}}">{{ $students->user->name }}</a>
                                 </td>

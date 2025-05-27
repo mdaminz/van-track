@@ -60,7 +60,7 @@
                             <tr class="btn-reveal-trigger">
 
                                 <td class="no align-middle">VNTRK{{ $unpaidBills->id }}</td>
-                                <td class="name align-middle">{{ $unpaidBills->student->full_name }}</td>
+                                <td class="name align-middle"><a href="detail_student/{{ $unpaidBills->student->id }}">{{ $unpaidBills->student->full_name }}</a></td>
                                 <td class="name align-middle d-none d-md-table-cell">{{ $unpaidBills->student->school->name }}</td>
                                 <td class="name align-middle d-none d-md-table-cell">{{ $unpaidBills->student->address }}</td>
                                 <td class="rifd align-middle">RM {{ $unpaidBills->amount }}</td>
@@ -147,7 +147,7 @@
 
                             <th class="sort" style="min-width: 5rem;" data-sort="address">Due</th>
                             <th class="sort" style="min-width: 5rem;" data-sort="status">Status</th>
-                            <th class="no-sort"></th>
+                            
                         </tr>
                     </thead>
                     <tbody class="list" id="table-student">
@@ -158,7 +158,7 @@
                             <tr class="btn-reveal-trigger">
 
                                 <td class="no align-middle">VNTRK{{ $pendingBills->id }}</td>
-                                <td class="name align-middle">{{ $pendingBills->student->full_name }}</td>
+                                <td class="name align-middle"><a href="detail_student/{{ $pendingBills->student->id }}">{{ $pendingBills->student->full_name }}</a></td>
                                 <td class="name align-middle d-none d-md-table-cell">{{ $pendingBills->student->school->name }}</td>
                                 <td class="name align-middle d-none d-md-table-cell">{{ $pendingBills->student->address }}</td>
                                 <td class="rifd align-middle">RM {{ $pendingBills->amount }}</td>
@@ -256,7 +256,7 @@
                             <tr class="btn-reveal-trigger">
 
                                 <td class="no align-middle">VNTRK{{ $paidBills->id }}</td>
-                                <td class="name align-middle">{{ $paidBills->student->full_name }}</td>
+                                <td class="name align-middle"><a href="detail_student/{{ $paidBills->student->id }}">{{ $paidBills->student->full_name }}</a></td>
                                 <td class="name align-middle d-none d-md-table-cell">{{ $paidBills->student->school->name }}</td>
                                 <td class="name align-middle d-none d-md-table-cell">{{ $paidBills->student->address }}</td>
                                 <td class="rifd align-middle">RM {{ $paidBills->amount }}</td>

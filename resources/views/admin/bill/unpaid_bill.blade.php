@@ -58,7 +58,7 @@
     </div>
 
     <div class="card mb-3" id="table-student"
-        data-list='{"valueNames":["no", "name", "school", "address", "amount", "due", "status"],"page":10,"pagination":true}'>
+        data-list='{"valueNames":["no", "name", "school", "address", "amount", "due", "status", "parent"],"page":10,"pagination":true}'>
         <div class="card-header">
             <div class="row flex-between-center">
                 <div class="col-4 col-sm-auto d-flex align-items-center pe-0">
@@ -79,9 +79,10 @@
                     <thead class="bg-200 text-900">
                         <tr>
                             <th class="sort" style="min-width: 3rem;" data-sort="no">No</th>
+                            <th class="sort" style="min-width: 10rem;" data-sort="parent">Parent Name</th>
                             <th class="sort" style="min-width: 10rem;" data-sort="name">Student Name</th>
+                            <th class="sort" style="min-width: 5rem;" data-sort="address">District</th>
                             <th class="sort" style="min-width: 5rem;" data-sort="school">School</th>
-                            <th class="sort" style="min-width: 5rem;" data-sort="address">Address</th>
                             <th class="sort" style="min-width: 5rem;" data-sort="amount">Amount</th>
 
                             <th class="sort" style="min-width: 5rem;" data-sort="due">Due</th>
@@ -97,9 +98,10 @@
                             <tr class="btn-reveal-trigger">
 
                                 <td class="no align-middle">VNTRK{{ $unpaidBills->id }}</td>
-                                <td class="name align-middle">{{ $unpaidBills->student->full_name }}</td>
+                                <td class="parent align-middle"><a href="profile_detail/{{ $unpaidBills->user->id }}">{{ $unpaidBills->user->name }}</a></td>
+                                <td class="name align-middle"><a href="detail_student/{{ $unpaidBills->student->id }}">{{ $unpaidBills->student->full_name }}</a></td>
+                                <td class="address align-middle">{{ $unpaidBills->student->district }}</td>
                                 <td class="school align-middle">{{ $unpaidBills->student->school->name }}</td>
-                                <td class="address align-middle">{{ $unpaidBills->student->address }}</td>
                                 <td class="amount align-middle">RM {{ $unpaidBills->amount }}</td>
 
                                 </td>

@@ -48,7 +48,7 @@
                     <h6 class="text-500">Invoice to</h6>
                     <h5>{{$bill->user->name}}</h5>
                     <p class="fs--1">{{$bill->user->address}}<br /></p>
-                    <p class="fs--1"><a href="">{{$bill->user->email}}</a><br /><a href="">{{$bill->user->phone}}</a></p>
+                    <p class="fs--1">{{$bill->user->email}}<br />{{$bill->user->phone}}</p>
                 </div>
                 <div class="col-sm-auto ms-auto">
                     <div class="table-responsive">

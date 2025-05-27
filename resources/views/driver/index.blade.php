@@ -54,10 +54,10 @@
                             <div class="d-flex position-relative">
                                 <div class="icon-item icon-item-sm border rounded-3 shadow-none me-2"><span
                                         class="fas fa-user text-info"></span></div>
-                                <div class="flex-1"><a class="stretched-link" href="view_alluser">
-                                        <h6 class="text-800 mb-0">Members Profile</h6>
+                                <div class="flex-1"><a class="stretched-link" href="driver_calendar">
+                                        <h6 class="text-800 mb-0">Check your Schedule</h6>
                                     </a>
-                                    <p class="mb-0 fs--2 text-500">Edit and manage user's profile</p>
+                                    <p class="mb-0 fs--2 text-500">See your schedule here</p>
                                 </div>
                             </div>
                         </div>
@@ -69,7 +69,7 @@
             <div class="card h-100">
                 <div class="card-header d-flex flex-between-center">
                     <h5 class="mb-0">Student Atten..</h5><a class="btn btn-link btn-sm px-0"
-                        href="/admin_view_attendance">Attendance<span class="fas fa-chevron-right ms-1 fs--2"> </span></a>
+                        href="/driver_view_attendance">Attendance<span class="fas fa-chevron-right ms-1 fs--2"> </span></a>
                 </div>
                 <div class="card-body">
                     <p class="fs--1 text-600">See student's attendance, <br /> time, and date</p>
@@ -187,10 +187,10 @@
                 <!--/.bg-holder-->
 
                 <div class="card-body position-relative">
-                    <h6>Revenue</h6>
+                    <h6>Today Attendance</h6>
                     <div class="display-4 fs-4 mb-2 fw-normal font-sans-serif"
-                        data-countup='{"endValue":43594,"prefix":"$"}'>RM {{$paid_revenue}}</div><a
-                        class="fw-semi-bold fs--1 text-nowrap" href="paid_bill">See all<span class="fas fa-angle-right ms-1"
+                        data-countup='{"endValue":43594,"prefix":"$"}'>0</div><a
+                        class="fw-semi-bold fs--1 text-nowrap" href="driver_view_attendance">See all<span class="fas fa-angle-right ms-1"
                             data-fa-transform="down-1"></span></a>
                 </div>
             </div>
@@ -198,74 +198,61 @@
     </div>
 
     <div class="row g-3 mb-3">
-        <div class="col-xxl-8">
-            <div class="card overflow-hidden h-100">
-                <div class="card-body p-0 management-calendar">
-                    <div class="row g-6">
-                        <div class="col-md-14">
-                            <div class="p-card">
-                                <div class="d-flex justify-content-between">
-                                    <div class="order-md-1">
-                                        <button class="btn btn-sm border me-1 shadow-sm" type="button" data-event="prev"
-                                            data-bs-toggle="tooltip" title="Previous"><span
-                                                class="fas fa-chevron-left"></span></button>
-                                        <button class="btn btn-sm text-secondary border px-sm-4 shadow-sm" type="button"
-                                            data-event="today">Today</button>
-                                        <button class="btn btn-sm border ms-1 shadow-sm" type="button" data-event="next"
-                                            data-bs-toggle="tooltip" title="Next"><span
-                                                class="fas fa-chevron-right"></span></button>
-                                    </div>
-                                    <button class="btn btn-sm text-primary border order-md-0" type="button"
-                                        data-bs-toggle="modal" data-bs-target="#addEventModal"> <span
-                                            class="fas fa-plus me-2"></span>New Schedule</button>
-                                </div>
-                            </div>
-                            <div class="calendar-outline px-3" id="managementAppCalendar"
-                                data-calendar-option='{"title":"management-calendar-title","day":"management-calendar-day","events":"management-calendar-events"}'>
-                            </div>
+        <div class="col-xl-7 col-xxl-8">
+            <div class="card h-100">
+                <div class="card-header bg-light d-flex flex-between-center">
+                    <h5 class="mb-0">Your Current Location</h5>
+                    {{-- <div class="dropdown font-sans-serif btn-reveal-trigger">
+                        <button class="btn btn-link text-600 btn-sm dropdown-toggle dropdown-caret-none btn-reveal"
+                            type="button" data-bs-toggle="dropdown" data-boundary="viewport" aria-haspopup="true"
+                            aria-expanded="false"><span class="fas fa-ellipsis-h fs--1"></span></button>
+                        <div class="dropdown-menu dropdown-menu-end border py-2"><a class="dropdown-item"
+                                href="#!">Edit</a><a class="dropdown-item" href="#!">Move</a><a class="dropdown-item"
+                                href="#!">Resize</a>
+                            <div class="dropdown-divider"></div><a class="dropdown-item text-warning"
+                                href="#!">Archive</a><a class="dropdown-item text-danger" href="#!">Delete</a>
                         </div>
-                        {{-- <div class="col-md-5 bg-light pt-3">
-                            <div class="px-3">
-                                <h4 class="mb-0 fs-0 fs-sm-1 fs-lg-2" id="management-calendar-title"></h4>
-                                <p class="text-500 mb-0" id="management-calendar-day"></p>
-                                <ul class="list-unstyled mt-3 scrollbar management-calendar-events"
-                                    id="management-calendar-events"></ul>
-                            </div>
-                        </div> --}}
+                    </div> --}}
+                </div>
+                <div class="card-body h-100 p-0">
+                    <div class="h-100 bg-white" id="map" style="min-height: 300px;"></div>
+                </div>
+                <div class="card-footer bg-light">
+                    <div class="row justify-content-between">
+                        <div class="col-auto">
+                        </div>
+                        <div class="col-auto"><a class="btn btn-falcon-default btn-sm"
+                                href="view_van_location/{{ auth()->user()->id }}"><span
+                                    class="d-none d-sm-inline-block me-1">Location</span>overview<span
+                                    class="fa fa-chevron-right ms-1 fs--1"></span></a></div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-xxl-4">
-            <div class="card h-100 bg-line-chart-gradient">
-                <div class="card-header bg-transparent light">
-                    <h5 class="text-white">Users online right now</h5>
-                    <div class="real-time-user display-1 fw-normal text-white" data-countup='{"endValue":119}'>
-                        {{$active_user}}
-                    </div>
+        <div class="col-lg-4 pe-lg-2 mb-3">
+            <div class="card mb-3 mb-lg-0 h-110">
+                <div class="card-header bg-light">
+                    <h5 class="mb-0">Your Schedule</h5>
                 </div>
-                <div class="card-body text-white fs--1 light pb-0">
-                    <p class="border-bottom pb-2" style="border-color: rgba(255, 255, 255, 0.15) !important">Page views /
-                        second</p>
-
-                    <div class="list-group-flush mt-4">
-                        <div class="rounded-2" style="border:1px solid rgba(255, 255, 255, 0.15)">
-                            <div class="px-3 bg-transparent text-white d-flex justify-content-between px-0 py-1 fw-semi-bold border-top-0"
-                                style="border-bottom:1px solid rgba(255, 255, 255, 0.15)">
-                                <p class="mb-0">User Name</p>
-                                <p class="mb-0">Ip Address</p>
+                <div class="card-body fs--1">
+                    @foreach ($rates as $rate)
+                        <div class="d-flex btn-reveal-trigger">
+                            <div class="calendar"><span class="calendar-month">Jan</span><span class="calendar-day">12</span>
                             </div>
-                            @foreach ($session as $session)
-                                <div class="px-3 bg-transparent text-white d-flex justify-content-between px-0 py-1"
-                                    style="border-bottom:1px solid rgba(255, 255, 255, 0.05)">
-                                    <p class="mb-0">{{$session->user->email}}</p>
-                                    <p class="mb-0">{{$session->ip_address}}</p>
-                                </div>
-                            @endforeach
-
+                            <div class="flex-1 position-relative ps-3">
+                                <h6 class="fs-0 mb-0"><a href="/student_listToHome/{{$rate->id}}">{{$rate->school->name}}</a></h6>
+                                <p class="mb-1">From <a href="/student_listToHome/{{$rate->id}}" class="text-700">From {{$rate->district}}</a></p>
+                                <p class="text-1000 mb-0">Pickup Time: {{$rate->start_time}}</p>
+                                <p class="text-1000 mb-0">Return Time: {{$rate->end_time}}</p>
+                                <div class="border-dashed-bottom my-3"></div>
+                            </div>
                         </div>
-                    </div>
+                    @endforeach
+
                 </div>
+                <div class="card-footer bg-light p-0 border-top"><a class="btn btn-link d-block w-100"
+                        href="/schedule_list">All Schedule<span
+                            class="fas fa-chevron-right ms-1 fs--2"></span></a></div>
             </div>
         </div>
     </div>
