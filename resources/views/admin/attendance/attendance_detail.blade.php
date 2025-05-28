@@ -13,164 +13,141 @@
 @section('body-content')
 
     <div class="card mb-3">
-        <div class="bg-holder d-none d-lg-block bg-card"
-            style="background-image:url(../../assets/img/icons/spot-illustrations/corner-4.png);">
-        </div>
-
-        <div class="card-body position-relative">
-            <div class="row">
-                <div class="col-lg-8">
-                    <h3>Student Attendance Records</h3>
-                    {{-- <p class="mb-0">Below are the attendance details of students registered in the system.</p> --}}
-                </div>
-            </div>
+        <div class="card-body">
+            <h3>Attendance Detail - Monthly View</h3>
         </div>
     </div>
 
-    <div class="card mb-3" id="ordersTable"
-        data-list='{"valueNames":["order","date","address","status","amount"],"page":10,"pagination":true}'>
+
+    <div class="card">
         <div class="card-header">
-            <div class="row flex-between-center">
-                <div class="col-4 col-sm-auto d-flex align-items-center pe-0">
-                    <h5 class="fs-0 mb-0 text-nowrap py-2 py-xl-0">{{$student->full_name}}</h5>
-                </div>
-
-                <div class="col-8 col-sm-auto ms-auto text-end ps-0">
-                    <form id="filterForm" method="GET"
-                        action="{{ route('attendance_detail', ['id' => $student->id]) }}">
-                        <div class="d-flex gap-2">
-
-
-                            <button class="btn btn-falcon-default btn-sm" type="submit" name="today"
-                                value="{{ $isToday ? '0' : '1' }}">
-                                <span class="fas fa-calendar-day"></span>
-                                <span class="d-none d-sm-inline-block ms-1">
-                                    {{ $isToday ? 'Show All' : 'Today' }}
-                                </span>
-                            </button>
-
-                            <button class="btn btn-falcon-default btn-sm" type="button" onclick="exportAttendanceTable()">
-                                <span class="fas fa-external-link-alt" data-fa-transform="shrink-3 down-2"></span>
-                                <span class="d-none d-sm-inline-block ms-1">Export</span>
-                            </button>
-                        </div>
-                    </form>
+            <div class="row flex-between-end">
+                <div class="col-auto flex-lg-grow-1 flex-lg-basis-0 align-self-center">
+                    <h5 class="mb-0" data-anchor="data-anchor">Attendance Details for {{ $student->full_name }}</h5>
                 </div>
             </div>
         </div>
-        <div class="card-body p-0">
-            <div class="table-responsive scrollbar">
-                <table id="attendance-table" class="table table-sm table-striped fs--1 mb-0 overflow-hidden">
-                    <thead class="bg-200 text-900">
-                        <tr>
-                            {{-- <th>
-                                <div class="form-check fs-0 mb-0 d-flex align-items-center">
-                                    <input class="form-check-input" id="checkbox-bulk-customers-select" type="checkbox"
-                                        data-bulk-select='{"body":"table-orders-body","actions":"orders-bulk-actions","replacedElement":"orders-actions"}' />
-                                </div>
-                            </th> --}}
-                            <th class="sort" style="max-width: 0rem;" data-sort="order">No</th>
-                            <th class="sort" style="max-width: 0.5rem;" data-sort="address">Date Time</th>
-                            <th class="sort" style="min-width: 5rem;" data-sort="order">RFID Tag</th>
-                            {{-- <th class="sort" style="min-width: 10rem;" data-sort="date">Driver Name</th> --}}
-                            {{-- <th class="sort" style="min-width: 10rem;" data-sort="date">School</th>
-                            <th class="sort" style="min-width: 10rem;" data-sort="address">Address</th> --}}
-                            <th class="sort" style="max-width: 1rem;" data-sort="date">Status</th>
-
-                            {{-- <th class="sort pe-1 align-middle white-space-nowrap text-center" data-sort="status">Photo
-                            </th> --}}
-                            {{-- <th class="no-sort"></th> --}}
-                        </tr>
-                    </thead>
-                    <tbody class="list" id="table-orders-body">
-                        @php
-                            $number = 1; // Initialize the counter
-                        @endphp
-                        @foreach ($attendance as $attendances)
-                            <tr class="btn-reveal-trigger">
-                                {{-- <td class="align-middle" style="width: 28px;">
-                                    <div class="form-check fs-0 mb-0 d-flex align-items-center">
-                                        <input class="form-check-input" type="checkbox" id="checkbox-0"
-                                            data-bulk-select-row="data-bulk-select-row" />
-                                    </div>
-                                </td> --}}
-                                <td class="order py-2" style="max-width: 0rem;">{{ $number++ }}</td>
-                                <!-- Increment the counter -->
-                                <td class="address py-2" style="max-width: 2rem;">
-                                    {{ $attendances->created_at->format('d M Y, h:i A') }}
-                                </td>
-                                <td class="order py-2">{{ $attendances->rfid_tag }}
-                                </td>
-                                {{-- <td class="date py-2"><a href="detail_student/{{$attendances->student->id}}">{{
-                                        $attendances->rate->van->user->name }}</a>
-                                </td> --}}
-                                {{-- <td class="school py-2">{{ $attendances->student->school->name }}</td>
-                                <td class="address py-2">
-                                    {{ $attendances->student->address }}
-                                </td> --}}
-
-                                @if ($attendances->status == 'In')
-                                    <td class="align-middle" style="max-width: 1rem;"><span
-                                            class="badge badge rounded-pill d-block py-2 badge-soft-success">In<span
-                                                class="fas fa-check" data-fa-transform="shrink-2"></span></span>
-                                    </td>
-                                @else
-                                    <td class="align-middle" style="max-width: 1rem;"><span
-                                            class="badge badge rounded-pill d-block p-2 badge-soft-secondary">Out<span
-                                                class="ms-1 fas fa-ban" data-fa-transform="shrink-2"></span></span>
-                                @endif
-
-
-                                    {{--
-                                <td class="status py-2 align-middle text-center fs-0 white-space-nowrap">
-                                    <img style="width: 120px;" src="student/{{ $attendances->student->profile_photo }}" alt="">
-                                </td> --}}
-                                {{-- <td class="py-2 align-middle white-space-nowrap text-end">
-                                    <div class="dropdown font-sans-serif position-static">
-                                        <button class="btn btn-link text-600 btn-sm dropdown-toggle btn-reveal" type="button"
-                                            id="order-dropdown-0" data-bs-toggle="dropdown" data-boundary="viewport"
-                                            aria-haspopup="true" aria-expanded="false"><span
-                                                class="fas fa-ellipsis-h fs--1"></span></button>
-                                        <div class="dropdown-menu dropdown-menu-end border py-0"
-                                            aria-labelledby="order-dropdown-0">
-                                            <div class="bg-white py-2"><a class="dropdown-item" href="">Edit</a>
-                                                <div class="dropdown-divider"></div>
-                                                <a class="dropdown-item text-danger" href="">Delete</a>
+        <div class="card-body bg-light">
+            <div class="tab-content">
+                <div class="tab-pane preview-tab-pane active" role="tabpanel">
+                    <div class="accordion" id="attendanceAccordion">
+                        @forelse ($groupedAttendance as $date => $records)
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="heading-{{ $loop->index }}">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapse-{{ $loop->index }}" aria-expanded="false"
+                                        aria-controls="collapse-{{ $loop->index }}">
+                                        {{ \Carbon\Carbon::parse($date)->format('l, d M Y') }}
+                                    </button>
+                                </h2>
+                                <div id="collapse-{{ $loop->index }}" class="accordion-collapse collapse"
+                                    aria-labelledby="heading-{{ $loop->index }}" data-bs-parent="#attendanceAccordion">
+                                    <div class="accordion-body">
+                                        @foreach ($records as $entry)
+                                            <div class="d-flex align-items-center mb-2">
+                                                <div class="me-2">
+                                                    @if ($entry->status == 'In')
+                                                        <span style="width: 40px"
+                                                            class="badge rounded-pill badge-soft-success">In</span>
+                                                    @else
+                                                        <span style="width: 40px"
+                                                            class="badge rounded-pill badge-soft-secondary">Out</span>
+                                                    @endif
+                                                </div>
+                                                {{-- <div>
+                                                    {{ \Carbon\Carbon::parse($entry->created_at)->format('h:i A') }} – RFID:
+                                                    <strong>{{ $entry->rfid_tag ?? 'N/A' }}</strong>
+                                                </div> --}}
+                                                <div>
+                                                    {{ \Carbon\Carbon::parse($entry->created_at)->format('h:i A') }}, &nbsp; {{$entry->student->school->name}}
+                                                    
+                                                </div>
                                             </div>
-                                        </div>
+                                        @endforeach
                                     </div>
-                                </td> --}}
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        <div class="card-footer">
-            <div class="d-flex align-items-center justify-content-center">
-                <button class="btn btn-sm btn-falcon-default me-1" type="button" title="Previous"
-                    data-list-pagination="prev"><span class="fas fa-chevron-left"></span></button>
-                <ul class="pagination mb-0"></ul>
-                <button class="btn btn-sm btn-falcon-default ms-1" type="button" title="Next"
-                    data-list-pagination="next"><span class="fas fa-chevron-right"> </span></button>
+                                </div>
+                            </div>
+                        @empty
+                            <div class="alert alert-info">No attendance records available.</div>
+                        @endforelse
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
 
 
-
-
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
-
-    <script>
-        function exportAttendanceTable() {
-            const table = document.getElementById('attendance-table');
-            const wb = XLSX.utils.table_to_book(table, { sheet: "Attendance Records" });
-            XLSX.writeFile(wb, "attendance_records.xlsx");
-        }
-    </script>
-
+    {{-- <div class="card">
+        <div class="card-header">
+            <div class="row flex-between-end">
+                <div class="col-auto flex-lg-grow-1 flex-lg-basis-0 align-self-center">
+                    <h5 class="mb-0" data-anchor="data-anchor">Example</h5>
+                    <p class="mb-0 mt-2">Using the card component, you can extend the default collapse behavior to create an
+                        accordion. To properly achieve the accordion style, be sure to use <code> .accordion </code> as a
+                        wrapper.</p>
+                </div>
+            </div>
+        </div>
+        <div class="card-body bg-light">
+            <div class="tab-content">
+                <div class="tab-pane preview-tab-pane active" role="tabpanel"
+                    aria-labelledby="tab-dom-ec557d89-a32e-4e39-89cf-58a62664929f"
+                    id="dom-ec557d89-a32e-4e39-89cf-58a62664929f">
+                    <div class="accordion" id="accordionExample">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="heading1">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapse1" aria-expanded="true" aria-controls="collapse1">How long do
+                                    payouts take?</button>
+                            </h2>
+                            <div class="accordion-collapse collapse show" id="collapse1" aria-labelledby="heading1"
+                                data-bs-parent="#accordionExample">
+                                <div class="accordion-body">Once you’re set up, payouts arrive in your bank account on a
+                                    2-day rolling basis. Or you can opt to receive payouts weekly or monthly.</div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="heading2">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapse2" aria-expanded="true" aria-controls="collapse2">How do
+                                    refunds work?</button>
+                            </h2>
+                            <div class="accordion-collapse collapse" id="collapse2" aria-labelledby="heading2"
+                                data-bs-parent="#accordionExample">
+                                <div class="accordion-body">You can issue either partial or full refunds. There are no fees
+                                    to refund a charge, but the fees from the original charge are not returned.</div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="heading3">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapse3" aria-expanded="true" aria-controls="collapse3">How much do
+                                    disputes costs?</button>
+                            </h2>
+                            <div class="accordion-collapse collapse" id="collapse3" aria-labelledby="heading3"
+                                data-bs-parent="#accordionExample">
+                                <div class="accordion-body">Disputed payments (also known as chargebacks) incur a $15.00
+                                    fee. If the customer’s bank resolves the dispute in your favor, the fee is fully
+                                    refunded.</div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="heading4">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapse4" aria-expanded="true" aria-controls="collapse4">Is there a
+                                    fee to use Apple Pay or Google Pay?</button>
+                            </h2>
+                            <div class="accordion-collapse collapse" id="collapse4" aria-labelledby="heading4"
+                                data-bs-parent="#accordionExample">
+                                <div class="accordion-body">There are no additional fees for using our mobile SDKs or to
+                                    accept payments using consumer wallets like Apple Pay or Google Pay.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> --}}
 
 @endsection

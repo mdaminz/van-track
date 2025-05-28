@@ -171,6 +171,8 @@ route::get('/paid_bill', [AdminController::class, 'paid_bill']);
 route::get('/pending_bill', [AdminController::class, 'pending_bill']);
 route::get('/unpaid_bill', [AdminController::class, 'unpaid_bill']);
 
+route::get('/delete_unpaidBill/{id}', [AdminController::class, 'delete_unpaidBill']);
+
 route::get('/verify_bill/{id}', [AdminController::class, 'verify_bill']);
 route::post('/edit_status/{id}', [AdminController::class, 'edit_status']);
 

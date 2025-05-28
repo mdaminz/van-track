@@ -66,7 +66,7 @@
                                 <td class="rifd align-middle">RM {{ $unpaidBills->amount }}</td>
 
                                 </td>
-                                <td class="address align-middle">{{ $unpaidBills->due_date}}
+                                <td class="address align-middle">[{{ $unpaidBills->created_at->format('F') }}] {{ $unpaidBills->due_date}}
                                 </td>
                                 @if ($unpaidBills->status == 'Paid')
                                     <td class="align-middle"><span
@@ -164,7 +164,7 @@
                                 <td class="rifd align-middle">RM {{ $pendingBills->amount }}</td>
 
                                 </td>
-                                <td class="address align-middle">{{ $pendingBills->due_date}}
+                                <td class="address align-middle">[{{ $pendingBills->created_at->format('F') }}] {{ $pendingBills->due_date}}
                                 </td>
                                 @if ($pendingBills->status == 'Paid')
                                     <td class="align-middle"><span
@@ -262,7 +262,7 @@
                                 <td class="rifd align-middle">RM {{ $paidBills->amount }}</td>
 
                                 </td>
-                                <td class="address align-middle">{{ $paidBills->due_date}}
+                                <td class="address align-middle">[{{ $paidBills->created_at->format('F') }}] {{ $paidBills->due_date}}
                                 </td>
                                 @if ($paidBills->status == 'Paid')
                                     <td class="align-middle"><span

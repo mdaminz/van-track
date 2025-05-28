@@ -22,6 +22,8 @@ use App\Models\Bill;
 use App\Models\Comment;
 use App\Models\Session;
 
+use Carbon\CarbonPeriod;
+
 use Illuminate\Support\Facades\DB;
 
 
@@ -273,7 +275,12 @@ class AdminController extends Controller
             ->orderBy('created_at', 'desc')
             ->get();
 
-        return view('admin.attendance.attendance_detail', compact('student', 'attendance', 'isToday'));
+        // Group attendance by date (Y-m-d)
+        $groupedAttendance = $attendance->groupBy(function ($item) {
+            return $item->created_at->format('Y-m-d');
+        });
+
+        return view('admin.attendance.attendance_detail', compact('student', 'groupedAttendance', 'isToday', 'attendance'));
     }
 
 
@@ -339,36 +346,56 @@ class AdminController extends Controller
 
         $students = Student::find($id);
 
-        $previousStatus = $students->status; // Store the previous status before updating
+        $previousStatus = $students->status;
 
+        // Update student data
         $students->full_name = $request->full_name;
         $students->date_of_birth = $request->date_of_birth;
         $students->relationship = $request->relationship;
         $students->emergency_contact = $request->emergency_contact;
         $students->address = $request->address;
-
-        $students->school_id = $request->school_id;
-
         $students->postcode = $request->postcode;
         $students->district = $request->district;
+        $students->school_id = $request->school_id;
         $students->user_id = $request->user_id;
-
         $students->rfid_tag = $request->rfid_tag;
         $students->status = $request->status;
 
-        // ✅ Match district + school_id
+        // Find rate based on district and school
         $rate = Rate::where('district', $request->district)
             ->where('school_id', $request->school_id)
             ->first();
 
-        $students->rate_id = $rate ? $rate->id : 'No Rate';
-
+        $students->rate_id = $rate ? $rate->id : null;
         $students->save();
 
-        // // Check if status was changed from anything to "Active"
-        // if ($previousStatus !== 'Active' && $students->status === 'Active') {
-        //     $this->generateBill($students); // ✅ Fixed: Call the private method correctly
-        // }
+        // ✅ If status changed from non-active to active
+        if ($previousStatus !== 'Active' && $students->status === 'Active' && $rate) {
+
+            $fullPrice = $rate->price;
+
+            // Billing period starts on 1st of the current month
+            $billingStart = Carbon::now()->startOfMonth();
+            $activationDate = Carbon::now()->startOfDay();
+
+            // Count missed weekdays before activation
+            $missedDays = CarbonPeriod::create($billingStart, $activationDate->copy()->subDay());
+            $missedWeekdays = collect($missedDays)->filter(fn($date) => $date->isWeekday())->count();
+
+            $discount = $missedWeekdays * 5;
+            $finalAmount = max(0, $fullPrice - $discount); // prevent negative amount
+
+            // Create bill
+            Bill::create([
+                'student_id' => $students->id,
+                'user_id' => $students->user_id,
+                'amount' => $finalAmount,
+                'due_date' => Carbon::now()->day <= 10
+                    ? Carbon::now()->startOfMonth()->day(10)
+                    : Carbon::now()->addMonthNoOverflow()->startOfMonth()->day(10),
+                'status' => 'Unpaid',
+            ]);
+        }
 
         return redirect('admin_view_student')->with('success', 'Student Profile updated successfully!');
     }
@@ -1004,7 +1031,7 @@ class AdminController extends Controller
         $rate->delete();
 
         return redirect()->back()->with('success', 'Rate deleted successfully!');
-        ;
+
     }
 
     public function paid_bill()
@@ -1059,6 +1086,16 @@ class AdminController extends Controller
             ->sum('amount');
 
         return view('admin.bill.unpaid_bill', compact('unpaidBills', 'unpaid_bills', 'total_unpaid'));
+    }
+
+    public function delete_unpaidBill($id)
+    {
+        $bill = Bill::find($id);
+
+        $bill->delete();
+
+        return redirect()->back()->with('success', 'Billing deleted successfully!');
+
     }
 
     public function bill_receipt($id)

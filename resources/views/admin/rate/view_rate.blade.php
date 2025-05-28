@@ -97,7 +97,7 @@
                                                 <a class="dropdown-item"
                                                     href="{{ url('update_rate', $rates->id) }}">Edit</a>
                                                 <div class="dropdown-divider"></div>
-                                                <a class="dropdown-item text-danger" href="">Delete</a>
+                                                <a class="dropdown-item text-danger" href="{{ url('delete_rate', $rates->id) }}">Delete</a>
                                             </div>
                                         </div>
                                     </div>

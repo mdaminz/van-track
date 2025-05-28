@@ -108,7 +108,7 @@
                                 <td class="amount align-middle">RM {{ $pendingBills->amount }}</td>
 
                                 </td>
-                                <td class="address align-middle">{{ $pendingBills->due_date}}
+                                <td class="address align-middle">[{{ $pendingBills->created_at->format('F') }}] {{ $pendingBills->due_date}}
                                 </td>
                                 @if ($pendingBills->status == 'Paid')
                                     <td class="align-middle"><span

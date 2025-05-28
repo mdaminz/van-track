@@ -66,15 +66,15 @@
 
     @if (session('success'))
         <div class="alert alert-success border-2 d-flex align-items-center" role="alert" style="
-                        position: fixed;
-                        top: 20px;
-                        right: 0;
-                        width: 30%;
-                        z-index: 9999;
-                        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-                        transform: translateX(100%);
-                        animation: slideIn 0.5s forwards;
-                        ">
+                            position: fixed;
+                            top: 20px;
+                            right: 0;
+                            width: 30%;
+                            z-index: 9999;
+                            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+                            transform: translateX(100%);
+                            animation: slideIn 0.5s forwards;
+                            ">
             <div class="bg-success me-3 icon-item">
                 <span class="fas fa-check-circle text-white fs-3"></span>
             </div>
@@ -86,7 +86,45 @@
             setTimeout(() => {
                 const alert = document.querySelector('.alert');
                 if (alert) alert.remove();
-            }, 3000); // auto-hide after 3 seconds
+            }, 10000); // auto-hide after 3 seconds
+        </script>
+
+        <style>
+            @keyframes slideIn {
+                0% {
+                    transform: translateX(100%);
+                }
+
+                100% {
+                    transform: translateX(0);
+                }
+            }
+        </style>
+    @endif
+
+    @if (session('error'))
+        <div class="alert alert-danger border-2 d-flex align-items-center" role="alert" style="
+                            position: fixed;
+                            top: 20px;
+                            right: 0;
+                            width: 30%;
+                            z-index: 9999;
+                            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+                            transform: translateX(100%);
+                            animation: slideIn 0.5s forwards;
+                            ">
+            <div class="bg-danger me-3 icon-item">
+                <span class="fas fa-times-circle text-white fs-3"></span>
+            </div>
+            <p class="mb-0 flex-1">{{ session('error') }}</p>
+            <button class="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+
+        <script>
+            setTimeout(() => {
+                const alert = document.querySelector('.alert');
+                if (alert) alert.remove();
+            }, 10000); // auto-hide after 3 seconds
         </script>
 
         <style>

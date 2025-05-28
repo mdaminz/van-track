@@ -78,20 +78,14 @@ class HomeController extends Controller
 
         $user_id = Auth::id(); // Get the authenticated user's ID
 
-        // Check if the usertype is 'user'
-        if ($user_type === 'user') {
+    
             // Retrieve students associated with the authenticated user
             $students = Student::where('user_id', $user_id)->get();
 
             // Pass the students to the view
             return view('user.student.view_student', compact('students'));
-        } elseif ($user_type === 'admin') {
-            $students = Student::whereHas('user', function ($query) {
-                $query->where('usertype', 'user');
-            })->get();
-
-            return view('user.student.view_student', compact('students'));
-        }
+         
+        
     }
 
 
@@ -156,6 +150,8 @@ class HomeController extends Controller
 
         $student->save();
 
+
+
         return redirect('/view_student')->with('success', 'Child created successfully!');
     }
 
@@ -186,9 +182,31 @@ class HomeController extends Controller
     public function edit_student(Request $request, $id)
     {
         $user = Auth::user();
-
         $student_data = Student::find($id);
 
+        $isChangingDistrictOrSchool =
+            $student_data->school_id != $request->school_id ||
+            $student_data->district != $request->district;
+
+        $today = Carbon::now();
+
+        // Calculate the first day of the next month
+        $firstOfNextMonth = $today->copy()->startOfMonth()->addMonth();
+
+        // Calculate 5 days before the first day of next month
+        $startWindow = $firstOfNextMonth->copy()->subDays(5);
+
+        // Check if today is within [startWindow, firstOfNextMonth]
+        $isWithinWindow = $today->between($startWindow, $firstOfNextMonth);
+
+        if ($isChangingDistrictOrSchool && !$isWithinWindow) {
+            $formattedStart = $startWindow->toFormattedDateString(); // e.g. June 26, 2025
+            $formattedEnd = $firstOfNextMonth->toFormattedDateString(); // e.g. July 1, 2025
+
+            return redirect()->back()->with('error', "School and district can only be changed from {$formattedStart} to {$formattedEnd}.");
+        }
+
+        // Update student fields
         $student_data->full_name = $request->full_name;
         $student_data->date_of_birth = $request->date_of_birth;
         $student_data->relationship = $request->relationship;
@@ -199,32 +217,30 @@ class HomeController extends Controller
         $student_data->school_id = $request->school_id;
         $student_data->user_id = Auth::id();
 
-        // ✅ Match district + school_id
+        // Match district + school_id
         $rate = Rate::where('district', $request->district)
             ->where('school_id', $request->school_id)
             ->first();
 
         $student_data->rate_id = $rate ? $rate->id : 'No Rate';
 
+        // Update profile photo
         if ($request->hasFile('profile_photo')) {
-            // Delete the old profile photo (optional, if updating an existing student)
             if ($student_data->profile_photo && file_exists(public_path('student/' . $student_data->profile_photo))) {
                 unlink(public_path('student/' . $student_data->profile_photo));
             }
 
-            // Save the new profile photo
             $image = $request->file('profile_photo');
             $imagename = time() . '.' . $image->getClientOriginalExtension();
             $image->move(public_path('student'), $imagename);
             $student_data->profile_photo = $imagename;
         }
 
-
-
         $student_data->save();
 
-        return redirect('view_student')->with('success', 'Child updated successfully!');
+        return redirect('/view_student')->with('success', 'Child updated successfully!');
     }
+
 
     public function delete_student($id)
     {
@@ -232,7 +248,7 @@ class HomeController extends Controller
 
         $student_data->delete();
 
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Child deleted successfully!');
     }
 
     //FEEDBACK

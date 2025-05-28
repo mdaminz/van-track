@@ -105,7 +105,7 @@
                                 <td class="amount align-middle">RM {{ $paidBills->amount }}</td>
 
                                 </td>
-                                <td class="due align-middle">{{ $paidBills->due_date}}
+                                <td class="due align-middle">[{{ $paidBills->created_at->format('F') }}] {{ $paidBills->due_date}}
                                 </td>
                                 @if ($paidBills->status == 'Paid')
                                     <td class="align-middle"><span

@@ -105,7 +105,7 @@
                                 <td class="amount align-middle">RM {{ $unpaidBills->amount }}</td>
 
                                 </td>
-                                <td class="due align-middle">{{ $unpaidBills->due_date}}
+                                <td class="due align-middle">[{{ $unpaidBills->created_at->format('F') }}] {{ $unpaidBills->due_date}}
                                 </td>
                                 @if ($unpaidBills->status == 'Paid')
                                     <td class="align-middle"><span
@@ -114,7 +114,7 @@
                                     </td>
                                 @else
                                     <td class="align-middle"><span
-                                            class="badge badge rounded-pill d-block p-2 badge-soft-secondary">{{$unpaidBills->status}}<span
+                                            class="badge badge rounded-pill d-block p-2 badge-soft-danger">{{$unpaidBills->status}}<span
                                                 class="ms-1 fas fa-ban" data-fa-transform="shrink-2"></span></span>
                                 @endif
                                 </td>
@@ -134,9 +134,9 @@
                                                     href="{{ url('bill_receipt', $unpaidBills->id) }}">Invoice</a>
 
 
-                                                {{-- <a class="dropdown-item" href="">Verify</a>
+                                                {{-- <a class="dropdown-item" href="">Verify</a> --}}
                                                 <div class="dropdown-divider"></div>
-                                                <a class="dropdown-item text-danger" href="">Delete</a> --}}
+                                                <a class="dropdown-item text-danger" href="{{ url('delete_unpaidBill', $unpaidBills->id) }}">Delete</a>
 
                                             </div>
                                         </div>
