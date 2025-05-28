@@ -82,7 +82,7 @@
                             <th class="sort align-middle" style="min-width: 5rem;" data-sort="type">Type</th>
                             <th class="sort align-middle" style="min-width: 15rem;" data-sort="subject">Subject</th>
                             <th class="sort align-middle" style="min-width: 10rem;" data-sort="resolved">Resolved At</th>
-                            <th class="sort align-middle" style="min-width: 10rem;" data-sort="status">Status</th>
+                            <th class="sort align-middle" style="min-width: 5rem;" data-sort="status">Status</th>
 
                             <th class="no-sort"></th>
                         </tr>

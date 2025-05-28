@@ -52,7 +52,7 @@
                             <th class="sort align-middle d-none d-md-table-cell" style="min-width: 5rem;" data-sort="email">Type</th>
                             <th class="sort align-middle" style="min-width: 15rem;" data-sort="contact">Subject</th>
                             <th class="sort align-middle d-none d-md-table-cell" style="min-width: 10rem;" data-sort="address">Resolved At</th>
-                            <th class="sort align-middle" style="min-width: 10rem;" data-sort="status">Status</th>
+                            <th class="sort align-middle" style="min-width: 5rem;" data-sort="status">Status</th>
                             <th class="no-sort"></th>
                         </tr>
                     </thead>
@@ -140,7 +140,7 @@
                             <th class="sort align-middle d-none d-md-table-cell" style="min-width: 5rem;" data-sort="email">Type</th>
                             <th class="sort align-middle" style="min-width: 15rem;" data-sort="contact">Subject</th>
                             <th class="sort align-middle d-none d-md-table-cell" style="min-width: 10rem;" data-sort="address">Resolved At</th>
-                            <th class="sort align-middle" style="min-width: 10rem;" data-sort="status">Status</th>
+                            <th class="sort align-middle" style="min-width: 5rem;" data-sort="status">Status</th>
                             <th class="no-sort"></th>
                         </tr>
                     </thead>
