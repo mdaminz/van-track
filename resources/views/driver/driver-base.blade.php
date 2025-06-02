@@ -72,15 +72,15 @@
 <body>
     @if (session('success'))
         <div class="alert alert-success border-2 d-flex align-items-center" role="alert" style="
-                                position: fixed;
-                                top: 20px;
-                                right: 0;
-                                width: 30%;
-                                z-index: 9999;
-                                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-                                transform: translateX(100%);
-                                animation: slideIn 0.5s forwards;
-                                ">
+                                    position: fixed;
+                                    top: 20px;
+                                    right: 0;
+                                    width: 30%;
+                                    z-index: 9999;
+                                    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+                                    transform: translateX(100%);
+                                    animation: slideIn 0.5s forwards;
+                                    ">
             <div class="bg-success me-3 icon-item">
                 <span class="fas fa-check-circle text-white fs-3"></span>
             </div>
@@ -143,6 +143,7 @@
                 <div class="collapse navbar-collapse" id="navbarVerticalCollapse">
                     <div class="navbar-vertical-content scrollbar">
                         <ul class="navbar-nav flex-column mb-3" id="navbarVerticalNav">
+
                             <li class="nav-item">
                                 <!-- parent pages--><a class="nav-link" href="/home" role="button">
                                     <div class="d-flex align-items-center"><span class="nav-link-icon"><span
@@ -154,7 +155,7 @@
                             <li class="nav-item">
                                 <!-- label-->
                                 <div class="row navbar-vertical-label-wrapper mt-3 mb-2">
-                                    <div class="col-auto navbar-vertical-label">Manage Student
+                                    <div class="col-auto navbar-vertical-label">Calendar
                                     </div>
                                     <div class="col ps-0">
                                         <hr class="mb-0 navbar-vertical-divider" />
@@ -166,6 +167,19 @@
                                             class="nav-link-text ps-1">Calendar</span>
                                     </div>
                                 </a>
+
+
+                            </li>
+                            <li class="nav-item">
+                                <!-- label-->
+                                <div class="row navbar-vertical-label-wrapper mt-3 mb-2">
+                                    <div class="col-auto navbar-vertical-label">Manage Student
+                                    </div>
+                                    <div class="col ps-0">
+                                        <hr class="mb-0 navbar-vertical-divider" />
+                                    </div>
+                                </div>
+
                                 <!-- parent pages--><a class="nav-link" href="driver_view_student" role="button">
                                     <div class="d-flex align-items-center"><span class="nav-link-icon"><span
                                                 class="fab fa-odnoklassniki"></span></span><span
@@ -584,7 +598,7 @@
 
                         map.setCenter(pos); // Update map center to the new position
                     });
-                }, 1000); // Update every second
+                }, 5000); // Update every second
             } else {
                 alert("Geolocation is not supported by this browser.");
             }

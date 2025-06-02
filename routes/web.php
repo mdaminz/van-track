@@ -19,7 +19,8 @@ Route::middleware([
 });
 
 
-route::get('/home', [AdminController::class, 'index'])->name('index');;
+route::get('/home', [AdminController::class, 'index'])->name('index');
+;
 
 //main-dashboard
 route::get('/contact', [HomeController::class, 'contact']);
@@ -53,7 +54,7 @@ route::get('/admin_update_student/{id}', [AdminController::class, 'admin_update_
 route::post('/admin_edit_student/{id}', [AdminController::class, 'admin_edit_student']);
 route::get('/admin_delete_student/{id}', [AdminController::class, 'admin_delete_student']);
 
-route::get('/detail_student/{id}', [AdminController::class,'detail_student']);
+route::get('/detail_student/{id}', [AdminController::class, 'detail_student']);
 
 //manage parent
 route::get('/view_parent', [AdminController::class, 'view_parent']);
@@ -101,7 +102,7 @@ Route::get('/parent_view_attendance', [HomeController::class, 'parent_view_atten
 
 route::get('/view_van', [AdminController::class, 'view_van']);
 
-route::get('/view_van_location', [AdminController::class, 'view_van_location']);
+// route::get('/view_van_location', [AdminController::class, 'view_van_location']);
 
 //Report
 
@@ -221,3 +222,24 @@ route::get('/student_listToSchool/{id}', [DriverController::class, 'student_list
 route::get('/student_listToHome/{id}', [DriverController::class, 'student_listToHome']);
 
 Route::get('/get-price', [App\Http\Controllers\HomeController::class, 'getPrice']);
+
+
+//AJAX routes
+Route::get('/students/to-school/{id}/data', [DriverController::class, 'getStudentListToSchoolData']);
+Route::get('/students/to-home/{id}/data', [DriverController::class, 'getStudentListToHomeData']);
+// Route::get('/api/van-location/{id}', [AdminController::class, 'getVanLocation']);
+
+Route::get('/api/parent-attendance', [HomeController::class, 'fetchAttendanceData'])->name('api.parent.attendance');
+Route::get('/api/driver-attendance', [DriverController::class, 'fetchAttendanceData'])
+    ->name('api.driver.attendance');
+
+
+//admin calendar
+Route::get('/admin_calendar', [AdminController::class, 'admin_calendar'])->name('admin.calendar');
+
+// Add this route to fetch events
+Route::get('/admin_calendar/events', [AdminController::class, 'calendar_events'])->name('admin.calendar.events');
+
+//parent calendar
+Route::get('/parent_calendar', [HomeController::class, 'parent_calendar'])->name('parent_calendar');
+Route::get('/parent_calendar/events', [HomeController::class, 'calendar_events'])->name('parent.calendar.events');

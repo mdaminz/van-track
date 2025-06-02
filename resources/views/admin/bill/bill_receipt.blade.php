@@ -78,6 +78,7 @@
                     <h5>{{$bill->user->name}}</h5>
                     <p class="fs--1">{{$bill->user->address}}<br /></p>
                     <p class="fs--1">{{$bill->user->email}}<br />{{$bill->user->phone}}</p>
+
                 </div>
                 <div class="col-sm-auto ms-auto">
                     <div class="table-responsive">
@@ -88,7 +89,7 @@
                                     <td>{{$bill->id}}</td>
                                 </tr>
                                 <tr>
-                                    <th class="text-sm-end">Order Number:</th>
+                                    <th class="text-sm-end">Invoice Number:</th>
                                     <td>VNTRK{{$bill->id}}</td>
                                 </tr>
                                 <tr>
@@ -99,6 +100,10 @@
                                     <th class="text-sm-end">Payment Status:</th>
                                     <td>{{$bill->status}}</td>
                                 </tr>
+                                {{-- <tr>
+                                    <th class="text-sm-end">Remarks:</th>
+                                    <td>{{$bill->remarks}}</td>
+                                </tr> --}}
 
                                 @if ($bill->status == 'Paid')
                                     <tr class="alert-success fw-bold">
@@ -157,9 +162,16 @@
                 </div>
             </div>
         </div>
-        <div class="card-footer bg-light">
-            <p class="fs--1 mb-0"><strong>Notes: </strong>We really appreciate your business and if there’s anything else we
-                can do, please let us know!</p>
-        </div>
+
+        @if (!empty($bill->remarks))
+            <div class="card-footer bg-light">
+                <p class="fs--1 mb-0"><strong>Remarks: </strong>{{$bill->remarks}}</p>
+            </div>
+        @else
+            <div class="card-footer bg-light">
+                <p class="fs--1 mb-0"><strong>Notes: </strong>We really appreciate your business and if there’s anything else we
+                    can do, please let us know!</p>
+            </div>
+        @endif
     </div>
 @endsection

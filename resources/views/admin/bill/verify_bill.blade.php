@@ -173,16 +173,14 @@
                     <form action="{{ url('edit_status', $bill->id) }}" method="POST" class="row g-3 needs-validation"
                         novalidate="" enctype="multipart/form-data">
                         @csrf
-                        @if (session('success'))
-                            <div class="alert alert-success" role="alert">
-                                {{ session('success') }}
-                            </div>
-                        @endif
-                        <select name="status" class="form-select mb-3" aria-label="Default select example">
+                        <select name="status" class="form-select mb-2" aria-label="Default select example">
                             <option selected="{{$bill->status}}">{{$bill->status}}</option>
-                            <option value="Unpaid">Unpaid</option>
+                            <option value="Rejected">Rejected</option>
                             <option value="Paid">Paid</option>
                         </select>
+
+                        <textarea class="form-control mb-3" name="remarks" id="" cols="25" rows="10" placeholder="Write remarks here" value>{{$bill->remarks}}</textarea>
+
 
                         <div class="d-flex justify-content-between fs--1 mb-1">
                             <p class="mb-0">Due in</p><span>{{$bill->due_date}}</span>
@@ -191,7 +189,8 @@
                         <h5 style="margin: 0;" class="d-flex justify-content-between"><span>Paid
                                 Amount</span><span>{{$bill->amount}}</span>
                         </h5>
-                        <p style="margin: 0;" class="fs--1 text-600"> Please make sure to double-check the payment details
+                        <p style="margin: 0;" class="fs--1 text-600"> Please make sure to double-check the payment
+                            details
                             and ensure it is
                             made to
                             the official VanTrack bank account.</p>

@@ -10,6 +10,8 @@
 
 @section('body-content')
 
+
+
     <div class="card mb-3">
         <div class="bg-holder d-none d-lg-block bg-card"
             style="background-image:url(../../assets/img/icons/spot-illustrations/corner-4.png);">

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->decimal('amount', 8, 2);
             $table->date('due_date');
             $table->string('status')->default('Pending'); // Pending, Paid, Overdue
+            $table->text('remarks')->nullable();
 
             $table->unsignedBigInteger('user_id')->nullable();
             $table->string('receipt')->nullable();

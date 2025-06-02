@@ -19,7 +19,8 @@
             <div class="row">
                 <div class="col-lg-8">
                     <h3>Bill Management</h3>
-                    {{-- <p class="mb-0">Below is the list of all students currently registered by thier parent in the system.
+                    {{-- <p class="mb-0">Below is the list of all students currently registered by thier parent in the
+                        system.
                     </p> --}}
                 </div>
             </div>
@@ -32,7 +33,7 @@
                 <div class="col-4 col-sm-auto d-flex align-items-center pe-0">
                     <h5 class="fs-0 mb-0 text-nowrap py-2 py-xl-0">Unpaid Bills</h5>
                 </div>
-                
+
             </div>
         </div>
         <div class="card-body p-0">
@@ -60,22 +61,26 @@
                             <tr class="btn-reveal-trigger">
 
                                 <td class="no align-middle">VNTRK{{ $unpaidBills->id }}</td>
-                                <td class="name align-middle"><a href="detail_student/{{ $unpaidBills->student->id }}">{{ $unpaidBills->student->full_name }}</a></td>
-                                <td class="name align-middle d-none d-md-table-cell">{{ $unpaidBills->student->school->name }}</td>
+                                <td class="name align-middle"><a
+                                        href="detail_student/{{ $unpaidBills->student->id }}">{{ $unpaidBills->student->full_name }}</a>
+                                </td>
+                                <td class="name align-middle d-none d-md-table-cell">{{ $unpaidBills->student->school->name }}
+                                </td>
                                 <td class="name align-middle d-none d-md-table-cell">{{ $unpaidBills->student->address }}</td>
                                 <td class="rifd align-middle">RM {{ $unpaidBills->amount }}</td>
 
                                 </td>
-                                <td class="address align-middle">[{{ $unpaidBills->created_at->format('F') }}] {{ $unpaidBills->due_date}}
+                                <td class="address align-middle">[{{ $unpaidBills->created_at->format('F') }}]
+                                    {{ $unpaidBills->due_date}}
                                 </td>
-                                @if ($unpaidBills->status == 'Paid')
+                                @if ($unpaidBills->status == 'Rejected')
                                     <td class="align-middle"><span
-                                            class="badge badge rounded-pill d-block py-2 badge-soft-success">Paid<span
-                                                class="fas fa-check" data-fa-transform="shrink-2"></span></span>
+                                            class="badge badge rounded-pill d-block py-2 badge-soft-warning">Rejected<span
+                                                class="ms-1 fas fa-ban" data-fa-transform="shrink-2"></span></span>
                                     </td>
                                 @else
                                     <td class="align-middle"><span
-                                            class="badge badge rounded-pill d-block p-2 badge-soft-secondary">{{$unpaidBills->status}}<span
+                                            class="badge badge rounded-pill d-block p-2 badge-soft-danger">{{$unpaidBills->status}}<span
                                                 class="ms-1 fas fa-ban" data-fa-transform="shrink-2"></span></span>
                                 @endif
                                 </td>
@@ -88,8 +93,10 @@
                                         <div class="dropdown-menu dropdown-menu-end border py-0"
                                             aria-labelledby="order-dropdown-0">
                                             <div class="bg-white py-2">
-                                                {{-- <a class="dropdown-item"
-                                                    href="{{ url('pay_bill', $unpaidBills->id) }}">Pay</a> --}}
+                                                <a class="dropdown-item"
+                                                    href="{{ url('bill_receipt', $unpaidBills->id) }}">Invoice</a>
+
+                                                <div class="dropdown-divider"></div>
 
                                                 <a href="#" class="dropdown-item pay-btn" data-id="{{ $unpaidBills->id }}"
                                                     data-bs-toggle="modal" data-bs-target="#error-modal">
@@ -147,7 +154,7 @@
 
                             <th class="sort" style="min-width: 5rem;" data-sort="address">Due</th>
                             <th class="sort" style="min-width: 5rem;" data-sort="status">Status</th>
-                            
+
                         </tr>
                     </thead>
                     <tbody class="list" id="table-student">
@@ -158,13 +165,17 @@
                             <tr class="btn-reveal-trigger">
 
                                 <td class="no align-middle">VNTRK{{ $pendingBills->id }}</td>
-                                <td class="name align-middle"><a href="detail_student/{{ $pendingBills->student->id }}">{{ $pendingBills->student->full_name }}</a></td>
-                                <td class="name align-middle d-none d-md-table-cell">{{ $pendingBills->student->school->name }}</td>
+                                <td class="name align-middle"><a
+                                        href="detail_student/{{ $pendingBills->student->id }}">{{ $pendingBills->student->full_name }}</a>
+                                </td>
+                                <td class="name align-middle d-none d-md-table-cell">{{ $pendingBills->student->school->name }}
+                                </td>
                                 <td class="name align-middle d-none d-md-table-cell">{{ $pendingBills->student->address }}</td>
                                 <td class="rifd align-middle">RM {{ $pendingBills->amount }}</td>
 
                                 </td>
-                                <td class="address align-middle">[{{ $pendingBills->created_at->format('F') }}] {{ $pendingBills->due_date}}
+                                <td class="address align-middle">[{{ $pendingBills->created_at->format('F') }}]
+                                    {{ $pendingBills->due_date}}
                                 </td>
                                 @if ($pendingBills->status == 'Paid')
                                     <td class="align-middle"><span
@@ -186,8 +197,7 @@
                                         <div class="dropdown-menu dropdown-menu-end border py-0"
                                             aria-labelledby="order-dropdown-0">
                                             <div class="bg-white py-2">
-                                                <a class="dropdown-item"
-                                                    href="{{ url('pay_bill', $unpaidBills->id) }}">Pay</a>
+                                                <a class="dropdown-item" href="{{ url('pay_bill', $unpaidBills->id) }}">Pay</a>
 
                                                 <a href="#" class="dropdown-item pay-btn" data-id="{{ $unpaidBills->id }}"
                                                     data-bs-toggle="modal" data-bs-target="#error-modal">
@@ -256,13 +266,17 @@
                             <tr class="btn-reveal-trigger">
 
                                 <td class="no align-middle">VNTRK{{ $paidBills->id }}</td>
-                                <td class="name align-middle"><a href="detail_student/{{ $paidBills->student->id }}">{{ $paidBills->student->full_name }}</a></td>
-                                <td class="name align-middle d-none d-md-table-cell">{{ $paidBills->student->school->name }}</td>
+                                <td class="name align-middle"><a
+                                        href="detail_student/{{ $paidBills->student->id }}">{{ $paidBills->student->full_name }}</a>
+                                </td>
+                                <td class="name align-middle d-none d-md-table-cell">{{ $paidBills->student->school->name }}
+                                </td>
                                 <td class="name align-middle d-none d-md-table-cell">{{ $paidBills->student->address }}</td>
                                 <td class="rifd align-middle">RM {{ $paidBills->amount }}</td>
 
                                 </td>
-                                <td class="address align-middle">[{{ $paidBills->created_at->format('F') }}] {{ $paidBills->due_date}}
+                                <td class="address align-middle">[{{ $paidBills->created_at->format('F') }}]
+                                    {{ $paidBills->due_date}}
                                 </td>
                                 @if ($paidBills->status == 'Paid')
                                     <td class="align-middle"><span

@@ -41,9 +41,9 @@
                                             >{{$schedule_data->school->name}}
                                             -></a></h5>
                                     <p class="fs--1 mb-3"><a class="text-500" href="#!">{{$schedule_data->district}}</a></p>
-                                    <p class="fs--1 mb-1">Pickup Time to School: <strong>{{$schedule_data->start_time}}</strong>
+                                    <p class="fs--1 mb-1">Pickup Time to School: <strong>{{ \Carbon\Carbon::parse($schedule_data->start_time)->format('g:i a') }}</strong>
                                     </p>
-                                    <p class="fs--1 mb-1">Pickup Time to Home: <strong>{{$schedule_data->end_time}}</strong>
+                                    <p class="fs--1 mb-1">Pickup Time to Home: <strong>{{ \Carbon\Carbon::parse($schedule_data->end_time)->format('g:i a') }}</strong>
                                     </p>
                                 </div>
                             </div>

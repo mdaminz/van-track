@@ -56,7 +56,8 @@
                             <th class="sort" style="min-width: 5rem;" data-sort="address">Date Time</th>
                             <th class="sort" style="min-width: 5rem;" data-sort="order">RFID Tag</th>
                             <th class="sort" style="min-width: 10rem;" data-sort="date">Student Name</th>
-                            <th class="sort d-none d-md-table-cell" style="min-width: 10rem;" data-sort="address">Address</th>
+                            <th class="sort d-none d-md-table-cell" style="min-width: 10rem;" data-sort="address">Address
+                            </th>
                             <th class="sort" data-sort="date">Status</th>
 
                             {{-- <th class="sort pe-1 align-middle white-space-nowrap text-center" data-sort="status">Photo
@@ -136,11 +137,60 @@
         </div>
     </div>
 
-    {{--
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        // Refresh the page every 5 seconds (5000 milliseconds)
-        setInterval(function () {
-            location.reload(); // Reloads the entire page
-        }, 10000);
-    </script> --}}
+        function loadAttendance() {
+            $.ajax({
+                url: '{{ route('api.parent.attendance') }}?today={{ $isToday ? '1' : '0' }}',
+                type: 'GET',
+                success: function (data) {
+                    let tbody = $('#table-orders-body');
+                    tbody.empty(); // Clear old rows
+
+                    let number = 1;
+                    data.forEach(function (item) {
+                        let badge = item.status === 'In' ?
+                            `<span class="badge badge rounded-pill d-block py-2 badge-soft-success">In<span class="fas fa-check" data-fa-transform="shrink-2"></span></span>` :
+                            `<span class="badge badge rounded-pill d-block p-2 badge-soft-secondary">Out<span class="ms-1 fas fa-ban" data-fa-transform="shrink-2"></span></span>`;
+
+                        let row = `
+                            <tr class="btn-reveal-trigger">
+                                <td class="order py-2">${number++}</td>
+                                <td class="address py-2">${formatDate(item.created_at)}</td>
+                                <td class="order py-2">${item.rfid_tag}</td>
+                                <td class="date py-2">
+                                    <a href="/detail_student/${item.student.id}">${item.student.full_name}</a>
+                                </td>
+                                <td class="address py-2 d-none d-md-table-cell">${item.student.address}</td>
+                                <td class="align-middle">${badge}</td>
+                            </tr>
+                        `;
+                        tbody.append(row);
+                    });
+                },
+                error: function (err) {
+                    console.error('Error loading attendance:', err);
+                }
+            });
+        }
+
+        function formatDate(timestamp) {
+            const date = new Date(timestamp);
+            return date.toLocaleString('en-MY', {
+                day: '2-digit',
+                month: 'short',
+                year: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit',
+                hour12: true
+            });
+        }
+
+        // Initial load
+        loadAttendance();
+
+        // Auto-refresh every 10 seconds
+        setInterval(loadAttendance, 10000);
+    </script>
+
 @endsection

@@ -605,6 +605,24 @@ class AdminController extends Controller
         return view('admin.van.view_van_location', ['lat' => 0, 'lng' => 0], compact('van'));
     }
 
+    // public function getVanLocation($id)
+    // {
+    //     $van = Van::where('user_id', $id)->first();
+
+    //     if ($van && $van->coor) {
+    //         list($lat, $lng) = explode(',', $van->coor);
+    //         return response()->json([
+    //             'lat' => (float) $lat,
+    //             'lng' => (float) $lng
+    //         ]);
+    //     }
+
+    //     return response()->json([
+    //         'lat' => 0,
+    //         'lng' => 0
+    //     ]);
+    // }
+
     public function view_report()
     {
         $report_data = Report::where('status', 'unresolved')
@@ -1073,7 +1091,7 @@ class AdminController extends Controller
     public function unpaid_bill()
     {
         // Get unpaid bills (sorted by latest)
-        $unpaidBills = Bill::where('status', 'Unpaid')
+        $unpaidBills = Bill::whereIn('status', ['Rejected', 'Unpaid'])
             ->orderBy('created_at', 'desc')
             ->get();
 
@@ -1118,10 +1136,17 @@ class AdminController extends Controller
 
         // Update the status
         $bill->status = $request->status;
+        $bill->remarks = $request->remarks;
+
 
         // If status is 'Unpaid', set receipt to null
-        if ($request->status == 'Unpaid') {
+        if ($request->status == 'Rejected') {
             $bill->receipt = null;
+        }
+
+        // If status is 'Unpaid', set receipt to null
+        if ($request->status == 'Paid') {
+            $bill->remarks = null;
         }
 
         // Save the changes
@@ -1174,6 +1199,55 @@ class AdminController extends Controller
         return view('profile_detail', compact('users', 'students', 'count_students', 'rates'));
     }
 
+    public function admin_calendar()
+    {
+        return view('admin.calendar.view_calendar');
+    }
 
+    public function calendar_events()
+    {
+        $year = Carbon::now()->year;
+
+        // Get all rates with van eager loaded
+        $rates = Rate::with('van')->get();
+
+        // Helper: get all weekdays in the year
+        $weekdaysInYear = function ($year) {
+            $dates = [];
+            $date = Carbon::create($year, 1, 1);
+            while ($date->year == $year) {
+                if ($date->isWeekday()) { // Monday to Friday
+                    $dates[] = $date->toDateString(); // 'YYYY-MM-DD'
+                }
+                $date->addDay();
+            }
+            return $dates;
+        };
+
+        $weekdays = $weekdaysInYear($year);
+
+        $events = [];
+
+        foreach ($rates as $rate) {
+            $licensePlate = $rate->van ? $rate->van->license_plate : 'Unknown Van';
+
+            foreach ($weekdays as $date) {
+                $events[] = [
+                    'title' => $licensePlate,
+                    'start' => $date,
+                    'allDay' => true,
+                    'extendedProps' => [
+                        'district' => $rate->district ?? 'N/A',
+                        'school' => $rate->school ? $rate->school->name : 'N/A',
+                        'toSchool' => $rate->start_time ?? 'N/A',
+                        'toHome' => $rate->end_time ?? 'N/A',
+                        'price' => $rate->price ?? 'N/A'
+                    ],
+                ];
+            }
+        }
+
+        return response()->json($events);
+    }
 
 }

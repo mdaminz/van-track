@@ -50,6 +50,26 @@ class DriverController extends Controller
 
     }
 
+    public function fetchAttendanceData()
+    {
+        try {
+            $user = Auth::user();
+
+            $van = Van::where('user_id', $user->id)->first();
+            $rates = $van ? $van->rates : collect();
+            $students = $rates->flatMap->students;
+            $studentIds = $students->pluck('id');
+
+            $attendances = Attendance::whereIn('student_id', $studentIds)->latest()->get();
+
+            return view('driver.attendance._attendance_tbody', compact('attendances'))->render();
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+    }
+
+
+
     public function driver_calendar()
     {
         $user = Auth::user();
@@ -140,9 +160,51 @@ class DriverController extends Controller
         $presentCount = $students->where('attendance_status', 'Present')->count();
         $totalCount = $students->count();
 
-        return view('driver.schedule.listToSchool', compact('students', 'driver', 'rate', 'presentCount', 'totalCount'));
+        $students->map(function ($student) {
+            $student->full_address = $student->address;
+            return $student;
+        });
+
+        $googleMapsApiKey = config('services.google_maps.key');
+
+        return view('driver.schedule.listToSchool', compact('students', 'driver', 'rate', 'presentCount', 'totalCount', 'students', 'googleMapsApiKey'));
     }
 
+    public function getStudentListToSchoolData($id)
+    {
+        $today = Carbon::today();
+
+        $students = Student::where('rate_id', $id)
+            ->where('status', 'Active')
+            ->orderBy('full_name', 'asc')
+            ->get()
+            ->map(function ($student) use ($today) {
+                $attendances = Attendance::where('student_id', $student->id)
+                    ->whereDate('created_at', $today)
+                    ->orderBy('created_at')
+                    ->pluck('status');
+
+                $attendanceStatus = 'Absent';
+                if ($attendances->get(0) === 'In') {
+                    $attendanceStatus = 'Present';
+                }
+
+                return [
+                    'id' => $student->id,
+                    'full_name' => $student->full_name,
+                    'rfid_tag' => $student->rfid_tag,
+                    'emergency_contact' => $student->emergency_contact,
+                    'profile_photo' => $student->profile_photo,
+                    'attendance_status' => $attendanceStatus
+                ];
+            });
+
+        return response()->json([
+            'students' => $students,
+            'presentCount' => $students->where('attendance_status', 'Present')->count(),
+            'totalCount' => $students->count()
+        ]);
+    }
 
 
 
@@ -177,8 +239,52 @@ class DriverController extends Controller
         $presentCount = $students->where('attendance_status', 'Present')->count();
         $totalCount = $students->count();
 
-        return view('driver.schedule.listToHome', compact('students', 'driver', 'rate', 'presentCount', 'totalCount'));
+        $students->map(function ($student) {
+            $student->full_address = $student->address;
+            return $student;
+        });
+
+        $googleMapsApiKey = config('services.google_maps.key');
+
+        return view('driver.schedule.listToHome', compact('students', 'driver', 'rate', 'presentCount', 'totalCount', 'students', 'googleMapsApiKey'));
     }
+
+    public function getStudentListToHomeData($id)
+    {
+        $today = Carbon::today();
+
+        $students = Student::where('rate_id', $id)
+            ->where('status', 'Active')
+            ->orderBy('full_name', 'asc')
+            ->get()
+            ->map(function ($student) use ($today) {
+                $attendances = Attendance::where('student_id', $student->id)
+                    ->whereDate('created_at', $today)
+                    ->orderBy('created_at')
+                    ->pluck('status');
+
+                $attendanceStatus = 'Absent';
+                if ($attendances->get(2) === 'In') { // 3rd entry = return trip
+                    $attendanceStatus = 'Present';
+                }
+
+                return [
+                    'id' => $student->id,
+                    'full_name' => $student->full_name,
+                    'rfid_tag' => $student->rfid_tag,
+                    'emergency_contact' => $student->emergency_contact,
+                    'profile_photo' => $student->profile_photo,
+                    'attendance_status' => $attendanceStatus
+                ];
+            });
+
+        return response()->json([
+            'students' => $students,
+            'presentCount' => $students->where('attendance_status', 'Present')->count(),
+            'totalCount' => $students->count()
+        ]);
+    }
+
 
 
 

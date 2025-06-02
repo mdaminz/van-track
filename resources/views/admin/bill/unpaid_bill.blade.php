@@ -107,10 +107,10 @@
                                 </td>
                                 <td class="due align-middle">[{{ $unpaidBills->created_at->format('F') }}] {{ $unpaidBills->due_date}}
                                 </td>
-                                @if ($unpaidBills->status == 'Paid')
+                                @if ($unpaidBills->status == 'Rejected')
                                     <td class="align-middle"><span
-                                            class="badge badge rounded-pill d-block py-2 badge-soft-success">Paid<span
-                                                class="fas fa-check" data-fa-transform="shrink-2"></span></span>
+                                            class="badge badge rounded-pill d-block py-2 badge-soft-warning">Rejected<span
+                                                class="ms-1 fas fa-ban" data-fa-transform="shrink-2"></span></span>
                                     </td>
                                 @else
                                     <td class="align-middle"><span

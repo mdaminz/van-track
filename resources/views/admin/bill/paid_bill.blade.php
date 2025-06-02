@@ -35,7 +35,7 @@
                 <!--/.bg-holder-->
 
                 <div class="card-body position-relative">
-                    <h6>Pending Bills</h6>
+                    <h6>Paid Bills</h6>
                     <div class="display-4 fs-4 mb-2 fw-normal font-sans-serif text-warning"
                         data-countup='{"endValue":58.386,"decimalPlaces":2,"suffix":"k"}'>{{$paid_bills}}</div>
                 </div>

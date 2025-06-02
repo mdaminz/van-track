@@ -25,7 +25,7 @@
     </div>
 
     <div class="card mb-3" id="ordersTable"
-        data-list='{"valueNames":["order","date","address","status","amount"],"page":10,"pagination":true}'>
+        data-list='{"valueNames":["no","date","rfid","studname","school", "address", "status"],"page":10,"pagination":true}'>
         <div class="card-header">
             <div class="row flex-between-center">
                 <div class="col-4 col-sm-auto d-flex align-items-center pe-0">
@@ -33,6 +33,13 @@
                 </div>
                 <div class="col-8 col-sm-auto ms-auto text-end ps-0">
                     <div id="orders-actions" class="d-flex justify-content-end align-items-center gap-2">
+
+                        {{-- <div class="col-8 col-sm-auto ms-auto text-end ps-0">
+                            <form class="position-relative" data-bs-toggle="search" data-bs-display="static">
+                                <input class="form-control search-input fuzzy-search" type="search" placeholder="Search..."
+                                    aria-label="Search" />
+                            </form>
+                        </div> --}}
 
                         <!-- Select Dropdown -->
                         <select id="rate-select" class="form-select form-select-sm" style="max-width: 200px;">
@@ -63,26 +70,26 @@
                 <table id="attendance-table" class="table table-sm table-striped fs--1 mb-0 overflow-hidden">
                     <thead class="bg-200 text-900">
                         <tr>
-                            <th class="sort">No</th>
-                            <th class="sort">Date Time</th>
-                            <th class="sort">RFID Tag</th>
-                            <th class="sort">Student Name</th>
-                            <th class="sort">School</th>
-                            <th class="sort d-none d-md-table-cell">Address</th>
-                            <th hidden class="sort">Rate</th>
-                            <th class="sort">Status</th>
+                            <th class="sort" data-sort="no">No</th>
+                            <th class="sort" data-sort="date">Date Time</th>
+                            <th class="sort" data-sort="rfid">RFID Tag</th>
+                            <th class="sort" data-sort="studname">Student Name</th>
+                            <th class="sort" data-sort="school">School</th>
+                            <th class="sort d-none d-md-table-cell" data-sort="address">Address</th>
+                            <th hidden class="sort" data-sort="rate">Rate</th>
+                            <th class="sort" data-sort="status">Status</th>
                         </tr>
                     </thead>
                     <tbody class="list" id="table-orders-body">
                         @php $number = 1; @endphp
                         @foreach ($attendances as $attendances)
                             <tr class="btn-reveal-trigger">
-                                <td class="order py-2">{{ $number++ }}</td>
-                                <td class="address py-2 date-cell" data-date="{{ $attendances->created_at }}">
+                                <td class="no py-2">{{ $number++ }}</td>
+                                <td class="date py-2 date-cell" data-date="{{ $attendances->created_at }}">
                                     {{ $attendances->created_at->format('d M Y, h:i A') }}
                                 </td>
-                                <td class="order py-2">{{ $attendances->rfid_tag }}</td>
-                                <td class="date py-2">
+                                <td class="rfid py-2">{{ $attendances->rfid_tag }}</td>
+                                <td class="studname py-2">
                                     <a href="detail_student/{{ $attendances->student->id }}">
                                         {{ $attendances->student->full_name }}
                                     </a>
@@ -169,4 +176,50 @@
             });
         });
     </script>
+
+    <script>
+        function refreshAttendanceTable() {
+            fetch('{{ route('api.driver.attendance') }}')
+                .then(response => response.text())
+                .then(html => {
+                    document.querySelector('#attendance-table tbody').innerHTML = html;
+
+                    // Re-apply filters if needed
+                    applyRateFilter();
+                    applyDateFilter();
+                })
+                .catch(error => console.error('Error refreshing attendance:', error));
+        }
+
+        // Auto-refresh every 30 seconds
+        setInterval(refreshAttendanceTable, 10000);
+
+        // Filter re-application functions
+        function applyRateFilter() {
+            const selectedRate = document.getElementById('rate-select').value;
+            const rows = document.querySelectorAll("#attendance-table tbody tr");
+
+            rows.forEach(row => {
+                const rateCell = row.querySelector(".rate");
+                const rateValue = rateCell ? rateCell.getAttribute('data-rate') : null;
+                const showRow = selectedRate === "" || rateValue === selectedRate;
+                row.style.display = showRow ? "" : "none";
+            });
+        }
+
+        function applyDateFilter() {
+            if (!showingTodayOnly) return;
+
+            const today = new Date().toISOString().slice(0, 10);
+            const rows = document.querySelectorAll("#attendance-table tbody tr");
+
+            rows.forEach(row => {
+                const dateCell = row.querySelector(".date-cell");
+                const rowDate = new Date(dateCell.getAttribute("data-date")).toISOString().slice(0, 10);
+                row.style.display = rowDate === today ? "" : "none";
+            });
+        }
+    </script>
+
+
 @endsection

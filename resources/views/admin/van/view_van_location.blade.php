@@ -43,7 +43,9 @@
         <div class="card-header">
             <div class="row flex-between-end">
                 <div class="col-auto flex-lg-grow-1 flex-lg-basis-0 align-self-center">
-                    <a href="profile_detail/{{$van->user->id}}" class="mb-0">{{$van->user->name}}<span style="margin-left: 10px" class="badge rounded-pill badge-soft-primary">{{$van->license_plate}}</span></a>
+                    <a href="profile_detail/{{$van->user->id}}" class="mb-0">{{$van->user->name}}<span
+                            style="margin-left: 10px"
+                            class="badge rounded-pill badge-soft-primary">{{$van->license_plate}}</span></a>
                 </div>
             </div>
         </div>
@@ -106,6 +108,55 @@
                 '{{ asset($van->user->profile_photo_path) }}',
                 map
             );
+
+            // Add logged-in user's real location
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    function (position) {
+                        const userPos = {
+                            lat: position.coords.latitude,
+                            lng: position.coords.longitude,
+                        };
+
+                        // Optional: adjust map to fit both user and van
+                        const bounds = new google.maps.LatLngBounds();
+                        bounds.extend(new google.maps.LatLng(pos.lat, pos.lng)); // van
+                        bounds.extend(new google.maps.LatLng(userPos.lat, userPos.lng)); // user
+                        map.fitBounds(bounds);
+
+                        // Marker for the logged-in user
+                        new google.maps.Marker({
+                            position: userPos,
+                            map: map,
+                            title: "You",
+                            icon: {
+                                path: google.maps.SymbolPath.CIRCLE,
+                                scale: 8,
+                                fillColor: "#007bff",
+                                fillOpacity: 1,
+                                strokeWeight: 2,
+                                strokeColor: "#ffffff",
+                            },
+                        });
+
+                        // Optional: draw line from user to van
+                        new google.maps.Polyline({
+                            path: [userPos, pos],
+                            geodesic: true,
+                            strokeColor: "#00c853",
+                            strokeOpacity: 0.7,
+                            strokeWeight: 2,
+                            map: map,
+                        });
+                    },
+                    function (error) {
+                        console.error("Error getting user location:", error);
+                    }
+                );
+            } else {
+                console.warn("Geolocation is not supported by this browser.");
+            }
+
         }
 
         // Load the map script

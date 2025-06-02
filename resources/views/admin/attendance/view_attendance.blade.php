@@ -64,7 +64,7 @@
     </div>
 
     <div class="card mb-3" id="ordersTable"
-        data-list='{"valueNames":["order","date","address","status","amount"],"page":10,"pagination":true}'>
+        data-list='{"valueNames":["date","rfid","name","school","address", "status"],"page":10,"pagination":true}'>
         <div class="card-header">
             <div class="row flex-between-center">
                 <div class="col-4 col-sm-auto d-flex align-items-center pe-0">
@@ -77,6 +77,12 @@
 
                     <form id="filterForm" method="GET" action="{{ route('admin_view_attendance') }}">
                         <div class="d-flex gap-2">
+                            <div class="col-8 col-sm-auto ms-auto text-end ps-0">
+                                <form class="position-relative" data-bs-toggle="search" data-bs-display="static">
+                                    <input class="form-control search-input fuzzy-search" type="search"
+                                        placeholder="Search..." aria-label="Search" />
+                                </form>
+                            </div>
                             @php
                                 $isToday = request('today') == 1;
                             @endphp
@@ -116,13 +122,13 @@
                                         data-bulk-select='{"body":"table-orders-body","actions":"orders-bulk-actions","replacedElement":"orders-actions"}' />
                                 </div>
                             </th> --}}
-                            <th class="sort" style="min-width: 5rem;" data-sort="order">No</th>
-                            <th class="sort" style="min-width: 5rem;" data-sort="address">Date Time</th>
-                            <th class="sort" style="min-width: 5rem;" data-sort="order">RFID Tag</th>
-                            <th class="sort" style="min-width: 10rem;" data-sort="date">Student Name</th>
-                            <th class="sort" style="min-width: 10rem;" data-sort="date">School</th>
+                            <th class="sort" style="min-width: 5rem;" data-sort="no">No</th>
+                            <th class="sort" style="min-width: 5rem;" data-sort="date">Date Time</th>
+                            <th class="sort" style="min-width: 5rem;" data-sort="rfid">RFID Tag</th>
+                            <th class="sort" style="min-width: 10rem;" data-sort="name">Student Name</th>
+                            <th class="sort" style="min-width: 10rem;" data-sort="school">School</th>
                             <th class="sort" style="min-width: 10rem;" data-sort="address">Address</th>
-                            <th class="sort" data-sort="date">Status</th>
+                            <th class="sort" data-sort="status">Status</th>
 
                             {{-- <th class="sort pe-1 align-middle white-space-nowrap text-center" data-sort="status">Photo
                             </th> --}}
@@ -141,14 +147,14 @@
                                             data-bulk-select-row="data-bulk-select-row" />
                                     </div>
                                 </td> --}}
-                                <td class="order py-2">{{ $number++ }}</td>
+                                <td class="no order py-2">{{ $number++ }}</td>
                                 <!-- Increment the counter -->
-                                <td class="address py-2">
+                                <td class="date py-2">
                                     {{ $attendances->created_at->format('d M Y, h:i A') }}
                                 </td>
-                                <td class="order py-2">{{ $attendances->rfid_tag }}
+                                <td class="rfid py-2">{{ $attendances->rfid_tag }}
                                 </td>
-                                <td class="date py-2"><a
+                                <td class="name py-2"><a
                                         href="detail_student/{{$attendances->student->id}}">{{ $attendances->student->full_name }}</a>
                                 </td>
                                 <td class="school py-2">{{ $attendances->student->school->name }}</td>

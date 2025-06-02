@@ -50,8 +50,16 @@
                                     <p class="fs--1 mb-1">
                                         Address: <strong>{{$student->address}}</strong>
                                     </p>
-                                    <p class="fs--1 mb-1">
+                                    <p class="fs--1 mb-3">
                                         School: <strong>{{$student->school->name}}</strong>
+                                    </p>
+
+                                    <p class="fs--1 mb-1">
+                                        Pickup Time to School: <strong>{{ \Carbon\Carbon::parse($student->rate->start_time)->format('g:i a') }}</strong>
+                                    </p>
+
+                                    <p class="fs--1 mb-1">
+                                        Pickup Time to Hom: <strong>{{ \Carbon\Carbon::parse($student->rate->end_time)->format('g:i a') }}</strong>
                                     </p>
                                 </div>
                             </div>

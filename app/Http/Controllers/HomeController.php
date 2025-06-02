@@ -78,14 +78,14 @@ class HomeController extends Controller
 
         $user_id = Auth::id(); // Get the authenticated user's ID
 
-    
-            // Retrieve students associated with the authenticated user
-            $students = Student::where('user_id', $user_id)->get();
 
-            // Pass the students to the view
-            return view('user.student.view_student', compact('students'));
-         
-        
+        // Retrieve students associated with the authenticated user
+        $students = Student::where('user_id', $user_id)->get();
+
+        // Pass the students to the view
+        return view('user.student.view_student', compact('students'));
+
+
     }
 
 
@@ -362,6 +362,23 @@ class HomeController extends Controller
         return view('user.attendance.view_attendance', compact('attendances', 'isToday'));
     }
 
+    public function fetchAttendanceData(Request $request)
+    {
+        $user_id = Auth::id();
+        $studentIds = Student::where('user_id', $user_id)->pluck('id');
+        $isToday = $request->input('today') == '1';
+
+        $attendances = Attendance::whereIn('student_id', $studentIds)
+            ->when($isToday, function ($query) {
+                $query->whereDate('created_at', Carbon::today());
+            })
+            ->orderBy('created_at', 'desc')
+            ->with('student') // Eager load
+            ->get();
+
+        return response()->json($attendances);
+    }
+
     public function user_view_report(Request $request)
     {
         $user_id = Auth::id(); // Get the authenticated user's ID
@@ -386,7 +403,7 @@ class HomeController extends Controller
 
         // Get unpaid bills (sorted by latest)
         $unpaidBills = Bill::where('user_id', $userId)
-            ->where('status', 'Unpaid')
+            ->whereIn('status', ['Unpaid', 'Rejected'])
             ->orderBy('created_at', 'desc')
             ->get();
 
@@ -440,4 +457,72 @@ class HomeController extends Controller
 
         return view('user.pricing.view_pricing', compact('rates'));
     }
+
+    public function parent_calendar()
+    {
+        return view('user.calendar.view_calendar'); // create this blade view
+    }
+
+    public function parent_calendar_events()
+    {
+        $user = Auth::user();
+
+        $children = Student::with(['rate.van', 'rate.school'])
+            ->where('user_id', $user->id)
+            ->get();
+
+        $year = Carbon::now()->year;
+
+        $weekdaysInYear = function ($year) {
+            $dates = [];
+            $date = Carbon::create($year, 1, 1);
+            while ($date->year == $year) {
+                if ($date->isWeekday()) {
+                    $dates[] = $date->toDateString();
+                }
+                $date->addDay();
+            }
+            return $dates;
+        };
+
+        $weekdays = $weekdaysInYear($year);
+
+        $events = [];
+
+        foreach ($children as $child) {
+            $rate = $child->rate;
+            if (!$rate)
+                continue;
+
+            $van = $rate->van;
+            $school = $rate->school;
+
+            $licensePlate = $van ? $van->license_plate : 'Unknown Van';
+            $district = $rate->district ?? 'N/A';
+            $schoolName = $school ? $school->name : 'N/A';
+            $startTime = $rate->start_time ?? 'N/A';
+            $endTime = $rate->end_time ?? 'N/A';
+
+            foreach ($weekdays as $date) {
+                $events[] = [
+                    'title' => $child->full_name,
+                    'start' => $date,
+                    'allDay' => true,
+                    'extendedProps' => [
+                        'district' => $district,
+                        'school' => $schoolName,
+                        'van' => $licensePlate,
+                        'toSchool' => $startTime,
+                        'toHome' => $endTime,
+                    ],
+                ];
+            }
+        }
+
+        // Debug line: uncomment to inspect the output
+        // dd($events);
+
+        return response()->json($events);
+    }
+
 }
