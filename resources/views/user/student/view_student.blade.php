@@ -9,10 +9,12 @@
 
         <div class="card-body position-relative">
             <div class="row">
-                <div class="col-lg-8">
-                    <h3>Children Management</h3>
-                    {{-- <p class="mb-0">Below is the list of all children associated with you in the system.
-                    </p> --}}
+                <div class="col-12 d-flex justify-content-between align-items-center">
+                    <h3 class="mb-0">Children Management</h3>
+                    <a href="create_student" class="btn btn-falcon-default btn-sm">
+                        <span class="fas fa-plus" data-fa-transform="shrink-3 down-2"></span>
+                        <span class="d-none d-sm-inline-block ms-1">New</span>
+                    </a>
                 </div>
             </div>
         </div>
@@ -55,23 +57,25 @@
                                     </p>
 
                                     <p class="fs--1 mb-1">
-                                        Pickup Time to School: <strong>{{ \Carbon\Carbon::parse($student->rate->start_time)->format('g:i a') }}</strong>
+                                        Pickup Time to School:
+                                        <strong>{{ \Carbon\Carbon::parse($student->rate->start_time)->format('g:i a') }}</strong>
                                     </p>
 
                                     <p class="fs--1 mb-1">
-                                        Pickup Time to Hom: <strong>{{ \Carbon\Carbon::parse($student->rate->end_time)->format('g:i a') }}</strong>
+                                        Pickup Time to Hom:
+                                        <strong>{{ \Carbon\Carbon::parse($student->rate->end_time)->format('g:i a') }}</strong>
                                     </p>
                                 </div>
                             </div>
                             <div class="d-flex flex-between-center px-3">
                                 <div>
-                                    
+
                                 </div>
                                 <div>
                                     <a class="btn btn-sm btn-falcon-default me-2"
                                         href="{{ url('update_student', $student->id) }}" data-bs-toggle="tooltip"
-                                        data-bs-placement="top" title="Edit"><span
-                                            class="fas fa-user-edit"></span></a><a class="btn btn-sm btn-falcon-default" href="{{ url('delete_student', $student->id) }}"
+                                        data-bs-placement="top" title="Edit"><span class="fas fa-user-edit"></span></a><a
+                                        class="btn btn-sm btn-falcon-default" href="{{ url('delete_student', $student->id) }}"
                                         data-bs-toggle="Delete" data-bs-placement="top" title="Add to Cart"><span
                                             class="fas fa-trash"></span></a>
                                 </div>
