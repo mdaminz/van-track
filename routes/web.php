@@ -243,3 +243,7 @@ Route::get('/admin_calendar/events', [AdminController::class, 'calendar_events']
 //parent calendar
 Route::get('/parent_calendar', [HomeController::class, 'parent_calendar'])->name('parent_calendar');
 Route::get('/parent_calendar/events', [HomeController::class, 'calendar_events'])->name('parent.calendar.events');
+
+Route::get('/thedev', function(){
+    return view ('thedev');
+});
