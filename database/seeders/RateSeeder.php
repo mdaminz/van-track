@@ -53,6 +53,26 @@ class RateSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
+            [
+                'school_id' => 3,
+                'district' => 'Sungai Way',
+                'price' => 120.00,
+                'van_id' => 2,
+                'start_time' => '12:30',
+                'end_time' => '18:30',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'school_id' => 4,
+                'district' => 'Sungai Way',
+                'price' => 120.00,
+                'van_id' => 2,
+                'start_time' => '12:30',
+                'end_time' => '18:30',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
            
         ]);
     }
