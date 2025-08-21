@@ -21,9 +21,9 @@ class DatabaseSeeder extends Seeder
         $this->call(RateSeeder::class);
         $this->call(StudentSeeder::class);
         $this->call(AttendanceSeeder::class);
-        $this->call(BillSeeder::class); 
         $this->call(FeedbackSeeder::class);
         $this->call(ReportSeeder::class);
         $this->call(ForumSeeder::class);
+        $this->call(BillSeeder::class);
     }
 }
