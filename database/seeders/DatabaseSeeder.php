@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Database\Seeder;
 
 
+
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -15,8 +16,8 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call(UserSeeder::class);
-        $this->call(VanSeeder::class);
         $this->call(SchoolSeeder::class);
+        $this->call(VanSeeder::class);
         $this->call(RateSeeder::class);
         $this->call(StudentSeeder::class);
         $this->call(AttendanceSeeder::class);
